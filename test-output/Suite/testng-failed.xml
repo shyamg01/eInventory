@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suite]" parallel="none">
+  <parameter name="StoreId" value="762"/>
+  <parameter name="browser" value="Chrome"/>
+  <listeners>
+    <listener class-name="common.Listener"/>
+    <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+    <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+  </listeners>
+  <test name="Chrome Browser(failed)" parallel="none">
+    <parameter name="StoreId" value="762"/>
+    <parameter name="browser" value="Chrome"/>
+    <classes>
+      <class name="rawItemActivityBundle.US290_RawItemActivity">
+        <methods>
+          <include name="rawItemActivityBundle_US290_TC2235"/>
+          <include name="beforeTest"/>
+          <include name="initializeTestData"/>
+          <include name="afterMethod"/>
+          <include name="afterTest"/>
+          <include name="beforeMethod"/>
+          <include name="afterSuite"/>
+        </methods>
+      </class> <!-- rawItemActivityBundle.US290_RawItemActivity -->
+    </classes>
+  </test> <!-- Chrome Browser(failed) -->
+</suite> <!-- Failed suite [Suite] -->

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+    <line>
+      <![CDATA[User name is successfully inserted]]>
+    </line>
+    <line>
+      <![CDATA[Password Successfully inserted]]>
+    </line>
+    <line>
+      <![CDATA[Successfully clicked on the login button]]>
+    </line>
+    <line>
+      <![CDATA[Successfully redirected to the Home Page]]>
+    </line>
+    <line>
+      <![CDATA[Successfully clicked on location dropdown button]]>
+    </line>
+    <line>
+      <![CDATA[clicked on the storeID in the location drop down]]>
+    </line>
+    <line>
+      <![CDATA[Clicked on the Menu drop down button]]>
+    </line>
+    <line>
+      <![CDATA[Successfully clicked on the Inventory management button]]>
+    </line>
+  </reporter-output>
+  <suite name="Suite" duration-ms="100482" started-at="2016-04-28T10:35:45Z" finished-at="2016-04-28T10:37:26Z">
+    <groups>
+    </groups>
+    <test name="Chrome Browser" duration-ms="100482" started-at="2016-04-28T10:35:45Z" finished-at="2016-04-28T10:37:26Z">
+      <class name="rawItemActivityBundle.US290_RawItemActivity">
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:rawItemActivityBundle.US290_RawItemActivity@9f3f8]" name="beforeTest" is-config="true" duration-ms="127" started-at="2016-04-28T16:05:45Z" finished-at="2016-04-28T16:05:45Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTest -->
+        <test-method status="PASS" signature="initializeTestData(java.lang.String, java.lang.String)[pri:0, instance:rawItemActivityBundle.US290_RawItemActivity@9f3f8]" name="initializeTestData" is-config="true" duration-ms="348" started-at="2016-04-28T16:05:45Z" finished-at="2016-04-28T16:05:46Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Chrome]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[762]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initializeTestData -->
+        <test-method status="PASS" signature="beforeMethod(java.lang.String)[pri:0, instance:rawItemActivityBundle.US290_RawItemActivity@9f3f8]" name="beforeMethod" is-config="true" duration-ms="28956" started-at="2016-04-28T16:05:46Z" finished-at="2016-04-28T16:06:15Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="PASS" signature="rawItemActivityBundle_US290_TC2235()[pri:0, instance:rawItemActivityBundle.US290_RawItemActivity@9f3f8]" name="rawItemActivityBundle_US290_TC2235" duration-ms="60690" started-at="2016-04-28T16:06:15Z" finished-at="2016-04-28T16:07:15Z">
+          <reporter-output>
+            <line>
+              <![CDATA[User name is successfully inserted]]>
+            </line>
+            <line>
+              <![CDATA[Password Successfully inserted]]>
+            </line>
+            <line>
+              <![CDATA[Successfully clicked on the login button]]>
+            </line>
+            <line>
+              <![CDATA[Successfully redirected to the Home Page]]>
+            </line>
+            <line>
+              <![CDATA[Successfully clicked on location dropdown button]]>
+            </line>
+            <line>
+              <![CDATA[clicked on the storeID in the location drop down]]>
+            </line>
+            <line>
+              <![CDATA[Clicked on the Menu drop down button]]>
+            </line>
+            <line>
+              <![CDATA[Successfully clicked on the Inventory management button]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- rawItemActivityBundle_US290_TC2235 -->
+        <test-method status="PASS" signature="afterMethod()[pri:0, instance:rawItemActivityBundle.US290_RawItemActivity@9f3f8]" name="afterMethod" is-config="true" duration-ms="10405" started-at="2016-04-28T16:07:15Z" finished-at="2016-04-28T16:07:26Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method status="FAIL" signature="afterTest()[pri:0, instance:rawItemActivityBundle.US290_RawItemActivity@9f3f8]" name="afterTest" is-config="true" duration-ms="0" started-at="2016-04-28T16:07:26Z" finished-at="2016-04-28T16:07:26Z">
+          <exception class="java.io.FileNotFoundException">
+            <message>
+              <![CDATA[Report_Excel\Report.xls (The process cannot access the file because it is being used by another process)]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.io.FileNotFoundException: Report_Excel\Report.xls (The process cannot access the file because it is being used by another process)
+	at java.io.FileOutputStream.open(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at jxl.Workbook.createWorkbook(Workbook.java:338)
+	at jxl.Workbook.createWorkbook(Workbook.java:320)
+	at common.Reporter.updateTotalCount(Reporter.java:192)
+	at sprint2.AbstractTest.afterTest(AbstractTest.java:154)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:84)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:564)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:213)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:138)
+	at org.testng.TestRunner.afterRun(TestRunner.java:1014)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1224)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1149)
+	at org.testng.TestNG.run(TestNG.java:1057)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:111)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:204)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:175)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.io.FileNotFoundException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+        <test-method status="SKIP" signature="afterSuite()[pri:0, instance:rawItemActivityBundle.US290_RawItemActivity@9f3f8]" name="afterSuite" is-config="true" duration-ms="0" started-at="2016-04-28T16:07:26Z" finished-at="2016-04-28T16:07:26Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterSuite -->
+      </class> <!-- rawItemActivityBundle.US290_RawItemActivity -->
+    </test> <!-- Chrome Browser -->
+  </suite> <!-- Suite -->
+</testng-results>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="none">
+    <listeners>
+       <listener class-name="common.Listener"/>
+         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+      <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+  </listeners> 
+
+<test name="Chrome Browser">
+
+    <parameter name="browser"  value="Chrome"/>
+    <parameter name="StoreId"  value="762"/>
+    
+		<classes>
+			<class name="rawItemActivityBundle.US290_RawItemActivity">
+				<methods>
+					<include name="rawItemActivityBundle_US290_TC2235"/>
+				</methods>
+			</class>
+		</classes>
+
+</test>
+
+
+</suite>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Firefox Browser"
+           tests="1"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="57.134">
+  <properties />
+  
+  
+            <testcase name="manualVendor_US1380_TC2856" time="57.134" classname="manualVendorBundle.US1380_UIUXRetrofitManualVendors" />
+      
+</testsuite>

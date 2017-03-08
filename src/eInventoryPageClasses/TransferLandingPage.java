@@ -1,11 +1,17 @@
 package eInventoryPageClasses;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
+
+import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -18,6 +24,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import common.Base;
+import common.GenericMethods;
 
 
 public class TransferLandingPage extends AbstractPage{
@@ -29,12 +36,6 @@ public class TransferLandingPage extends AbstractPage{
 
 	@FindBy(xpath ="//h1[text()='Transfers']")
 	public WebElement TransferLandingPage_Label;
-	
-	@FindBy(xpath ="//input[@id='history_start_date']")
-	public WebElement TransferLandingPage_StartDate_TB;
-	
-	@FindBy(xpath ="//input[@id='history_end_date']")
-	public WebElement TransferLandingPage_EndDate_TB;
 
 	@FindBy(xpath ="//eb-button[@class='insertNewTransferBtn']/button")
 	public WebElement CreateNewTransfers_BT;
@@ -42,80 +43,20 @@ public class TransferLandingPage extends AbstractPage{
 	@FindBy(xpath ="//input[@id='autosearchInput']")
 	public WebElement AddTransferItemsPopup_RawItemsSearchBox_TB;
 	
-	@FindBy(xpath ="(//table[@id='transfer_modal_tbl']/tbody[@id='transfer_modal_body'])[1]/tr")
-	public List <WebElement> TransferDetailsPopup_Records_List;
-	
 	@FindBy(xpath ="//table[@id='transfercounts']/tbody/tr/td/eb-button[@value='View']/button")
 	public List <WebElement> TransferLandingPage_Records_List;
 	
 	@FindBy(xpath ="//button[@value='Cancel']")
 	public WebElement AddTransferItemsPopup_Cancel_BT;
 	
-	@FindBy(xpath ="//div[@id='notTitle' and text()='Warning: Transfer Incomplete']")
-	public WebElement AddTransferItemsPopup_Warning_Message;
-	
 	@FindBy(xpath ="//button[@id='htmlButton']/span[text()='Yes']")
 	public WebElement AddTransferItemsPopup_Warning_Message_Yes_BT;
-	
-	@FindBy(xpath ="//button[@id='htmlButton']/span[text()='No']")
-	public WebElement AddTransferItemsPopup_Warning_Message_No_BT;
 	
 	@FindBy(xpath ="//button[@value='Submit']")
 	public WebElement AddTransferItemsPopup_Submit_BT;
 	
-	@FindBy(xpath ="//div[@id='eb_tp_input']/span")
+	@FindBy(xpath ="//div[@id='eb_tp_input']")
 	public WebElement InsertNewTransfersPopup_Time_Value;
-	
-	@FindBy(xpath = "//input[@id='office_transfer']")
-	public WebElement transferToOffice_chkBox;
-
-	@FindBy(xpath = "//input[@id='disp_date']")
-	public WebElement dateForTransfer_Label;
-
-	@FindBy(xpath = "//input[@id='disp_time']")
-	public WebElement timeForTransfer_Label;
-
-	@FindBy(xpath = "//tbody[@id='transfer_add_body']/tr/td[6]")
-	public WebElement unitCountForTransfer_Value;
-
-	@FindBy(xpath = "//div[@id='transfer_detail_modal_count_div']//b[contains(.,'Date & Time')]/parent::span/following-sibling::span/span[1]")
-	public WebElement insertNewTransfersDate_label;
-
-	@FindBy(xpath = "//div[@id='transfer_detail_modal_count_div']//b[contains(.,'Date & Time')]/parent::span/following-sibling::span/span[2]")
-	public WebElement InsertNewTransfersTime_label;
-	
-	@FindBy(xpath="//div[@class='toast-message' and text()='Store Number is not valid']")
-	public WebElement InvalidStoreNumber_Messag;
-	
-	@FindBy(xpath="//tbody[@id='transfer_modal_body']/tr/td[7]/span")
-	public WebElement SubTotalForTransfer_Label;
-
-	@FindBy(xpath="//input[@value='Close']")
-	public WebElement TransferDetailPopUp_Close_BTN;
-	
-	@FindBy(xpath="//label[text()='Select a date and time for your new transfer:']")
-	public WebElement InsertNewTransfersPopup_SelectDateTime_Label;
-	
-	@FindBy(id = "back-to-top")
-	public WebElement BackToTop_BT;
-	
-	@FindBy(xpath ="//div[@id='transfer_detail_modal_count_div']/div/div[1]/span[2]/span")
-	public WebElement SubmittedTransferPopup_Type_Value;
-	
-	@FindBy(xpath ="//div[@id='transfer_detail_modal_count_div']/div/div[2]/span[2]")
-	public WebElement SubmittedTransferPopup_NationalStoreNO_Value;
-	
-	@FindBy(xpath ="//div[@id='transfer_detail_modal_count_div']/div/div[3]/span[2]/span[1]")
-	public WebElement SubmittedTransferPopup_Date_Value;
-	
-	@FindBy(xpath ="//div[@id='transfer_detail_modal_count_div']/div/div[3]/span[2]/span[2]")
-	public WebElement SubmittedTransferPopup_Time_Value;
-	
-	@FindBy(xpath ="//div[@id='transfer_detail_modal_count_div']/div/div[5]/span[2]")
-	public WebElement SubmittedTransferPopup_TotalAmount_Value;
-	
-	@FindBy(xpath ="//div[@id='transfer_detail_modal_count_div']/div/div[6]/span[2]")
-	public WebElement SubmittedTransferPopup_CreatedBy_Value;
 	
 	@FindBy(xpath ="//div[@id='total_amount_div']/strong")
 	public WebElement AddTransferPopup_TotalAmount_Value;
@@ -123,17 +64,14 @@ public class TransferLandingPage extends AbstractPage{
 	@FindBy(xpath ="//input[@id='insert_new_transfer_date']")
 	public WebElement AddTransferPopup_Date_TB;
 	
-	@FindBy(xpath ="//button[@id='insert_new_transfer_date_btn']/i[contains(@class,'calendar')]")
-	public WebElement AddTransferPopup_Date_BT;
-	
 	@FindBy(xpath ="//button/span[text()='Yes']")
 	public WebElement CanceTransferPopup_Yes_BT;
 	
 	@FindBy(xpath ="//button[@id='htmlButton']/span[text()='No']")
 	public WebElement CanceTransferPopup_No_BT;
 	
-	@FindBy(xpath ="//input[@id='transfer_input_total_pack']")
-	public WebElement AddTransferItemsPopup_TotalUnits_TB;
+	@FindBy(xpath ="//tbody[@id='transfer_add_body']/tr/td[7]")
+	public WebElement AddTransferItemsPopup_TotalUnits_Value;
 	
 	@FindBy(id="transfer_type_menu")
 	public WebElement TransferType_DD;
@@ -141,17 +79,14 @@ public class TransferLandingPage extends AbstractPage{
 	@FindBy(id="location_menu")
 	public WebElement Location_DD;
 	
-	@FindBy(id="add-transfers-clear-input-btn")
-	public WebElement AddTransferItemsPopup_AddRawItem_BT;;
-	
 	@FindBy(xpath="//input[@colname='inner_pack_count']")
-	public WebElement AddTransferItemsPopup_InnerPackCount_TB;
+	public List <WebElement> AddTransferItemsPopup_InnerPackCount_TB;
 	
 	@FindBy(xpath="//input[@colname='case_count']")
-	public WebElement AddTransferItemsPopup_CaseCount_TB;
+	public List <WebElement> AddTransferItemsPopup_CaseCount_TB;
 	
 	@FindBy(xpath="//input[@colname='loose_count']")
-	public WebElement AddTransferItemsPopup_LooseCount_TB;	
+	public List <WebElement> AddTransferItemsPopup_LooseCount_TB;	
 	
 	@FindBy(xpath="//button/span[text()='Yes']")
 	public WebElement SubmitTransferConfirmationPopUp_Yes_BT;
@@ -165,7 +100,7 @@ public class TransferLandingPage extends AbstractPage{
 	@FindBy(xpath ="//div[@id='grand_amount']/span[2]/span")
 	public WebElement ViewTransferItemsPopup_GrandTotal_Value;
 	
-	@FindBy(xpath ="//div[@id='modal-header-bottom-right']/div/div/div/a[contains(@class,'icon-print')]")
+	@FindBy(xpath ="//div[@id='transfer_time']/div[2]/a[contains(@class,'icon-print')]")
 	public WebElement ViewTransferItemsPopup_Print_BT;
 	
 	@FindBy(xpath ="//h2[text()='Transfer']")
@@ -174,14 +109,8 @@ public class TransferLandingPage extends AbstractPage{
 	@FindBy(xpath ="//div[@id='eb_tp_hr_control']/div[contains(@class,'eb_tp_hr_min')]/span[@id='eb_tp_hr_span']")
 	public WebElement AddNewTransferForm_hourSpan_Value;
 	
-	@FindBy(xpath ="//div[@id='eb_tp_hr_control']/div[@id='eb_tp_hour_up']")
-	public WebElement AddNewTransferItemsPopup_HourUp_BT;
-	
 	@FindBy(xpath ="//div[@id='eb_tp_min_control']/div[contains(@class,'eb_tp_hr_min')]/span[@id='eb_tp_min_span']")
 	public WebElement AddNewTransferForm_MinSpan_Value;
-	
-	@FindBy(xpath ="//div[@id='eb_tp_min_up']")
-	public WebElement AddNewTransferItemsPopup_MinUp_BT;
 	
 	@FindBy(xpath ="//input[@id='history_start_date']")
 	public WebElement StartDate_TB;
@@ -192,13 +121,10 @@ public class TransferLandingPage extends AbstractPage{
 	@FindBy(xpath ="//eb-button[@value='Show Results']/button")
 	public WebElement ShowResults_BT;
 	
-	@FindBy(xpath = "//div[contains(@id,'dlgContent')]")
+	@FindBy(xpath = "//div[@id='dlgContent']/p[contains(text(),'Are you sure you want to')]/following-sibling::p[contains(text(),'	submit this transfer?')]")
 	public WebElement AddNewTransfer_Confirmation_Message;
 	
-	@FindBy(xpath = "//div[contains(@class,'confirmation-title')]/div[@id='notTitle']")
-	public WebElement AddNewTransfer_ConfirmationPopUp_Title;
-	
-	@FindBy(xpath="//div[@class='toast-message' and text()='Transfer entry saved']")
+	@FindBy(xpath="//div[@class='toast-message' and contains(text(),'Transfer entry saved')]")
 	public WebElement TransferAdded_Messag;
 	
 	@FindBy(xpath ="(//div[contains(@class,'datepickerWrapper')])[1]")
@@ -219,9 +145,6 @@ public class TransferLandingPage extends AbstractPage{
 	@FindBy(xpath="//th[text()='Amount']")
 	public WebElement TransferAmount_Header;
 	
-	@FindBy(xpath="//h2[text()='Transfer Out Detail']")
-	public WebElement ViewTransferForm_Title;
-	
 	@FindBy(xpath ="//table[@id='transfer_modal_tbl']/tbody/tr")
 	public List <WebElement> ViewTransferForm_Records_List;
 	
@@ -231,16 +154,16 @@ public class TransferLandingPage extends AbstractPage{
 	@FindBy(xpath="(//th[text()='Description'])[2]")
 	public WebElement ViewTransferForm_Description_Header;
 	
-	@FindBy(xpath="(//th[text()='Case Count'])[2]")
+	@FindBy(xpath="(//table[@id='transfer_modal_tbl']/thead/tr/th[contains(.,'Case') and contains(.,'Count')])[1]")
 	public WebElement ViewTransferForm_CaseCount_Header;;
 	
-	@FindBy(xpath="(//th[text()='Inner Pack Count'])[2]")
+	@FindBy(xpath="(//table[@id='transfer_modal_tbl']/thead/tr/th[contains(.,'Inner') and contains(.,'Pack Count')])[1]")
 	public WebElement ViewTransferForm_InnerPackCount_Header;;
 	
-	@FindBy(xpath="(//th[text()='Loose Count'])[2]")
+	@FindBy(xpath="(//table[@id='transfer_modal_tbl']/thead/tr/th[contains(.,'Loose') and contains(.,'Count')])[1]")
 	public WebElement ViewTransferForm_LooseCount_Header;;
 	
-	@FindBy(xpath="(//th[text()='Units Count'])[2]")
+	@FindBy(xpath="(//table[@id='transfer_modal_tbl']/thead/tr/th[contains(.,'Item') and contains(.,'Total')])[1]")
 	public WebElement ViewTransferForm_UnitsCount_Header;;
 	
 	@FindBy(xpath="(//th[contains(text(),'Sub-total')])[2]")
@@ -258,7 +181,7 @@ public class TransferLandingPage extends AbstractPage{
 	@FindBy(xpath="//input[@id='transfer_store']")
 	public WebElement ViewTransferForm_StoreBumber_TB;
 	
-	@FindBy(xpath="//div[@id='transfer_time']/span[@id='header_name']")
+	@FindBy(xpath="//div[@id='transfer_time']/div/span[@id='header_name']")
 	public WebElement ViewTransferForm_PreparerName_Value;
 	
 	@FindBy(xpath = "//h2[text()='Transfer']")
@@ -267,8 +190,8 @@ public class TransferLandingPage extends AbstractPage{
 	@FindBy(xpath = "//div[@id='eb_tp_input']/span[@id='eb_tp_span']")
 	public WebElement AddTransferPopup_Time_TB;
 	
-	@FindBy(xpath="//div[@class='toast-message' and text()='New Item Added']")
-	public WebElement AddTransferPopup_ItemAdded_Msg;
+	@FindBy(xpath="//div[@class='toast-message' and text()='Transfer entry saved']")
+	public WebElement Submit_Transfer_Confirmation_MSG;
 	
 	@FindBy(xpath="//input[@id='transfer_store']")
 	public WebElement TransferDetail_NationalStoreNumber_TB;
@@ -288,10 +211,7 @@ public class TransferLandingPage extends AbstractPage{
 	@FindBy(xpath ="//button/span[text()='Yes']")
 	public WebElement CancelTransfer_PopUp_YES_BT;
 	
-	@FindBy(xpath ="//button/span[text()='No']")
-	public WebElement CancelTransfer_PopUp_NO_BT;
-	
-	@FindBy(xpath = "//div[@id='dlgContent']")
+	@FindBy(xpath = "//div[@id='dlgContent' and contains(text(),'All entered information will be lost. Are you sure you want to cancel?')]")
 	public WebElement CancelTransfer_Warning_Message;
 	
 	@FindBy(xpath = "//tbody[@id='transfer_add_body']/tr")
@@ -303,159 +223,110 @@ public class TransferLandingPage extends AbstractPage{
 	@FindBy(xpath="//th[text()='WRIN']")
 	public WebElement AddNewTransferForm_Wrin_Header;
 	
-	@FindBy(xpath="//th[text()='Description']")
+	@FindBy(xpath="//table[@id='transfer_add']/thead/tr/th[text()='Description']")
 	public WebElement AddNewTransferForm_Description_Header;
 	
-	@FindBy(xpath="//th[text()='Case Count']")
+	@FindBy(xpath="//table[@id='transfer_add']/thead/tr/th[contains(.,'Case') and contains(.,'Count')]")
 	public WebElement AddNewTransferForm_CaseCount_Header;;
 	
-	@FindBy(xpath="//th[text()='Inner Pack Count']")
+	@FindBy(xpath="//table[@id='transfer_add']/thead/tr/th[contains(.,'Inner') and contains(.,'Pack Count')]")
 	public WebElement AddNewTransferForm_InnerPackCount_Header;;
 	
-	@FindBy(xpath="//th[text()='Loose Count']")
+	@FindBy(xpath="//table[@id='transfer_add']/thead/tr/th[contains(.,'Loose') and contains(.,'Count')]")
 	public WebElement AddNewTransferForm_LooseCount_Header;;
 	
-	@FindBy(xpath="//th[text()='Units Count']")
-	public WebElement AddNewTransferForm_UnitsCount_Header;;
+	@FindBy(xpath="//table[@id='transfer_add']/thead/tr/th[contains(.,'Item') and contains(.,'Total')]")
+	public WebElement AddNewTransferForm_ItemTotal_Header;;
 	
-	@FindBy(xpath="//th[text()='Sub-total($)']")
+	@FindBy(xpath="//table[@id='transfer_add']/thead/tr/th[text()='Sub-total']")
 	public WebElement AddNewTransferForm_SubTotal_Header;
 	
+	@FindBy(xpath ="//div[@id='kpi-header']/h2[text()='Current Day Activity']")
+	public WebElement TransferLandingPage_CurrentDayActivity_Label;
 	
-	/*
-	 * After selecting the store this method will click on the continue button
-	 * and allow the user to search for a WRIN id. it will insert the
-	 * outerPackQty, innerPackQty(if applicable) , looseUnitsQty and than add the transfer
-	 */
-	/*public TransferLandingPage insertAndAddDetailsToTransfer(String samplewRINID, String outerPackQty, String innerPackQty,String looseUnitsQty) throws InterruptedException {
-		// Click on the continue transfer button in Insert New Transfers Popup
-		//InsertNewTransfersPopup_ContinueTransfer_BT.click();
-		// Enter the WRIN Id
-		AddTransferItemsPopup_RawItemsSearchBox_TB.sendKeys(samplewRINID);
-		driver.findElement(By.xpath("//strong[text()='" + samplewRINID + "']")).click();
-		AddTransferItemsPopup_AddRawItem_BT.click();
-		wait.until(ExpectedConditions.visibilityOf(AddTransferItemsPopup_OuterPack_TB));
-		// Enter the outerPackQty for the food item
-		AddTransferItemsPopup_OuterPack_TB.sendKeys(outerPackQty);
-		try {
-			// Enter the innerPackQty for the food item
-			AddTransferItemsPopup_InnerPack_TB.sendKeys(innerPackQty);
-		} catch (Exception e) {
-			// innerPackQty is not applicable for the food item
-		}
-		// Enter the looseUnitsQty for the food item
-		AddTransferItemsPopup_LooseUnits_TB.sendKeys(looseUnitsQty);
-		wait.until(ExpectedConditions.visibilityOf(AddTransferItemsPopup_Add_BT));
-		// Add the transfer
-		AddTransferItemsPopup_Add_BT.click();
-		Thread.sleep(4000);
-		wait.until(ExpectedConditions.visibilityOf(AddTransferItemsPopup_Submit_BT));
-		return PageFactory.initElements(driver, TransferLandingPage.class);
-
-	}*/
+	@FindBy(xpath ="//table[@id='transfercounts']/tbody/tr/td[2]/span")
+	public List <WebElement> TransferLandingPage_TransferType_List;
+	
 	
 	public TransferLandingPage insertAndAddDetailsToTransfer(String samplewRINID, 
-			String outerPackQty, String innerPackQty,String looseUnitsQty) throws InterruptedException 
+			String outerPackQty, String innerPackQty,String looseUnitsQty) throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException 
 	{
 		seacrhAndSelectRawItem(samplewRINID);
 		Thread.sleep(3000);
 		// Enter the outerPackQty for the food item
 		Actions actions = new Actions(driver);
-		actions.moveToElement(AddTransferItemsPopup_CaseCount_TB);
-		// actions.click();
+		actions.moveToElement(AddTransferItemsPopup_CaseCount_TB.get(0));
 		actions.perform();
-		wait.until(ExpectedConditions.visibilityOf(AddTransferItemsPopup_CaseCount_TB));
-		AddTransferItemsPopup_CaseCount_TB.sendKeys(outerPackQty);
+		wait.until(ExpectedConditions.visibilityOf(AddTransferItemsPopup_CaseCount_TB.get(0)));
+		GenericMethods.enterValueInElement(AddTransferItemsPopup_CaseCount_TB.get(0),"AddTransferItemsPopup_CaseCount_TB",outerPackQty);
 		try {
 			// Enter the innerPackQty for the food item
-			AddTransferItemsPopup_InnerPackCount_TB.sendKeys(innerPackQty);
+			GenericMethods.enterValueInElement(AddTransferItemsPopup_InnerPackCount_TB.get(0),"AddTransferItemsPopup_InnerPackCount_TB",innerPackQty);
 		} catch (Exception e) {
 			// innerPackQty is not applicable for the food item
 		}
 		// Enter the looseUnitsQty for the food item
-		AddTransferItemsPopup_LooseCount_TB.sendKeys(looseUnitsQty);
+		GenericMethods.enterValueInElement(AddTransferItemsPopup_LooseCount_TB.get(0),"AddTransferItemsPopup_LooseCount_TB",looseUnitsQty);
 		AddNewTransfer_Header.click();
 		wait.until(ExpectedConditions.visibilityOf(AddTransferItemsPopup_Submit_BT));
 		return PageFactory.initElements(driver, TransferLandingPage.class);
 	}
 	
 	public TransferLandingPage EnterQuantitiesForWrinId(String samplewRINID, String outerPackQty, String innerPackQty,
-			String looseUnitsQty) throws InterruptedException {
-		driver.findElement(By.xpath("//tbody[@id='transfer_add_body']/tr/td/span[contains(text(),'"+samplewRINID+"')]/../following-sibling::td[2]/eb-validated-input//div/div[contains(@class,'input-group')]/input[@colname='case_count']")).sendKeys(outerPackQty);
+			String looseUnitsQty) throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException {
+		GenericMethods.enterValueInElement(driver.findElement(By.xpath("//tbody[@id='transfer_add_body']/tr/td/span[contains(text(),'"+samplewRINID+"')]/../following-sibling::td[2]/eb-validated-input//div/div[contains(@class,'input-group')]/input[@colname='case_count']")),"case_count",outerPackQty);
 		try{
-			driver.findElement(By.xpath("//tbody[@id='transfer_add_body']/tr/td/span[contains(text(),'"+samplewRINID+"')]/../following-sibling::td[3]/eb-validated-input//div/div[contains(@class,'input-group')]/input[@colname='inner_pack_count']")).sendKeys(innerPackQty);
+			GenericMethods.enterValueInElement(driver.findElement(By.xpath("//tbody[@id='transfer_add_body']/tr/td/span[contains(text(),'"+samplewRINID+"')]/../following-sibling::td[3]/eb-validated-input//div/div[contains(@class,'input-group')]/input[@colname='inner_pack_count']")),"inner_pack_count",innerPackQty);
 		}catch(Exception e){
 			//Do nothing
 		}
-		driver.findElement(By.xpath("//tbody[@id='transfer_add_body']/tr/td/span[contains(text(),'"+samplewRINID+"')]/../following-sibling::td[4]/eb-validated-input//div/div[contains(@class,'input-group')]/input[@colname='loose_count']")).sendKeys(looseUnitsQty);
+		GenericMethods.enterValueInElement(driver.findElement(By.xpath("//tbody[@id='transfer_add_body']/tr/td/span[contains(text(),'"+samplewRINID+"')]/../following-sibling::td[4]/eb-validated-input//div/div[contains(@class,'input-group')]/input[@colname='loose_count']")),"loose_count",looseUnitsQty);
 		AddNewTransfer_Header.click();
 		wait.until(ExpectedConditions.visibilityOf(AddTransferItemsPopup_Submit_BT));
 		return PageFactory.initElements(driver, TransferLandingPage.class);
 	}
 	
-	
-/*	//Create a transfer IN or Out type of transaction
-	public TransferLandingPage createATransferTransaction(String samplewRINID,String nationalStoreNumber,String type ,String outerPackQty, String innerPackQty,String looseUnitsQty) throws InterruptedException
-	{
-		//click on insert new transfer button
-//		CreateNewTransfers_BT.click();
-		wait.until(ExpectedConditions.visibilityOf(InsertNewTransfersPopup_InputNationalStoreNo_TB));
-		InsertNewTransfersPopup_InputNationalStoreNo_TB.sendKeys(nationalStoreNumber);
-		//click on transfer out or in
-		if(type.equalsIgnoreCase("OUT"))
-		{
-			InsertNewTransfersPopup_TransferOut_RB.click();
-		}
-		else
-		{
-			InsertNewTransfersPopup_TransferIn_RB.click();
-		}
-		insertAndAddDetailsToTransfer(samplewRINID, outerPackQty, innerPackQty, looseUnitsQty);
-		Thread.sleep(3000);
-		//click on submit button
-		AddTransferItemsPopup_Submit_BT.click();
-		Thread.sleep(2000);
-		//wait.until(ExpectedConditions.visibilityOf(ChangesSaved_Confirmation_MSG));
-		return PageFactory.initElements(driver, TransferLandingPage.class);
-		
-	}*/
-	
-	public boolean verifyTransferPlaced(String date, String time, String amount) throws InterruptedException{
+	public boolean verifyTransferPlaced(String date,String amount) throws InterruptedException{
 		wait.until(ExpectedConditions.visibilityOf(CreateNewTransfers_BT));
 		Thread.sleep(3000);
 		System.out.println("//table[@id='transfercounts']//tr/td/span[text()='"+date+"']/../following-sibling::td/span[text()='"+amount+"']");
 		return Base.isElementDisplayed(By.xpath("//table[@id='transfercounts']//tr/td/span[text()='"+date+"']/../following-sibling::td/span[text()='"+amount+"']"));
 	}
 	
-	public boolean verifyTransferPlaced(String date, String time,String store,String amount) throws InterruptedException{
+	public boolean verifyTransferPlaced(String date,String transferType,String storID,String amount) throws InterruptedException{
+		if(transferType.equalsIgnoreCase("Office"))
+		{
+			transferType="Out";
+			storID="Office";
+		}
 		wait.until(ExpectedConditions.visibilityOf(CreateNewTransfers_BT));
 		Thread.sleep(3000);
-		return Base.isElementDisplayed(By.xpath("//table[@id='transfercounts']/tbody/tr/td[contains(.,'"+time+"')]/span[contains(text(),'"+date+"')]/../following-sibling::td/span[contains(.,'"+store+"')]/../following-sibling::td/span[text()='"+amount+"']"));
+		System.out.println("//table[@id='transfercounts']/tbody/tr/td/span[contains(text(),'"+date+"')]/../following-sibling::td/span[contains(.,'"+transferType+"')]/../following-sibling::td/span[contains(.,'"+storID+"')]/../following-sibling::td/span[text()='"+amount+"']");
+		return Base.isElementDisplayed(By.xpath("//table[@id='transfercounts']/tbody/tr/td/span[contains(text(),'"+date+"')]/../following-sibling::td/span[contains(.,'"+transferType+"')]/../following-sibling::td/span[contains(.,'"+storID+"')]/../following-sibling::td/span[text()='"+amount+"']"));
 	}
 	
-	public TransferLandingPage selectDateInAddNewTransferPopUp(String date) throws InterruptedException{
-		AddTransferPopup_Date_TB.click();
+	public TransferLandingPage selectDateInAddNewTransferPopUp(String date) throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException{
+		GenericMethods.clickOnElement(AddTransferPopup_Date_TB,"AddTransferPopup_Date_TB");
 		Thread.sleep(1000);
 		int day = Base.getDayFromDate(date);
 		int month = Base.getMonthFromDate(date);
 		selectMonthFromDatePicker(Base.getMonthName(month+1),1);
-		driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[1]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")).click();
+		GenericMethods.clickOnElement(driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[1]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")),date);
 		return PageFactory.initElements(driver, TransferLandingPage.class);
 	
 	}
 	
-	/*public TransferLandingPage selectMonthFromDatePicker(String monthName,int calIndex){
-		String selectedMonth = driver.findElement(By.xpath("(//div[@class='xdsoft_mounthpicker'])["+calIndex+"]/div[1]/span")).getText();
-		while (!selectedMonth.equals(monthName)) {
-			driver.findElement(By.xpath("(//div[@class='xdsoft_mounthpicker'])["+calIndex+"]/button[@class='xdsoft_prev']")).click();
-			selectedMonth = driver.findElement(By.xpath("(//div[@class='xdsoft_mounthpicker'])["+calIndex+"]/div[contains(@class,'xdsoft_month')]/span")).getText();
-			System.out.println("monthName found "+selectedMonth);
-		}
-		return PageFactory.initElements(driver, TransferLandingPage.class);
-	}*/
+	public boolean verifyDateIsDisabled(String date) throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException{
+		GenericMethods.clickOnElement(AddTransferPopup_Date_TB,"AddTransferPopup_Date_TB");
+		Thread.sleep(1000);
+		int day = Base.getDayFromDate(date);
+		int month = Base.getMonthFromDate(date);
+		selectMonthFromDatePicker(Base.getMonthName(month+1),1);
+		return driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[1]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")).getAttribute("class").contains("xdsoft_disabled");
+	}
 	
-	public void selectTimeInAddNewTransferForm(String time) throws InterruptedException{
-		InsertNewTransfersPopup_Time_Value.click();
+	public TransferLandingPage selectTimeInAddNewTransferForm(String time) throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException{
+		GenericMethods.clickOnElement(InsertNewTransfersPopup_Time_Value,"InsertNewTransfersPopup_Time");
 		Thread.sleep(1000);
 		String hourValue = time.split(":")[0];
 		while(!AddNewTransferForm_hourSpan_Value.getText().equals(hourValue)){
@@ -469,6 +340,7 @@ public class TransferLandingPage extends AbstractPage{
 		//AddNewTransferForm_MinSpan_Value.click();
 		AddNewTransfer_Header.click();
 		Thread.sleep(1000);
+		return PageFactory.initElements(driver, TransferLandingPage.class); 
 	}
 	
 	public String getTimeToSet() throws InterruptedException{
@@ -495,36 +367,31 @@ public class TransferLandingPage extends AbstractPage{
 		return timeToSet;
 	}
 	
-	public TransferLandingPage selectTransferType(String transferTypeValue){
-		Select selectTransferType = new Select(TransferType_DD);
-		//TransferType_DD.click();
-		selectTransferType.selectByVisibleText(transferTypeValue);
+	public TransferLandingPage selectTransferType(String transferTypeValue) throws RowsExceededException, BiffException, WriteException, IOException{
+		GenericMethods.selectTextFormDropDownElement(TransferType_DD, "TransferType_DD", transferTypeValue);
 		return PageFactory.initElements(driver, TransferLandingPage.class);
 	}
 	
-	public TransferLandingPage selectLocationToTransfer(String storeId){
-		Select selectLocation = new Select(Location_DD);
-		selectLocation.selectByVisibleText(storeId);
+	public TransferLandingPage selectLocationToTransfer(String storeId) throws RowsExceededException, BiffException, WriteException, IOException{
+		//Select selectLocation = new Select(Location_DD);
+		GenericMethods.selectValueFormDropDownElement(Location_DD, "Location_DD", storeId);
 		return PageFactory.initElements(driver, TransferLandingPage.class);
 	}
 	
-	public TransferLandingPage seacrhAndSelectRawItem(String samplewRINID) throws InterruptedException{
-		AddTransferItemsPopup_RawItemsSearchBox_TB.clear();
-		AddTransferItemsPopup_RawItemsSearchBox_TB.sendKeys(samplewRINID);
-		driver.findElement(By.xpath("//strong[text()='" + samplewRINID + "']")).click();
+	public TransferLandingPage seacrhAndSelectRawItem(String samplewRINID) throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException{
+		GenericMethods.clearValueOfElement(AddTransferItemsPopup_RawItemsSearchBox_TB, "AddTransferItemsPopup_RawItemsSearchBox_TB");
+		GenericMethods.enterValueInElement(AddTransferItemsPopup_RawItemsSearchBox_TB, "AddTransferItemsPopup_RawItemsSearchBox_TB", samplewRINID);
+		GenericMethods.clickOnElement(driver.findElement(By.xpath("//strong[text()='" + samplewRINID + "']")),samplewRINID);
 		Thread.sleep(2000);
-		/*wait.until(ExpectedConditions.visibilityOf(AddTransferItemsPopup_AddRawItem_BT));
-		AddTransferItemsPopup_AddRawItem_BT.click();*/
 		return PageFactory.initElements(driver, TransferLandingPage.class);
 	}
 	
-	public void viewTransfer(String date, String time, String amount) throws InterruptedException{
+	public void viewTransfer(String date, String amount) throws InterruptedException{
 		wait.until(ExpectedConditions.visibilityOf(CreateNewTransfers_BT));
 		WebElement viewTransfer_BT = wait.until(ExpectedConditions.visibilityOfElementLocated(By
-				.xpath("//table[@id='transfercounts']/tbody/tr/td[contains(.,'"+time+"')]/span[contains(text(),'"+date+"')]/../following-sibling::td/span[text()='"+amount+"']/../following-sibling::td//button[@value='View']")));
+				.xpath("//table[@id='transfercounts']/tbody/tr/td/span[contains(text(),'"+date+"')]/../following-sibling::td/span[text()='"+amount+"']/../following-sibling::td//button[@value='View']")));
 		try {
-			viewTransfer_BT.click();
-
+			executor.executeScript("arguments[0].click();", viewTransfer_BT);
 		} catch (Exception e) {
 			// Do Page scroll
 			JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -538,8 +405,8 @@ public class TransferLandingPage extends AbstractPage{
 		Thread.sleep(1000);
 		int day = Base.getDayFromDate(startDate);
 		int month = Base.getMonthFromDate(startDate);
-		selectMonthFromDatePicker(Base.getMonthName(month+1),2);
-		driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[2]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")).click();
+		selectMonthFromDatePicker(Base.getMonthName(month+1),1);
+		driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[1]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")).click();
 		return PageFactory.initElements(driver, TransferLandingPage.class);
 	}
 	
@@ -563,14 +430,14 @@ public class TransferLandingPage extends AbstractPage{
 		Thread.sleep(1000);
 		int day = Base.getDayFromDate(endDate);
 		int month = Base.getMonthFromDate(endDate);
-		selectMonthFromDatePicker(Base.getMonthName(month+1),3);
-		driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[3]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")).click();
+		selectMonthFromDatePicker(Base.getMonthName(month+1),2);
+		driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[2]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")).click();
 		return PageFactory.initElements(driver, TransferLandingPage.class);
 	}
 	
 
 	public boolean verifyTransferHistoryDisplayedForSelectedDateRange(String startDate, String endDate) throws ParseException{
-		DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 		Date stDate = df.parse(startDate);
 		Date eDate = df.parse(endDate);
 		System.out.println(stDate);
@@ -595,7 +462,7 @@ public class TransferLandingPage extends AbstractPage{
 		List<WebElement> transferItemSubtotalList = driver.findElements(By.xpath("//table[@id='transfer_add']/tbody/tr/td[8]"));
 		BigDecimal subtotal = new BigDecimal("0.00");
 		for(WebElement transferItem : transferItemSubtotalList){
-			String transferSubtotal = transferItem.getText();
+			String transferSubtotal = transferItem.getText().replace("$", "").trim();
 			BigDecimal itemSubtotal = new BigDecimal(transferSubtotal);
 			subtotal = subtotal.add(itemSubtotal);
 		}
@@ -608,11 +475,11 @@ public class TransferLandingPage extends AbstractPage{
 		wait.until(ExpectedConditions.visibilityOf(AddTransferPopup_DeleteItem_BT)).click();
 	}
 	
-	public void removeAllWrinIdFromTransferPage() throws InterruptedException{
+	public void removeAllWrinIdFromTransferPage() throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException{
 		List<WebElement> removeBtnList = driver.findElements(By.xpath("//tbody[@id='transfer_add_body']/tr/td[contains(@class,'select-checkbox')]"));
 		for(WebElement removeBtn : removeBtnList){
-			removeBtn.click();
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//ul[@id='utility-toolbar']/li[@id='deleteId']"))).click();
+			GenericMethods.clickOnElement(removeBtn,"checkBox");
+			GenericMethods.clickOnElement(wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//ul[@id='utility-toolbar']/li[@id='deleteId']"))),"Delete Button");
 			Thread.sleep(1000);
 		}
 	}
@@ -655,6 +522,56 @@ public class TransferLandingPage extends AbstractPage{
 			}
 		}
 		return result;
+	}
+	
+	public boolean verifyDateIsInAscendingOrder() throws ParseException{
+		List<WebElement> dateList = driver.findElements(By.xpath("//table[@id='transfercounts']/tbody/tr/td[1]/span"));
+		List<String>dateValueList = Base.getTextListFromWebElements(dateList);
+		return Base.verifyDateInAscendingOrder(dateValueList);
+	}
+	
+	public boolean verifyDateIsInDescendingOrder() throws ParseException{
+		List<WebElement> dateList = driver.findElements(By.xpath("//table[@id='transfercounts']/tbody/tr/td[1]/span"));
+		List<String>dateValueList = Base.getTextListFromWebElements(dateList);
+		return Base.verifyDateInDescendingOrder(dateValueList);
+	}
+	
+	public boolean verifyTypeIsInAscendingOrder() throws ParseException{
+		List<WebElement> dateList = driver.findElements(By.xpath("//table[@id='transfercounts']/tbody/tr/td[2]/span"));
+		List<String>dateValueList = Base.getTextListFromWebElements(dateList);
+		return Base.verifyStringInAsscendingOrder(dateValueList);
+	}
+	
+	public boolean verifyTypeIsInDescendingOrder() throws ParseException{
+		List<WebElement> dateList = driver.findElements(By.xpath("//table[@id='transfercounts']/tbody/tr/td[2]/span"));
+		List<String>dateValueList = Base.getTextListFromWebElements(dateList);
+		return Base.verifyStringInDescendingOrder(dateValueList);
+	}
+	
+	public boolean verifyRecordsAreDisplayedInCorrectFormat(){
+		String datepattern = ("(\\d{1,2})(/)(\\d{1,2})(/)(\\d{1,4})");
+		List<WebElement> transferRecordsList = driver.findElements(By.xpath("//table[@id='transfercounts']/tbody/tr[@role='row']"));
+		boolean result = true;
+		for (int i = 1; i <= transferRecordsList.size(); i++) {
+			// Verify the date and time format for each records
+			boolean dateTimePatternMatched = Pattern.compile(datepattern).matcher(
+							driver.findElement(By.xpath("//table[@id='transfercounts']/tbody/tr["+ i + "]/td[1]/span")).getText()).matches();
+			// verify the type of the transaction for each record
+			boolean storeTypeValueDisplayed = (driver.findElement(By.xpath("//table[@id='transfercounts']/tbody/tr["+ i + "]/td[2]/span")).getText().contains("In")
+					|| driver.findElement(By.xpath("//table[@id='transfercounts']/tbody/tr["+ i + "]/td[2]/span")).getText().contains("Out"));
+			boolean locationDisplayed = !driver.findElement(By.xpath("//table[@id='transfercounts']/tbody/tr["+ i + "]/td[3]")).getText().isEmpty();
+			boolean amountDisplayed = !driver.findElement(By.xpath("//table[@id='transfercounts']/tbody/tr["+ i + "]/td[contains(@class,'money-format')]/span")).getText().isEmpty();
+			// Verify the view button for each record
+			boolean viewButtonresult = driver.findElement(By.xpath("//table[@id='transfercounts']/tbody/tr["+ i + "]/td[5]/eb-button/button")).getText().equalsIgnoreCase("View");
+			result = result & dateTimePatternMatched & storeTypeValueDisplayed & locationDisplayed
+					& amountDisplayed & viewButtonresult;
+			System.out.println("Entry format matched "+ result);
+		}
+		return result;
+	}
+	
+	public String getSubTotalForAWrin(String wrinId){
+		return driver.findElement(By.xpath("//tbody[@id='transfer_add_body']/tr/td/span[contains(text(),'"+wrinId+"')]/../following-sibling::td[6]")).getText();
 	}
 	
 }

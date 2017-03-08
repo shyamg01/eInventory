@@ -1,6 +1,8 @@
 package eInventoryPageClasses;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +23,7 @@ public class PromotionsAndWastePage extends AbstractPage
 	{
 		super(driver);
 		PageFactory.initElements(driver, this);
+		
 	}
 
 	@FindBy(xpath ="//h1[contains(.,'Promotions & Waste')]")
@@ -38,14 +41,8 @@ public class PromotionsAndWastePage extends AbstractPage
 	@FindBy(xpath ="//label[contains(text(),'Begin Date:')]")
 	public WebElement BeginDate_Label;
 	
-	@FindBy(id ="begin_date")
-	public WebElement BeginDate_TB;
-	
 	@FindBy(xpath ="//button[@id='one_month_cal_btn']")
 	public WebElement MonthToDate_BT;
-	
-	@FindBy(xpath ="//button[@id='two_month_cal_btn']")
-	public WebElement TwoMonthToDate_BT;
 	
 	@FindBy(xpath ="//label[@id='daily_label']")
 	public WebElement DailyRollup_label;
@@ -56,21 +53,6 @@ public class PromotionsAndWastePage extends AbstractPage
 	@FindBy(xpath ="//th[contains(text(),'Cost')]")
 	public WebElement Cost_Coloumn ;
 
-	@FindBy(xpath ="//h5[@id='raw_waste_table_cap']/b[1]")
-	public WebElement fromDateHeader_Label ;
-	
-	@FindBy(xpath ="//h5[@id='raw_waste_table_cap']/b[2]")
-	public WebElement toDateHeader_Label ;
-	
-	@FindBy(xpath ="//button[@id='raw_waste_start_btn']")
-	public WebElement wasteHistoryStartDate_BT ;
-	
-	@FindBy(xpath ="//button[@id='raw_waste_end_btn']")
-	public WebElement wasteHistoryEndDate_BT ;
-	
-	@FindBy(xpath ="//input[@value='Update Table']")
-	public WebElement updateTable_BT ;
-	
 	@FindBy(xpath ="//div[@id='waste_hist_detail_data']/table/thead//th[text()='WRIN']")
 	public WebElement wasteDetail_WRINColumn_Label ;
 	
@@ -104,22 +86,19 @@ public class PromotionsAndWastePage extends AbstractPage
 	@FindBy(xpath ="//button[@value='Enter Completed Waste']")
 	public WebElement CompletedWaste_BT ;
 	
-	@FindBy(xpath ="//h2[text()='Completed Waste']")
-	public WebElement CompletedWastePopUp_Title ;
-	
 	@FindBy(xpath ="//eb-button[@value='Show Results']/button")
 	public WebElement ShowResults_BT;
 
-	@FindBy(xpath ="//th[text()='Time of Waste']")
+	@FindBy(xpath ="//th[text()='Time Occurred']")
 	public WebElement PromotionAndWasteTable_TimeofWaste_Header;
 	
-	@FindBy(xpath ="//th[text()='Date Entered']")
+	@FindBy(xpath ="//th[text()='Date Submitted']")
 	public WebElement PromotionAndWasteTable_DateEntered_Header;
 	
-	@FindBy(xpath ="//th[text()='Time Entered']")
+	@FindBy(xpath ="//th[text()='Time Submitted']")
 	public WebElement PromotionAndWasteTable_TimeEntered_Header;
 	
-	@FindBy(xpath ="//th[text()='Entered By']")
+	@FindBy(xpath ="//th[text()='Submitted By']")
 	public WebElement PromotionAndWasteTable_EnteredBy_Header;
 	
 	@FindBy(xpath ="//th[text()='Type']")
@@ -134,40 +113,19 @@ public class PromotionsAndWastePage extends AbstractPage
 	@FindBy(xpath ="//div[@id='kpi-header']/h2[text()='Current Day Activity']")
 	public WebElement AtAGlance_Header;
 	
-	@FindBy(xpath ="//h5[text()='Raw Item Activity']")
-	public WebElement AtAGlance_RawItemActivity_Label;
-	
-	@FindBy(xpath ="//h6[contains(.,'Current day as of')]")
-	public WebElement AtAGlance_CurrentDayAsOf_Label;
-	
-	@FindBy(xpath ="//th[contains(.,'Top Raw Items Wasted')]")
-	public WebElement AtAGlance_TopRawItemWasted_Column_header;
-	
-	@FindBy(xpath ="//th[contains(.,'Top Raw Items Promo')]")
-	public WebElement AtAGlance_TopRawItemsPromo_Column_header;
-	
-	@FindBy(xpath ="//th[contains(.,'Top Completed Waste')]")
-	public WebElement AtAGlance_TopCompletedWaste_Column_header;
-	
 	@FindBy(xpath ="//tr[contains(@class,'waste_date_group')]")
 	public List<WebElement> WasteRecordsList;
 	
-	@FindBy(xpath ="//h2[text()='Waste']")
-	public WebElement ViewWasteForm_Title;
-	
-	@FindBy(xpath ="//h2[text()='Promo']")
-	public WebElement ViewPromoForm_Title;
-	
-	@FindBy(xpath ="//h2[text()='Completd Waste']")
+	@FindBy(xpath ="(//h2[text()='Completed Waste'])[1]")
 	public WebElement ViewCompletedWasteForm_Title;
 	
-	@FindBy(xpath ="//div[@id='waste_hist_detail_data']/table/tfoot//td/b[text()='Total: ']")
+	@FindBy(xpath ="//div[@id='raw_waste_total_amount']/span[1]/strong[contains(text(),'Total Amount:')]")
 	public WebElement wasteDetail_Total_Label ;
 	
-	@FindBy(xpath ="//div[@id='waste_hist_detail_data']/table/tfoot//td/b[2]")
+	@FindBy(xpath ="//div[@id='raw_waste_total_amount']/span[2]/strong")
 	public WebElement wasteDetail_Total_Value ;
 	
-	@FindBy(xpath ="//tbody[@id='waste_hist_detail_table_body']/tr")
+	@FindBy(xpath ="//div[@id='waste_hist_detail_data']/table/tbody/tr")
 	public List<WebElement> WasteDetailsEntries_List;
 	
 	@FindBy(xpath ="//div[@id='comp_waste_hist_detail_data']/table/thead//th[text()='Menu Item #']")
@@ -185,10 +143,10 @@ public class PromotionsAndWastePage extends AbstractPage
 	@FindBy(xpath ="//tbody[@id='comp_waste_entry_table_body']/tr")
 	public List<WebElement> CompletedWasteDetailsEntries_List;
 	
-	@FindBy(xpath ="//div[@id='comp_waste_hist_detail_data']/table/tfoot//td/b[text()='Total: ']")
+	@FindBy(xpath ="//div[@id='total_completed_waste_amount']/span[1]/strong[contains(text(),'Total Amount:')]")
 	public WebElement CompletedWasteDetail_Total_Label ;
 	
-	@FindBy(xpath ="//div[@id='comp_waste_hist_detail_data']/table/tfoot//td/b[2]")
+	@FindBy(xpath ="//div[@id='total_completed_waste_amount']/span[2]")
 	public WebElement CompletedWasteDetail_Total_Value ;
 	
 	
@@ -236,36 +194,35 @@ public class PromotionsAndWastePage extends AbstractPage
 		return current_date;
 	}
 	
-	//double click on the First row of todays date in daily roll up table
+	public boolean verifyRawPromoEntry(String date, String amount, String userName, String eId, String enteredTime){
+		return verifyWasteEntry(date, amount, userName, eId, enteredTime, "Raw Promo");
+		
+	}
 	
-	public RawItemWastePage doubleClickOnFirstTodayDateRecordInDailyRollupTable()
-	{
-		wait.until(ExpectedConditions.visibilityOf(PromotionAndWaste_Title));
-		int size=driver.findElements(By.xpath("//table[@id='raw_history_tbl']/tbody/tr")).size();
-		for(int i=1;i<=size;i++)
-		{
-			String todayDate=getCurrentDateinMMDDYYYY();
-			if(driver.findElement(By.xpath("//table[@id='raw_history_tbl']/tbody/tr["+i+"]/td[1]")).getText().trim().equalsIgnoreCase(todayDate))
-			{
-				action.moveToElement(driver.findElement(By.xpath("//table[@id='raw_history_tbl']/tbody/tr["+i+"]/td[1]"))).doubleClick().build().perform();
-			}
-			
-		}
+	public boolean verifyRawWasteEntry(String date, String amount, String userName, String eId, String enteredTime){
+		return verifyWasteEntry(date, amount, userName, eId, enteredTime, "Raw Waste");
+		
+	}
 	
-		return PageFactory.initElements(driver, RawItemWastePage.class);
+	public boolean verifyCompletedWasteEntry(String date, String amount, String userName, String eId, String enteredTime){
+		return verifyWasteEntry(date, amount, userName, eId, enteredTime, "Completed waste");
 		
 	}
 	
 	//Verify Raw Waste entry is Present or not
+	public boolean verifyWasteEntry(String date, String amount, String userName, String eId, String enteredTime, String wasteType) {
+			String dateformat1 = getFormattedDate(date);
+			System.out.println("//table[@id='waste_history_table']/tbody/tr[contains(@class,'"+dateformat1+"')]/td[contains(text(),'"+enteredTime+"')]/following-sibling::td/span[text()='"+date+"']/../following-sibling::td/span[text()='"+userName+" - "+eId+"']/../following-sibling::td/span[text()='"+wasteType+"']/../following-sibling::td/span[text()='"+amount+"']");
+			return Base.isElementDisplayed(By.xpath("//table[@id='waste_history_table']/tbody/tr[contains(@class,'"+dateformat1+"')]/td[contains(text(),'"+enteredTime+"')]/following-sibling::td/span[text()='"+date+"']/../following-sibling::td/span[text()='"+userName+" - "+eId+"']/../following-sibling::td/span[text()='"+wasteType+"']/../following-sibling::td/span[text()='"+amount+"']"));
+	}
+	
+	
+	
+	//Verify Raw Waste entry is Present or not
 	public boolean isRawWasteEntryPresent(String date, String amount) {
 		String dateformat1 = getFormattedDate(date);
-		String enteredDate = Base.returnTodayDate();
-		String month = enteredDate.split("/")[0];
-		String day = enteredDate.split("/")[1];
-		String year = enteredDate.split("/")[2];
-		String dateformat2 =  month+"/" + day+"/"+year;//  12-08-2015
-		System.out.println("//table[@id='waste_history_table']/tbody/tr[contains(@class,'date"+dateformat1+" ')]/td/span[text()='"+dateformat2+"']/../following-sibling::td/span[text()='Waste']/../following-sibling::td/span[text()='"+amount+"']");
-		int size = driver.findElements(By.xpath("//table[@id='waste_history_table']/tbody/tr[contains(@class,'date"+dateformat1+" ')]/td/span[text()='"+dateformat2+"']/../following-sibling::td/span[text()='Waste']/../following-sibling::td/span[text()='"+amount+"']")).size();
+		System.out.println("//table[@id='waste_history_table']/tbody/tr[contains(@class,'date"+dateformat1+" ')]/td[5][following-sibling::td/span[text()='"+amount+"']]/span[text()='Waste']");
+		int size = driver.findElements(By.xpath("//table[@id='waste_history_table']/tbody/tr[contains(@class,'date"+dateformat1+" ')]/td[5][following-sibling::td/span[text()='"+amount+"']]/span[text()='Waste']")).size();
 		if (size >= 1) {
 			return true;
 		} else {
@@ -276,13 +233,8 @@ public class PromotionsAndWastePage extends AbstractPage
 	//Verify Completed Waste entry is Present or not
 	public boolean isCompletedWasteEntryPresent(String date, String amount) {
 		String dateformat1 = getFormattedDate(date);
-		String enteredDate = Base.returnTodayDate();
-		String month = enteredDate.split("/")[0];
-		String day = enteredDate.split("/")[1];
-		String year = enteredDate.split("/")[2];
-		String dateformat2 =  month+"/" + day+"/"+year;
-		System.out.println("//table[@id='waste_history_table']/tbody/tr[contains(@class,'date"+dateformat1+" ')]/td/span[text()='"+dateformat2+"']/../following-sibling::td/span[text()='Completed waste']/../following-sibling::td/span[text()='"+amount+"']");
-		int size = driver.findElements(By.xpath("//table[@id='waste_history_table']/tbody/tr[contains(@class,'date"+dateformat1+" ')]/td/span[text()='"+dateformat2+"']/../following-sibling::td/span[text()='Completed waste']/../following-sibling::td/span[text()='"+amount+"']")).size();
+		System.out.println("//table[@id='waste_history_table']/tbody/tr[contains(@class,'date"+dateformat1+" ')]/td[5][following-sibling::td/span[text()='"+amount+"']]/span[text()='Completed waste']");
+		int size = driver.findElements(By.xpath("//table[@id='waste_history_table']/tbody/tr[contains(@class,'date"+dateformat1+" ')]/td[5][following-sibling::td/span[text()='"+amount+"']]/span[text()='Completed waste']")).size();
 		if (size >= 1) {
 			return true;
 		} else {
@@ -292,13 +244,8 @@ public class PromotionsAndWastePage extends AbstractPage
 	// Verify Raw Promo entry is Present or not
 	public boolean isRawPromoEntryPresent(String date, String amount)throws InterruptedException {
 		String dateformat1 = getFormattedDate(date);
-		String enteredDate = Base.returnTodayDate();
-		String month = enteredDate.split("/")[0];
-		String day = enteredDate.split("/")[1];
-		String year = enteredDate.split("/")[2];
-		String dateformat2 =  month+"/" + day+"/"+year;
-		System.out.println("//table[@id='waste_history_table']/tbody/tr[contains(@class,'date"+dateformat1+" ')]/td/span[text()='"+dateformat2+"']/../following-sibling::td/span[text()='Promo']/../following-sibling::td/span[text()='"+amount+"']");
-		int size = driver.findElements(By.xpath("//table[@id='waste_history_table']/tbody/tr[contains(@class,'date"+dateformat1+" ')]/td/span[text()='"+dateformat2+"']/../following-sibling::td/span[text()='Promo']/../following-sibling::td/span[text()='"+amount+"']")).size();
+		System.out.println("//table[@id='waste_history_table']/tbody/tr[contains(@class,'date"+dateformat1+" ')]/td[5][following-sibling::td/span[text()='"+amount+"']]/span[text()='Promo']");
+		int size = driver.findElements(By.xpath("//table[@id='waste_history_table']/tbody/tr[contains(@class,'date"+dateformat1+" ')]/td[5][following-sibling::td/span[text()='"+amount+"']]/span[text()='Promo']")).size();
 		if (size >= 1) {
 			System.out.println("true");
 			return true;
@@ -306,118 +253,31 @@ public class PromotionsAndWastePage extends AbstractPage
 			return false;
 		}
 	}
-		
-		/* @Author :Hemlata
-		 * This method will take start date and end date as input in MM/DD/YYYY format and select start date and end date 
-		from the calendar present in raw waste and promo landing page*/
-		public void selectStartAndEndDateForWasteHistory(String startDate,String endDate) throws InterruptedException{
-			int month1 = Base.getMonthFromDate(startDate);
-			int date1 = Base.getDayFromDate(startDate);
-			int month2 = Base.getMonthFromDate(endDate);
-			int date2 = Base.getDayFromDate(endDate);
-			promoWasteHistoryStartDate_TB.click();
-			Thread.sleep(1000);
-			driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[1]//tbody/tr//td[@data-month='"+month1+"']/div[text()='"+date1+"']")).click();
-			promoWasteHistoryEndDate_TB.click();
-			Thread.sleep(1000);
-			driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[2]//tbody/tr//td[@data-month='"+month2+"']/div[text()='"+date2+"']")).click();
-			
-		}
-		
-		/*Author :Hemlata 
-		This method will take date in yyyymmdd format and verify Expand And Collapse Functionality For that Date Group records */
-		public boolean verifyExpandAndCollapseFunctionalityForDateGroup(String date) {
-			//get the header element for the given date group
-			WebElement dateGroup1 = driver.findElement(By.xpath("//table[@id='waste_history_table']/tbody/tr[contains(@class,'date"+ date + "_group')]"));
-			/*//get the raw waste amount from header
-			String rawWasteAmt = driver.findElement(By.xpath("//table[@id='waste_history_table']/tbody/tr[contains(@class,'date"+ date + "_group')]/td/div[@class='waste_day_totals']/b")).getText();
-			//get the promo amount from header
-			String promoAmt = dateGroup1.findElement(By.xpath("//table[@id='waste_history_table']/tbody/tr[contains(@class,'date"+ date + "_group')]/td/div[@class='promo_day_totals']/b")).getText();
-			// if raw waste amount and promo amount will be $0.00 for passed date group than NO RAW WASTE label will be displayed in table
-			if (rawWasteAmt.equals("Raw waste: $0.00") && promoAmt.equals("Raw promo: $0.00")) {
-				String noRawWasteMsg = driver.findElement(By.xpath("//tr[contains(@class,'date" + date + " ')]")).getAttribute("class");
-				//if 'NO RAW WASTE label' is hidden than expand the header and verify that label is displayed
-				if (noRawWasteMsg.contains("hidden")) {
-					dateGroup1.click();
-					String noRawWaste = driver.findElement(By.xpath("//tr[contains(@class,'date" + date+ " ')]/td[3]")).getText();
-					return noRawWaste.equals("NO RAW WASTE");
-				} //else click on the header and verify that label is hidden now
-				else {
-					dateGroup1.click();
-					return (!noRawWasteMsg.contains("hidden"));
-
-				}
-			} 
-			// if raw waste amount or promo amount is not 0.00 for passed date group than records will be displayed in table
-			else {*/
-				//get the record list from the table for passed date group
-				List<WebElement> historyRecordsList = driver.findElements(By.xpath("//tr[contains(@class,'date" + date + " ')]"));
-				//If the records are hidden by default view that click on the header and verify that records are displayed
-				if(historyRecordsList.get(0).getAttribute("class").contains("hidden")){
-					boolean toggle = true;
-					dateGroup1.click();
-					for (int a = 0; a < historyRecordsList.size(); a++) {
-						toggle = toggle && (!historyRecordsList.get(a).getAttribute("class").contains("hidden"));
-				}
-					return toggle;
-				} 
-				//If the records are expanded by default view that click on the header and verify that records are hidden
-				else {
-					boolean toggle = true;
-					dateGroup1.click();
-					for (int a = 0; a < historyRecordsList.size(); a++) {
-						toggle = toggle && (historyRecordsList.get(a).getAttribute("class").contains("hidden"));
-					}
-					return toggle;
-					}
-				}
-			/*}*/
-		
-	/*
-	 * @Author :Hemlata This method will take date in yyyymmdd format and click
-	 * on the first record for that date group
-	 */
-	public void clickOnFirstRecordOfADateGroup(String date) {
-		
-		
-		int size=Record_Expend_Button_List.size();
-		for(int i=1;i<=size;i++)
-		{
-		// get the raw waste amount from header
-		String rawWasteAmt = driver.findElement(By.xpath("//table[@id='waste_history_table']/tbody/tr["+i+"]/td/b/div[2]")).getText();
-		// get the promo amount from header
-		String promoAmt = driver
-				.findElement(By.xpath("//table[@id='waste_history_table']/tbody/tr["+i+"]/td/b/div[3]")).getText();
-		// if raw waste amount and promo amount is not $0.00 for passed date group than click on the first record
-		if (!(rawWasteAmt.trim().equalsIgnoreCase("Raw waste: $0.00,") && promoAmt.trim().equalsIgnoreCase("Raw promo: $0.00,"))) 
-		{
-			Record_Expend_Button_List.get(i-2).click();
-			driver.findElement(By.xpath("//table[@id='waste_history_table']/tbody/tr["+(i+1)+"]/td[1]")).click();
-			break;
-			/*WebElement historyRecord = driver.findElement(By.xpath("//tr[contains(@class,'date" + date + " ')]"));
-			// if record is hidden than first expand the date group header and than click on the first record
-			if (historyRecord.getAttribute("class").contains("hidden")) {
-				dateGroup1.click();
-				historyRecord.click();
-			} else {
-				historyRecord.click();
-			}*/
-		}
-		else
-		{
-			i=i+1;
-		}
-	}
-
-}
 	
-	public boolean verifyRecordsAreCollapsed(){
-		boolean toggle=true;
-		List<WebElement>wasteHistoryList = driver.findElements(By.xpath("//tr[contains(@class,'waste_date_group')]/following-sibling::tr[@role='row']"));
-		for(WebElement wasteItem : wasteHistoryList){
-			toggle = toggle && wasteItem.getAttribute("class").contains("hidden");
+	public boolean verifyWasteHistoryDisplayedForSelectedDateRange(String startDate, String endDate) throws ParseException{
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+		Date stDate = df.parse(startDate);
+		Date eDate = df.parse(endDate);
+		System.out.println(stDate);
+		System.out.println(eDate);
+		List<WebElement> recordDateList = driver.findElements(By.xpath("//table[@id='waste_history_table']/tbody/tr[contains(@class,'waste_date_group')]"));
+		boolean result = true;
+		for(WebElement record : recordDateList ){
+			String dategroup = record.getAttribute("class").split(" ")[2].split("_")[0];
+			System.out.println("dategroup "+dategroup);
+			String year = dategroup.substring(4,8);
+			String month = dategroup.substring(8,10);
+			String day = dategroup.substring(10,12);
+			String date = month+"/"+day+"/"+year;
+			System.out.println("date "+date);
+			Date recordDate = df.parse(date);
+			if((recordDate.compareTo(stDate)>0 ||recordDate.compareTo(stDate) ==0) & (recordDate.compareTo(eDate)<0||recordDate.compareTo(eDate)==0)){
+			System.out.println("RecordDate"+recordDate);
+				result = result & true;
+			}else{result = result & false;}
 		}
-		return toggle;
+		return result;
+		
 	}
 	
 	public boolean verifyWasteDateGroupDisplayedForSelectedDateRange(String startDate, String endDate) {
@@ -469,7 +329,7 @@ public class PromotionsAndWastePage extends AbstractPage
 		return completWasteAmount;		
 	}
 	
-	public String getPromoWasteAmountFromDateGroupHeader(String date){
+	private String getPromoWasteAmountFromDateGroupHeader(String date){
 		String formattedDate =  getFormattedDate(date);
 		String promoWasteCalculationHeader = driver.findElement(By.xpath("//tr[contains(@class,'date" + formattedDate+ "_group')]/th[2]/span")).getText();
 		return promoWasteCalculationHeader;
@@ -501,64 +361,54 @@ public class PromotionsAndWastePage extends AbstractPage
 	}
 	
 	public PromotionsAndWastePage selectStartDate(String startDate) throws InterruptedException{
-		promoWasteHistoryStartDate_TB.click();
+		wait.until(ExpectedConditions.elementToBeClickable(promoWasteHistoryStartDate_TB)).click();
 		Thread.sleep(1000);
 		int day = Base.getDayFromDate(startDate);
 		int month = Base.getMonthFromDate(startDate);
-		selectMonthFromDatePicker(Base.getMonthName(month+1),4);
-		driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[4]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")).click();
+		selectMonthFromDatePicker(Base.getMonthName(month+1),1);
+		driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[1]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")).click();
 		return PageFactory.initElements(driver, PromotionsAndWastePage.class);
 	}
 	
 	public PromotionsAndWastePage selectEndDate(String endDate) throws InterruptedException{
-		promoWasteHistoryEndDate_TB.click();
+		wait.until(ExpectedConditions.elementToBeClickable(promoWasteHistoryEndDate_TB)).click();
 		Thread.sleep(1000);
 		int day = Base.getDayFromDate(endDate);
 		int month = Base.getMonthFromDate(endDate);
-		selectMonthFromDatePicker(Base.getMonthName(month+1),5);
-		driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[5]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")).click();
+		selectMonthFromDatePicker(Base.getMonthName(month+1),2);
+		driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[2]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")).click();
 		return PageFactory.initElements(driver, PromotionsAndWastePage.class);
 	}
 	
-	/*public PromotionsAndWastePage selectMonthFromDatePicker(String monthName,int calIndex){
-		String selectedMonth = driver.findElement(By.xpath("(//div[@class='xdsoft_mounthpicker'])["+calIndex+"]/div[1]/span")).getText();
-		while (!selectedMonth.equals(monthName)) {
-			driver.findElement(By.xpath("(//div[@class='xdsoft_mounthpicker'])["+calIndex+"]/button[@class='xdsoft_prev']")).click();
-			selectedMonth = driver.findElement(By.xpath("(//div[@class='xdsoft_mounthpicker'])["+calIndex+"]/div[contains(@class,'xdsoft_month')]/span")).getText();
-			System.out.println("monthName found "+selectedMonth);
-		}
-		return PageFactory.initElements(driver, PromotionsAndWastePage.class);
-	}*/
-	
-	public boolean verifyStartDateIsDisabled(String startDate){
+	public boolean verifyStartDateIsDisabled(String startDate) throws InterruptedException{
 		int day = Base.getDayFromDate(startDate);
 		int month = Base.getMonthFromDate(startDate);
-		selectMonthFromDatePicker(Base.getMonthName(month+1),4);
-		boolean dateEnabled = driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[4]//tbody/tr//td[@data-month='"+month+"' and @data-date='"+day+"']")).getAttribute("class").contains("xdsoft_disabled");
+		selectMonthFromDatePicker(Base.getMonthName(month+1),1);
+		boolean dateEnabled = driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[1]//tbody/tr//td[@data-month='"+month+"' and @data-date='"+day+"']")).getAttribute("class").contains("xdsoft_disabled");
 		return dateEnabled;
 	}
 	
-	public boolean verifyEndDateIsDisabled(String endDate){
+	public boolean verifyEndDateIsDisabled(String endDate) throws InterruptedException{
 		int day = Base.getDayFromDate(endDate);
 		int month = Base.getMonthFromDate(endDate);
-		selectMonthFromDatePicker(Base.getMonthName(month+1),5);
-		boolean dateEnabled = driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[5]//tbody/tr//td[@data-month='"+month+"' and @data-date='"+day+"']")).getAttribute("class").contains("xdsoft_disabled");
+		selectMonthFromDatePicker(Base.getMonthName(month+1),2);
+		boolean dateEnabled = driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[2]//tbody/tr//td[@data-month='"+month+"' and @data-date='"+day+"']")).getAttribute("class").contains("xdsoft_disabled");
 		return dateEnabled;
 	}
 	
 	public String calculatePromoAmountForSelectedDate(String date) throws InterruptedException{
-		return calculatePromoWasteAmount(date, "Promo");
+		return calculatePromoWasteAmount(date, "Raw Promo");
 	}
 
 	public String calculateWasteAmountForSelectedDate(String date) throws InterruptedException{
-		return calculatePromoWasteAmount(date, "Waste");
+		return calculatePromoWasteAmount(date, "Raw Waste");
 	}
 	
 	public String calculateCompleteWasteAmountForSelectedDate(String date) throws InterruptedException{
 		return calculatePromoWasteAmount(date, "Completed waste");
 	}
 	
-	public String calculatePromoWasteAmount(String date, String promoWasteType) throws InterruptedException{
+	private String calculatePromoWasteAmount(String date, String promoWasteType) throws InterruptedException{
 		int day = Base.getDayFromDate(date);
 		String month = date.split("/")[0];
 		String year = date.split("/")[2];
@@ -602,7 +452,7 @@ public class PromotionsAndWastePage extends AbstractPage
 		return recordIsCollapsed;
 	}
 	
-	public String getFormattedDate(String date){
+	private String getFormattedDate(String date){
 		int day = Base.getDayFromDate(date);
 		String month = date.split("/")[0];
 		String year = date.split("/")[2];
@@ -618,11 +468,11 @@ public class PromotionsAndWastePage extends AbstractPage
 	}
 	
 	public void viewPromoEntry(String date) throws InterruptedException {
-		viewPromoWasteEntry(date, "Promo");
+		viewPromoWasteEntry(date, "Raw Promo");
 	}
 	
 	public void viewWasteEntry(String date) throws InterruptedException {
-		viewPromoWasteEntry(date, "Waste");
+		viewPromoWasteEntry(date, "Raw Waste");
 	}
 	
 	public void viewCompletedWasteEntry(String date) throws InterruptedException {
@@ -631,12 +481,31 @@ public class PromotionsAndWastePage extends AbstractPage
 	
 	
 	// Verify Raw Waste entry is Present or not
-	public void viewPromoWasteEntry(String date, String promoWasteType ) throws InterruptedException {
+	private void viewPromoWasteEntry(String date, String promoWasteType ) throws InterruptedException {
 		String dateformat1 = getFormattedDate(date);
-		WebElement promoWasteViewBtn = driver.findElement(By.xpath("//tr[contains(@class,'date"+dateformat1+" ')]/td[5]/span[text()='"+promoWasteType+"']/../following-sibling::td[contains(@class,' view-column')]/eb-button/button"));
+		WebElement promoWasteViewBtn = driver.findElement(By.xpath("//tr[contains(@class,'date"+dateformat1+" ')]/td[5]/span[text()='"+promoWasteType+"']/../following-sibling::td[contains(@class,'view-column')]/eb-button/button"));
 		Base.scrollToTheElement(promoWasteViewBtn);
 		Thread.sleep(3000);
-		promoWasteViewBtn.click();
+		executor.executeScript("arguments[0].click();", promoWasteViewBtn);
+		//promoWasteViewBtn.click();
+	}
+	
+	public void viewWasteEntry(String date,String amount) throws InterruptedException {
+		viewPromoWasteEntry(date, "Raw Waste",amount);
+	}
+	
+	public void viewPromoEntry(String date,String amount) throws InterruptedException {
+		viewPromoWasteEntry(date, "Raw Promo",amount);
+	}
+	
+	// Verify Raw Waste entry is Present or not
+	private void viewPromoWasteEntry(String date, String promoWasteType,String amount) throws InterruptedException {
+		String dateformat1 = getFormattedDate(date);
+		WebElement promoWasteViewBtn = driver.findElement(By.xpath("//tr[contains(@class,'date"+ dateformat1
+								+ " ')]/td[5]/span[text()='"+ promoWasteType+ "']/../following-sibling::td[1]/span[text()='"+amount+"']/../following-sibling::td[contains(@class,'view-column')]/eb-button/button"));
+		Base.scrollToTheElement(promoWasteViewBtn);
+		Thread.sleep(3000);
+		executor.executeScript("arguments[0].click();", promoWasteViewBtn);
 	}
 		
 		

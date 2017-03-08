@@ -15,7 +15,8 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import sprint2.AbstractTest;
+import eInventoryPageClasses.AbstractTest;
+
 
 
 public class Listener  implements ITestListener 
@@ -46,11 +47,10 @@ public class Listener  implements ITestListener
 		//Get the name of the browser
 		browser=AbstractTest.getBrowserName();
 		//Get the name of test case
-		String tcName=result.getName();
 			/*System.out.println(result.getThrowable());
 			System.out.println((result.getThrowable()).getMessage());*/
 			try {
-				Reporter.reportTestFailure(browser,tcName, tcName, "Test Case is Skipped", "Skipped");
+				Reporter.reportTestFailure(browser,result.getThrowable().getMessage(), "Fail");
 			} catch (RowsExceededException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -68,7 +68,7 @@ public class Listener  implements ITestListener
         File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
      //The below method will save the screen shot in d drive with name "TCXXX.png"
         try {
-        	FileUtils.copyFile(scrFile, new File("FailureScreenshot/"+browser+"_"+tcName+".png"));
+        	FileUtils.copyFile(scrFile, new File("FailureScreenshot/"+browser+"_"+AbstractTest.tcName+(AbstractTest.stepValue-1)+".png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

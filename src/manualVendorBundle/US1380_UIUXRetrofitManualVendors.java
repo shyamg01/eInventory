@@ -12,15 +12,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.Assert;
-import org.testng.Reporter;
 import org.testng.annotations.Test;
 
-import sprint2.AbstractTest;
 import common.Base;
+import common.GenericMethods;
 import common.GlobalVariable;
 import common.LoginTestData;
 import common.Reporter;
+import eInventoryPageClasses.AbstractTest;
 import eInventoryPageClasses.HomePage;
 import eInventoryPageClasses.ManualVendorsPage;
 
@@ -31,10 +30,8 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2856() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2856";
 		ManualVendorsPage manualVendorsPage;
-		/*String userId = LoginTestData.operator_SSO_UserId;
-		String password = LoginTestData.operator_SSO_Password;
-		String storeId = LoginTestData.operatorStoreId;*/
 		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
 		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
 		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
@@ -42,23 +39,25 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.ManualVendors_Label));
-		Assert.assertEquals(Base.isElementDisplayed(manualVendorsPage.ManualVendors_Label), true,"Manual vendor Level is not displaying");
-		Reporter.log("User is successfully redirected to the Manual Vendor page");
+		//Assert.assertEquals(GenericMethods.isElementDisplayed(manualVendorsPage.ManualVendors_Label), true,"Manual vendor Level is not displaying");
 		//verify that Manual Vendors  Page is accessible from the Main Menu
-		if (Base.isElementDisplayed(manualVendorsPage.AddVendor_BT)
-				& Base.isElementDisplayed(manualVendorsPage.ManualVendors_Label)) {
+		if (GenericMethods.isElementDisplayed(manualVendorsPage.AddVendor_BT,"AddVendor_BT")
+				& GenericMethods.isElementDisplayed(manualVendorsPage.ManualVendors_Label,"ManualVendors_Label")) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2856",
+					browser,
 					"User should be able to access Manual Vendors Page from the Main Menu",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2856","manualVendor_US1380_TC2856",
+					browser,
 					"User should be able to access Manual Vendors Page from the Main Menu",
 					"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2856");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -67,6 +66,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2857() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2857";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -75,19 +75,22 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		//verify that Manual Vendors  Page is accessible from the Main Menu
-		if (Base.isElementDisplayed(manualVendorsPage.ManualVendors_Label)) {
+		if (GenericMethods.isElementDisplayed(manualVendorsPage.ManualVendors_Label,"ManualVendors_Label")) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2857",
+					browser,
 					"User should be able to view Manual Vendors Page Header",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2857","manualVendor_US1380_TC2857",
+					browser,
 					"User should be able to view Manual Vendors Page Header",
 					"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2857");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -96,6 +99,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2858() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2858";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -104,19 +108,22 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
-		homePage.Menu_DD_BT.click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.elementToBeClickable(homePage.Menu_DD_BT)), "homePage.Menu_DD_BT");
 		//verify that Manual Vendors  Page is accessible from the Main Menu
-		if (Base.isElementDisplayed(homePage.ManualVendors_BT)){
+		if (GenericMethods.isElementDisplayed(homePage.ManualVendors_BT,"ManualVendors_BT")){
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2858",
+					browser,
 					"User should be able to open Main Menu from Manual Vendors Page","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2858","manualVendor_US1380_TC2858",
+					browser,
 					"User should be able to open Main Menu from Manual Vendors Page","Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2858");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -125,32 +132,94 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2859() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2859";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
 		String storeId = LoginTestData.operatorStoreId;
-		String randomNum = String.valueOf(Base.generateNdigitRandomNumber(4));
-		String newVendorName = "Testauto" + randomNum;
+		String vendorNumber = String.valueOf(Base.generateNdigitRandomNumber(4));
+		String alphanumericVendorName = "Testauto" + vendorNumber;
+		String LeadingSpecialCharacterVendorName = "#";
+		String spaceLeadingVendorName = " ";
+		String specialCharacterVendorName = "a 12&%#";
+		String specialCharacterVendorNumber = "#";
+		
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
+				.goToManualVendorsPage();
 		// Create a new vendor
-		manualVendorsPage.createANewVendor(newVendorName, randomNum);
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT)), "AddVendor_BT");
+		// Enter a new vendor name
+		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddvendorDetailsPopUp_VendorName_TB));
+		Thread.sleep(2000);
+		GenericMethods.clearValueOfElement(manualVendorsPage.AddvendorDetailsPopUp_VendorName_TB, "AddvendorDetailsPopUp_VendorName_TB");
+		GenericMethods.enterValueInElement(manualVendorsPage.AddvendorDetailsPopUp_VendorName_TB, "AddvendorDetailsPopUp_VendorName_TB", LeadingSpecialCharacterVendorName);
+		boolean leadingSpecialCharactersVendorNameNotAllowed = manualVendorsPage.InvalidVendorNameNumber_Error_Message.getText().equals("Value cannot have special character as a leading character");
+		System.out.println(manualVendorsPage.InvalidVendorNameNumber_Error_Message.getText());
+		
+		GenericMethods.clearValueOfElement(manualVendorsPage.AddvendorDetailsPopUp_VendorName_TB,"AddvendorDetailsPopUp_VendorName_TB");
+		GenericMethods.enterValueInElement(manualVendorsPage.AddvendorDetailsPopUp_VendorName_TB,"AddvendorDetailsPopUp_VendorName_TB",spaceLeadingVendorName);
+		boolean leadingSpaceVendorNameNotAllowed = manualVendorsPage.InvalidVendorNameNumber_Error_Message.getText().equals("Value cannot have special character as a leading character");
+		System.out.println(manualVendorsPage.InvalidVendorNameNumber_Error_Message.getText());
+		
+		GenericMethods.clearValueOfElement(manualVendorsPage.AddvendorDetailsPopUp_VendorName_TB,"AddvendorDetailsPopUp_VendorName_TB");
+		GenericMethods.enterValueInElement(manualVendorsPage.AddvendorDetailsPopUp_VendorName_TB,"AddvendorDetailsPopUp_VendorName_TB",specialCharacterVendorName);
+		boolean specialCharactersVendorNameAllowed = !Base.isElementDisplayed(manualVendorsPage.InvalidVendorNameNumber_Error_Message);
+		
+		GenericMethods.clearValueOfElement(manualVendorsPage.AddvendorDetailsPopUp_VendorName_TB,"AddvendorDetailsPopUp_VendorName_TB");
+		GenericMethods.enterValueInElement(manualVendorsPage.AddvendorDetailsPopUp_VendorName_TB,"AddvendorDetailsPopUp_VendorName_TB",alphanumericVendorName);
+		boolean alphanumericVendorNameAllowed = !Base.isElementDisplayed(manualVendorsPage.InvalidVendorNameNumber_Error_Message);
 		//verify that user is able to add new manual vendor
-		if (Base.isElementDisplayed(manualVendorsPage.VendorName_Row(newVendorName))) {
+		if (leadingSpecialCharactersVendorNameNotAllowed & leadingSpaceVendorNameNotAllowed
+				& specialCharactersVendorNameAllowed & alphanumericVendorNameAllowed) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2859",
-					"User should be able to add a manual vendor",
-					"Pass");
+					browser,
+					"User should be not able to enter special characters and space characters as leading characters for vendor name and allowed to enter alphanumeric value.", "Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2859","manualVendor_US1380_TC2859",
+					browser,
+					"User should be not able to enter special characters and space characters as leading characters for vendor name and allowed to enter alphanumeric value.", "Fail");
+			AbstractTest.takeSnapShot();
+			
+		}
+		GenericMethods.clearValueOfElement(manualVendorsPage.AddvendorDetailsPopUp_ManualNumber_TB,"AddvendorDetailsPopUp_ManualNumber_TB");
+		GenericMethods.enterValueInElement(manualVendorsPage.AddvendorDetailsPopUp_ManualNumber_TB,"AddvendorDetailsPopUp_ManualNumber_TB",specialCharacterVendorNumber);
+		boolean specialCharacterVendorNumberNotAllowed = manualVendorsPage.InvalidVendorNameNumber_Error_Message.getText().equals("Values must be numeric with no decimals or you have entered a number larger than this field allows. (Example: 123)");
+		System.out.println(manualVendorsPage.InvalidVendorNameNumber_Error_Message.getText());
+		GenericMethods.clearValueOfElement(manualVendorsPage.AddvendorDetailsPopUp_ManualNumber_TB,"AddvendorDetailsPopUp_ManualNumber_TB");
+		GenericMethods.enterValueInElement(manualVendorsPage.AddvendorDetailsPopUp_ManualNumber_TB,"AddvendorDetailsPopUp_ManualNumber_TB",vendorNumber);
+		boolean numericVendorNumberAllowed = !Base.isElementDisplayed(manualVendorsPage.InvalidVendorNameNumber_Error_Message);
+		
+		if (specialCharacterVendorNumberNotAllowed & numericVendorNumberAllowed) {
+			Reporter.reportPassResult(
+					browser,
+					"User should be not able to enter special characters for vendor Number and allowed to enter numeric value.", "Pass");
+			
+		} else {
+			Reporter.reportTestFailure(
+					browser,
+					"User should be not able to enter special characters for vendor Number and allowed to enter numeric value.", "Fail");
+			AbstractTest.takeSnapShot();
+			
+		}
+		// Click on Save vendor button
+		GenericMethods.clickOnElement(manualVendorsPage.AddvendorDetailsPopUp_SaveVendor_BT,"AddvendorDetailsPopUp_SaveVendor_BT");
+		//verify that user is able to add new manual vendor
+		if (GenericMethods.isElementDisplayed(manualVendorsPage.VendorName_Row(alphanumericVendorName),"alphanumericVendorName")) {
+			Reporter.reportPassResult(
+					browser,
+					"User should be able to add a manual vendor",
+					"Pass");
+			
+		} else {
+			Reporter.reportTestFailure(
+					browser,
 					"User should be able to add a manual vendor",
 					"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2859");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -159,6 +228,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2860() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2860";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -167,18 +237,21 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		//verify that user is able to see the list of manual vendors
 		if (manualVendorsPage.VendorInfo_List.size()>0) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2860",
+					browser,
 					"User should be able to view list of manual vendors in Manual Vendors Page.","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2860","manualVendor_US1380_TC2860",
+					browser,
 					"User should be able to view list of manual vendors in Manual Vendors Page.","Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2860");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -187,6 +260,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2861() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2861";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -195,18 +269,21 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		//verify that user is able to see the list of manual vendors
 		if (manualVendorsPage.VendorInfo_List.size()>0) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2861",
+					browser,
 					"User should be able to view list of manual vendors in Manual Vendors Page.","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2861","manualVendor_US1380_TC2861",
+					browser,
 					"User should be able to view list of manual vendors in Manual Vendors Page.","Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2861");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -215,6 +292,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2862() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2862";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -223,38 +301,42 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT)).click();
+				.goToManualVendorsPage();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT)),"AddVendor_BT");
 		// Click on cancel button
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddvendorDetailsPopUp_Cancel_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddvendorDetailsPopUp_Cancel_BT)),"AddvendorDetailsPopUp_Cancel_BT");
 		Thread.sleep(2000);
 		//verify that user User should be able to close add manual vendor form on clicking Cancel button
 		if (!Base.isElementDisplayed(manualVendorsPage.AddvendorDetailsPopUp_Cancel_BT)
-				& Base.isElementDisplayed(manualVendorsPage.AddVendor_BT)) {
+				& GenericMethods.isElementDisplayed(manualVendorsPage.AddVendor_BT,"AddVendor_BT")) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2862",
+					browser,
 					"User should be able to close add manual vendor form on clicking Cancel button","Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2862_Condition1","manualVendor_US1380_TC2862",
+					browser,
 					"User should be able to close add manual vendor form on clicking Cancel button","Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2862_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT)),"AddVendor_BT");
 		// Click on Close(X) button
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddvendorDetailsPopUp_Close_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddvendorDetailsPopUp_Close_BT)),"AddvendorDetailsPopUp_Close_BT");
 		Thread.sleep(2000);
 		//verify that User should be able to close add manual vendor form on clicking  Close(X) button
 		if (!Base.isElementDisplayed(manualVendorsPage.AddvendorDetailsPopUp_Close_BT)
-				& Base.isElementDisplayed(manualVendorsPage.AddVendor_BT)) {
+				& GenericMethods.isElementDisplayed(manualVendorsPage.AddVendor_BT,"AddVendor_BT")) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2862",
+					browser,
 					"User should be able to close add manual vendor form on clicking Close(X) button","Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2862_Condition2","manualVendor_US1380_TC2862",
+					browser,
 					"User should be able to close add manual vendor form on clicking Close(X) button","Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2862_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -264,6 +346,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2863() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2863";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -272,36 +355,42 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		String vendor1 = manualVendorsPage.vendorName_List.get(0).getText();
-		manualVendorsPage.editVendor_BT(vendor1).click();
+		GenericMethods.clickOnElement(manualVendorsPage.editVendor_BT(vendor1),vendor1);
 		// Enter a new vendor name
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.EditVendorDetails_Title));
 		Thread.sleep(2000);
-		manualVendorsPage.EditVendorForm_SliderToggle_BT.click();
+		GenericMethods.clickOnElement(manualVendorsPage.EditVendorForm_SliderToggle_BT,"EditVendorForm_SliderToggle_BT");
 		//verify that user User should be able to close add manual vendor form on clicking Cancel button
 		if (manualVendorsPage.EditVendorForm_Container.getAttribute("class").contains("modalCollapsedView")	) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2863",
+					browser,
 					"User should be able to collapse the details screen","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2863_Condition1","manualVendor_US1380_TC2863",
+					browser,
 					"User should be able to collapse the details screen","Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2863_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
-		manualVendorsPage.EditVendorForm_SliderToggle_BT.click();
+		GenericMethods.clickOnElement(manualVendorsPage.EditVendorForm_SliderToggle_BT,"EditVendorForm_SliderToggle_BT");
 		//verify that User should be able to close add manual vendor form on clicking  Close(X) button
 		if (manualVendorsPage.EditVendorForm_Container.getAttribute("class").contains("modalExpandedView")	) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2863",
+					browser,
 					"User should be able to expand the collapsed screen","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2863_Condition2","manualVendor_US1380_TC2863",
+					browser,
 					"User should be able to expand the collapsed screen","Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2863_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 
@@ -310,6 +399,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2864() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2864";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -318,13 +408,13 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		//Click on Add new Vendor button
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT)),"AddVendor_BT");
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendorDetails_Title));
 		boolean isAddVendorButtonNotClickable;
 		try {
-			manualVendorsPage.AddVendor_BT.click();
+			GenericMethods.clickOnElement(manualVendorsPage.AddVendor_BT,"AddVendor_BT");
 			if (manualVendorsPage.AddVendorModel_List.size() == 1)
 				isAddVendorButtonNotClickable = true;
 			else {
@@ -339,13 +429,15 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		//Verify that A user can only have one 'Add New Vendor' form open at a time.
 		if (isAddVendorButtonNotClickable) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2864",
+					browser,
 					"A user can only have one 'Add New Vendor' form open at a time.","Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2864","manualVendor_US1380_TC2864",
+					browser,
 					"A user can only have one 'Add New Vendor' form open at a time.","Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2864");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 
@@ -355,6 +447,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2865() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2865";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -363,33 +456,36 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT)).click();
+				.goToManualVendorsPage();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT)),"AddVendor_BT");
 		// Enter a new vendor name
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendorDetails_Title));
 		Thread.sleep(1000);
-		manualVendorsPage.AddVendorForm_SliderToggle_BT.click();
+		GenericMethods.clickOnElement(manualVendorsPage.AddVendorForm_SliderToggle_BT,"AddVendorForm_SliderToggle_BT");
 		Thread.sleep(1000);
 		//verify that user User should be able to close add manual vendor form on clicking Cancel button
 		boolean addVendorFormCollapsed = manualVendorsPage.AddVendorForm_Container.getAttribute("class").contains("modalCollapsedView");
 		System.out.println("addVendorFormCollapsed "+addVendorFormCollapsed);
-		manualVendorsPage.AddVendor_BT.click();
+		GenericMethods.clickOnElement(manualVendorsPage.AddVendor_BT,"AddVendor_BT");
 		Thread.sleep(2000);
 		boolean addVendorFormExpanded = manualVendorsPage.AddVendorForm_Container.getAttribute("class").contains("modalExpandedView");
 		System.out.println("addVendorFormExpanded "+addVendorFormExpanded);
-		//manualVendorsPage.FormSliderToggle_BT.click();
+		//manualVendorsPage.FormSliderToggle_BT
 		//verify that User should be able to close add manual vendor form on clicking  Close(X) button
 		if (addVendorFormCollapsed & addVendorFormExpanded) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2865",
+					browser,
 					"If the form is already open and collapsed and the user attempts to create a new one,the collapsed form will re-open",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2865","manualVendor_US1380_TC2865",
+					browser,
 					"If the form is already open and collapsed and the user attempts to create a new one,the collapsed form will re-open",
 					"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2865");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -399,6 +495,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2866() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2866";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -407,13 +504,13 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		//Click on Add new Vendor button
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT)),"AddVendor_BT");
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendorDetails_Title));
 		boolean isAddVendorButtonNotClickable;
 		try {
-			manualVendorsPage.AddVendor_BT.click();
+			GenericMethods.clickOnElement(manualVendorsPage.AddVendor_BT,"AddVendor_BT");
 			if (manualVendorsPage.AddVendorModel_List.size() == 1)
 				isAddVendorButtonNotClickable = true;
 			else {
@@ -424,17 +521,19 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		}
 		/*Verify,"If the form is already open and not collapsed and the user attempts to create a new one, 
 		the form will remain open. A new form will not be created."*/
-		if (isAddVendorButtonNotClickable & Base.isElementDisplayed(manualVendorsPage.AddVendorDetails_Title)) {
+		if (isAddVendorButtonNotClickable & GenericMethods.isElementDisplayed(manualVendorsPage.AddVendorDetails_Title,"AddVendorDetails_Title")) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2866",
+					browser,
 					"If the form is already open and not collapsed and the user attempts to create a new one,the form will remain open",
 					"Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2866","manualVendor_US1380_TC2866",
+					browser,
 					"If the form is already open and not collapsed and the user attempts to create a new one,the form will remain open",
 					"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2866");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -444,6 +543,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2867() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2867";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -454,22 +554,26 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		// Create a new vendor
 		manualVendorsPage.createANewVendor(newVendorName, randomNum);
 		//verify that operator is able to add new manual vendor
-		if (Base.isElementDisplayed(manualVendorsPage.VendorName_Row(newVendorName))) {
+		if (GenericMethods.isElementDisplayed(manualVendorsPage.VendorName_Row(newVendorName),newVendorName)) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2867",
+					browser,
 					"User should be able to view confirmation success message at the bottom of the Manual Vendors Page",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2867","manualVendor_US1380_TC2867",
+					browser,
 					"User should be able to view confirmation success message at the bottom of the Manual Vendors Page",
 					"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2867");
+			AbstractTest.takeSnapShot();
+			
+			
 		}
 	}
 	
@@ -478,6 +582,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2868() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2868";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -486,45 +591,50 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		String vendor1 = manualVendorsPage.vendorName_List.get(0).getText();
-		manualVendorsPage.editVendor_BT(vendor1).click();
+		GenericMethods.clickOnElement(manualVendorsPage.editVendor_BT(vendor1),vendor1);
 		// Enter a new vendor name
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.EditVendorDetails_Title));
 		Thread.sleep(2000);
-		manualVendorsPage.EditVendorDetailsPopUp_Cancel_BT.click();
+		GenericMethods.clickOnElement(manualVendorsPage.EditVendorDetailsPopUp_Cancel_BT,"EditVendorDetailsPopUp_Cancel_BT");
+		Thread.sleep(2000);
 		//verify that operator is able to add new manual vendor
 		if (!Base.isElementDisplayed(manualVendorsPage.EditVendorDetailsPopUp_Cancel_BT) &
-				Base.isElementDisplayed(manualVendorsPage.AddVendor_BT)) {
+				GenericMethods.isElementDisplayed(manualVendorsPage.AddVendor_BT,"AddVendor_BT")) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2868",
+					browser,
 					"User should be able to close Edit Vendor details form on clicking Cancel Button",
 					"Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2868_Condition1","manualVendor_US1380_TC2868",
+					browser,
 					"User should be able to close Edit Vendor details form on clicking Cancel Button",
 					"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2868_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
-		manualVendorsPage.editVendor_BT(vendor1).click();
+		GenericMethods.clickOnElement(manualVendorsPage.editVendor_BT(vendor1),vendor1);
 		// Enter a new vendor name
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.EditVendorDetails_Title));
 		Thread.sleep(2000);
-		manualVendorsPage.EditvendorDetailsPopUp_Close_BT.click();
+		GenericMethods.clickOnElement(manualVendorsPage.EditvendorDetailsPopUp_Close_BT,"EditvendorDetailsPopUp_Close_BT");
 		//verify that operator is able to add new manual vendor
 		if (!Base.isElementDisplayed(manualVendorsPage.EditvendorDetailsPopUp_Close_BT) &
-				Base.isElementDisplayed(manualVendorsPage.AddVendor_BT)) {
+				GenericMethods.isElementDisplayed(manualVendorsPage.AddVendor_BT,"AddVendor_BT")) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2868",
+					browser,
 					"User should be able to close Edit Vendor details form on clicking Close(X) Button",
 					"Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2868_Condition2","manualVendor_US1380_TC2868",
+					browser,
 					"User should be able to close Edit Vendor details form on clicking Close(X) Button",
 					"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2868_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 
@@ -534,6 +644,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2870() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2870";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -544,73 +655,85 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		// Create a new vendor
 		manualVendorsPage.createANewVendor(newVendorName, randomNum);
 		WebElement vendor=manualVendorsPage.editVendor_BT(newVendorName);
 		Thread.sleep(4000);
-		vendor.click();
+		GenericMethods.clickOnElement(vendor,newVendorName);
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.EditVendorDetails_Title));
-		manualVendorsPage.EditvendorDetailsPopUp_VendorName_TB.clear();
-		manualVendorsPage.EditvendorDetailsPopUp_SaveVendor_BT.click();
-		boolean errorMessageDisplayed = Base.isElementDisplayed(manualVendorsPage.EditvendorDetailsPopUp_EnterVendorName_Message);
+		GenericMethods.clearValueOfElement(manualVendorsPage.EditvendorDetailsPopUp_VendorName_TB,"EditvendorDetailsPopUp_VendorName_TB");
+		GenericMethods.clickOnElement(manualVendorsPage.EditVendorDetails_Title,"EditVendorDetails_Title");
+		GenericMethods.clickOnElement(manualVendorsPage.EditvendorDetailsPopUp_SaveVendor_BT,"EditvendorDetailsPopUp_SaveVendor_BT");
+		boolean errorMessageDisplayed = GenericMethods.isElementDisplayed(manualVendorsPage.EditvendorDetailsPopUp_EnterVendorName_Message,"EditvendorDetailsPopUp_EnterVendorName_Message");
 		if (errorMessageDisplayed) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2870",
+					browser,
 					"The Edit Vendor Form requires a Vendor Name before a Vendor edit can be submitted",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2870_Condition1","manualVendor_US1380_TC2870",
+					browser,
 					"The Edit Vendor Form requires a Vendor Name before a Vendor edit can be submitted",
 					"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2870_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
-		manualVendorsPage.EditvendorDetailsPopUp_Close_BT.click();
-		manualVendorsPage.editVendor_BT(newVendorName).click();
+		GenericMethods.clickOnElement(manualVendorsPage.EditvendorDetailsPopUp_Close_BT,"EditvendorDetailsPopUp_Close_BT");
+		GenericMethods.clickOnElement(manualVendorsPage.editVendor_BT(newVendorName),newVendorName);
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.EditVendorDetails_Title));
-		manualVendorsPage.EditvendorDetailsPopUp_VendorNumber_TB.clear();
-		manualVendorsPage.EditvendorDetailsPopUp_SaveVendor_BT.click();
-		boolean editVendorChangesSaved = Base.isElementDisplayed(manualVendorsPage.EditvendorDetails_ChangesSaved_Message);
-		manualVendorsPage.EditvendorDetails_ChangesSaved_Message.click();
+		GenericMethods.clearValueOfElement(manualVendorsPage.EditvendorDetailsPopUp_VendorNumber_TB,"EditvendorDetailsPopUp_VendorNumber_TB");
+		GenericMethods.clickOnElement(manualVendorsPage.EditVendorDetails_Title,"EditVendorDetails_Title");
+		GenericMethods.clickOnElement(manualVendorsPage.EditvendorDetailsPopUp_SaveVendor_BT,"EditvendorDetailsPopUp_SaveVendor_BT");
+		boolean editVendorChangesSaved = GenericMethods.isElementDisplayed(manualVendorsPage.EditvendorDetails_ChangesSaved_Message,"EditvendorDetails_ChangesSaved_Message");
+		GenericMethods.clickOnElement(manualVendorsPage.EditvendorDetails_ChangesSaved_Message,"EditvendorDetails_ChangesSaved_Message");
 		Thread.sleep(4000);
 		System.out.println("Manual num "+manualVendorsPage.VendorNumber_Row(newVendorName).getText());
 		if (editVendorChangesSaved & manualVendorsPage.VendorNumber_Row(newVendorName).getText().equals("")) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2870",
+					browser,
 					"User is able to edit Vendor details with blank manual number",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2870_Condition2","manualVendor_US1380_TC2870",
+					browser,
 					"User is able to edit Vendor details with blank manual number",
 					"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2870_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 		vendor=manualVendorsPage.editVendor_BT(newVendorName);
-		vendor.click();
+		GenericMethods.clickOnElement(vendor,newVendorName);
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.EditVendorDetails_Title));
 		newVendorName = newVendorName +"Edit";
-		manualVendorsPage.EditvendorDetailsPopUp_VendorName_TB.clear();
+		GenericMethods.clearValueOfElement(manualVendorsPage.EditvendorDetailsPopUp_VendorName_TB,"EditvendorDetailsPopUp_VendorName_TB");
 		Thread.sleep(3000);
-		manualVendorsPage.EditvendorDetailsPopUp_VendorName_TB.sendKeys(newVendorName);
-		manualVendorsPage.EditvendorDetailsPopUp_SaveVendor_BT.click();
+		GenericMethods.enterValueInElement(manualVendorsPage.EditvendorDetailsPopUp_VendorName_TB,"EditvendorDetailsPopUp_VendorName_TB",newVendorName);
+		GenericMethods.clickOnElement(manualVendorsPage.EditVendorDetails_Title,"EditVendorDetails_Title");
+		GenericMethods.clickOnElement(manualVendorsPage.EditvendorDetailsPopUp_SaveVendor_BT,"EditvendorDetailsPopUp_SaveVendor_BT");
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.EditvendorDetails_ChangesSaved_Message));
 		//verify that user is able to add new manual vendor
 		System.out.println("Manual num "+manualVendorsPage.VendorNumber_Row(newVendorName).getText());
-		if (Base.isElementDisplayed(manualVendorsPage.VendorName_Row(newVendorName))
+		if (GenericMethods.isElementDisplayed(manualVendorsPage.VendorName_Row(newVendorName),newVendorName)
 				& manualVendorsPage.VendorNumber_Row(newVendorName).getText().equals("")) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2870",
+					browser,
 					"User should be able to submit manual vendor details and navigated back to Manual vendor landing page with the updated values",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2870_Condition3","manualVendor_US1380_TC2870",
+					browser,
 					"User should be able to submit manual vendor details and navigated back to Manual vendor landing page with the updated values",
 					"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2870_Condition3");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 
@@ -620,6 +743,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2871() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2871";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -628,33 +752,36 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		// Create a new vendor
 		String vendor1 = manualVendorsPage.vendorName_List.get(0).getText();
-		manualVendorsPage.editVendor_BT(vendor1).click();
+		GenericMethods.clickOnElement(manualVendorsPage.editVendor_BT(vendor1),"First Vendor Name");
 		// Enter a new vendor name
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.EditVendorDetails_Title));
 		Thread.sleep(2000);
-		manualVendorsPage.EditVendorForm_SliderToggle_BT.click();
+		GenericMethods.clickOnElement(manualVendorsPage.EditVendorForm_SliderToggle_BT,"EditVendorForm_SliderToggle_BT");
 		boolean editFormCollapsed = manualVendorsPage.EditVendorForm_Container.getAttribute("class").contains("modalCollapsedView");
 		Actions actions = new Actions(driver);
 		actions.moveToElement(manualVendorsPage.RestoreManualVendor_BT);
-		// actions.click();
+		// actions
 		actions.perform();
-		manualVendorsPage.EditVendorForm_SliderToggle_BT.click();
+		GenericMethods.clickOnElement(manualVendorsPage.EditVendorForm_SliderToggle_BT,"EditVendorForm_SliderToggle_BT");
 		boolean editFormExpanded = manualVendorsPage.EditVendorForm_Container.getAttribute("class").contains("modalExpandedView");
 		// verify that user is able to add new manual vendor
 		if (editFormCollapsed & editFormExpanded) {
 			Reporter.reportPassResult(
-					browser,"manualVendor_US1380_TC2871",
+					browser,
 					"User is able to scroll down to manual vendor page when Edit form is collapsed","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser,"manualVendor_US1380_TC2871","manualVendor_US1380_TC2871",
+					browser,
 					"User is able to scroll down to manual vendor page when Edit form is collapsed",
 					"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2871");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -663,6 +790,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2872() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2872";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -671,17 +799,17 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		// Create a new vendor
 		String vendor1 = manualVendorsPage.vendorName_List.get(0).getText();
-		manualVendorsPage.editVendor_BT(vendor1).click();
+		GenericMethods.clickOnElement(manualVendorsPage.editVendor_BT(vendor1),"First Vendor Name");
 		// Enter a new vendor name
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.EditVendorDetails_Title));
 		Thread.sleep(2000);
 		boolean isEditVendorButtonNotClickable;
 		try {
-			manualVendorsPage.editVendor_BT(vendor1).click();
+			GenericMethods.clickOnElement(manualVendorsPage.editVendor_BT(vendor1),"First Vendor Name");
 			if (manualVendorsPage.AddVendorModel_List.size() == 1)
 				isEditVendorButtonNotClickable = true;
 			else {
@@ -693,13 +821,16 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		// verify that user is able to add new manual vendor
 		if (isEditVendorButtonNotClickable) {
 			Reporter.reportPassResult(
-					browser,"manualVendor_US1380_TC2872",
+					browser,
 					"A user can only have one 'Vendor Detail' form open at a time","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser,"manualVendor_US1380_TC2872","manualVendor_US1380_TC2872",
+					browser,
 					"A user can only have one 'Vendor Detail' form open at a time",	"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2872");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -708,6 +839,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2873() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2873";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -716,29 +848,34 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		// Create a new vendor
 		String vendor1 = manualVendorsPage.vendorName_List.get(0).getText();
-		manualVendorsPage.editVendor_BT(vendor1).click();
+		System.out.println("vendor1 "+vendor1);
+		GenericMethods.clickOnElement(manualVendorsPage.editVendor_BT(vendor1),vendor1);
 		// Enter a new vendor name
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.EditVendorDetails_Title));
 		Thread.sleep(2000);
-		System.out.println("edit value "+manualVendorsPage.EditvendorDetailsPopUp_VendorName_TB.getAttribute("value"));
-		manualVendorsPage.EditVendorForm_SliderToggle_BT.click();
+		System.out.println("Value in Edit Form 1"+manualVendorsPage.EditvendorDetailsPopUp_VendorName_TB.getAttribute("value"));
+		GenericMethods.clickOnElement(manualVendorsPage.EditVendorForm_SliderToggle_BT,"EditVendorForm_SliderToggle_BT");
+		Thread.sleep(2000);
 		boolean editFormCollapsed = manualVendorsPage.EditVendorForm_Container.getAttribute("class").contains("modalCollapsedView");
-		manualVendorsPage.clickEditButtonUsingJSExecuter(2);
-		System.out.println("edit value2 "+manualVendorsPage.EditvendorDetailsPopUp_VendorName_TB.getAttribute("value"));
+		String vendor2 = manualVendorsPage.vendorName_List.get(2).getText();
+		System.out.println("vendor2 "+vendor2);
+		GenericMethods.clickOnElement(manualVendorsPage.editVendor_BT(vendor2),vendor2);
+		System.out.println("Value in Edit Form 2 "+manualVendorsPage.EditvendorDetailsPopUp_VendorName_TB.getAttribute("value"));
 		if (editFormCollapsed & manualVendorsPage.EditvendorDetailsPopUp_VendorName_TB.getAttribute("value").equals(vendor1)) {
 			Reporter.reportPassResult(
-					browser,"manualVendor_US1380_TC2873",
+					browser,
 					"A user can only have one 'Edit Vendor Detail' form open at a time","Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"manualVendor_US1380_TC2873","manualVendor_US1380_TC2873",
+					browser,
 					"A user can only have one 'Edit Vendor Detail' form open at a time","Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2873");
+			AbstractTest.takeSnapShot();
 		}
+		GenericMethods.clickOnElement(manualVendorsPage.EditvendorDetailsPopUp_Close_BT,"EditvendorDetailsPopUp_Close_BT");
 	}
 	
 	/*TC2874 :Verify,"The Form provides functionality to delete a vendor".*/
@@ -746,6 +883,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2874() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2874";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -756,31 +894,31 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		// Create a new vendor
 		manualVendorsPage.createANewVendor(newVendorName, randomNum);
 		Thread.sleep(4000);
 		//click on edit button for the vendor
-		manualVendorsPage.editVendor_BT(newVendorName).click();
+		GenericMethods.clickOnElement(manualVendorsPage.editVendor_BT(newVendorName),newVendorName);
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.EditVendorDetails_Title));
 		//click on delete button
-		wait.until(ExpectedConditions.elementToBeClickable(manualVendorsPage.Delete_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.elementToBeClickable(manualVendorsPage.Delete_BT)),"Delete_BT");
 		//click on submit button
-		wait.until(ExpectedConditions.elementToBeClickable(manualVendorsPage.DeleteVendorConfirmationPopUp_Yes_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.elementToBeClickable(manualVendorsPage.DeleteVendorConfirmationPopUp_Yes_BT)),"DeleteVendorConfirmationPopUp_Yes_BT");
 		Thread.sleep(4000);
 		//verify that operator is able to delete the manual vendor
 		if (manualVendorsPage.verifyVendorDeleted(newVendorName)) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2874",
+					browser,
 					"user is able to delete a manual vendor",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2874","manualVendor_US1380_TC2874",
+					browser,
 					"user is able to delete a manual vendor",
 					"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2874");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -790,6 +928,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2875() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2875";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.level1_SSO_Password;
 		String userId = LoginTestData.level1_SSO_UserId;
@@ -799,34 +938,32 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		//click on edit button for the vendor
-		manualVendorsPage.editVendor_BT(vendor).click();
+		GenericMethods.clickOnElement(manualVendorsPage.editVendor_BT(vendor),vendor);
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.EditVendorDetails_Title));
 		//click on delete button
-		wait.until(ExpectedConditions.elementToBeClickable(manualVendorsPage.Delete_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.elementToBeClickable(manualVendorsPage.Delete_BT)),"Delete_BT");
 		//click on submit button
-		wait.until(ExpectedConditions.elementToBeClickable(manualVendorsPage.DeletevendorDetailsPopUp_Confirmation_Message));
-		String pendingInvoiceMsg = manualVendorsPage.DeletevendorDetailsPopUp_Confirmation_Message.getText();
-		String pendingInvoiceMsg1 = manualVendorsPage.DeleteVendorPopUp_Confirmation_Message.getText();
-		System.out.println(pendingInvoiceMsg);
-		System.out.println(pendingInvoiceMsg1);
-		manualVendorsPage.DeletevendorDetailsConfirmationPopUp_OK_BT.click();
+		//wait.until(ExpectedConditions.elementToBeClickable(manualVendorsPage.DeletevendorDetailsPopUp_PendingInvoiceConfirmation_Message));
 		//verify that operator is able to delete the manual vendor
-		if (pendingInvoiceMsg.contains("This vendor still has pending invoices.")
-				& pendingInvoiceMsg1.contains("Please finalize all invoices for this vendor before deleting.")) {
+		if (GenericMethods.isElementDisplayed(manualVendorsPage.DeletevendorDetailsPopUp_PendingInvoiceConfirmation_Message,"DeletevendorDetailsPopUp_PendingInvoiceConfirmation_Message")) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2875",
+					browser,
 					"When a vendor has pending invoices and the delete option is selected Form prompt instructs users to finalize all pending invoices before deleting a vendor",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2875","manualVendor_US1380_TC2875",
+					browser,
 					"When a vendor has pending invoices and the delete option is selected Form prompt instructs users to finalize all pending invoices before deleting a vendor",
 					"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2875");
+			AbstractTest.takeSnapShot();
+			
 		}
+		GenericMethods.clickOnElement(manualVendorsPage.DeletevendorDetailsConfirmationPopUp_OK_BT,"DeletevendorDetailsConfirmationPopUp_OK_BT");
 	}
 
 	/*TC2876 :Verify,"The Form prompts the user when a vendor has no pending invoices and the delete option is selected.
@@ -836,6 +973,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2876() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2876";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -846,44 +984,48 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		// Create a new vendor
 		manualVendorsPage.createANewVendor(newVendorName, randomNum);
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.VendorName_Row(newVendorName)));
 		Thread.sleep(5000);
 		//click on edit button for the vendor
-		manualVendorsPage.editVendor_BT(newVendorName).click();
+		GenericMethods.clickOnElement(manualVendorsPage.editVendor_BT(newVendorName),newVendorName);
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.EditVendorDetails_Title));
 		//click on delete button
-		wait.until(ExpectedConditions.elementToBeClickable(manualVendorsPage.Delete_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.elementToBeClickable(manualVendorsPage.Delete_BT)),"Delete_BT");
 		//click on submit button
 		wait.until(ExpectedConditions.elementToBeClickable(manualVendorsPage.DeletevendorDetailsPopUp_Confirmation_Message));
 		String confirmationMsg = manualVendorsPage.DeletevendorDetailsPopUp_Confirmation_Message.getText();
 		System.out.println("confirmationMsg "+confirmationMsg);
 		//verify that operator is able to delete the manual vendor
-		if (confirmationMsg.contains("Deleting this vendor will move any Raw Items that were associated to this vendor to \"normal\" status. You must reassign these raw items to another manual vendor if they are manual purchase items.")
-				& Base.isElementDisplayed(manualVendorsPage.DeleteVendorConfirmationPopUp_Yes_BT)
-				& Base.isElementDisplayed(manualVendorsPage.DeleteVendorConfirmationPopUp_No_BT)) {
+		if (GenericMethods.isElementDisplayed(manualVendorsPage.DeletevendorDetailsPopUp_Confirmation_Message,"DeletevendorDetailsPopUp_Confirmation_Message")
+				& GenericMethods.isElementDisplayed(manualVendorsPage.DeleteVendorConfirmationPopUp_Yes_BT,"DeleteVendorConfirmationPopUp_Yes_BT")
+				& GenericMethods.isElementDisplayed(manualVendorsPage.DeleteVendorConfirmationPopUp_No_BT,"DeleteVendorConfirmationPopUp_Yes_BT")) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2876",
+					browser,
 					"The Form prompts the user about raw Item accociation when a vendor has no pending invoices and the delete option is selected.",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2876","manualVendor_US1380_TC2876",
+					browser,
 					"The Form prompts the user about raw Item accociation when a vendor has no pending invoices and the delete option is selected.",
 					"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2876");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
 	/*TC2877 :Verify, "The popup of delete button provides 2 options on manual vendor details screen , Yes and No
 	 * :Yes - Proceeds with Manual Vendor deletion and No - Returns the user back to the 'Vendor Detail' Form".*/
-	@Test()
+	@Test(groups="Smoke")
 	public void manualVendor_US1380_TC2877() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2877";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -894,36 +1036,39 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		// Create a new vendor
 		manualVendorsPage.createANewVendor(newVendorName, randomNum);
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.VendorName_Row(newVendorName)));
 		Thread.sleep(5000);
 		//click on edit button for the vendor
-		manualVendorsPage.editVendor_BT(newVendorName).click();
+		GenericMethods.clickOnElement(manualVendorsPage.editVendor_BT(newVendorName),newVendorName);
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.EditVendorDetails_Title));
 		//click on delete button
-		wait.until(ExpectedConditions.elementToBeClickable(manualVendorsPage.Delete_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.elementToBeClickable(manualVendorsPage.Delete_BT)),"Delete_BT");
 		//click on submit button
 		wait.until(ExpectedConditions.elementToBeClickable(manualVendorsPage.DeletevendorDetailsPopUp_Confirmation_Message));
-		manualVendorsPage.DeleteVendorConfirmationPopUp_No_BT.click();
+		GenericMethods.clickOnElement(manualVendorsPage.DeleteVendorConfirmationPopUp_No_BT,"DeleteVendorConfirmationPopUp_No_BT");
 		boolean delectionCanceled = !Base.isElementDisplayed(manualVendorsPage.DeleteVendorConfirmationPopUp_No_BT);
 		Thread.sleep(2000);
-		manualVendorsPage.Delete_BT.click();
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.DeleteVendorConfirmationPopUp_Yes_BT)).click();
+		GenericMethods.clickOnElement(manualVendorsPage.Delete_BT,"Delete_BT");
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.DeleteVendorConfirmationPopUp_Yes_BT)),"DeleteVendorConfirmationPopUp_Yes_BT");
 		//verify that operator is able to delete the manual vendor
-		if (delectionCanceled & Base.isElementDisplayed(manualVendorsPage.DeleteVendorPopUp_VendorDeleted_Message)) {
+		if (delectionCanceled & GenericMethods.isElementDisplayed(manualVendorsPage.DeleteVendorPopUp_VendorDeleted_Message,"DeleteVendorPopUp_VendorDeleted_Message")) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2877",
+					browser,
 					"While manual vendor deletion Yes Button - Proceeds with Manual Vendor deletion and No Button - Returns the user back to the 'Vendor Detail' Form",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2877","manualVendor_US1380_TC2877",
+					browser,
 					"While manual vendor deletion Yes Button - Proceeds with Manual Vendor deletion and No Button - Returns the user back to the 'Vendor Detail' Form",
 					"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2877");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -933,6 +1078,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2878() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2878";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -943,39 +1089,44 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		// Create a new vendor
 		manualVendorsPage.createANewVendor(newVendorName, randomNum);
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.VendorName_Row(newVendorName)));
 		Thread.sleep(5000);
 		//click on edit button for the vendor
-		manualVendorsPage.editVendor_BT(newVendorName).click();
+		GenericMethods.clickOnElement(manualVendorsPage.editVendor_BT(newVendorName),newVendorName);
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.EditVendorDetails_Title));
 		// edit the vendor details with different vendor name
 		newVendorName = newVendorName + "Edit";
 		randomNum = randomNum +"0";
-		manualVendorsPage.EditvendorDetailsPopUp_VendorName_TB.clear();
+		GenericMethods.clearValueOfElement(manualVendorsPage.EditvendorDetailsPopUp_VendorName_TB,"EditvendorDetailsPopUp_VendorName_TB");
 		manualVendorsPage.EditvendorDetailsPopUp_VendorName_TB.sendKeys(Keys.BACK_SPACE);
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.EditvendorDetailsPopUp_EnterVendorName_Message)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.EditvendorDetailsPopUp_EnterVendorName_Message)),"EditvendorDetailsPopUp_EnterVendorName_Message");
 		Thread.sleep(3000);
-		manualVendorsPage.EditvendorDetailsPopUp_VendorName_TB.sendKeys(newVendorName);
-		manualVendorsPage.EditvendorDetailsPopUp_VendorNumber_TB.clear();
-		manualVendorsPage.EditvendorDetailsPopUp_VendorNumber_TB.sendKeys(randomNum);
+		GenericMethods.enterValueInElement(manualVendorsPage.EditvendorDetailsPopUp_VendorName_TB,"EditvendorDetailsPopUp_VendorName_TB",newVendorName);
+		GenericMethods.clickOnElement(manualVendorsPage.EditVendorDetails_Title,"EditVendorDetails_Title");
+		GenericMethods.clearValueOfElement(manualVendorsPage.EditvendorDetailsPopUp_VendorNumber_TB,"EditvendorDetailsPopUp_VendorNumber_TB");
+		GenericMethods.enterValueInElement(manualVendorsPage.EditvendorDetailsPopUp_VendorNumber_TB,"EditvendorDetailsPopUp_VendorNumber_TB",randomNum);
+		GenericMethods.clickOnElement(manualVendorsPage.EditVendorDetails_Title,"EditVendorDetails_Title");
 		// Click on Save vendor button
-		manualVendorsPage.EditvendorDetailsPopUp_SaveVendor_BT.click();
+		GenericMethods.clickOnElement(manualVendorsPage.EditvendorDetailsPopUp_SaveVendor_BT,"EditvendorDetailsPopUp_SaveVendor_BT");
 		//verify that operator is able to delete the manual vendor
-		if (Base.isElementDisplayed(manualVendorsPage.EditvendorDetails_ChangesSaved_Message)) {
+		if (GenericMethods.isElementDisplayed(manualVendorsPage.EditvendorDetails_ChangesSaved_Message,"EditvendorDetails_ChangesSaved_Message")) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2878",
+					browser,
 					"User is able to see confirmation message while editing manual vendor details",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2878","manualVendor_US1380_TC2878",
+					browser,
 					"User is able to see confirmation message while editing manual vendor details",
 					"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2878");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 
@@ -984,6 +1135,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2879() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2879";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -992,20 +1144,24 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		// Create a new vendor
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)),"RestoreManualVendor_BT");
 		// verify that operator is able to restore deleted manual vendor
-		if (Base.isElementDisplayed(manualVendorsPage.RestoreManualVendor_Title)) {
+		if (GenericMethods.isElementDisplayed(manualVendorsPage.RestoreManualVendor_Title,"RestoreManualVendor_Title")
+				& GenericMethods.isElementDisplayed(manualVendorsPage.RestoreManualVendor_VendorName_Header,"RestoreManualVendor_VendorName_Header")
+				& GenericMethods.isElementDisplayed(manualVendorsPage.RestoreManualVendor_ManualNumber_Header,"RestoreManualVendor_ManualNumber_Header")
+				& GenericMethods.isElementDisplayed(manualVendorsPage.RestoreManualVendor_SelectAll_Header,"RestoreManualVendor_SelectAll_Header")) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2879",
-					"User is able to see restore manual vendor form on clicking Restore Manual Vendor Button ", "Pass");
+					browser,
+					"Verify table headings include: 'Select All', 'Vendor Name' and 'Manual Number'", "Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2879","manualVendor_US1380_TC2879",
-					"User is able to see restore manual vendor form on clicking Restore Manual Vendor Button", "Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2879");
+					browser,
+					"Verify table headings include: 'Select All', 'Vendor Name' and 'Manual Number'", "Fail");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1014,6 +1170,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2880() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2880";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -1022,21 +1179,24 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		// Create a new vendor
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)),"RestoreManualVendor_BT");
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_Title));
 		// verify that operator is able to restore deleted manual vendor
 		if (manualVendorsPage.RestoreDeletedVendor_Disclaimer_Message.getText().contains("Deleted manual vendors are retained for up to 10 days.")) {
 			Reporter.reportPassResult(
-					browser, "manualVendor_US1380_TC2880",
+					browser,
 					"Restore Manual Vendor Form provides a message informing users that deleted vendors are retained for up to 10 days", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "manualVendor_US1380_TC2880","manualVendor_US1380_TC2880",
+					browser,
 					"Restore Manual Vendor Form provides a message informing users that deleted vendors are retained for up to 10 days", "Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2880");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1045,6 +1205,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2881() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2881";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -1053,93 +1214,59 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		// Create a new vendor
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)),"RestoreManualVendor_BT");
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_Title));
 		// Click on cancel button
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreVendorDetailsPopUp_Cancel_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreVendorDetailsPopUp_Cancel_BT)),"RestoreVendorDetailsPopUp_Cancel_BT");
 		Thread.sleep(2000);
 		// verify that user User should be able to close add manual vendor form on clicking Cancel button
 		if (!Base.isElementDisplayed(manualVendorsPage.RestoreVendorDetailsPopUp_Cancel_BT)
-				& Base.isElementDisplayed(manualVendorsPage.AddVendor_BT)) {
+				& GenericMethods.isElementDisplayed(manualVendorsPage.AddVendor_BT,"AddVendor_BT")) {
 			Reporter.reportPassResult(
-					browser,"manualVendor_US1380_TC2881",
+					browser,
 					"User should be able to close restore manual vendor form on clicking Cancel button","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser,"manualVendor_US1380_TC2881_Condition1","manualVendor_US1380_TC2881",
+					browser,
 					"User should be able to close Restore manual vendor form on clicking Cancel button","Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2881_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		Thread.sleep(2000);
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)),"RestoreManualVendor_BT");
 		// Click on Close(X) button
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreVendorDetailsPopUp_Close_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreVendorDetailsPopUp_Close_BT)),"RestoreVendorDetailsPopUp_Close_BT");
 		Thread.sleep(2000);
 		// verify that User should be able to close Restore manual vendor form on clicking Close(X) button
 		if (!Base.isElementDisplayed(manualVendorsPage.RestoreVendorDetailsPopUp_Close_BT)
-				& Base.isElementDisplayed(manualVendorsPage.AddVendor_BT)) {
+				& GenericMethods.isElementDisplayed(manualVendorsPage.AddVendor_BT,"AddVendor_BT")) {
 			Reporter.reportPassResult(
-					browser,"manualVendor_US1380_TC2881",
+					browser,
 					"User should be able to close Restore manual vendor form on clicking Close(X) button","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser,"manualVendor_US1380_TC2881_Condition2","manualVendor_US1380_TC2881",
+					browser,
 					"User should be able to close Restore manual vendor form on clicking Close(X) button",
 					"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2881_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 
-	/*TC2882: Verify,"The Form can be collapsed and re-opened. When the form is collapsed and the user scrolls the
-	 *Manual Vendors Page, the form anchors to the browser and remains visible."*/
-	@Test()
-	public void manualVendor_US1380_TC2882() throws RowsExceededException,
-			BiffException, WriteException, IOException, InterruptedException {
-		/** Variable Section : **/
-		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
-		/***********************************/
-		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
-		// Navigate to Manual Vendor page
-		manualVendorsPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
-		// Create a new vendor
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)).click();
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_Title));
-		Thread.sleep(2000);
-		manualVendorsPage.RestoreVendorForm_SliderToggle_BT.click();
-		boolean restoreVendorFormCollapsed = manualVendorsPage.RestoreVendorForm_Container.getAttribute("class").contains("modalCollapsedView");
-		Actions actions = new Actions(driver);
-		actions.moveToElement(manualVendorsPage.AddVendor_BT);
-		// actions.click();
-		actions.perform();
-		manualVendorsPage.RestoreVendorForm_SliderToggle_BT.click();
-		boolean restoreVendorFormExpanded = manualVendorsPage.RestoreVendorForm_Container.getAttribute("class").contains("modalExpandedView");
-		// verify that user is able to add new manual vendor
-		if (restoreVendorFormCollapsed & restoreVendorFormExpanded) {
-			Reporter.reportPassResult(
-					browser,"manualVendor_US1380_TC2882",
-					"User is able to scroll up down to manual vendor page when Restore manual Vendor form is collapsed","Pass");
-		} else {
-			Reporter.reportTestFailure(
-					browser,"manualVendor_US1380_TC2882","manualVendor_US1380_TC2882",
-					"User is able to scroll up down to manual vendor page when Restore manual Vendor form is collapsed",
-					"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2882");
-		}
-	}
-	
+
 	/*TC2883: Verify,"A user can only have one 'Restore Manual Vendor' form open at a time."*/
 	@Test()
 	public void manualVendor_US1380_TC2883() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2883";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -1148,15 +1275,15 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		// Create a new vendor
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)),"RestoreManualVendor_BT");
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_Title));
 		Thread.sleep(2000);
 		boolean isRestoreVendorButtonNotClickable;
 		try {
-			manualVendorsPage.RestoreManualVendor_BT.click();
+			GenericMethods.clickOnElement(manualVendorsPage.RestoreManualVendor_BT,"RestoreManualVendor_BT");
 			if (manualVendorsPage.RestoreVendorModel_List.size() == 1)
 				isRestoreVendorButtonNotClickable = true;
 			else {
@@ -1168,57 +1295,20 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		// verify that user is able to add new manual vendor
 		if (isRestoreVendorButtonNotClickable) {
 			Reporter.reportPassResult(
-					browser,"manualVendor_US1380_TC2883",
+					browser,
 					"A user can only have one 'Restore Manual Vendor' form open at a time.","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser,"manualVendor_US1380_TC2883","manualVendor_US1380_TC2883",
+					browser,
 					"A user can only have one 'Restore Manual Vendor' form open at a time.",	"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2883");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
-	/*TC2884: Verify,"If the form is already open and collapsed and the user attempts to create a new one,
-	  the collapsed form will re-open. A new form will not be created."*/
-	@Test()
-	public void manualVendor_US1380_TC2884() throws RowsExceededException,
-			BiffException, WriteException, IOException, InterruptedException {
-		/** Variable Section : **/
-		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
-		/***********************************/
-		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
-		// Navigate to Manual Vendor page
-		manualVendorsPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
-		// Create a new vendor
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)).click();
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_Title));
-		Thread.sleep(2000);
-		manualVendorsPage.RestoreVendorForm_SliderToggle_BT.click();
-		boolean restoreVendorFormCollapsed = manualVendorsPage.RestoreVendorForm_Container.getAttribute("class").contains("modalCollapsedView");
-		System.out.println("restoreVendorFormExpanded "+restoreVendorFormCollapsed);
-		Thread.sleep(2000);
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)).click();
-		Thread.sleep(1000);
-		boolean restoreVendorFormExpanded = manualVendorsPage.RestoreVendorForm_Container.getAttribute("class").contains("modalExpandedView");
-		System.out.println("restoreVendorFormExpanded "+restoreVendorFormExpanded);
-		// verify that user is able to add new manual vendor
-		if (restoreVendorFormCollapsed & restoreVendorFormExpanded) {
-			Reporter.reportPassResult(
-					browser,"manualVendor_US1380_TC2884",
-					"If the form is already open and collapsed and the user attempts to create a new one,the collapsed form will re-open","Pass");
-		} else {
-			Reporter.reportTestFailure(
-					browser,"manualVendor_US1380_TC2884","manualVendor_US1380_TC2884",
-					"If the form is already open and collapsed and the user attempts to create a new one,the collapsed form will re-open",
-					"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2884");
-		}
-	}
+	
 	
 	/*TC2885: Verify,"If the form is already open and not collapsed and the user attempts to create a new one,
 	 *the form will remain open. A new form will not be created.*/
@@ -1226,6 +1316,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2885() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2885";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -1234,15 +1325,15 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		// Create a new vendor
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)),"RestoreManualVendor_BT");
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_Title));
 		Thread.sleep(2000);
 		boolean isRestoreVendorButtonNotClickable;
 		try {
-			manualVendorsPage.RestoreManualVendor_BT.click();
+			GenericMethods.clickOnElement(manualVendorsPage.RestoreManualVendor_BT,"RestoreManualVendor_BT");
 			if (manualVendorsPage.RestoreVendorModel_List.size() == 1)
 				isRestoreVendorButtonNotClickable = true;
 			else {
@@ -1254,13 +1345,16 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		// verify that user is able to add new manual vendor
 		if (isRestoreVendorButtonNotClickable) {
 			Reporter.reportPassResult(
-					browser,"manualVendor_US1380_TC2885",
+					browser,
 					"A user can only have one 'Restore Manual Vendor' form open at a time.","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser,"manualVendor_US1380_TC2885","manualVendor_US1380_TC2885",
+					browser,
 					"A user can only have one 'Restore Manual Vendor' form open at a time.",	"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2885");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1269,29 +1363,47 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2886() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2886";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
 		String storeId = LoginTestData.operatorStoreId;
+		String vendorName = "Testauto" + Base.generateNdigitRandomNumber(4);
+		String manualNumber=Integer.toString(Base.generateNdigitRandomNumber(3));
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
+		//Create a new vendor
+		manualVendorsPage.createANewVendor(vendorName,manualNumber);
+		Thread.sleep(4000);
+		// Click on the edit vendor button
+		WebElement vendor=manualVendorsPage.editVendor_BT(vendorName);
+		GenericMethods.clickOnElement(vendor,vendorName);
+		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.EditVendorDetails_Title));
+		//click on delete button
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.elementToBeClickable(manualVendorsPage.Delete_BT)),"Delete_BT");
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.elementToBeClickable(manualVendorsPage.DeleteVendorConfirmationPopUp_Yes_BT)),"DeleteVendorConfirmationPopUp_Yes_BT");
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.DeleteVendorPopUp_VendorDeleted_Message)),"DeleteVendorPopUp_VendorDeleted_Message");
+		Thread.sleep(4000);
 		// Create a new vendor
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)),"RestoreManualVendor_BT");
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_Title));
 		if (manualVendorsPage.DeletedVendorName_List.size()>0
 				& manualVendorsPage.DeletedVendorNumber_List.size()>0) {
 			Reporter.reportPassResult(
-					browser,"manualVendor_US1380_TC2886",
+					browser,
 					"The restore Form provides a list of available manual vendors (Vendor Name & Manual Number) that can be restored","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser,"manualVendor_US1380_TC2886","manualVendor_US1380_TC2886",
+					browser,
 					"The restore Form provides a list of available manual vendors (Vendor Name & Manual Number) that can be restored",	"Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2886");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1300,6 +1412,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2887() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2887";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -1308,25 +1421,28 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		// Create a new vendor
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)),"RestoreManualVendor_BT");
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_Title));
-		manualVendorsPage.DeletedVendorSelect_ChkBox_List.get(0).click();
+		GenericMethods.clickOnElement(manualVendorsPage.DeletedVendorSelect_ChkBox_List.get(0),"First Deleted Vendor checkbox");
 		System.out.println(manualVendorsPage.DeletedVendor_List.get(0).getAttribute("class"));
-		manualVendorsPage.DeletedVendorSelect_ChkBox_List.get(1).click();
+		GenericMethods.clickOnElement(manualVendorsPage.DeletedVendorSelect_ChkBox_List.get(1),"second Deleted Vendor checkbox");
 		System.out.println(manualVendorsPage.DeletedVendor_List.get(1).getAttribute("class"));
 		if (manualVendorsPage.DeletedVendor_List.get(0).getAttribute("class").contains("selected")
 				& manualVendorsPage.DeletedVendor_List.get(1).getAttribute("class").contains("selected")) {
 			Reporter.reportPassResult(
-					browser,"manualVendor_US1380_TC2887",
+					browser,
 					"The restore manual vendor form allows the user to select one or more vendors from the list","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser,"manualVendor_US1380_TC2887","manualVendor_US1380_TC2887",
+					browser,
 					"The restore manual vendor form allows the user to select one or more vendors from the list","Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2887");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1335,28 +1451,30 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2888() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2888";
 		ManualVendorsPage manualVendorsPage;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String password = LoginTestData.operator_SSO_Password;
-		String storeId = "5353";
+		String userId = LoginTestData.level1_SSO_UserId;
+		String password = LoginTestData.level1_SSO_Password;
+		String storeId = LoginTestData.level1StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		// Create a new vendor
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)),"RestoreManualVendor_BT");
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_Title));
 		if (manualVendorsPage.RestoreManualVendor_Restore_BT.getAttribute("disabled").equals("true")) {
 			Reporter.reportPassResult(
-					browser,"manualVendor_US1380_TC2888",
+					browser,
 					"The Form requires at least one Vendor Name/Manual Number selection before a restore is allowed","Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"manualVendor_US1380_TC2888","manualVendor_US1380_TC2888",
+					browser,
 					"The Form requires at least one Vendor Name/Manual Number selection before a restore is allowed","Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2888");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1365,6 +1483,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2889() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2889";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -1373,21 +1492,24 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		// Create a new vendor
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)),"RestoreManualVendor_BT");
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_Title));
-		manualVendorsPage.DeletedVendorSelect_ChkBox_List.get(0).click();
+		GenericMethods.clickOnElement(manualVendorsPage.DeletedVendorSelect_ChkBox_List.get(0),"First Deleted Vendor");
 		if (manualVendorsPage.RestoreManualVendor_Restore_BT.getAttribute("disabled") == null) {
 			Reporter.reportPassResult(
-					browser,"manualVendor_US1380_TC2889",
+					browser,
 					"The Form enables the restore button when at least one manual vendor is selected from the list","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser,"manualVendor_US1380_TC2889","manualVendor_US1380_TC2889",
+					browser,
 					"The Form enables the restore button when at least one manual vendor is selected from the listt","Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2889");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1396,6 +1518,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2891() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2891";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -1404,32 +1527,36 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		// Create a new vendor
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)),"RestoreManualVendor_BT");
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_Title));
-		manualVendorsPage.DeletedVendorSelect_ChkBox_List.get(0).click();
-		manualVendorsPage.RestoreManualVendor_Restore_BT.click();
-		if (Base.isElementDisplayed(manualVendorsPage.RestoreManualVendor_Yes_BT)
-				& Base.isElementDisplayed(manualVendorsPage.RestoreManualVendor_No_BT)
+		GenericMethods.clickOnElement(manualVendorsPage.DeletedVendorSelect_ChkBox_List.get(0),"First deleted vendor checkbox");
+		GenericMethods.clickOnElement(manualVendorsPage.RestoreManualVendor_Restore_BT,"RestoreManualVendor_Restore_BT");
+		if (GenericMethods.isElementDisplayed(manualVendorsPage.RestoreManualVendor_Yes_BT,"RestoreManualVendor_Yes_BT")
+				& GenericMethods.isElementDisplayed(manualVendorsPage.RestoreManualVendor_No_BT,"RestoreManualVendor_No_BT")
 				& manualVendorsPage.RestoreVendorPopUp_Confirmation_Message.getText().contains("Are you sure you want to restore this manual vendor?")) {
 			Reporter.reportPassResult(
-					browser,"manualVendor_US1380_TC2891",
+					browser,
 					"Selecting restore causes a popup prompting whether the user would like to proceed with YES and NO buttons","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser,"manualVendor_US1380_TC2891","manualVendor_US1380_TC2891",
+					browser,
 					"Selecting restore causes a popup prompting whether the user would like to proceed with YES and NO buttons","Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2891");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
 	/*TC2892: Verify that the deleted manual vendor should be restored once user click on "Yes"button.*/
-	@Test()
+	@Test(groups="Smoke")
 	public void manualVendor_US1380_TC2892() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2892";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -1438,25 +1565,41 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		// Create a new vendor
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)),"RestoreManualVendor_BT");
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_Title));
 		String vendorName = manualVendorsPage.DeletedVendorName_List.get(0).getText();
-		manualVendorsPage.DeletedVendorSelect_ChkBox_List.get(0).click();
-		manualVendorsPage.RestoreManualVendor_Restore_BT.click();
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_Yes_BT)).click();
+		GenericMethods.clickOnElement(manualVendorsPage.DeletedVendorSelect_ChkBox_List.get(0),"First deleted vendor checkbox");
+		GenericMethods.clickOnElement(manualVendorsPage.RestoreManualVendor_Restore_BT,"RestoreManualVendor_Restore_BT");
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_Yes_BT)),"RestoreManualVendor_Yes_BT");
 		Thread.sleep(2000);
-		if (Base.isElementDisplayed(manualVendorsPage.VendorName_Row(vendorName))) {
+		if (GenericMethods.isElementDisplayed(manualVendorsPage.VendorName_Row(vendorName),vendorName)) {
 			Reporter.reportPassResult(
-					browser,"manualVendor_US1380_TC2892",
+					browser,
 					"Deleted manual vendor should be restored once user click on Yes button.","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser,"manualVendor_US1380_TC2892","manualVendor_US1380_TC2892",
+					browser,
 					"Deleted manual vendor should be restored once user click on Yes button.","Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2892");
+			AbstractTest.takeSnapShot();
+			
+		}
+		if(manualVendorsPage.verifyVendorIsMovedFromRestoreVendorScreen(vendorName)){
+			Reporter.reportPassResult(
+					browser,
+					"USer should not be able to view the restored vendor name in Restore Vendor screen",
+					"Pass");
+		} else {
+			Reporter.reportTestFailure(
+					browser,
+					"USer should not be able to view the restored vendor name in Restore Vendor screen",
+					"Fail");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1465,6 +1608,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2894() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2894";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -1473,25 +1617,28 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		// Create a new vendor
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)),"RestoreManualVendor_BT");
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_Title));
-		manualVendorsPage.DeletedVendorSelect_ChkBox_List.get(0).click();
-		manualVendorsPage.RestoreManualVendor_Restore_BT.click();
+		GenericMethods.clickOnElement(manualVendorsPage.DeletedVendorSelect_ChkBox_List.get(0),"First deleted vendor checkbox");
+		GenericMethods.clickOnElement(manualVendorsPage.RestoreManualVendor_Restore_BT,"RestoreManualVendor_Restore_BT");
 		Thread.sleep(2000);
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_No_BT)).click();
-		if (Base.isElementDisplayed(manualVendorsPage.RestoreVendorDetailsPopUp_Cancel_BT)
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_No_BT)),"RestoreManualVendor_No_BT");
+		if (GenericMethods.isElementDisplayed(manualVendorsPage.RestoreVendorDetailsPopUp_Cancel_BT,"RestoreVendorDetailsPopUp_Cancel_BT")
 				& manualVendorsPage.DeletedVendor_List.size()>0) {
 			Reporter.reportPassResult(
-					browser,"manualVendor_US1380_TC2894",
+					browser,
 					"User should return back to the 'Restore Manual Vendor' Form when clicks on No button.","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser,"manualVendor_US1380_TC2894","manualVendor_US1380_TC2894",
+					browser,
 					"User should return back to the 'Restore Manual Vendor' Form when clicks on No button.","Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2894");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1500,6 +1647,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC2898() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC2898";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -1508,38 +1656,45 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		// Create a new vendor
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_BT)),"RestoreManualVendor_BT");
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_Title));
-		manualVendorsPage.DeletedVendorSelect_ChkBox_List.get(0).click();
-		manualVendorsPage.RestoreManualVendor_Restore_BT.click();
+		String vendorName = manualVendorsPage.DeletedVendorName_List.get(0).getText();
+		GenericMethods.clickOnElement(manualVendorsPage.DeletedVendorSelect_ChkBox_List.get(0),"First Deleted Vendor");
+		GenericMethods.clickOnElement(manualVendorsPage.RestoreManualVendor_Restore_BT,"RestoreManualVendor_Restore_BT");
 		Thread.sleep(2000);
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_No_BT)).click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_No_BT)),"RestoreManualVendor_No_BT");
 		if (!Base.isElementDisplayed(manualVendorsPage.RestoreManualVendor_No_BT)) {
 			Reporter.reportPassResult(
-					browser,"manualVendor_US1380_TC2898",
+					browser,
 					"User Should not be able to restore the manual vendor on clicking No Button and should be back on Restore Manual Vendor Page","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser,"manualVendor_US1380_TC2898_Condition1","manualVendor_US1380_TC2898",
+					browser,
 					"User Should not be able to restore the manual vendor on clicking No Button and should be back on Restore Manual Vendor Page","Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2898_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		Thread.sleep(2000);
-		manualVendorsPage.RestoreManualVendor_Restore_BT.click();
+		GenericMethods.clickOnElement(manualVendorsPage.RestoreManualVendor_Restore_BT,"RestoreManualVendor_Restore_BT");
 		Thread.sleep(2000);
-		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_Yes_BT)).click();
-		if (Base.isElementDisplayed(manualVendorsPage.VendoreRestored_Message)) {
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.RestoreManualVendor_Yes_BT)),"RestoreManualVendor_Yes_BT");
+		if (GenericMethods.isElementDisplayed(manualVendorsPage.VendorName_Row(vendorName),vendorName)) {
 			Reporter.reportPassResult(
-					browser,"manualVendor_US1380_TC2898",
+					browser,
 					"A Manual Vendor restore provides a confirmation to the user that anchors to the bottom of the Manual Vendors Page","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser,"manualVendor_US1380_TC2898_Condition2","manualVendor_US1380_TC2898",
+					browser,
 					"A Manual Vendor restore provides a confirmation to the user that anchors to the bottom of the Manual Vendors Page","Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC2898_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1548,6 +1703,7 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 	public void manualVendor_US1380_TC3057() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="manualVendor_US1380_TC3057";
 		ManualVendorsPage manualVendorsPage;
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
@@ -1558,53 +1714,151 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
 		manualVendorsPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToManualVendorsPage();
+				.goToManualVendorsPage();
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
 		// Create a new vendor
 		manualVendorsPage.createANewVendor(newVendorName, randomNum);
 		Thread.sleep(5000);
-		manualVendorsPage.AddVendor_BT.click();
+		GenericMethods.clickOnElement(manualVendorsPage.AddVendor_BT,"AddVendor_BT");
 		// Enter a new vendor name
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddvendorDetailsPopUp_VendorName_TB));
 		Thread.sleep(2000);
-		manualVendorsPage.AddvendorDetailsPopUp_VendorName_TB.clear();
-		manualVendorsPage.AddvendorDetailsPopUp_VendorName_TB.sendKeys(newVendorName);
-		manualVendorsPage.AddvendorDetailsPopUp_ManualNumber_TB.clear();
+		GenericMethods.clearValueOfElement(manualVendorsPage.AddvendorDetailsPopUp_VendorName_TB,"AddvendorDetailsPopUp_VendorName_TB");
+		GenericMethods.enterValueInElement(manualVendorsPage.AddvendorDetailsPopUp_VendorName_TB,"AddvendorDetailsPopUp_VendorName_TB",newVendorName);
+		GenericMethods.clearValueOfElement(manualVendorsPage.AddvendorDetailsPopUp_ManualNumber_TB,"AddvendorDetailsPopUp_ManualNumber_TB");
 		// Click on Save vendor button
-		manualVendorsPage.AddvendorDetailsPopUp_SaveVendor_BT.click();
-		boolean duplicateVendorNameErrorDisplayed = Base.isElementDisplayed(manualVendorsPage.AddvendorDetailsPopUp_vendorAlreadyExists_Message);
+		GenericMethods.clickOnElement(manualVendorsPage.AddvendorDetailsPopUp_SaveVendor_BT,"AddvendorDetailsPopUp_SaveVendor_BT");
+		boolean duplicateVendorNameErrorDisplayed = GenericMethods.isElementDisplayed(manualVendorsPage.AddvendorDetailsPopUp_vendorNameAlreadyExists_Message,"AddvendorDetailsPopUp_vendorAlreadyExists_Message");
 		System.out.println("duplicateVendorNameErrorDisplayed "+duplicateVendorNameErrorDisplayed);
-		manualVendorsPage.AddvendorDetailsPopUp_Close_BT.click();
+		GenericMethods.clickOnElement(manualVendorsPage.AddvendorDetailsPopUp_Close_BT,"AddvendorDetailsPopUp_Close_BT");
 		Thread.sleep(2000);
-		manualVendorsPage.editVendor_BT(newVendorName).click();
+		GenericMethods.clickOnElement(manualVendorsPage.editVendor_BT(newVendorName),newVendorName);
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.EditvendorDetailsPopUp_VendorName_TB));
-		manualVendorsPage.Delete_BT.click();
-		manualVendorsPage.DeleteVendorConfirmationPopUp_Yes_BT.click();
+		GenericMethods.clickOnElement(manualVendorsPage.Delete_BT,"Delete_BT");
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.DeleteVendorConfirmationPopUp_Yes_BT)),"DeleteVendorConfirmationPopUp_Yes_BT");
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.DeleteVendorPopUp_VendorDeleted_Message));
 		Thread.sleep(5000);
 		if(Base.isElementDisplayed(manualVendorsPage.BackToTop_BT))
-			manualVendorsPage.BackToTop_BT.click();
-		wait.until(ExpectedConditions.elementToBeClickable(manualVendorsPage.AddVendor_BT)).click();
+			GenericMethods.clickOnElement(manualVendorsPage.BackToTop_BT,"BackToTop_BT");
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.elementToBeClickable(manualVendorsPage.AddVendor_BT)),"AddVendor_BT");
 		// Enter a new vendor name
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddvendorDetailsPopUp_VendorName_TB));
-		manualVendorsPage.AddvendorDetailsPopUp_VendorName_TB.clear();
-		manualVendorsPage.AddvendorDetailsPopUp_VendorName_TB.sendKeys(newVendorName);
-		manualVendorsPage.AddvendorDetailsPopUp_ManualNumber_TB.clear();
+		GenericMethods.clearValueOfElement(manualVendorsPage.AddvendorDetailsPopUp_VendorName_TB,"AddvendorDetailsPopUp_VendorName_TB");
+		GenericMethods.enterValueInElement(manualVendorsPage.AddvendorDetailsPopUp_VendorName_TB,"AddvendorDetailsPopUp_VendorName_TB",newVendorName);
+		GenericMethods.clearValueOfElement(manualVendorsPage.AddvendorDetailsPopUp_ManualNumber_TB,"AddvendorDetailsPopUp_ManualNumber_TB");
 		// Click on Save vendor button
-		manualVendorsPage.AddvendorDetailsPopUp_SaveVendor_BT.click();
-		boolean duplicateDeletedVendorNameErrorDisplayed = Base.isElementDisplayed(manualVendorsPage.AddvendorDetailsPopUp_vendorAlreadyExists_Message);
+		GenericMethods.clickOnElement(manualVendorsPage.AddvendorDetailsPopUp_SaveVendor_BT,"AddvendorDetailsPopUp_SaveVendor_BT");
+		boolean duplicateDeletedVendorNameErrorDisplayed = GenericMethods.isElementDisplayed(manualVendorsPage.AddvendorDetailsPopUp_vendorNameAlreadyExists_Message,"AddvendorDetailsPopUp_vendorAlreadyExists_Message");
 		System.out.println("duplicateDeletedVendorNameErrorDisplayed "+duplicateDeletedVendorNameErrorDisplayed);
 		// Create a new vendor
 		if (duplicateVendorNameErrorDisplayed & duplicateDeletedVendorNameErrorDisplayed) {
 			Reporter.reportPassResult(
-					browser,"manualVendor_US1380_TC3057",
+					browser,
 					"Verify that user should be restricted from duplicating the same vendor name","Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"manualVendor_US1380_TC3057","manualVendor_US1380_TC3057",
+					browser,
 					"Verify that user should be restricted from duplicating the same vendor name","Fail");
-			AbstractTest.takeSnapShot("manualVendor_US1380_TC3057");
+			AbstractTest.takeSnapShot();
 		}
 	}
-
+	
+	/*TC4434: Verify submit feature of manual vendor screen*/
+	@Test()
+	public void manualVendor_US1380_TC4434() throws RowsExceededException,
+			BiffException, WriteException, IOException, InterruptedException {
+		/**Variable Section :**/
+		AbstractTest.tcName="manualVendor_US1380_TC4434";
+		ManualVendorsPage manualVendorsPage;
+		String password = LoginTestData.operator_SSO_Password;
+		String userId = LoginTestData.operator_SSO_UserId;
+		String storeId = LoginTestData.operatorStoreId;
+		String vendorNumber1=Integer.toString(Base.generateNdigitRandomNumber(4));
+		String vendorNumber2=Integer.toString(Base.generateNdigitRandomNumber(4));
+		/***********************************/
+		String vendorName1 = "TestAuto"+Base.generateNdigitRandomNumber(4);
+		String vendorName2 = "TTestAuto"+Base.generateNdigitRandomNumber(4);
+		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
+		// Navigate to Manual Vendor page
+		manualVendorsPage = homePage.selectUserWithSSOLogin(userId, password)
+				.selectLocation(storeId).goToManualVendorsPage();
+		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
+		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.AddVendor_BT));
+		// Create a new vendor
+		manualVendorsPage.createANewVendor(vendorName1, vendorNumber1);
+		Thread.sleep(5000);
+		// Create a new vendor
+		manualVendorsPage.createANewVendor(vendorName2, vendorNumber2);
+		Thread.sleep(5000);
+		//Click on a vendor Name
+		GenericMethods.clickOnElement(manualVendorsPage.editVendor_BT(vendorName1),vendorName1);
+		vendorName1 = vendorName1 +"Edit";
+		vendorNumber1 = vendorNumber1+"0";
+		Thread.sleep(1000);
+		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.EditVendorDetails_Title));
+		//Enter an another existing vendor name
+		GenericMethods.clearValueOfElement(manualVendorsPage.EditvendorDetailsPopUp_VendorName_TB,"EditvendorDetailsPopUp_VendorName_TB");
+		GenericMethods.enterValueInElement(manualVendorsPage.EditvendorDetailsPopUp_VendorName_TB,"EditvendorDetailsPopUp_VendorName_TB",vendorName1);
+		GenericMethods.clickOnElement(manualVendorsPage.EditVendorDetails_Title,"EditVendorDetails_Title");
+		//Enter an another existing vendor manual number
+		GenericMethods.clearValueOfElement(manualVendorsPage.EditvendorDetailsPopUp_VendorNumber_TB,"EditvendorDetailsPopUp_VendorNumber_TB");
+		GenericMethods.enterValueInElement(manualVendorsPage.EditvendorDetailsPopUp_VendorNumber_TB,"EditvendorDetailsPopUp_VendorNumber_TB",vendorNumber1);
+		GenericMethods.clickOnElement(manualVendorsPage.EditVendorDetails_Title,"EditVendorDetails_Title");
+		//CLick on save vendor changes button
+		GenericMethods.clickOnElement(manualVendorsPage.EditvendorDetailsPopUp_SaveVendor_BT,"EditvendorDetailsPopUp_SaveVendor_BT");
+		if(Base.isElementDisplayed(manualVendorsPage.EditvendorDetails_ChangesSaved_Message)
+				& Base.isElementDisplayed(manualVendorsPage.VendorName_Row(vendorName1))){
+			Reporter.reportPassResult(
+					browser,
+					"User should be able to submit the details with success message",
+					"Pass");
+		} else {
+			Reporter.reportTestFailure(
+					browser,
+					"User should be able to submit the details with success message",
+					"Fail");
+			AbstractTest.takeSnapShot();
+		}
+		Thread.sleep(5000);
+		//Click on a vendor Name
+		GenericMethods.clickOnElement(manualVendorsPage.editVendor_BT(vendorName2), vendorName2);
+		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.EditVendorDetails_Title));
+		if(manualVendorsPage.EditvendorDetailsPopUp_VendorName_TB.getAttribute("value").equals(vendorName2)
+				& manualVendorsPage.EditvendorDetailsPopUp_VendorNumber_TB.getAttribute("value").equals(vendorNumber2)){
+			Reporter.reportPassResult(
+					browser,
+					"User should view the details of manual vendor 2",
+					"Pass");
+		} else {
+			Reporter.reportTestFailure(
+					browser,
+					"User should view the details of manual vendor 2",
+					"Fail");
+			AbstractTest.takeSnapShot();
+		}
+		vendorName2 = vendorName2 + "Edit";
+		vendorNumber2 = vendorNumber2 + "0";
+		Thread.sleep(1000);
+		//Enter an another existing vendor name
+		GenericMethods.clearValueOfElement(manualVendorsPage.EditvendorDetailsPopUp_VendorName_TB,"EditvendorDetailsPopUp_VendorName_TB");
+		GenericMethods.enterValueInElement(manualVendorsPage.EditvendorDetailsPopUp_VendorName_TB,"EditvendorDetailsPopUp_VendorName_TB",vendorName2);
+		GenericMethods.clickOnElement(manualVendorsPage.EditVendorDetails_Title,"EditVendorDetails_Title");
+		//Enter an another existing vendor manual number
+		GenericMethods.clearValueOfElement(manualVendorsPage.EditvendorDetailsPopUp_VendorNumber_TB,"EditvendorDetailsPopUp_VendorNumber_TB");
+		GenericMethods.enterValueInElement(manualVendorsPage.EditvendorDetailsPopUp_VendorNumber_TB,"EditvendorDetailsPopUp_VendorNumber_TB",vendorNumber2);
+		GenericMethods.clickOnElement(manualVendorsPage.EditVendorDetails_Title,"EditVendorDetails_Title");
+		//CLick on save vendor changes button
+		GenericMethods.clickOnElement(manualVendorsPage.EditvendorDetailsPopUp_SaveVendor_BT,"EditvendorDetailsPopUp_SaveVendor_BT");
+		if(Base.isElementDisplayed(manualVendorsPage.EditvendorDetails_ChangesSaved_Message)
+						& Base.isElementDisplayed(manualVendorsPage.VendorName_Row(vendorName2))){
+			Reporter.reportPassResult(
+					browser,
+					"User should be able to submit the details with success message","Pass");
+		} else {
+			Reporter.reportTestFailure(
+					browser,"User should be able to submit the details with success message",
+					"Fail");
+			AbstractTest.takeSnapShot();
+		}
+	}
 }

@@ -9,11 +9,11 @@ import jxl.write.biff.RowsExceededException;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
-import sprint2.AbstractTest;
 import common.Base;
 import common.GlobalVariable;
 import common.LoginTestData;
 import common.Reporter;
+import eInventoryPageClasses.AbstractTest;
 import eInventoryPageClasses.HomePage;
 import eInventoryPageClasses.MenuItemActivityAndInformationPage;
 
@@ -23,7 +23,9 @@ public class US1047_MenuItemActivityWhenUserEntersSearchCriteria extends Abstrac
 	@Test()
 	public void menuItemActivity_US1047_TC1732() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
+		
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1047_TC1732";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -37,22 +39,22 @@ public class US1047_MenuItemActivityWhenUserEntersSearchCriteria extends Abstrac
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
-		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
+		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectEndTime(endTime).selectStartTime(startTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		if (menuItemActivityPage.verifyRecordsAreCollapsed()) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US1047_TC1732",
+					browser,
 					"System should display the collapsed rolled up daily totals for Menu Item X",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US1047_TC1732","menuItemActivity_US1047_TC1732",
+					browser,
 					"System should display the collapsed rolled up daily totals for Menu Item X",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US898_TC1535_Condition2");
+			AbstractTest.takeSnapShot();
 		}
 	}
 
@@ -61,6 +63,7 @@ public class US1047_MenuItemActivityWhenUserEntersSearchCriteria extends Abstrac
 	public void menuItemActivity_US1047_TC1733() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1047_TC1733";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -74,38 +77,38 @@ public class US1047_MenuItemActivityWhenUserEntersSearchCriteria extends Abstrac
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
-		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
+		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectEndTime(endTime).selectStartTime(startTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		menuItemActivityPage.expandDateGroup();
 		if (menuItemActivityPage.verifyRecordsAreExpanded() & 
 				menuItemActivityPage.verifyMenuActivityTimeInDetailForSelectedDate(startDate, startTime, endTime)) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US1047_TC1733",
+					browser,
 					"User should be able to view the expanded Activity for Menu Item X in interval of 15 min each for the selected date and time.",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US1047_TC1733_Condition1","menuItemActivity_US1047_TC1733",
+					browser,
 					"User should be able to view the expanded Activity for Menu Item X in interval of 15 min each for the selected date and time.",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1047_TC1733_Condition1");
+			AbstractTest.takeSnapShot();
 		}
 		Base.toReachTopOfthePage();
 		menuItemActivityPage.collapseDateGroup();
 		if(menuItemActivityPage.verifyRecordsAreCollapsed()) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US1047_TC1733",
+					browser,
 					"User should be able to collapse the menu item activity details",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US1047_TC1733_Condition2","menuItemActivity_US1047_TC1733",
+					browser,
 					"User should be able to collapse the menu item activity details",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1047_TC1733_Condition2");
+			AbstractTest.takeSnapShot();
 		}
 	}
 

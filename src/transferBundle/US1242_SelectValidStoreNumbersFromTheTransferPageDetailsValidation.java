@@ -16,7 +16,7 @@ import common.LoginTestData;
 import common.Reporter;
 import eInventoryPageClasses.HomePage;
 import eInventoryPageClasses.TransferLandingPage;
-import sprint2.AbstractTest;
+import eInventoryPageClasses.AbstractTest;
 
 public class US1242_SelectValidStoreNumbersFromTheTransferPageDetailsValidation extends AbstractTest
 {
@@ -25,19 +25,21 @@ public class US1242_SelectValidStoreNumbersFromTheTransferPageDetailsValidation 
 		@Test()
 		public void transferBundle_US1242_TC3165() throws RowsExceededException,
 				BiffException, WriteException, IOException, InterruptedException {
+			
 			/** Variable Section : **/
+			AbstractTest.tcName="transferBundle_US1242_TC3165";
 //			String userId = LoginTestData.operatorUserId;
-			String userId = LoginTestData.operator_SSO_UserId;
-			String password = LoginTestData.operator_SSO_UserId;
-			String storeId = LoginTestData.operatorStoreId;
+			String userId = LoginTestData.userId;
+			String password = LoginTestData.password;
+			String storeId = LoginTestData.StoreId;
 
-			String transferType="in";
-			String storeID="55";
+			String transferType=GlobalVariable.transferTypeIn;
+			String storeID=GlobalVariable.nationalStore1;
 			/***********************************/
 			HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 			TransferLandingPage transferLandingPage = PageFactory.initElements(driver, TransferLandingPage.class);
 			// Navigate to Transfer Landing page and click on create new transfer button
-			homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+			homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 					.goToTransferLandingPage().CreateNewTransfers_BT.click();
 			wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 			// Select the type of transfer as 'IN'
@@ -48,17 +50,19 @@ public class US1242_SelectValidStoreNumbersFromTheTransferPageDetailsValidation 
 			{
 				transferLandingPage.selectLocationToTransfer(storeID);
 				Reporter.reportPassResult(
-						browser,"transferBundle_US1242_TC3165",
+						browser,
 						"User should be able to select Store number for transfer type in", "Pass");
+				
 
 			}
 			catch(Exception e)
 			{
 				Reporter.reportTestFailure(
-						browser,"transferBundle_US1242_TC3165","transferBundle_US1242_TC3165",
+						browser,
 						"User should be able to select Store number for transfer type in",
 						"Fail");
-				AbstractTest.takeSnapShot("transferBundle_US1242_TC3165");
+				AbstractTest.takeSnapShot();
+				
 			}
 		
 		}
@@ -72,18 +76,19 @@ public class US1242_SelectValidStoreNumbersFromTheTransferPageDetailsValidation 
 				public void transferBundle_US1242_TC3167() throws RowsExceededException,
 						BiffException, WriteException, IOException, InterruptedException {
 					/** Variable Section : **/
+					AbstractTest.tcName="transferBundle_US1242_TC3167";
 //					String userId = LoginTestData.operatorUserId;
-					String userId = LoginTestData.operator_SSO_UserId;
-					String password = LoginTestData.operator_SSO_UserId;
-					String storeId = LoginTestData.operatorStoreId;
+					String userId = LoginTestData.userId;
+					String password = LoginTestData.password;
+					String storeId = LoginTestData.StoreId;
 
-					String transferType="out";
-					String storeID="55";
+					String transferType="Out";
+					String storeID=GlobalVariable.nationalStore1;
 					/***********************************/
 					HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 					TransferLandingPage transferLandingPage = PageFactory.initElements(driver, TransferLandingPage.class);
 					// Navigate to Transfer Landing page and click on create new transfer button
-					homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+					homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 							.goToTransferLandingPage().CreateNewTransfers_BT.click();
 					wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 					// Select the type of transfer as 'IN'
@@ -94,17 +99,19 @@ public class US1242_SelectValidStoreNumbersFromTheTransferPageDetailsValidation 
 					{
 						transferLandingPage.selectLocationToTransfer(storeID);
 						Reporter.reportPassResult(
-								browser,"transferBundle_US1242_TC3167",
+								browser,
 								"User should be able to select Store number for transfer type out", "Pass");
+						
 
 					}
 					catch(Exception e)
 					{
 						Reporter.reportTestFailure(
-								browser,"transferBundle_US1242_TC3167","transferBundle_US1242_TC3167",
+								browser,
 								"User should be able to select Store number for transfer type out",
 								"Fail");
-						AbstractTest.takeSnapShot("transferBundle_US1242_TC3167");
+						AbstractTest.takeSnapShot();
+						
 					}
 					
 				}
@@ -116,54 +123,58 @@ public class US1242_SelectValidStoreNumbersFromTheTransferPageDetailsValidation 
 				@Test()
 				public void transferBundle_US1242_TC3168() throws RowsExceededException,
 							BiffException, WriteException, IOException, InterruptedException {
-							/** Variable Section : **/
-//							String userId = LoginTestData.operatorUserId;
-							String userId = LoginTestData.operator_SSO_UserId;
-							String password = LoginTestData.operator_SSO_UserId;
-							String storeId = LoginTestData.operatorStoreId;
+					/** Variable Section : **/
+					AbstractTest.tcName="transferBundle_US1242_TC3168";
+					//							String userId = LoginTestData.operatorUserId;
+					String userId = LoginTestData.userId;
+					String password = LoginTestData.password;
+					String storeId = LoginTestData.StoreId;
 
-							String transferType="office";
-							/***********************************/
-							HomePage homePage = PageFactory.initElements(driver, HomePage.class);
-							TransferLandingPage transferLandingPage = PageFactory.initElements(driver, TransferLandingPage.class);
-							// Navigate to Transfer Landing page and click on create new transfer button
-							homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
-									.goToTransferLandingPage().CreateNewTransfers_BT.click();
-							wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
-							// Select the type of transfer as 'IN'
-							transferLandingPage.selectTransferType(transferType);
-							Thread.sleep(4000);
-							
-							if (!Base.isElementDisplayed(transferLandingPage.Location_DD)) {
-								Reporter.reportPassResult(
-										browser,"transferBundle_US1242_TC3168",
-										"User should be able to select Store number for transfer type office", "Pass");
-							} 
-							else
-							{
+					String transferType="Office";
+					/***********************************/
+					HomePage homePage = PageFactory.initElements(driver, HomePage.class);
+					TransferLandingPage transferLandingPage = PageFactory.initElements(driver, TransferLandingPage.class);
+					// Navigate to Transfer Landing page and click on create new transfer button
+					homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
+					.goToTransferLandingPage().CreateNewTransfers_BT.click();
+					wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
+					// Select the type of transfer as 'IN'
+					transferLandingPage.selectTransferType(transferType);
+					Thread.sleep(4000);
 
-								Reporter.reportTestFailure(
-										browser,"transferBundle_US1242_TC3168","transferBundle_US1242_TC3168",
-										"User should be able to select Store number for transfer type office",
-										"Fail");
-								AbstractTest.takeSnapShot("transferBundle_US1242_TC3168");
-							}
+					if (!Base.isElementDisplayed(transferLandingPage.Location_DD)) {
+						Reporter.reportPassResult(
+								browser,
+								"User should be able to select Store number for transfer type office", "Pass");
+						
+					} 
+					else
+					{
+
+						Reporter.reportTestFailure(
+								browser,
+								"User should be able to select Store number for transfer type office",
+								"Fail");
+						AbstractTest.takeSnapShot();
+						
+					}
 						}
 					
 		//TC3274 : Verify that user is able to select store number for the type of transfer as transfer in and transfer out.
 
-		@Test()
+		@Test(enabled=false)
 		public void transferBundle_US1242_TC3274() throws RowsExceededException,
 					BiffException, WriteException, IOException, InterruptedException {
 			/**Variable Section :**/
+			AbstractTest.tcName="transferBundle_US1242_TC3274";
 //			String userId = LoginTestData.operatorUserId;
-			String userId = LoginTestData.operator_SSO_UserId;
-			String password = LoginTestData.operator_SSO_UserId;
-			String storeId = LoginTestData.operatorStoreId;
+			String userId = LoginTestData.userId;
+			String password = LoginTestData.password;
+			String storeId = LoginTestData.StoreId;
 			String samplewRINID = GlobalVariable.addTransferItemWrin;
 			String transferType1 = GlobalVariable.transferTypeIn;
 			String transferType2 = GlobalVariable.transferTypeOut;
-			String transferStoreNumber = "55";
+			String transferStoreNumber = GlobalVariable.nationalStore1;
 			String caseQuantity = "4";
 			String innerPackQuantity ="1";
 			String looseUnitQuantity ="4";
@@ -173,12 +184,12 @@ public class US1242_SelectValidStoreNumbersFromTheTransferPageDetailsValidation 
 			HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 			//Navigate to Transfer Landing page and click on create new transfer button
 			TransferLandingPage transferLandingPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).selectLocation(storeId)
-					.navigateToInventoryManagement().goToTransferLandingPage();
+					.goToTransferLandingPage();
 			wait.until(ExpectedConditions.visibilityOf(transferLandingPage.CreateNewTransfers_BT)).click();
 			Thread.sleep(10000);
 			wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
-			//Get the time of transfer
-			String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+			/*//Get the time of transfer
+			String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();*/
 			//Select the transfer type as "in" and select the store from dropdown an add the transfer details
 			transferLandingPage.selectTransferType(transferType1).selectLocationToTransfer(transferStoreNumber)
 					.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
@@ -194,17 +205,19 @@ public class US1242_SelectValidStoreNumbersFromTheTransferPageDetailsValidation 
 			Thread.sleep(5000);
 			transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 			//Verify that transfer entries should displayed in Transfer landing page
-			if (transferLandingPage.verifyTransferPlaced(date, time, transferStoreNumber,amount)) {
+			if (transferLandingPage.verifyTransferPlaced(date,transferType1, transferStoreNumber,amount)) {
 				Reporter.reportPassResult(
-						browser,"transferBundle_US1242_TC3274",
+						browser,
 						"User should be able to do transfer in type transction",
 						"Pass");
+				
 			} else {
 				Reporter.reportTestFailure(
-						browser,"transferBundle_US1242_TC3274_Condition1","transferBundle_US1242_TC3274",
+						browser,
 						"User should be able to do transfer in type transction",
 						"Fail");
-				AbstractTest.takeSnapShot("transferBundle_US1242_TC3274_Condition1");
+				AbstractTest.takeSnapShot();
+				
 			}
 			Thread.sleep(6000);
 			wait.until(ExpectedConditions.visibilityOf(transferLandingPage.CreateNewTransfers_BT)).click();
@@ -227,26 +240,23 @@ public class US1242_SelectValidStoreNumbersFromTheTransferPageDetailsValidation 
 			Thread.sleep(5000);
 			transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 			//Verify that transfer entries should displayed in Transfer landing page
-			if (transferLandingPage.verifyTransferPlaced(date, time1, transferStoreNumber,amount1)) {
+			if (transferLandingPage.verifyTransferPlaced(date,transferType2, transferStoreNumber,amount1)) {
 				Reporter.reportPassResult(
-						browser,"transferBundle_US1242_TC3274",
+						browser,
 						"User should be able to do transfer out type transction",
 						"Pass");
+				
 			} else {
 				Reporter.reportTestFailure(
-						browser,"transferBundle_US1242_TC3274_Condition2","transferBundle_US1242_TC3274",
+						browser,
 						"User should be able to do transfer out type transction",
 						"Fail");
-				AbstractTest.takeSnapShot("transferBundle_US1242_TC3274_Condition2");
+				AbstractTest.takeSnapShot();
+				
 			}
-			
-	
-	
-	
-	
-}
 		
-		
+	
+}	
 		
 		
 }

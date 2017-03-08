@@ -20,6 +20,7 @@ public class ManualInvoiceEditPage extends AbstractPage
 	{
 		super(driver);
 		PageFactory.initElements(driver, this);
+		
 	}
 		
 	@FindBy(xpath="//input[@id='complete_button']")

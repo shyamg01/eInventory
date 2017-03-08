@@ -10,6 +10,7 @@ public class StoreControlSettingsPage extends AbstractPage {
 	public StoreControlSettingsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		
 	}
 
 	@FindBy(xpath = "//input[@value='Inventory Settings']")

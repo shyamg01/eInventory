@@ -12,11 +12,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
-import sprint2.AbstractTest;
 import common.Base;
 import common.GlobalVariable;
 import common.LoginTestData;
 import common.Reporter;
+import eInventoryPageClasses.AbstractTest;
 import eInventoryPageClasses.HomePage;
 import eInventoryPageClasses.MenuItemActivityAndInformationPage;
 
@@ -27,6 +27,7 @@ public class US603_MenuItemActivity extends AbstractTest {
 	public void menuItemActivity_US603_TC1596() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/**Variable Section :**/
+		AbstractTest.tcName="menuItemActivity_US603_TC1596";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -36,45 +37,47 @@ public class US603_MenuItemActivity extends AbstractTest {
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to menu item activity page 
-		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		//Search and select menu Item using menu Item Number = 1
 		menuItemActivityPage.searchAndSelectMenuItem(menuItemNumber);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.MiaStartDate_TB));
 		menuItemActivityPage.ShowResults_BT.click();
+		Thread.sleep(5000);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.SelectItem_Value));
 		//Verify that user is able to search the menu item using menu item number=1
 		if(menuItemActivityPage.SelectItem_Value.getText().contains(menuItemNumber)
 				& menuItemActivityPage.SelectItem_Value.getText().contains(menuItemDescription)){
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US603_TC1596",
+					browser,
 					"User should be able to search and select the menu item by typing menu item number",
 					"Pass");
 
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US603_TC1596","menuItemActivity_US603_TC1596",
+					browser,
 					"User should be able to search and select the menu item by typing menu item number",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US603_TC1596_condition_1");
+			AbstractTest.takeSnapShot();
 			}
 		menuItemActivityPage.searchAndSelectMenuItem(menuItemDescription);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.MiaStartDate_TB));
 		menuItemActivityPage.ShowResults_BT.click();
+		Thread.sleep(5000);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.SelectItem_Value));
 		//Verify that user is able to search the menu item using menu item Description = Hamburger
 		if(menuItemActivityPage.SelectItem_Value.getText().contains(menuItemNumber)
 				& menuItemActivityPage.SelectItem_Value.getText().contains(menuItemDescription)){
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US603_TC1596",
+					browser,
 					"User should be able to search and select the menu item by typing menu item description",
 					"Pass");
 
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US603_TC1596","menuItemActivity_US603_TC1596",
+					browser,
 					"User should be able to search and select the menu item by typing menu item description",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US603_TC1596_condition_2");
+			AbstractTest.takeSnapShot();
 			}
 	}
 	
@@ -83,6 +86,7 @@ public class US603_MenuItemActivity extends AbstractTest {
 	public void menuItemActivity_US603_TC1599() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/**Variable Section :**/
+		AbstractTest.tcName="menuItemActivity_US603_TC1599";
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
 		String storeId = LoginTestData.level1StoreId;
@@ -91,7 +95,7 @@ public class US603_MenuItemActivity extends AbstractTest {
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to menu item activity page 
-		menuItemActivityPage= homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+		menuItemActivityPage= homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		//Search and select menu Item using menu Item Number = 1
 		menuItemActivityPage.searchAndSelectMenuItem(menuItemNumber);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.MiaStartDate_TB));
@@ -104,16 +108,16 @@ public class US603_MenuItemActivity extends AbstractTest {
 		defaultTodayDateSelected = defaultTodayDateSelected && menuItemActivityPage.verifyDateIsSelectedForEndDate(todayDate);
 		if(defaultTodayDateSelected){
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US603_TC1599",
+					browser,
 					"User should be able to view the start date and end date as default to current date",
 					"Pass");
 
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US603_TC1599","menuItemActivity_US603_TC1599",
+					browser,
 					"User should be able to view the start date and end date as default to current date",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US603_TC1599_condition_1");
+			AbstractTest.takeSnapShot();
 			}
 		Calendar cal1 = Calendar.getInstance();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -146,16 +150,16 @@ public class US603_MenuItemActivity extends AbstractTest {
 		futureDatedisabled = futureDatedisabled && menuItemActivityPage.verifyFutureDateIsDisabledForEndDate(tomorrowDate);
 		if(pastDateSelected && futureDatedisabled){
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US603_TC1599",
+					browser,
 					"User should be able to select current or past dates only. Future date can not be selected.",
 					"Pass");
 
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US603_TC1599","menuItemActivity_US603_TC1599",
+					browser,
 					"User should be able to select current or past dates only. Future date can not be selected.",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US603_TC1599_condition_2");
+			AbstractTest.takeSnapShot();
 			}
 	}
 	
@@ -165,43 +169,55 @@ public class US603_MenuItemActivity extends AbstractTest {
 	public void menuItemActivity_US603_TC1605() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US603_TC1605";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
 		String storeId = LoginTestData.level1StoreId;
 		String menuItemNumber = GlobalVariable.menuItem;
-		String defaultStartTime = GlobalVariable.defaultStartTime;
+		//String defaultStartTime = GlobalVariable.defaultStartTime;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to menu item activity page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		// Search and select menu Item using menu Item Number = 1
 		menuItemActivityPage.searchAndSelectMenuItem(menuItemNumber);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.MiaStartDate_TB));
+		String defaultEndTime = Base.getCurrentTimeStamp();
+		System.out.println("defaultEndTime "+defaultEndTime);
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		// get current date and time
 		Calendar cal3 = Calendar.getInstance();
 		cal3.add(Calendar.DATE, 0);
-		dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:MM");
-		String currentTime = dateFormat.format(cal3.getTime()).split(" ")[1];
-		String currentHour = currentTime.split(":")[0];
+		cal3.add(Calendar.HOUR, -1);
+		dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+		String oneHourBackTime = dateFormat.format(cal3.getTime()).split(" ")[1];
+		System.out.println("oneHourBackTime "+oneHourBackTime);
+		//String defaultStartTime = Base.getCurrentTimeStamp();
+		String defaultStartTime = Base.get15MinuteTimeStamp(Integer.parseInt(oneHourBackTime.split(":")[0]), 
+				Integer.parseInt(oneHourBackTime.split(":")[1]));
+		/*String defaultStartTime = Base.get15MinuteTimeSlice(Integer.parseInt(oneHourBackTime.split(":")[0]), 
+				Integer.parseInt(oneHourBackTime.split(":")[1]));*/
+		System.out.println("defaultStartTime "+ defaultStartTime);
+		/*String currentTime = dateFormat.format(cal3.getTime()).split(" ")[1];
+		String currentHour = currentTime.split(":")[0];*/
 		// verify that start time is displayed as 00:00
 		boolean defaultTimeDisplayed = menuItemActivityPage.StartTime_TB.getText().equals(defaultStartTime);
 		// verify that end time is displayed as current hour
 		defaultTimeDisplayed = defaultTimeDisplayed
-				&& menuItemActivityPage.EndTime_TB.getText().equals(currentHour + ":00");
+				&& menuItemActivityPage.EndTime_TB.getText().equals(defaultEndTime);
 		if (defaultTimeDisplayed) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US603_TC1605",
+					browser,
 					"User should be able to view the Start time will default to beginning of business day. and end time will default to the current time",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US603_TC1605","menuItemActivity_US603_TC1605",
+					browser,
 					"User should be able to view the Start time will default to beginning of business day. and end time will default to the current time",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US603_TC1605");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	// TC1606:Verify that the Menu Item Activity will only display up to the current time if the current date is part of the date range selected.
@@ -209,27 +225,42 @@ public class US603_MenuItemActivity extends AbstractTest {
 	public void menuItemActivity_US603_TC1606() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/**Variable Section :**/
+		AbstractTest.tcName="menuItemActivity_US603_TC1606";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
 		String storeId = LoginTestData.level1StoreId;
 		String menuItemNumber = GlobalVariable.menuItem2;
-		String defaultStartTime = GlobalVariable.defaultStartTime;
+		//String defaultStartTime = GlobalVariable.defaultStartTime;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to menu item activity page
-		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		// Search and select menu Item using menu Item Number = 1
 		menuItemActivityPage.searchAndSelectMenuItem(menuItemNumber);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.MiaStartDate_TB));
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		// get current date and time
+		Calendar cal1 = Calendar.getInstance();
+		cal1.add(Calendar.DATE, 0);
+		cal1.add(Calendar.HOUR, -1);
+		dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+		String oneHourBackTime = dateFormat.format(cal1.getTime()).split(" ")[1];
+		System.out.println("oneHourBackTime " + oneHourBackTime);
+		// String defaultStartTime = Base.getCurrentTimeStamp();
+		String defaultStartTime = Base.get15MinuteTimeStamp(
+				Integer.parseInt(oneHourBackTime.split(":")[0]),
+				Integer.parseInt(oneHourBackTime.split(":")[1]));
+		System.out.println("defaultStartTime " + defaultStartTime);
+		// get current date and time
+		String defaultEndTime = Base.getCurrentTimeStamp();
+		System.out.println("defaultEndTime "+defaultEndTime);
 		Calendar cal3 = Calendar.getInstance();
 		cal3.add(Calendar.DATE, 0);
 		dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:MM");
 		String currentDate = dateFormat.format(cal3.getTime()).split(" ")[0];
-		String currentTime = dateFormat.format(cal3.getTime()).split(" ")[1];
-		String currentHour = currentTime.split(":")[0]+":00";
+		/*String currentTime = dateFormat.format(cal3.getTime()).split(" ")[1];
+		String currentHour = currentTime.split(":")[0]+":00";*/
 		// enter start date
 		menuItemActivityPage.selectStartDate(currentDate);
 		// enter end date
@@ -237,23 +268,40 @@ public class US603_MenuItemActivity extends AbstractTest {
 		// verify that start time is displayed as 00:00
 		menuItemActivityPage.selectStartTime(defaultStartTime);
 		// verify that end time is displayed as current hour
-		menuItemActivityPage.selectEndTime(currentHour);
+		menuItemActivityPage.selectEndTime(defaultEndTime);
 		menuItemActivityPage.ShowResults_BT.click();
+		Thread.sleep(5000);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.SelectItem_Value));
-		boolean menuItemActivityDisplayed = menuItemActivityPage.verifyMenuActivityTimeForSelectedDateRange(currentDate, currentDate, defaultStartTime, currentHour);
+		boolean menuItemActivityDisplayed = menuItemActivityPage.verifyMenuActivityTimeForSelectedDateRange(currentDate, currentDate, defaultStartTime, defaultEndTime);
 		if (menuItemActivityDisplayed) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US603_TC1606",
+					browser,
 					"User should be able to view the menu item activity up to  current time for the current date.",
 					"Pass");
 
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US603_TC1606","menuItemActivity_US603_TC1606",
+					browser,
 					"User should be able to view the menu item activity up to  current time for the current date.",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US603_TC1606");
+			AbstractTest.takeSnapShot();
 		}
+		menuItemActivityPage.expandDateGroup();
+		boolean menuItemActivityDisplayedInDetails = menuItemActivityPage.verifyMenuActivityTimeInDetailForSelectedDate(currentDate, defaultStartTime, defaultEndTime);
+		if (menuItemActivityDisplayedInDetails) {
+			Reporter.reportPassResult(
+					browser,
+					"User should be able to view the menu item activity in details up to  current time for the current date.",
+					"Pass");
+
+		} else {
+			Reporter.reportTestFailure(
+					browser,
+					"User should be able to view the menu item activity in details up to  current time for the current date.",
+					"Fail");
+			AbstractTest.takeSnapShot();
+		}
+		
 	}
 	
 	//TC1607:Verify that the user should be able to view the date information in greater detail for every 15 minute time slice for each date and the time period selected.
@@ -261,6 +309,7 @@ public class US603_MenuItemActivity extends AbstractTest {
 	public void menuItemActivity_US603_TC1607() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/**Variable Section :**/
+		AbstractTest.tcName="menuItemActivity_US603_TC1607";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -274,7 +323,7 @@ public class US603_MenuItemActivity extends AbstractTest {
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to menu item activity page
-		menuItemActivityPage =homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+		menuItemActivityPage =homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		// Search and select menu Item using menu Item Number = 1
 		menuItemActivityPage.searchAndSelectMenuItem(menuItemNumber);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.MiaStartDate_TB));
@@ -283,25 +332,26 @@ public class US603_MenuItemActivity extends AbstractTest {
 		// enter end date
 		menuItemActivityPage.selectEndDate(endDate);
 		// verify that start time is displayed as 00:00
-		menuItemActivityPage.selectStartTime(startTime);
+		menuItemActivityPage.selectEndTime(endTime).selectStartTime(startTime);
 		// verify that end time is displayed as 2 hour later from current time
-		menuItemActivityPage.selectEndTime(endTime);
 		menuItemActivityPage.ShowResults_BT.click();
+		Thread.sleep(5000);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.SelectItem_Value));
 		menuItemActivityPage.expandDateGroup();
+		Thread.sleep(3000);
 		boolean recordsWithTimeSpanDisplayed = menuItemActivityPage.verifyMenuActivityTimeInDetailForSelectedDate(date, startTime, endTime);
 		if (recordsWithTimeSpanDisplayed) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US603_TC1607",
+					browser,
 					"User should be able to view the date information in greater detail for every 15 minute time slice for each date and the time period selected.",
 					"Pass");
 
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US603_TC1607","menuItemActivity_US603_TC1607",
+					browser,
 					"User should be able to view the date information in greater detail for every 15 minute time slice for each date and the time period selected.",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US603_TC1606");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -310,6 +360,7 @@ public class US603_MenuItemActivity extends AbstractTest {
 	public void menuItemActivity_US603_TC1608() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US603_TC1608";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -318,18 +369,18 @@ public class US603_MenuItemActivity extends AbstractTest {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		if (Base.isElementDisplayed(menuItemActivityPage.MenuItemActivityAndInformation_Title)){
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US603_TC1608",
+					browser,
 					"User should be able to get navigated to Menu Item Information & Activity page.",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US603_TC1608","menuItemActivity_US603_TC1608",
+					browser,
 					"User should be able to get navigated to Menu Item Information & Activity page.",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US603_TC1608");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -338,6 +389,7 @@ public class US603_MenuItemActivity extends AbstractTest {
 	public void menuItemActivity_US603_TC1614() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US603_TC1614";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -348,20 +400,20 @@ public class US603_MenuItemActivity extends AbstractTest {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
 		if(menuItemActivityPage.SelectItem_Value.getText().contains(menuItem)
 				& menuItemActivityPage.SelectItem_Value.getText().contains(description)){
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US603_TC1614",
+					browser,
 					"User should be able to view item number and description",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US603_TC1614_Condition1","menuItemActivity_US603_TC1614",
+					browser,
 					"User should be able to view item number and description",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US603_TC1614_Condition1");
+			AbstractTest.takeSnapShot();
 		}
 		if(Base.isElementDisplayed(menuItemActivityPage.StartTime_TB)
 				& Base.isElementDisplayed(menuItemActivityPage.EndTime_TB)
@@ -370,23 +422,24 @@ public class US603_MenuItemActivity extends AbstractTest {
 				& Base.isElementDisplayed(menuItemActivityPage.ShowResults_BT)
 				& Base.isElementDisplayed(menuItemActivityPage.Information_BT)){
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US603_TC1614",
+					browser,
 					"User should be able to view Start Time End Time, Register ,Employee dropdown and Show Results Button, Information Button",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US603_TC1614_Condition2","menuItemActivity_US603_TC1614",
+					browser,
 					"User should be able to view Start Time End Time, Register ,Employee dropdown and Show Results Button, Information Button",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US603_TC1614_Condition2");
+			AbstractTest.takeSnapShot();
 		}
 	}
 
 	// TC1624:Verify that the user should be able to view Total Menu Items Sold rolled up for the time periods for the selected date range.
-	@Test()
+	@Test(enabled=false)
 	public void menuItemActivity_US603_TC1624() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US603_TC1624";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -400,7 +453,7 @@ public class US603_MenuItemActivity extends AbstractTest {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to menu item activity page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		// Search and select menu Item using menu Item Number = 1
 		menuItemActivityPage.searchAndSelectMenuItem(menuItemNumber);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.MiaStartDate_TB));
@@ -409,27 +462,26 @@ public class US603_MenuItemActivity extends AbstractTest {
 		// enter end date
 		menuItemActivityPage.selectEndDate(endDate);
 		// Enter start time
-		menuItemActivityPage.selectStartTime(startTime);
-		// Enter end time
-		menuItemActivityPage.selectEndTime(endTime);
+		menuItemActivityPage.selectEndTime(endTime).selectStartTime(startTime);
 		// Click on search button
 		menuItemActivityPage.ShowResults_BT.click();
+		Thread.sleep(5000);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.SelectItem_Value));
 		// Verify that sold value for menu item should be displayed for selected  date range
 		if (menuItemActivityPage.verifySoldValueForMenuItemDisplayed(startDate, endDate)
 				& menuItemActivityPage.verifyEmpMealValueForMenuItemDisplayed(startDate, endDate)
 				& menuItemActivityPage.verifyMgrMealValueForMenuItemDisplayed(startDate, endDate)) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US603_TC1624",
+					browser,
 					"User should be able to view total Sold, Employee, Manager Meals sold (rolled up for the time periods for the selected date range) for item X.",
 					"Pass");
 
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US603_TC1624","menuItemActivity_US603_TC1624",
+					browser,
 					"User should be able to view total Sold, Employee, Manager Meals sold (rolled up for the time periods for the selected date range) for item X.",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US603_TC1624");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -438,6 +490,7 @@ public class US603_MenuItemActivity extends AbstractTest {
 	public void menuItemActivity_US603_TC1632() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/**Variable Section :**/
+		AbstractTest.tcName="menuItemActivity_US603_TC1632";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -450,7 +503,7 @@ public class US603_MenuItemActivity extends AbstractTest {
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to menu item activity page
-		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		// Search and select menu Item using menu Item Number
 		menuItemActivityPage.searchAndSelectMenuItem(menuItemNumber);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.MiaStartDate_TB));
@@ -459,32 +512,32 @@ public class US603_MenuItemActivity extends AbstractTest {
 		// enter end date
 		menuItemActivityPage.selectEndDate(endDate);
 		// enter start time
-		menuItemActivityPage.selectStartTime(startTime);
-		// enter end time
-		menuItemActivityPage.selectEndTime(endTime);
+		menuItemActivityPage.selectEndTime(endTime).selectStartTime(startTime);
 		// Click on search button
 		menuItemActivityPage.ShowResults_BT.click();
+		Thread.sleep(5000);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.SelectItem_Value));
 		// Verify that Waste value for menu item should be displayed for selected date range
 		if (menuItemActivityPage.verifyWasteValueForMenuItemDisplayed(startDate, endDate)) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US603_TC1632",
+					browser,
 					"User should be able to view Total Menu Items Wasted (rolled up for the time periods for the selected date range)",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US603_TC1632","menuItemActivity_US603_TC1632",
+					browser,
 					"User should be able to view Total Menu Items Wasted (rolled up for the time periods for the selected date range)",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US603_TC1632");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
 	// TC1634:Verify that the user should be able to view Total Menu Items Promo'd (rolled up for the time periods for the selected date range).
-	@Test()
+	@Test(enabled=false)
 	public void menuItemActivity_US603_TC1634() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/**Variable Section :**/
+		AbstractTest.tcName="menuItemActivity_US603_TC1634";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -497,7 +550,7 @@ public class US603_MenuItemActivity extends AbstractTest {
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to menu item activity page
-		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		// Search and select menu Item using menu Item Number = 1
 		menuItemActivityPage.searchAndSelectMenuItem(menuItemNumber);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.MiaStartDate_TB));
@@ -506,33 +559,33 @@ public class US603_MenuItemActivity extends AbstractTest {
 		// enter end date
 		menuItemActivityPage.selectEndDate(endDate);
 		// enter start time
-		menuItemActivityPage.selectStartTime(startTime);
-		// enter end time
-		menuItemActivityPage.selectEndTime(endTime);
+		menuItemActivityPage.selectEndTime(endTime).selectStartTime(startTime);
 		// Click on search button
 		menuItemActivityPage.ShowResults_BT.click();
+		Thread.sleep(5000);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.SelectItem_Value));
 		// Verify that promo value for menu item should be displayed for selected date range
 		if (menuItemActivityPage.verifyPromoValueForMenuItemDisplayed(startDate, endDate)) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US603_TC1634",
+					browser,
 					"User should be able to view Total Menu Items Promo'd (rolled up for the time periods for the selected date range).",
 					"Pass");
 
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US603_TC1634","menuItemActivity_US603_TC1634",
+					browser,
 					"User should be able to view Total Menu Items Promo'd (rolled up for the time periods for the selected date range).",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US603_TC1634");
+			AbstractTest.takeSnapShot();
 		}
 	}
 
 	// TC1643:Verify that user should be able to view rolled up POS activity for date and time selected as a default for each date in the date range.
-	@Test()
+	@Test(enabled=false)
 	public void menuItemActivity_US603_TC1643() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US603_TC1643";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -546,7 +599,7 @@ public class US603_MenuItemActivity extends AbstractTest {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to menu item activity page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		// Search and select menu Item using menu Item Number = 1
 		menuItemActivityPage.searchAndSelectMenuItem(menuItemNumber);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.MiaStartDate_TB));
@@ -555,24 +608,23 @@ public class US603_MenuItemActivity extends AbstractTest {
 		// enter end date
 		menuItemActivityPage.selectEndDate(endDate);
 		// enter start time
-		menuItemActivityPage.selectStartTime(startTime);
-		// enter end time
-		menuItemActivityPage.selectEndTime(endTime);
+		menuItemActivityPage.selectEndTime(endTime).selectStartTime(startTime);
 		// Click on search button
 		menuItemActivityPage.ShowResults_BT.click();
+		Thread.sleep(5000);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.SelectItem_Value));
 		// Verify that Pos Activity value for menu item should be displayed for selected date range
 		if (menuItemActivityPage.verifyPOSActivityForMenuItemDisplayed(startDate, endDate)) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US603_TC1643",
+					browser,
 					"User should be able to view rolled up POS activity for date and time selected as a default for each date in the date range",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US603_TC1643","menuItemActivity_US603_TC1643",
+					browser,
 					"User should be able to view rolled up POS activity for date and time selected as a default for each date in the date range",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US603_TC1643");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -581,6 +633,7 @@ public class US603_MenuItemActivity extends AbstractTest {
 	public void menuItemActivity_US603_TC1645() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/**Variable Section :**/
+		AbstractTest.tcName="menuItemActivity_US603_TC1645";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -594,7 +647,7 @@ public class US603_MenuItemActivity extends AbstractTest {
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to menu item activity page
-		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		// Search and select menu Item using menu Item Number = 1
 		menuItemActivityPage.searchAndSelectMenuItem(menuItemNumber);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.MiaStartDate_TB));
@@ -603,34 +656,34 @@ public class US603_MenuItemActivity extends AbstractTest {
 		// enter end date
 		menuItemActivityPage.selectEndDate(endDate);
 		// Select start time
-		menuItemActivityPage.selectStartTime(startTime);
-		// Select end time
-		menuItemActivityPage.selectEndTime(endTime);
+		menuItemActivityPage.selectEndTime(endTime).selectStartTime(startTime);
 		//click on search button
 		menuItemActivityPage.ShowResults_BT.click();
+		Thread.sleep(5000);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.SelectItem_Value));
 		//Expand the date group
 		menuItemActivityPage.expandDateGroup();
 		//Verify that menu item activity is displayed in the 15 min time slice for the expanded date.
 		if (menuItemActivityPage.verifyMenuActivityDisplayedFor15MinTimeSlice(date)) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US603_TC1645",
+					browser,
 					"User should be able to view the menu item activity in the 15 min time slice for the expanded date.",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US603_TC1645","menuItemActivity_US603_TC1645",
+					browser,
 					"User should be able to view the menu item activity in the 15 min time slice for the expanded date.",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US603_TC1645");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
 	//TC1646:Verify that the user should be able to view the total menu items sold for a date in 15 minute time slice.
-	@Test()
+	@Test(enabled=false)
 	public void menuItemActivity_US603_TC1646() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/**Variable Section :**/
+		AbstractTest.tcName="menuItemActivity_US603_TC1646";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -644,7 +697,7 @@ public class US603_MenuItemActivity extends AbstractTest {
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to menu item activity page
-		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		// Search and select menu Item using menu Item Number = 1
 		menuItemActivityPage.searchAndSelectMenuItem(menuItemNumber);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.MiaStartDate_TB));
@@ -653,11 +706,10 @@ public class US603_MenuItemActivity extends AbstractTest {
 		// enter end date
 		menuItemActivityPage.selectEndDate(endDate);
 		// Select start time
-		menuItemActivityPage.selectStartTime(startTime);
-		// Select end time
-		menuItemActivityPage.selectEndTime(endTime);
+		menuItemActivityPage.selectEndTime(endTime).selectStartTime(startTime);
 		// click on search button
 		menuItemActivityPage.ShowResults_BT.click();
+		Thread.sleep(5000);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.SelectItem_Value));
 		// Expand the date group
 		menuItemActivityPage.expandDateGroup();
@@ -666,16 +718,16 @@ public class US603_MenuItemActivity extends AbstractTest {
 				& menuItemActivityPage.verifyEmployeeMealDisplayedFor15MinTimeSlice(date)
 				& menuItemActivityPage.verifyManagerMealDisplayedFor15MinTimeSlice(date)) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US603_TC1646",
+					browser,
 					"User should be able to view the total menu items and total Employee/Manager Meals sold for a date in 15 minute time slice.",
 					"Pass");
 
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US603_TC1646","menuItemActivity_US603_TC1646",
+					browser,
 					"User should be able to view the total menu items and total Employee/Manager Meals sold for a date in 15 minute time slice.",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US603_TC1646");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -684,6 +736,7 @@ public class US603_MenuItemActivity extends AbstractTest {
 	public void menuItemActivity_US603_TC1647() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/**Variable Section :**/
+		AbstractTest.tcName="menuItemActivity_US603_TC1647";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -697,7 +750,7 @@ public class US603_MenuItemActivity extends AbstractTest {
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to menu item activity page
-		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		// Search and select menu Item using menu Item Number = 1
 		menuItemActivityPage.searchAndSelectMenuItem(menuItemNumber);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.MiaStartDate_TB));
@@ -706,35 +759,35 @@ public class US603_MenuItemActivity extends AbstractTest {
 		// enter end date
 		menuItemActivityPage.selectEndDate(endDate);
 		// Select start time
-		menuItemActivityPage.selectStartTime(startTime);
-		// Select end time
-		menuItemActivityPage.selectEndTime(endTime);
+		menuItemActivityPage.selectEndTime(endTime).selectStartTime(startTime);
 		// click on search button
 		menuItemActivityPage.ShowResults_BT.click();
+		Thread.sleep(5000);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.SelectItem_Value));
 		// Expand the date group
 		menuItemActivityPage.expandDateGroup();
 		// Verify that menu item activity is displayed in the 15 min time slice for the expanded date.
 		if (menuItemActivityPage.verifyWasteItemDisplayedFor15MinTimeSlice(date)) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US603_TC1647",
+					browser,
 					"User should be able to view the waste menu items sold for a date in 15 minute time slice.",
 					"Pass");
 
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US603_TC1647","menuItemActivity_US603_TC1647",
+					browser,
 					"User should be able to view the waste menu items sold for a date in 15 minute time slice.",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US603_TC1647");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
 	//TC1648:Verify that the user should be able to view the Total Menu Items Promo's in the 15 minute time slice.
-	@Test()
+	@Test(enabled=false)
 	public void menuItemActivity_US603_TC1648() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/**Variable Section :**/
+		AbstractTest.tcName="menuItemActivity_US603_TC1648";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -749,7 +802,7 @@ public class US603_MenuItemActivity extends AbstractTest {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to menu item activity page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.goToMenuItemActivityAndInformationPage();
 		// Search and select menu Item using menu Item Number = 1
 		menuItemActivityPage.searchAndSelectMenuItem(menuItemNumber);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.MiaStartDate_TB));
@@ -758,26 +811,25 @@ public class US603_MenuItemActivity extends AbstractTest {
 		// enter end date
 		menuItemActivityPage.selectEndDate(endDate);
 		// Select start time
-		menuItemActivityPage.selectStartTime(startTime);
-		// Select end time
-		menuItemActivityPage.selectEndTime(endTime);
+		menuItemActivityPage.selectEndTime(endTime).selectStartTime(startTime);
 		// click on search button
 		menuItemActivityPage.ShowResults_BT.click();
+		Thread.sleep(5000);
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.SelectItem_Value));
 		// Expand the date group
 		menuItemActivityPage.expandDateGroup();
 		// Verify that menu item activity is displayed in the 15 min time slice for the expanded date.
 		if (menuItemActivityPage.verifyMenuItemPromoDisplayedFor15MinTimeSlice(date)) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US603_TC1648",
+					browser,
 					"User should be able to view the total Menu Items Promo's in the 15 minute time slice",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US603_TC1648","menuItemActivity_US603_TC1648",
+					browser,
 					"User should be able to view the total Menu Items Promo's in the 15 minute time slice",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US603_TC1648");
+			AbstractTest.takeSnapShot();
 		}
 	}
 }

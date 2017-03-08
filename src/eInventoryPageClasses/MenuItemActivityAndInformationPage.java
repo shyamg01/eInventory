@@ -19,6 +19,7 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 	{
 		super(driver);
 		PageFactory.initElements(driver,this);
+		
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -104,7 +105,7 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 	@FindBy(xpath = "//h2[text()='Menu Item Information']")
 	public WebElement MenuItemInformation_PopUp_Title;
 	
-	@FindBy(xpath = "//thead[@id='mia-info-top-table-thead']/tr/th[text()='Menu Item No.']")
+	@FindBy(xpath = "//thead[@id='mia-info-top-table-thead']/tr/th[text()='Item']")
 	public WebElement MenuItemInformation_Table_MenuItemNumberHeader;
 	
 	@FindBy(xpath = "//thead[@id='mia-info-top-table-thead']/tr/th[text()='Description']")
@@ -243,7 +244,7 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 	}
 	
 	//This method will verify that future date is disabled for Start Date field
-	public boolean verifyFutureDateIsDisabledForStartDate(String date) {
+	public boolean verifyFutureDateIsDisabledForStartDate(String date) throws InterruptedException {
 		int month = Base.getMonthFromDate(date);
 		int day = Base.getDayFromDate(date);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='xdsoft_calendar'])[1]")));
@@ -257,7 +258,7 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 	}
 	
 	//This method will verify that future date is disabled for End Date field	
-	public boolean verifyFutureDateIsDisabledForEndDate(String date) {
+	public boolean verifyFutureDateIsDisabledForEndDate(String date) throws InterruptedException {
 		int month = Base.getMonthFromDate(date);
 		int day = Base.getDayFromDate(date);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='xdsoft_calendar'])[2]")));
@@ -275,13 +276,28 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 		StartTime_TB.click();
 		Thread.sleep(1000);
 		String hourValue = startTime.split(":")[0];
+		int count = 0;
 		while(!StartTime_hourSpan_Value.getText().equals(hourValue)){
-			Base.executeJavaScript("document.getElementsByClassName('eb_tp_time_up style-scope eb-timepicker')[0].click();");
+			if(Integer.parseInt(hourValue) < Integer.parseInt(StartTime_hourSpan_Value.getText())){
+				count++;
+				Base.executeJavaScript("document.getElementsByClassName('eb_tp_time_down style-scope eb-timepicker')[0].click();");
+			}else{
+				count++;
+				Base.executeJavaScript("document.getElementsByClassName('eb_tp_time_up style-scope eb-timepicker')[0].click();");
+			}
+			if(count == 24){
+				break;
+			}
 		}
 		//StartTime_hourSpan_Value.click();
+		count = 0;
 		String minuteValue = startTime.split(":")[1];
 		while(!StartTime_MinSpan_Value.getText().equals(minuteValue)){
+			count++;
 			Base.executeJavaScript("document.getElementsByClassName('eb_tp_time_up style-scope eb-timepicker')[1].click();");
+			if(count == 4){
+				break;
+			}
 		}
 		StartTime_TB.click();
 		return PageFactory.initElements(driver, MenuItemActivityAndInformationPage.class);
@@ -292,13 +308,28 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 		EndTime_TB.click();
 		Thread.sleep(1000);
 		String hourValue = time.split(":")[0];
+		int count = 0;
 		while (!EndTime_hourSpan_Value.getText().equals(hourValue)) {
-			Base.executeJavaScript("document.getElementsByClassName('eb_tp_time_up style-scope eb-timepicker')[2].click();");
+			if(Integer.parseInt(hourValue) < Integer.parseInt(EndTime_hourSpan_Value.getText())){
+				count++;
+				Base.executeJavaScript("document.getElementsByClassName('eb_tp_time_down style-scope eb-timepicker')[2].click();");
+			}else{
+				count++;
+				Base.executeJavaScript("document.getElementsByClassName('eb_tp_time_up style-scope eb-timepicker')[2].click();");
+			}
+			if(count == 24){
+				break;
+			}
 		}
 		//EndTime_hourSpan_Value.click();
+		count = 0;
 		String minuteValue = time.split(":")[1];
 		while (!EndTime_MinSpan_Value.getText().equals(minuteValue)) {
+			count++;
 			Base.executeJavaScript("document.getElementsByClassName('eb_tp_time_up style-scope eb-timepicker')[3].click();");
+			if(count == 4){
+				break;
+			}
 		}
 		EndTime_TB.click();
 		return PageFactory.initElements(driver, MenuItemActivityAndInformationPage.class);
@@ -320,9 +351,11 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 			} else {
 				day = String.valueOf(i);
 			}
-			String date = month + day+ year ;
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr[contains(@class,'date"+date+"_group')]")));
-			String timeDuration = driver.findElement(By.xpath("//tr[contains(@class,'date"+date+"_group')]/th[1]/span[@class='mia-long-date-time']")).getText();
+			//String date = month + day+ year ;
+			//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr[contains(@class,'date"+date+"_group')]")));
+			String date = month +"/"+ day +"/"+ year;
+			System.out.println("date "+date);
+			String timeDuration = driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]")).getText();
 			String selectedTime = timeDuration.split("\\|")[1];
 			String startTimeInRecord = selectedTime.split(" to ")[0].trim();
 			String EndTimeInRecord = selectedTime.split(" to ")[1].trim();
@@ -347,8 +380,11 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 			} else {
 				day = String.valueOf(i);
 			}
-			String date = month + day + year;
-			String soldValue = driver.findElement(By.xpath("//tr[contains(@class,'date"+date+"_group')]/th[3]/div")).getText();
+			String date = month +"/"+ day +"/"+ year;
+			System.out.println("date "+date);
+			String soldValue= driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../following-sibling::th[2]")).getText();
+			//String soldValue = driver.findElement(By.xpath("//tr[contains(@id,'"+dateGroupClass+"')]/th[3]/div")).getText();
+			System.out.println("soldValue "+soldValue);
 			soldValueFound = soldValueFound && (! soldValue.isEmpty());
 		}
 		return soldValueFound;
@@ -369,8 +405,11 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 			} else {
 				day = String.valueOf(i);
 			}
-			String date = month + day + year;
-			String wasteValue = driver.findElement(By.xpath("//tr[contains(@class,'date"+date+"_group')]/th[6]/div")).getText();
+			String date = month +"/"+ day +"/"+ year;
+			System.out.println("date "+date);
+			String wasteValue= driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../following-sibling::th[5]")).getText();
+			/*String date = month + day + year;
+			String wasteValue = driver.findElement(By.xpath("//tr[contains(@class,'date"+date+"_group')]/th[6]/div")).getText();*/
 			wasteValueFound = wasteValueFound && (! wasteValue.isEmpty());
 			
 		}
@@ -391,8 +430,11 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 			} else {
 				day = String.valueOf(i);
 			}
-			String date = month + day + year;
-			String promoValue = driver.findElement(By.xpath("//tr[contains(@class,'date"+date+"_group')]/th[7]/div")).getText();
+			String date = month +"/"+ day +"/"+ year;
+			System.out.println("date "+date);
+			String promoValue= driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../following-sibling::th[6]")).getText();
+			/*String date = month + day + year;
+			String promoValue = driver.findElement(By.xpath("//tr[contains(@class,'date"+date+"_group')]/th[7]/div")).getText();*/
 			promoValueFound = promoValueFound && (! promoValue.isEmpty());
 		}
 		return promoValueFound;
@@ -414,8 +456,10 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 			} else {
 				day = String.valueOf(i);
 			}
-			String date = month + day + year;
-			String empMealValue = driver.findElement(By.xpath("//tr[contains(@class,'date" + date+ "_group')]/th[4]/div")).getText();
+			String date = month +"/"+ day +"/"+ year;
+			System.out.println("date "+date);
+			String empMealValue= driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../following-sibling::th[3]")).getText();
+			//String empMealValue = driver.findElement(By.xpath("//tr[contains(@class,'date" + date+ "_group')]/th[4]/div")).getText();
 			empMealValueFound = empMealValueFound && (!empMealValue.isEmpty());
 		}
 		return empMealValueFound;
@@ -437,8 +481,11 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 			} else {
 				day = String.valueOf(i);
 			}
-			String date = month + day + year;
-			String mgrMealValue = driver.findElement(By.xpath("//tr[contains(@class,'date" + date+ "_group')]/th[5]/div")).getText();
+			String date = month +"/"+ day +"/"+ year;
+			System.out.println("date "+date);
+			String mgrMealValue= driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../following-sibling::th[4]")).getText();
+			/*String date = month + day + year;
+			String mgrMealValue = driver.findElement(By.xpath("//tr[contains(@class,'date" + date+ "_group')]/th[5]/div")).getText();*/
 			mgrMealValueFound = mgrMealValueFound && (!mgrMealValue.isEmpty());
 		}
 		return mgrMealValueFound;
@@ -461,13 +508,15 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 			} else {
 				day = String.valueOf(i);
 			}
-			String date = month + day + year;
-			int POSActivityValue = Integer.parseInt(driver.findElement(By.xpath("//tr[contains(@class,'date"+date+"_group')]/th[2]/div")).getText());
-			int soldValue = Integer.parseInt(driver.findElement(By.xpath("//tr[contains(@class,'date"+date+"_group')]/th[3]/div")).getText());
-			int empMealValue = Integer.parseInt(driver.findElement(By.xpath("//tr[contains(@class,'date"+date+"_group')]/th[4]/div")).getText());
-			int mgrMealValue = Integer.parseInt(driver.findElement(By.xpath("//tr[contains(@class,'date"+date+"_group')]/th[5]/div")).getText());
-			int wasteValue = Integer.parseInt(driver.findElement(By.xpath("//tr[contains(@class,'date"+date+"_group')]/th[6]/div")).getText());
-			int promoValue = Integer.parseInt(driver.findElement(By.xpath("//tr[contains(@class,'date"+date+"_group')]/th[7]/div")).getText());			
+			String date = month +"/"+ day +"/"+ year;
+			System.out.println("date "+date);
+			//String date = month + day + year;
+			int POSActivityValue = Integer.parseInt(driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../following-sibling::th[1]")).getText());
+			int soldValue = Integer.parseInt(driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../following-sibling::th[2]")).getText());
+			int empMealValue = Integer.parseInt(driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../following-sibling::th[3]")).getText());
+			int mgrMealValue = Integer.parseInt(driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../following-sibling::th[4]")).getText());
+			int wasteValue = Integer.parseInt(driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../following-sibling::th[5]")).getText());
+			int promoValue = Integer.parseInt(driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../following-sibling::th[6]")).getText());			
 			boolean activityCalculationResult = (POSActivityValue == soldValue + empMealValue + mgrMealValue + wasteValue + promoValue);
 			activityValueFound = activityValueFound && activityCalculationResult;
 		}
@@ -481,7 +530,8 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 		List<WebElement> miaRecordGroupList = driver.findElements(By.xpath("//tr[contains(@class,'tableGroupHead')]"));
 		for (int i = 1; i <= miaRecordGroupList.size(); i++) {
 			try {
-				driver.findElement(By.xpath("(//tr[contains(@class,'tableGroupHead')])["+ i + "]/th/span[1]")).click();
+				WebElement expandBtn = driver.findElement(By.xpath("(//tr[contains(@class,'tableGroupHead')])["+ i + "]/th/span[1]"));
+				executor.executeScript("arguments[0].click();", expandBtn);
 				Base.toReachbottomOfthePage();
 			} catch (Exception e) {
 				Base.toReachbottomOfthePage();
@@ -508,7 +558,8 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr[contains(@class,'tableGroupHead')]")));
 		List<WebElement> miaRecordGroupList = driver.findElements(By.xpath("//tr[contains(@class,'tableGroupHead')]"));
 		for (int i = 1; i <= miaRecordGroupList.size(); i++) {
-			driver.findElement(By.xpath("(//tr[contains(@class,'tableGroupHead')])["+ i + "]/th/span[2]")).click();
+			WebElement collapseBtn = driver.findElement(By.xpath("(//tr[contains(@class,'tableGroupHead')])["+ i + "]/th/span[2]"));
+			executor.executeScript("arguments[0].click();", collapseBtn);
 			Thread.sleep(1000);
 		}
 	}
@@ -516,41 +567,54 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 	//This method will verify that menu activity should be displayed in detail with 15 minutes time span for a selected date and selected time range
 	//It will take date argument as MM/DD/YYYY format or YYYYMMDD format
 	public boolean verifyMenuActivityTimeInDetailForSelectedDate(String date, String startTime,String endTime){
-		if (date.contains("/")) {
-			date = getDateInMMDDYYYYFormat(date);
-		}
-		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'date"+date+" ')]"));
+		String dateGroupId = driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../..")).getAttribute("id");
+		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'"+dateGroupId+"')]"));
 		int j;
 		boolean result = true;
+		System.out.println(miaRecordList.size());
+		result = result & miaRecordList.size()>0;
 		for(int i=1;i<=miaRecordList.size();i++){
-			String timeSpan = driver.findElement(By.xpath("(//tr[contains(@class,'date"+date+" ')])["+i+"]/td[1]")).getText();
+			String timeSpan = driver.findElement(By.xpath("(//tr[contains(@class,'"+dateGroupId+"')])["+i+"]/td[1]")).getText().split("\\|")[1];
+			System.out.println("timeSpan "+timeSpan);
 			String startTimeInRecord = timeSpan.split(" to ")[0].trim();
+			System.out.println("startTimeInRecord "+startTimeInRecord);
 			String EndTimeInRecord = timeSpan.split(" to ")[1].trim();
 			int hour = Base.getHourFromTime(EndTimeInRecord);
 			int minute = Base.getMinuteFromTime(EndTimeInRecord);
 			String timeSlice = Base.get15MinuteTimeSlice(hour, minute);
 			result = result && timeSlice.equals(startTimeInRecord);
+			if(i==1){
+				result = result & startTimeInRecord.equals(startTime);
+				System.out.println("First record "+ result);
+			}
 			if (i < miaRecordList.size()) {
 				j = i + 1;
-				timeSpan = driver.findElement(By.xpath("(//tr[contains(@class,'date" + date+ " ')])[" + j + "]/td[1]")).getText();
-				String EndTimeInNextRecord = timeSpan.split(" to ")[1].trim();
-				System.out.println("startTimeInRecord "+ startTimeInRecord);
-				System.out.println("EndTimeInNextRecord "+ EndTimeInNextRecord);
-				result = result && startTimeInRecord.equals(EndTimeInNextRecord);
+				timeSpan = driver.findElement(By.xpath("(//tr[contains(@class,'" + dateGroupId+ "')])[" + j + "]/td[1]")).getText().split("\\|")[1];
+				String startTimeInNextRecord = timeSpan.split(" to ")[0].trim();
+				System.out.println("EndTimeInRecord "+ EndTimeInRecord);
+				System.out.println("startTimeInNextRecord "+ startTimeInNextRecord);
+				result = result && EndTimeInRecord.equals(startTimeInNextRecord);
+				System.out.println("mid records "+ result);
+			}
+			if(i == miaRecordList.size()){
+				result = result && EndTimeInRecord.equals(endTime);
+				System.out.println("Last record "+ result);
 			}
 		}
-		System.out.println("Result "+result);
+		System.out.println("Result2 "+result);
 		return result;
 		
 	}
 	
 	// This method will verify that menu activity should be displayed in detail with 15 minutes time span for each date and selected time range
 	public boolean verifyMenuActivityTimeInDetailForEachDate(String startTime, String endTime) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr[contains(@class,'tableGroupHead')]")));
-		List<WebElement> miaRecordGroupList = driver.findElements(By.xpath("//tr[contains(@class,'tableGroupHead')]"));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(@class,'mia-long-date-time')]")));
+		List<WebElement> miaRecordGroupList = driver.findElements(By.xpath("//span[contains(@class,'mia-long-date-time')]"));
 		boolean result = true;
+		result = result & miaRecordGroupList.size()>0;
 		for(WebElement miaRecordGroup : miaRecordGroupList){
-			String date =  miaRecordGroup.getAttribute("class").split(" date")[1].split("_")[0];
+			String date =  miaRecordGroup.getText().split("|")[0].split("-")[1].trim();
+			System.out.println("Date "+date);
 			result = result && verifyMenuActivityTimeInDetailForSelectedDate(date, startTime, endTime);
 		}
 		return result;
@@ -558,11 +622,13 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 	
 	// This method will verify that menu activity should be displayed in detail with 15 minutes time span for a selected date and selected time range
 	public boolean verifyMenuActivityDisplayedFor15MinTimeSlice(String date) {
-		date = getDateInMMDDYYYYFormat(date);
-		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'date" + date + " ')]"));
+		//date = getDateInMMDDYYYYFormat(date);
+		String dateGroupId = driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../..")).getAttribute("id");
+		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'" + dateGroupId + "')]"));
 		boolean result = true;
+		result = result & miaRecordList.size()>0;
 		for (int i = 1; i <= miaRecordList.size(); i++) {
-			String miaForTimeSpan = driver.findElement(By.xpath("(//tr[contains(@class,'date" + date + " ')])["+ i + "]/td[2]")).getText();
+			String miaForTimeSpan = driver.findElement(By.xpath("(//tr[contains(@class,'" + dateGroupId + "')])["+ i + "]/td[2]")).getText();
 			result = result	&& (!miaForTimeSpan.isEmpty());
 			}
 		return result;
@@ -570,12 +636,14 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 	
 	// This method will verify that total menu items sold for a date in 15 min time slice should be displayed
 	public boolean verifySoldMenuItemDisplayedFor15MinTimeSlice(String date) {
-		date = getDateInMMDDYYYYFormat(date);
+		//date = getDateInMMDDYYYYFormat(date);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr[contains(@class,'tableGroupHead')]")));
-		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'date" + date + " ')]"));
+		String dateGroupId = driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../..")).getAttribute("id");
+		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'" + dateGroupId + "')]"));
 		boolean result = true;
+		result = result & miaRecordList.size()>0;
 		for (int i = 1; i <= miaRecordList.size(); i++) {
-			String menuItemSoldInTimeSpan = driver.findElement(By.xpath("(//tr[contains(@class,'date" + date + " ')])["+ i + "]/td[3]")).getText();
+			String menuItemSoldInTimeSpan = driver.findElement(By.xpath("(//tr[contains(@class,'" + dateGroupId + "')])["+ i + "]/td[3]")).getText();
 			result = result && (!menuItemSoldInTimeSpan.isEmpty());
 		}
 		return result;
@@ -583,12 +651,14 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 	
 	// This method will verify that total menu items sold for a date in 15 min time slice should be displayed
 	public boolean verifyEmployeeMealDisplayedFor15MinTimeSlice(String date) {
-		date = getDateInMMDDYYYYFormat(date);
+		//date = getDateInMMDDYYYYFormat(date);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr[contains(@class,'tableGroupHead')]")));
-		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'date" + date + " ')]"));
+		String dateGroupId = driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../..")).getAttribute("id");
+		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'" + dateGroupId + "')]"));
 		boolean result = true;
+		result = result & miaRecordList.size()>0;
 		for (int i = 1; i <= miaRecordList.size(); i++) {
-			String menuItemSoldInTimeSpan = driver.findElement(By.xpath("(//tr[contains(@class,'date" + date + " ')])["+ i + "]/td[4]")).getText();
+			String menuItemSoldInTimeSpan = driver.findElement(By.xpath("(//tr[contains(@class,'" + dateGroupId + "')])["+ i + "]/td[4]")).getText();
 			result = result && (!menuItemSoldInTimeSpan.isEmpty());
 		}
 		return result;
@@ -596,12 +666,14 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 	
 	// This method will verify that total menu items sold for a date in 15 min time slice should be displayed
 	public boolean verifyManagerMealDisplayedFor15MinTimeSlice(String date) {
-		date = getDateInMMDDYYYYFormat(date);
+		//date = getDateInMMDDYYYYFormat(date);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr[contains(@class,'tableGroupHead')]")));
-		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'date" + date + " ')]"));
+		String dateGroupId = driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../..")).getAttribute("id");
+		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'" + dateGroupId + "')]"));
 		boolean result = true;
+		result = result & miaRecordList.size()>0;
 		for (int i = 1; i <= miaRecordList.size(); i++) {
-			String menuItemSoldInTimeSpan = driver.findElement(By.xpath("(//tr[contains(@class,'date" + date + " ')])["+ i + "]/td[5]")).getText();
+			String menuItemSoldInTimeSpan = driver.findElement(By.xpath("(//tr[contains(@class,'" + dateGroupId + "')])["+ i + "]/td[5]")).getText();
 			result = result && (!menuItemSoldInTimeSpan.isEmpty());
 		}
 		return result;
@@ -609,12 +681,15 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 	
 	// This method will verify that waste menu items sold for a date in 15 min time slice should be displayed
 	public boolean verifyWasteItemDisplayedFor15MinTimeSlice(String date) {
-		date = getDateInMMDDYYYYFormat(date);
+		//date = getDateInMMDDYYYYFormat(date);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr[contains(@class,'tableGroupHead')]")));
-		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'date" + date + " ')]"));
+		String dateGroupId = driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../..")).getAttribute("id");
+		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'" + dateGroupId + "')]"));
 		boolean result = true;
+		result = result & miaRecordList.size()>0;
 		for (int i = 1; i <= miaRecordList.size(); i++) {
-			String wasteItemInTimeSpan = driver.findElement(By.xpath("(//tr[contains(@class,'date" + date + " ')])["+ i + "]/td[6]")).getText();
+			String wasteItemInTimeSpan = driver.findElement(By.xpath("(//tr[contains(@class,'" + dateGroupId + "')])["+ i + "]/td[6]")).getText();
+			System.out.println("wasteItemInTimeSpan "+wasteItemInTimeSpan);
 			result = result && (!wasteItemInTimeSpan.isEmpty());
 		}
 		return result;
@@ -622,12 +697,14 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 	
 	// This method will verify that menu item Promo should be displayed for a date in 15 min time slice 
 	public boolean verifyMenuItemPromoDisplayedFor15MinTimeSlice(String date) {
-		date = getDateInMMDDYYYYFormat(date);
+		//date = getDateInMMDDYYYYFormat(date);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr[contains(@class,'tableGroupHead')]")));
-		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'date" + date + " ')]"));
+		String dateGroupId = driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../..")).getAttribute("id");
+		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'" + dateGroupId + "')]"));
 		boolean result = true;
+		result = result & miaRecordList.size()>0;
 		for (int i = 1; i <= miaRecordList.size(); i++) {
-			String menuItemPromoInTimeSpan = driver.findElement(By.xpath("(//tr[contains(@class,'date" + date + " ')])["+ i + "]/td[7]")).getText();
+			String menuItemPromoInTimeSpan = driver.findElement(By.xpath("(//tr[contains(@class,'" + dateGroupId + "')])["+ i + "]/td[7]")).getText();
 			result = result && (!menuItemPromoInTimeSpan.isEmpty());
 		}
 		return result;
@@ -667,16 +744,19 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 		for(WebElement activity : activityList){
 			result = result & !activity.getAttribute("class").contains("hidden");
 		}
+		System.out.println("Result1 "+result);
 		return result;
 	}
 	
 	public int calculateTotalActivityForADate(String date){
-		date = getDateInMMDDYYYYFormat(date);
+		//date = getDateInMMDDYYYYFormat(date);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr[contains(@class,'tableGroupHead')]")));
-		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'date"+date+" ')]"));
+		String dateGroupId = driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../..")).getAttribute("id");
+		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'" + dateGroupId + "')]"));
+		//List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'date"+date+" ')]"));
 		int  activityCount = 0;
 		for(int i=1;i<=miaRecordList.size();i++){
-			String activity = driver.findElement(By.xpath("(//tr[contains(@class,'date"+date+" ')])["+i+"]/td[2]")).getText();
+			String activity = driver.findElement(By.xpath("(//tr[contains(@class,'"+dateGroupId+"')])["+i+"]/td[2]")).getText();
 			activityCount = activityCount + Integer.parseInt(activity);
 		}
 		System.out.println("Result "+activityCount);
@@ -684,17 +764,19 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 	}
 	
 	public int getActivityTotalFromDateHeader(String date){
-		date = getDateInMMDDYYYYFormat(date);
-		String activityTotal = driver.findElement(By.xpath("//tr[contains(@class,'date"+date+"_group')]/th[2]/div")).getText();
+		//date = getDateInMMDDYYYYFormat(date);
+		String activityTotal = driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../following-sibling::th[1]")).getText();
 		return Integer.parseInt(activityTotal);
 	}
 	
 	public int calculateTotalSoldForADate(String date){
-		date = getDateInMMDDYYYYFormat(date);
-		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'date"+date+" ')]"));
+		//date = getDateInMMDDYYYYFormat(date);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr[contains(@class,'tableGroupHead')]")));
+		String dateGroupId = driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../..")).getAttribute("id");
+		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'"+dateGroupId+"')]"));
 		int  soldCount = 0;
 		for(int i=1;i<=miaRecordList.size();i++){
-			String sold = driver.findElement(By.xpath("(//tr[contains(@class,'date"+date+" ')])["+i+"]/td[3]")).getText();
+			String sold = driver.findElement(By.xpath("(//tr[contains(@class,'"+dateGroupId+"')])["+i+"]/td[3]")).getText();
 			soldCount = soldCount + Integer.parseInt(sold);
 		}
 		System.out.println("Result "+soldCount);
@@ -702,17 +784,18 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 	}
 	
 	public int getSoldTotalFromDateHeader(String date){
-		date = getDateInMMDDYYYYFormat(date);
-		String soldTotal = driver.findElement(By.xpath("//tr[contains(@class,'date"+date+"_group')]//th[3]/div")).getText();
+		//date = getDateInMMDDYYYYFormat(date);
+		String soldTotal = driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../following-sibling::th[2]")).getText();
 		return Integer.parseInt(soldTotal);
 	}
 	
 	public int calculateTotalEmpMealForADate(String date){
-		date = getDateInMMDDYYYYFormat(date);
-		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'date"+date+" ')]"));
+		//date = getDateInMMDDYYYYFormat(date);
+		String dateGroupId = driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../..")).getAttribute("id");
+		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'"+dateGroupId+"')]"));
 		int empMealCount = 0;
 		for(int i=1;i<=miaRecordList.size();i++){
-			String empMeal = driver.findElement(By.xpath("(//tr[contains(@class,'date"+date+" ')])["+i+"]/td[4]")).getText();
+			String empMeal = driver.findElement(By.xpath("(//tr[contains(@class,'"+dateGroupId+"')])["+i+"]/td[4]")).getText();
 			empMealCount = empMealCount + Integer.parseInt(empMeal);
 		}
 		System.out.println("Result "+empMealCount);
@@ -720,17 +803,19 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 	}
 	
 	public int getEmpMealTotalFromDateHeader(String date){
-		date = getDateInMMDDYYYYFormat(date);
-		String empMealTotal = driver.findElement(By.xpath("//tr[contains(@class,'date"+date+"_group')]//th[4]/div")).getText();
+		//date = getDateInMMDDYYYYFormat(date);
+		String empMealTotal = driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../following-sibling::th[3]")).getText();
 		return Integer.parseInt(empMealTotal);
 	}
 	
 	public int calculateTotalMgrMealForADate(String date){
-		date = getDateInMMDDYYYYFormat(date);
-		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'date"+date+" ')]"));
+		//date = getDateInMMDDYYYYFormat(date);
+		String dateGroupId = driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../..")).getAttribute("id");
+		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'"+dateGroupId+"')]"));
 		int mgrMealCount = 0;
 		for(int i=1;i<=miaRecordList.size();i++){
-			String mgrMeal = driver.findElement(By.xpath("(//tr[contains(@class,'date"+date+" ')])["+i+"]/td[5]")).getText();
+			String mgrMeal = driver.findElement(By.xpath("(//tr[contains(@class,'"+dateGroupId+"')])["+i+"]/td[5]")).getText();
+			System.out.println("mgrMeal "+mgrMeal);
 			mgrMealCount = mgrMealCount + Integer.parseInt(mgrMeal);
 		}
 		System.out.println("Result "+mgrMealCount);
@@ -738,35 +823,39 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 	}
 	
 	public int getMgrMealTotalFromDateHeader(String date){
-		date = getDateInMMDDYYYYFormat(date);
-		String mgrMealTotal = driver.findElement(By.xpath("//tr[contains(@class,'date"+date+"_group')]/th[5]/div")).getText();
+		//date = getDateInMMDDYYYYFormat(date);
+		String mgrMealTotal = driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../following-sibling::th[4]")).getText();
 		return Integer.parseInt(mgrMealTotal);
 	}
 	
 	public int calculateTotalWasteForADate(String date){
-		date = getDateInMMDDYYYYFormat(date);
-		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'date"+date+" ')]"));
+		//date = getDateInMMDDYYYYFormat(date);
+		String dateGroupId = driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../..")).getAttribute("id");
+		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'"+dateGroupId+"')]"));
 		int wasteCount = 0;
 		for(int i=1;i<=miaRecordList.size();i++){
-			String waste = driver.findElement(By.xpath("(//tr[contains(@class,'date"+date+" ')])["+i+"]/td[6]")).getText();
+			System.out.println("(//tr[contains(@class,'"+dateGroupId+"')])["+i+"]/td[6]");
+			String waste = driver.findElement(By.xpath("(//tr[contains(@class,'"+dateGroupId+"')])["+i+"]/td[6]")).getText();
+			System.out.println("waste "+waste);
 			wasteCount = wasteCount + Integer.parseInt(waste);
 		}
-		System.out.println("Result "+wasteCount);
+		System.out.println("wasteCount "+wasteCount);
 		return wasteCount;
 	}
 	
 	public int getWasteTotalFromDateHeader(String date){
-		date = getDateInMMDDYYYYFormat(date);
-		String wasteTotal = driver.findElement(By.xpath("//tr[contains(@class,'date"+date+"_group')]/th[6]/div")).getText();
+		//date = getDateInMMDDYYYYFormat(date);
+		String wasteTotal = driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../following-sibling::th[5]")).getText();
 		return Integer.parseInt(wasteTotal);
 	}
 	
 	public int calculateTotalPromoForADate(String date){
-		date = getDateInMMDDYYYYFormat(date);
-		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'date"+date+" ')]"));
+		//date = getDateInMMDDYYYYFormat(date);
+		String dateGroupId = driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../..")).getAttribute("id");
+		List<WebElement> miaRecordList = driver.findElements(By.xpath("//tr[contains(@class,'"+dateGroupId+"')]"));
 		int promoCount = 0;
 		for(int i=1;i<=miaRecordList.size();i++){
-			String promo = driver.findElement(By.xpath("(//tr[contains(@class,'date"+date+" ')])["+i+"]/td[7]")).getText();
+			String promo = driver.findElement(By.xpath("(//tr[contains(@class,'"+dateGroupId+"')])["+i+"]/td[7]")).getText();
 			promoCount = promoCount + Integer.parseInt(promo);
 		}
 		System.out.println("Result "+promoCount);
@@ -774,8 +863,8 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 	}
 
 	public int getPromoTotalFromDateHeader(String date){
-		date = getDateInMMDDYYYYFormat(date);
-		String promoTotal = driver.findElement(By.xpath("//tr[contains(@class,'date"+date+"_group')]/th[7]/div")).getText();
+		//date = getDateInMMDDYYYYFormat(date);
+		String promoTotal = driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../following-sibling::th[6]")).getText();
 		return Integer.parseInt(promoTotal);
 	}
 	/**************KPI Screen *************************/
@@ -786,8 +875,8 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 			return result;
 		}else{
 			for(int i=1;i<=itemList.size();i++){
-				result = result & Base.isElementDisplayed(By.xpath("//table[@id='top_menu_items_employee_meals']/tbody/tr["+i+"]/td[@class='menu_item_number']"));
-				result = result & Base.isElementDisplayed(By.xpath("//table[@id='top_menu_items_employee_meals']/tbody/tr["+i+"]/td[@class='menu_item_desc']"));
+				result = result & Base.isElementDisplayed(By.xpath("//table[@id='top_menu_items_employee_meals']/tbody/tr["+i+"]/td[@class='wrin']"));
+				result = result & Base.isElementDisplayed(By.xpath("//table[@id='top_menu_items_employee_meals']/tbody/tr["+i+"]/td[@class='wrinDesc']"));
 				result = result & Base.isElementDisplayed(By.xpath("//table[@id='top_menu_items_employee_meals']/tbody/tr["+i+"]/td[@class='amt']"));
 			}
 			return result;
@@ -797,6 +886,7 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 	public boolean verifyHeaderDisplayedInTopEmployeeMealTable(){
 		WebElement topEmployeeHeader = driver.findElement(By.xpath("//table[@id='top_menu_items_employee_meals']/thead/tr/th[1]"));
 		WebElement quantityHeader = driver.findElement(By.xpath("//table[@id='top_menu_items_employee_meals']/thead/tr/th[2]"));
+		System.out.println("topEmployeeHeader "+topEmployeeHeader.getText());
 		return topEmployeeHeader.getText().contains("Top Employee Meals") & quantityHeader.getText().contains("Quantity");
 	}
 	
@@ -828,8 +918,8 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 			return result;
 		}else{
 			for(int i=1;i<=itemList.size();i++){
-				result = result & Base.isElementDisplayed(By.xpath("(//table[@id='top_promo_items_wasted'])[1]/tbody/tr["+i+"]/td[@class='menu_item_number']"));
-				result = result & Base.isElementDisplayed(By.xpath("(//table[@id='top_promo_items_wasted'])[1]/tbody/tr["+i+"]/td[@class='menu_item_desc']"));
+				result = result & Base.isElementDisplayed(By.xpath("(//table[@id='top_promo_items_wasted'])[1]/tbody/tr["+i+"]/td[@class='wrin']"));
+				result = result & Base.isElementDisplayed(By.xpath("(//table[@id='top_promo_items_wasted'])[1]/tbody/tr["+i+"]/td[@class='wrinDesc']"));
 				result = result & Base.isElementDisplayed(By.xpath("(//table[@id='top_promo_items_wasted'])[1]/tbody/tr["+i+"]/td[@class='amt']"));
 			}
 			return result;
@@ -839,7 +929,7 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 	public boolean verifyHeaderDisplayedInTopMenuItemPromoTable(){
 		WebElement topMenuItemHeader = driver.findElement(By.xpath("(//table[@id='top_promo_items_wasted'])[1]/thead/tr/th[1]"));
 		WebElement quantityHeader = driver.findElement(By.xpath("(//table[@id='top_promo_items_wasted'])[1]/thead/tr/th[2]"));
-		return topMenuItemHeader.getText().contains("Top Menu Item Promo'd") & quantityHeader.getText().contains("Quantity");
+		return topMenuItemHeader.getText().contains("Top Menu Items Promo'd") & quantityHeader.getText().contains("Quantity");
 	}
 	
 	public boolean verifyDataDisplayedInTopManagerMealTable(){
@@ -849,8 +939,8 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 			return result;
 		}else{
 			for(int i=1;i<=itemList.size();i++){
-				result = result & Base.isElementDisplayed(By.xpath("(//table[@id='top_promo_items_wasted'])[2]/tbody/tr["+i+"]/td[@class='menu_item_number']"));
-				result = result & Base.isElementDisplayed(By.xpath("(//table[@id='top_promo_items_wasted'])[2]/tbody/tr["+i+"]/td[@class='menu_item_desc']"));
+				result = result & Base.isElementDisplayed(By.xpath("(//table[@id='top_promo_items_wasted'])[2]/tbody/tr["+i+"]/td[@class='wrin']"));
+				result = result & Base.isElementDisplayed(By.xpath("(//table[@id='top_promo_items_wasted'])[2]/tbody/tr["+i+"]/td[@class='wrinDesc']"));
 				result = result & Base.isElementDisplayed(By.xpath("(//table[@id='top_promo_items_wasted'])[2]/tbody/tr["+i+"]/td[@class='amt']"));
 			}
 			return result;
@@ -862,5 +952,19 @@ public class MenuItemActivityAndInformationPage extends AbstractPage
 		WebElement quantityHeader = driver.findElement(By.xpath("(//table[@id='top_promo_items_wasted'])[2]/thead/tr/th[2]"));
 		return topManagerMealHeader.getText().contains("Top Manager Meals") & quantityHeader.getText().contains("Quantity");
 	}
+	
+	public int getCompletedWasteCountForSelectedTime(String date, String time1, String time2){
+		String dateGroupId = driver.findElement(By.xpath(".//span[contains(text(),'"+date+"')]/../..")).getAttribute("id");
+		System.out.println("(//tr[contains(@class,'"+dateGroupId+"')])/td[contains(text(),'"+time1+"') and contains(text(),'"+time2+"')]/following-sibling::td[5]");
+		String completedWasteCount = driver.findElement(By.xpath("(//tr[contains(@class,'"+dateGroupId+"')])/td[contains(text(),'"+time1+"') and contains(text(),'"+time2+"')]/following-sibling::td[5]")).getText();
+		System.out.println("completedWasteCount "+completedWasteCount);
+		return Integer.parseInt(completedWasteCount);
+		
+	}
+	
+	public String getServingFactorForRecipeItem(String wrinId){
+		return driver.findElement(By.xpath("//table[@id='DataTables_Table_0']/tbody/tr/td/span[contains(text(),'"+wrinId+"')]/../following-sibling::td[contains(@class,'mia-serving-factor')]/span")).getText();
+	}
 
+	//
 }

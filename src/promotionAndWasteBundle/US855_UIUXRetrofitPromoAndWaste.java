@@ -1,6 +1,7 @@
 package promotionAndWasteBundle;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -13,54 +14,28 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
-import sprint2.AbstractTest;
 import common.Base;
+import common.GenericMethods;
 import common.GlobalVariable;
 import common.LoginTestData;
 import common.Reporter;
+import eInventoryPageClasses.AbstractTest;
 import eInventoryPageClasses.CompletedWastePage;
 import eInventoryPageClasses.HomePage;
 import eInventoryPageClasses.PromotionsAndWastePage;
 import eInventoryPageClasses.PurchasesPage;
+import eInventoryPageClasses.RawItemActivityPage;
 import eInventoryPageClasses.RawItemPromoPage;
 import eInventoryPageClasses.RawItemWastePage;
 
 public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 
-	//TC2718: Verify Promo & Waste page is accessible from the Main Menu.
-	@Test()
-	public void promotionWaste_US855_TC2718() throws RowsExceededException,
-			BiffException, WriteException, IOException, InterruptedException {
-		/** Variable Section : **/
-		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level2_SSO_UserId;
-		String password = LoginTestData.level2_SSO_Password;
-		String storeId = LoginTestData.level2StoreId;
-		/***********************************/
-		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
-		// Navigate to Promotion and Waste page
-		promotionsAndWastePage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToPromotionsAndWastePage();
-		//verify that Promotion and Waste page is accessible from the Main Menu
-		if (Base.isElementDisplayed(promotionsAndWastePage.PromotionAndWaste_Title)) {
-			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC2718",
-					"User should be able to access Promotion and Waste Page from the Main Menu",
-					"Pass");
-		} else {
-			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC2718","promotionWaste_US855_TC2718",
-					"User should be able to access Promotion and Waste Page from the Main Menu",
-					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC2718");
-		}
-	}
-	
 	//TC3219: Verify that Main Menu can be accessible through Promotions & Waste Page.
 	@Test()
 	public void promotionWaste_US855_TC3219() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3219";
 		PromotionsAndWastePage promotionsAndWastePage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -70,7 +45,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		PurchasesPage purchasesPage = PageFactory.initElements(driver, PurchasesPage.class);
 		// Navigate to Promotion and Waste page
 		promotionsAndWastePage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToPromotionsAndWastePage();
+				.goToPromotionsAndWastePage();
 		wait.until(ExpectedConditions.visibilityOf(promotionsAndWastePage.PromotionAndWaste_Title));
 		homePage.Menu_DD_BT.click();
 		boolean mainMenuDisplayed = Base.isElementDisplayed(homePage.Purchases_BT);
@@ -85,15 +60,15 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		//verify that Manual Vendors  Page is accessible from the Main Menu
 		if (mainMenuDisplayed & mainMenuHidden & Base.isElementDisplayed(purchasesPage.Purchases_Label)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3219",
+					browser,
 					"User should be able to access Main Menu and other pages from Promotion and Waste Page.",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3219","promotionWaste_US855_TC3219",
+					browser,
 					"User should be able to access Main Menu and other pages from Promotion and Waste Page.",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3219");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -102,6 +77,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3222() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3222";
 		PromotionsAndWastePage promotionsAndWastePage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -110,22 +86,25 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		promotionsAndWastePage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToPromotionsAndWastePage();
+				.goToPromotionsAndWastePage();
 		wait.until(ExpectedConditions.visibilityOf(promotionsAndWastePage.PromotionAndWaste_Title));
 		//Verify User is able to view  Enter Raw Waste [button], Enter Raw Promo [button] and Enter Completed Waste [button]
 		if(Base.isElementDisplayed(promotionsAndWastePage.RawWaste_BT) 
 				& Base.isElementDisplayed(promotionsAndWastePage.RawPromo_BT)
 				& Base.isElementDisplayed(promotionsAndWastePage.CompletedWaste_BT)){
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3222",
+					browser,
 					"User should be able to Enter Raw Waste [button], Enter Raw Promo [button] and Enter Completed Waste [button] on Promotion and Waste Page.",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3222_Condition1","promotionWaste_US855_TC3222",
+					browser,
 					"User should be able to Enter Raw Waste [button], Enter Raw Promo [button] and Enter Completed Waste [button] on Promotion and Waste Page.",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3222_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		/*Verify User is able to view Start Date Field with default date as 1st date of Current Month End Date Field 
 		 * with default date as Current date is selected and Show Results [button]- against Start and End Date field.*/
@@ -143,17 +122,20 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 				& promotionsAndWastePage.promoWasteHistoryEndDate_TB.getAttribute("value").equals(endDate)
 				& Base.isElementDisplayed(promotionsAndWastePage.ShowResults_BT)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3222",
+					browser,
 					"User is able to view Start Date Field with default date as 1st date of Current Month End Date Field "
 					+ " with default date as Current date is selected and Show Results [button]- against Start and End Date field.",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3222_Condition2","promotionWaste_US855_TC3222",
+					browser,
 					"User is able to view Start Date Field with default date as 1st date of Current Month End Date Field "
 					+ " with default date as Current date is selected and Show Results [button]- against Start and End Date field.",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3222_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 		/*Verify User is able to view Promotion and Waste Table with headers :1. Time of Waste, 2. Date Entered , 3.Time Entered ,
 		 * 4. Entered By, 5. Type, 6. Amount*/
@@ -164,45 +146,54 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 				& Base.isElementDisplayed(promotionsAndWastePage.PromotionAndWasteTable_Type_Header)
 				& Base.isElementDisplayed(promotionsAndWastePage.PromotionAndWasteTable_Amount_Header)){
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3222",
+					browser,
 					"User is able to view Promotion and Waste Table with headers :1. Time of Waste, 2. Date Entered , 3.Time Entered ,"
 					+ " 4. Entered By, 5. Type, 6. Amount",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3222_Condition3","promotionWaste_US855_TC3222",
+					browser, 
 					"User is able to view Promotion and Waste Table with headers :1. Time of Waste, 2. Date Entered , 3.Time Entered ,"
 					+ " 4. Entered By, 5. Type, 6. Amount",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3222_Condition3");
+			AbstractTest.takeSnapShot();
+			
 		}
 		
 		if(promotionsAndWastePage.verifyWasteDateGroupDisplayedForSelectedDateRange(startDate, endDate)
 				& promotionsAndWastePage.verifyByDefaultDateGroupIsCollapsed(startDate, endDate)){
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3222",
+					browser,
 					"By default in table grid, different container should be displayed for each day (as per the date selected in Start and End Date) and it should be collapsed.",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3222_Condition4","promotionWaste_US855_TC3222",
+					browser,
 					"By default in table grid, different container should be displayed for each day (as per the date selected in Start and End Date) and it should be collapsed.",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3222_Condition4");
+			AbstractTest.takeSnapShot();
+			
 		}
 		
 		if(Base.isElementDisplayed(promotionsAndWastePage.AtAGlance_Expand_Icon)
 				& Base.isElementDisplayed(promotionsAndWastePage.AtAGlance_Header)){
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3222",
+					browser,
 					"(^) icon should be displayed at the bottom of the screen with the header At a Glance",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3222_Condition5","promotionWaste_US855_TC3222",
+					browser, 
 					"(^) icon should be displayed at the bottom of the screen with the header At a Glance",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3222_Condition5");
+			AbstractTest.takeSnapShot();
+			
 			
 		}
 	}
@@ -212,6 +203,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3223() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3223";
 		PromotionsAndWastePage promotionsAndWastePage;
 		String userId = LoginTestData.level2_SSO_UserId;
 		String password = LoginTestData.level2_SSO_Password;
@@ -220,22 +212,25 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		promotionsAndWastePage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToPromotionsAndWastePage();
+				.goToPromotionsAndWastePage();
 		wait.until(ExpectedConditions.visibilityOf(promotionsAndWastePage.PromotionAndWaste_Title));
 		//Verify User is able to view  Enter Raw Waste [button], Enter Raw Promo [button] and Enter Completed Waste [button]
 		if(Base.isElementDisplayed(promotionsAndWastePage.RawWaste_BT) 
 				& !Base.isElementDisplayed(promotionsAndWastePage.RawPromo_BT)
 				& Base.isElementDisplayed(promotionsAndWastePage.CompletedWaste_BT)){
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3223",
+					browser,
 					"User should be able to Enter Raw Waste [button] and Enter Completed Waste [button] on Promotion and Waste Page.",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3223_Condition1","promotionWaste_US855_TC3223",
+					browser,
 					"User should be able to Enter Raw Waste [button] and Enter Completed Waste [button] on Promotion and Waste Page.",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3223_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		/*Verify User is able to view Start Date Field with default date as 1st date of Current Month End Date Field 
 		 * with default date as Current date is selected and Show Results [button]- against Start and End Date field.*/
@@ -253,17 +248,20 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 				& promotionsAndWastePage.promoWasteHistoryEndDate_TB.getAttribute("value").equals(endDate)
 				& Base.isElementDisplayed(promotionsAndWastePage.ShowResults_BT)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3223",
+					browser,
 					"User is able to view Start Date Field with default date as 1st date of Current Month End Date Field "
 					+ " with default date as Current date is selected and Show Results [button]- against Start and End Date field.",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3223_Condition2","promotionWaste_US855_TC3223",
+					browser,
 					"User is able to view Start Date Field with default date as 1st date of Current Month End Date Field "
 					+ " with default date as Current date is selected and Show Results [button]- against Start and End Date field.",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3223_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 		/*Verify User is able to view Promotion and Waste Table with headers :1. Time of Waste, 2. Date Entered , 3.Time Entered ,
 		 * 4. Entered By, 5. Type, 6. Amount*/
@@ -274,45 +272,54 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 				& Base.isElementDisplayed(promotionsAndWastePage.PromotionAndWasteTable_Type_Header)
 				& Base.isElementDisplayed(promotionsAndWastePage.PromotionAndWasteTable_Amount_Header)){
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3223",
+					browser,
 					"User is able to view Promotion and Waste Table with headers :1. Time of Waste, 2. Date Entered , 3.Time Entered ,"
 					+ " 4. Entered By, 5. Type, 6. Amount",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3223_Condition3","promotionWaste_US855_TC3223",
+					browser,
 					"User is able to view Promotion and Waste Table with headers :1. Time of Waste, 2. Date Entered , 3.Time Entered ,"
 					+ " 4. Entered By, 5. Type, 6. Amount",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3223_Condition3");
+			AbstractTest.takeSnapShot();
+			
 		}
 		
 		if(promotionsAndWastePage.verifyWasteDateGroupDisplayedForSelectedDateRange(startDate, endDate)
 				& promotionsAndWastePage.verifyByDefaultDateGroupIsCollapsed(startDate, endDate)){
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3223",
+					browser,
 					"By default in table grid, different container should be displayed for each day (as per the date selected in Start and End Date) and it should be collapsed.",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3223_Condition4","promotionWaste_US855_TC3223",
+					browser,
 					"By default in table grid, different container should be displayed for each day (as per the date selected in Start and End Date) and it should be collapsed.",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3223_Condition4");
+			AbstractTest.takeSnapShot();
+			
 		}
 		
 		if(Base.isElementDisplayed(promotionsAndWastePage.AtAGlance_Expand_Icon)
 				& Base.isElementDisplayed(promotionsAndWastePage.AtAGlance_Header)){
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3223",
+					browser,
 					"(^) icon should be displayed at the bottom of the screen with the header At a Glance",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3223_Condition5","promotionWaste_US855_TC3223",
+					browser,
 					"(^) icon should be displayed at the bottom of the screen with the header At a Glance",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3223_Condition5");
+			AbstractTest.takeSnapShot();
+			
 			
 		}
 	}
@@ -322,15 +329,16 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3224() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3224";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level2_SSO_UserId;
-		String password = LoginTestData.level2_SSO_Password;
-		String storeId = LoginTestData.level2StoreId;
+		String userId = LoginTestData.level1_SSO_UserId;
+		String password = LoginTestData.level1_SSO_Password;
+		String storeId = LoginTestData.level1StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		promotionsAndWastePage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToPromotionsAndWastePage();
+				.goToPromotionsAndWastePage();
 		wait.until(ExpectedConditions.visibilityOf(promotionsAndWastePage.PromotionAndWaste_Title));
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -343,15 +351,18 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		Thread.sleep(1000);
 		if (promotionsAndWastePage.verifyEndDateIsDisabled(tomorrowDate)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3224",
+					browser,
 					"System should not allow user to select date more than the current date.",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3224_Condition2","promotionWaste_US855_TC3224",
+					browser,
 					"System should not allow user to select date more than the current date.",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3224_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 		//get yesterday date and select end date as yesterday date
 		promotionsAndWastePage.promoWasteHistoryEndDate_TB.click();
@@ -368,18 +379,21 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		cal4.add(Calendar.DATE, 0);
 		String todayDate = dateFormat.format(cal4.getTime());
 		//Verify user is not able to select today date for start date when end date is already selected as yesterday date
-		if(promotionsAndWastePage.verifyStartDateIsDisabled(todayDate) &
+		if(promotionsAndWastePage.verifyStartDateIsDisabled(todayDate) &&
 				promotionsAndWastePage.promoWasteHistoryEndDate_TB.getAttribute("value").equals(yesterdayDate)){
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3224",
+					browser,
 					"System should not allow user to select date more than the date selected in End Date.",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3224_Condition2","promotionWaste_US855_TC3224",
+					browser,
 					"System should not allow user to select date more than the date selected in End Date.",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3224_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 		promotionsAndWastePage.promoWasteHistoryStartDate_TB.click();
 		Thread.sleep(1000);
@@ -393,15 +407,18 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 				& promotionsAndWastePage.promoWasteHistoryEndDate_TB.getAttribute("value").equals(todayDate)
 				& promotionsAndWastePage.verifyWasteDateGroupDisplayedForSelectedDateRange(todayDate, todayDate)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3224",
+					browser,
 					"User should be able to select same date for start date and end date field  which should not be more than current date ",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3224_Condition3","promotionWaste_US855_TC3224",
+					browser,
 					"User should be able to select same date for start date and end date field  which should not be more than current date",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3224_Condition3");
+			AbstractTest.takeSnapShot();
+			
 		}
 		//Click on end date button
 		promotionsAndWastePage.promoWasteHistoryEndDate_TB.click();
@@ -409,15 +426,18 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		//verify user is not able to select end date as yesterday date when start date is already set to today date
 		if (promotionsAndWastePage.verifyEndDateIsDisabled(yesterdayDate)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3224",
+					browser,
 					"System should not allow user to select date less than the date selected in Start Date field.",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3224_Condition4","promotionWaste_US855_TC3224",
+					browser,
 					"System should not allow user to select date less than the date selected in Start Date field.",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3224_Condition4");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -426,6 +446,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3225() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3225";
 		PromotionsAndWastePage promotionsAndWastePage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -437,7 +458,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		promotionsAndWastePage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToPromotionsAndWastePage();
+				.goToPromotionsAndWastePage();
 		wait.until(ExpectedConditions.visibilityOf(promotionsAndWastePage.PromotionAndWaste_Title));
 		//Select end date as today date and start date as today date
 		promotionsAndWastePage.selectStartDate(startDate);
@@ -447,44 +468,43 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		promotionsAndWastePage.clickOnDateGroup(createdate);
 		if (promotionsAndWastePage.verifySelectedDateIsExpanded(createdate)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3225",
+					browser,
 					"User is able to expand the records for a selecte date",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3225_Condition1","promotionWaste_US855_TC3225",
+					browser,
 					"User is able to expand the records for a selecte date",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3225_Condition1");
+			AbstractTest.takeSnapShot();
 		}
 		
 		if(promotionsAndWastePage.calculateWasteAmountForSelectedDate(createdate).equals(promotionsAndWastePage.getWasteAmountFromDateGroupHeader(createdate))
 				& promotionsAndWastePage.calculatePromoAmountForSelectedDate(createdate).equals(promotionsAndWastePage.getPromoAmountFromDateGroupHeader(createdate))
 				& promotionsAndWastePage.calculateCompleteWasteAmountForSelectedDate(createdate).equals(promotionsAndWastePage.getCompleteWasteAmountFromDateGroupHeader(createdate))){
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3225",
+					browser,
 					"Calculation for waste/completeWaste/Promo in container should match the total amount displayed on Footer for Raw Waste, Completed Waste and Raw Promo respectively.",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3225_Condition2","promotionWaste_US855_TC3225",
+					browser,
 					"Calculation for waste/completeWaste/Promo in container should match the total amount displayed on Footer for Raw Waste, Completed Waste and Raw Promo respectively.",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3225_Condition2");
-			
+			AbstractTest.takeSnapShot();
 		}
 		promotionsAndWastePage.clickOnDateGroup(createdate);
 		if (promotionsAndWastePage.verifySelectedDateIsCollapsed(createdate)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3225",
+					browser,
 					"User is able to Collapse the records for a selecte date",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3225_Condition3","promotionWaste_US855_TC3225",
+					browser,
 					"User is able to Collapse the records for a selecte date",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3225_Condition3");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -493,10 +513,11 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3230() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3230";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level3_SSO_UserId;
-		String password = LoginTestData.level3_SSO_Password;
-		String storeId = LoginTestData.level3StoreId;
+		String userId = LoginTestData.level2_SSO_UserId;
+		String password = LoginTestData.level2_SSO_Password;
+		String storeId = LoginTestData.level2StoreId;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		String createdate = GlobalVariable.createDate;
@@ -504,7 +525,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		promotionsAndWastePage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToPromotionsAndWastePage();
+				.goToPromotionsAndWastePage();
 		wait.until(ExpectedConditions.visibilityOf(promotionsAndWastePage.PromotionAndWaste_Title));
 		//Select end date as today date and start date as today date
 		promotionsAndWastePage.selectStartDate(startDate);
@@ -515,44 +536,53 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		if(!Base.isElementDisplayed(promotionsAndWastePage.RawPromo_BT) 
 				& promotionsAndWastePage.verifySelectedDateIsExpanded(createdate)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3230",
+					browser,
 					"Level 2-6 User is able to expand the records for a selecte date",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3230_Condition1","promotionWaste_US855_TC3230",
+					browser,
 					"Level 2-6 User is able to expand the records for a selecte date",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3230_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		
 		if(promotionsAndWastePage.calculateWasteAmountForSelectedDate(createdate).equals(promotionsAndWastePage.getWasteAmountFromDateGroupHeader(createdate))
 				& promotionsAndWastePage.calculatePromoAmountForSelectedDate(createdate).equals(promotionsAndWastePage.getPromoAmountFromDateGroupHeader(createdate))
 				& promotionsAndWastePage.calculateCompleteWasteAmountForSelectedDate(createdate).equals(promotionsAndWastePage.getCompleteWasteAmountFromDateGroupHeader(createdate))){
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3230",
+					browser,
 					"Calculation for waste/completeWaste/Promo in container should match the total amount displayed on Footer for Raw Waste, Completed Waste and Raw Promo respectively.",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3230_Condition2","promotionWaste_US855_TC3230",
+					browser,
 					"Calculation for waste/completeWaste/Promo in container should match the total amount displayed on Footer for Raw Waste, Completed Waste and Raw Promo respectively.",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3230_Condition2");
+			AbstractTest.takeSnapShot();
+			
 			
 		}
 		promotionsAndWastePage.clickOnDateGroup(createdate);
 		if (promotionsAndWastePage.verifySelectedDateIsCollapsed(createdate)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3230",
+					browser,
 					"Level 2-6 User is able to Collapse the records for a selecte date",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3230_Condition3","promotionWaste_US855_TC3230",
+					browser,
 					"Level 2-6 User is able to Collapse the records for a selecte date",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3230_Condition3");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -561,6 +591,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3233() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3233";
 		PromotionsAndWastePage promotionsAndWastePage;
 		String userId = LoginTestData.level2_SSO_UserId;
 		String password = LoginTestData.level2_SSO_Password;
@@ -569,7 +600,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		promotionsAndWastePage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToPromotionsAndWastePage();
+				.goToPromotionsAndWastePage();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		Calendar instance = Calendar.getInstance();
 	    instance.add(Calendar.MONTH, -1);
@@ -582,7 +613,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		promotionsAndWastePage.selectStartDate(startDate);
 		promotionsAndWastePage.selectEndDate(endDate);
 		promotionsAndWastePage.ShowResults_BT.click();
-		Thread.sleep(2000);
+		Thread.sleep(6000);
 		int noOfrecords = promotionsAndWastePage.WasteRecordsList.size();
 		Actions actions = new Actions(driver);
 		actions.moveToElement(promotionsAndWastePage.WasteRecordsList.get(noOfrecords-1));
@@ -590,15 +621,18 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		//verify that Promotion and Waste page is accessible from the Main Menu
 		if (promotionsAndWastePage.WasteRecordsList.get(noOfrecords-1).isDisplayed()) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3233",
+					browser,
 					"Scroll bar should get appear to accommodate all records.",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3233","promotionWaste_US855_TC3233",
+					browser,
 					"Scroll bar should get appear to accommodate all records.",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3233");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -607,6 +641,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3238() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3238";
 		PromotionsAndWastePage promotionsAndWastePage;
 		String userId = LoginTestData.level2_SSO_UserId;
 		String password = LoginTestData.level2_SSO_Password;
@@ -616,28 +651,29 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		RawItemWastePage rawItemWastePage = PageFactory.initElements(driver,RawItemWastePage.class);
 		// Navigate to Promotion and Waste page
 		promotionsAndWastePage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToPromotionsAndWastePage();
+				.goToPromotionsAndWastePage();
 		promotionsAndWastePage.RawWaste_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.RawWaste_Title));
 		//verify that Promotion and Waste page is accessible from the Main Menu
-		if (Base.isElementDisplayed(rawItemWastePage.SelectDateAndTime_TB)
-				& Base.isElementDisplayed(rawItemWastePage.SelectTime_TB)
-				& Base.isElementDisplayed(rawItemWastePage.RawItemWasted_TB)
+		if (Base.isElementDisplayed(rawItemWastePage.RawItemWasted_TB)
 				& Base.isElementDisplayed(rawItemWastePage.AddSearchItem_Icon)
 				& rawItemWastePage.Submit_BT.getAttribute("disabled").equals("true")
 				& Base.isElementDisplayed(rawItemWastePage.Cancel_BT)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3238",
+					browser,
 					"User should be able to view Raw Waste screen with details: 1. (Header) Raw Waste 2. Date { Field with Calendar Widget}"
 					+ " 3. Time { Field with Clock} 4. Item { Field with + sign in it} 5. Submit {button} - disabled 6. Cancel { button}",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3238","promotionWaste_US855_TC3238",
+					browser,
 					"User should be able to view Raw Waste screen with details: 1. (Header) Raw Waste 2. Date { Field with Calendar Widget}"
 					+ " 3. Time { Field with Clock} 4. Item { Field with + sign in it} 5. Submit {button} - disabled 6. Cancel { button}.",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3238");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -646,6 +682,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3239() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3239";
 		PromotionsAndWastePage promotionsAndWastePage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -655,28 +692,29 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		RawItemPromoPage rawItemPromoPage = PageFactory.initElements(driver,RawItemPromoPage.class);
 		// Navigate to Promotion and Waste page
 		promotionsAndWastePage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToPromotionsAndWastePage();
+				.goToPromotionsAndWastePage();
 		promotionsAndWastePage.RawPromo_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(rawItemPromoPage.RawPromo_Title));
 		//verify that Promotion and Waste page is accessible from the Main Menu
-		if (Base.isElementDisplayed(rawItemPromoPage.SelectDateAndTime_TB)
-				& Base.isElementDisplayed(rawItemPromoPage.SelectTime_TB)
-				& Base.isElementDisplayed(rawItemPromoPage.RawItemWasted_TB)
+		if (Base.isElementDisplayed(rawItemPromoPage.RawItemWasted_TB)
 				& Base.isElementDisplayed(rawItemPromoPage.AddSearchItem_Icon)
 				& rawItemPromoPage.Submit_BT.getAttribute("disabled").equals("true")
 				& Base.isElementDisplayed(rawItemPromoPage.Cancel_BT)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3239",
+					browser,
 					"User should be able to view Raw Promo screen with details: 1. (Header) Raw Promo 2. Date { Field with Calendar Widget}"
 					+ " 3. Time { Field with Clock} 4. Item { Field with + sign in it} 5. Submit {button} - disabled 6. Cancel { button}",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3239","promotionWaste_US855_TC3239",
+					browser,
 					"User should be able to view Raw Promo screen with details: 1. (Header) Raw Promo 2. Date { Field with Calendar Widget}"
 					+ " 3. Time { Field with Clock} 4. Item { Field with + sign in it} 5. Submit {button} - disabled 6. Cancel { button}.",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3239");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -685,6 +723,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3240() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3240";
 		PromotionsAndWastePage promotionsAndWastePage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -694,28 +733,29 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		CompletedWastePage completedWastePage = PageFactory.initElements(driver,CompletedWastePage.class);
 		// Navigate to Promotion and Waste page
 		promotionsAndWastePage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToPromotionsAndWastePage();
+				.goToPromotionsAndWastePage();
 		promotionsAndWastePage.CompletedWaste_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(completedWastePage.CompletedWaste_Title));
 		//verify that Promotion and Waste page is accessible from the Main Menu
-		if (Base.isElementDisplayed(completedWastePage.SelectDateAndTime_TB)
-				& Base.isElementDisplayed(completedWastePage.SelectTime_TB)
-				& Base.isElementDisplayed(completedWastePage.CompletedWastePopUp_SearchBox_TB)
+		if (Base.isElementDisplayed(completedWastePage.CompletedWastePopUp_SearchBox_TB)
 				& Base.isElementDisplayed(completedWastePage.AddSearchItem_Icon)
 				& completedWastePage.Submit_BT.getAttribute("disabled").equals("true")
 				& Base.isElementDisplayed(completedWastePage.Cancel_BT)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3240",
+					browser,
 					"User should be able to view Completed Waste screen with details: 1. (Header) Completed Waste 2. Date { Field with Calendar Widget}"
 					+ " 3. Time { Field with Clock} 4. Item { Field with + sign in it} 5. Submit {button} - disabled 6. Cancel { button}",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3240","promotionWaste_US855_TC3240",
+					browser,
 					"User should be able to view Completed Waste screen with details: 1. (Header) Completed Waste 2. Date { Field with Calendar Widget}"
 					+ " 3. Time { Field with Clock} 4. Item { Field with + sign in it} 5. Submit {button} - disabled 6. Cancel { button}.",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3240");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -724,14 +764,15 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3248() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3248";
 		PromotionsAndWastePage promotionsAndWastePage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
 		String storeId = LoginTestData.level1StoreId;
-		String wrinId = GlobalVariable.rawItemWatsewrin1;
-		String caseQuantity = "1";
-		String innerPackQuantity = "2";
-		String looseUnitQuantity = "3";
+		String wrinId = GlobalVariable.rawItemWastewrin4;
+		String caseQuantity = "4";
+		String innerPackQuantity = "";
+		String looseUnitQuantity = "";
 		String createDate = GlobalVariable.createDate;
 		String time = GlobalVariable.time;
 		String startDate = GlobalVariable.startDate;
@@ -740,37 +781,36 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		RawItemWastePage rawItemWastePage = PageFactory.initElements(driver,RawItemWastePage.class);
 		// Navigate to Promotion and Waste page
-		promotionsAndWastePage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToPromotionsAndWastePage();
+		RawItemActivityPage rawItemActivityPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).goToRawItemActivityPage();
+		rawItemActivityPage.searchAndSelectWRINID(wrinId);
+		Thread.sleep(3000);
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(rawItemActivityPage.Information_BT)),"Information_BT");
+		wait.until(ExpectedConditions.visibilityOf(rawItemActivityPage.RawItemInformation_Title));
+		String casePrice = rawItemActivityPage.RawItemInformation_popUp_CasePrice_TB.getAttribute("value");
+		GenericMethods.clickOnElement(rawItemActivityPage.RawItemInformation_popUp_Cancel_BT,"RawItemInformation_popUp_Cancel_BT");
+		Thread.sleep(2000);
+		promotionsAndWastePage =  homePage.goToPromotionsAndWastePage();
 		//CLick on Raw Waste Button
 		promotionsAndWastePage.RawWaste_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.RawWaste_Title));
 		rawItemWastePage.removeAllWrinIdFromRawWastePage();
-		if(rawItemWastePage.verifyBackTimeIsSelected(time)){
+		/*if(rawItemWastePage.verifyBackTimeIsSelected(time)){
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3248",
+					browser,
 					"User should be able to Select Time on clicking the down arrow button In Raw Waste Screen", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3248_Condition1","promotionWaste_US855_TC3248",
+					browser,
 					"User should be able to Select Time on clicking the down arrow button In Raw Waste Screen", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3248_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		//String time = rawItemWastePage.getTimeToSet();
-		rawItemWastePage.selectDateForRawWaste(createDate);
+		rawItemWastePage.selectDateForRawWaste(createDate);*/
 		//Create a raw waste entry
 		rawItemWastePage.searchAndSelectRawItemWasted(wrinId);
-		if(Base.isElementDisplayed(rawItemWastePage.RawWasteForm_ItemAdded_Message)){
-			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3248",
-					"User should be able to view success message on adding a wrin in Raw Waste Form", "Pass");
-		} else {
-			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3248_Condition2","promotionWaste_US855_TC3248",
-					"User should be able to view success message on adding a wrin in Raw Waste Form", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3248_Condition2");
-		}
-		
 		if (Base.isElementDisplayed(rawItemWastePage.RawWaste_Wrin_Header)
 				& Base.isElementDisplayed(rawItemWastePage.RawWaste_Description_Header)
 				& Base.isElementDisplayed(rawItemWastePage.RawWaste_OuterPack_Header)
@@ -780,33 +820,58 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 				& Base.isElementDisplayed(rawItemWastePage.RawWaste_Subtotal_Header)
 				& rawItemWastePage.Submit_BT.getAttribute("disabled").equals("true")) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3248",
+					browser,
 					"User should be able to view table grid with WRIN- {WRIN ID} Description- {WRIN Name} Outer Pack- { Text box}"
 					+ "Inner Pack ,Loose Unit ,Total Units Sub- total Remove details after adding a wrin in Raw Waste Form", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3248_Condition3","promotionWaste_US855_TC3248",
+					browser,
 					"User should be able to view table grid with WRIN- {WRIN ID} Description- {WRIN Name} Outer Pack- { Text box}"
 					+ "Inner Pack ,Loose Unit ,Total Units Sub- total Remove details after adding a wrin in Raw Waste Form", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3248_Condition3");
+			AbstractTest.takeSnapShot();
 		}
 		//Get the total waste amount
 		rawItemWastePage.addQuantitiesForMultipleWrin(wrinId, innerPackQuantity, caseQuantity, looseUnitQuantity);
 		Thread.sleep(2000);
+		String subtotal = rawItemWastePage.getSubTotalForAWrin(wrinId);
+		System.out.println("subtotal "+subtotal);
+		System.out.println("Case Price "+casePrice);
+		System.out.println("caseQuantity "+caseQuantity);
+		BigDecimal calculatedSubtotal = new BigDecimal(casePrice).multiply(new BigDecimal(caseQuantity));
+		calculatedSubtotal = calculatedSubtotal.setScale(2, BigDecimal.ROUND_DOWN);
+		System.out.println("calculatedSubtotal "+calculatedSubtotal);
 		String wasteAmount = rawItemWastePage.getTotalWasteAmunt();
 		System.out.println("wasteAmount "+wasteAmount);
+		if (String.valueOf(calculatedSubtotal).equals(subtotal)
+				& !wasteAmount.equals("0.00")) {
+			Reporter.reportPassResult(
+					browser,
+					"Item Total and Sub-total column should get updated accordingly as per the data entered in Case count", "Pass");
+			
+		} else {
+			Reporter.reportTestFailure(
+					browser,
+					"Item Total and Sub-total column should get updated accordingly as per the data entered in Case count", "Fail");
+			AbstractTest.takeSnapShot();
+			
+		}
 		//Submit the raw waste entry
 		rawItemWastePage.Submit_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.SubmitRawWaste_PopUp_YES_BT)).click();
 		if (Base.isElementDisplayed(rawItemWastePage.WasteEntrySaved_Confirmation_MSG)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3248",
+					browser,
 					"Complete Waste screen should get closed with an message Complete Waste entry saved at the bottom of the screen.", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3248_Condition4","promotionWaste_US855_TC3248",
+					browser,
 					"Complete Waste screen should get closed with an message Complete Waste entry saved at the bottom of the screen.", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3248_Condition4");
+			AbstractTest.takeSnapShot();
+			
 		}
 		Thread.sleep(5000);
 		promotionsAndWastePage.selectStartDate(startDate);
@@ -816,13 +881,16 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		//Verify that raw waste entry should displayed in Promotion and waste page
 		if (!wasteAmount.equals("0.00") & promotionsAndWastePage.isRawWasteEntryPresent(createDate, wasteAmount)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3248",
+					browser,
 					"User should be able to enter raw waste", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3248_Condition5","promotionWaste_US855_TC3248",
+					browser,
 					"User should be able to enter raw waste", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3248_Condition5");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -831,6 +899,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3250() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3250";
 		PromotionsAndWastePage promotionsAndWastePage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -839,8 +908,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		String wrinId1Description = GlobalVariable.rawItemWastewrin2Description;
 		String wrinId2 = GlobalVariable.rawItemWatsewrin1;
 		String caseQuantity = "2";
-		String innerPackQuantity = "2";
-		String looseUnitQuantity = "3";
+		
 		String createDate = GlobalVariable.createDate;
 		String time = GlobalVariable.time;
 		String startDate = GlobalVariable.startDate;
@@ -850,26 +918,27 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		RawItemWastePage rawItemWastePage = PageFactory.initElements(driver,RawItemWastePage.class);
 		// Navigate to Promotion and Waste page
 		promotionsAndWastePage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToPromotionsAndWastePage();
+				.goToPromotionsAndWastePage();
 		//CLick on Raw Waste Button
 		promotionsAndWastePage.RawWaste_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.RawWaste_Title));
 		rawItemWastePage.removeAllWrinIdFromRawWastePage();
 		//String time = rawItemWastePage.getTimeToSet();
-		rawItemWastePage.selectDateForRawWaste(createDate).selectTimeInRawWasteForm(time);
+		//rawItemWastePage.selectDateForRawWaste(createDate).selectTimeInRawWasteForm(time);
 		//Create a raw waste entry
 		rawItemWastePage.searchAndSelectRawItemWasted(wrinId1);
 		//wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.RawWasteForm_ItemAdded_Message));
 		rawItemWastePage.searchAndSelectRawItemWasted(wrinId1Description);
 		if (Base.isElementDisplayed(rawItemWastePage.DuplicateItem_Error_Message)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3250",
+					browser,
 					"Duplicate Items not Allowed message should be displayed on screen when user will try to add the same wrin twice", "Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3250_Condition1","promotionWaste_US855_TC3250",
+					browser,
 					"Duplicate Items not Allowed message should be displayed on screen when user will try to add the same wrin twice", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3250_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		rawItemWastePage.searchAndSelectRawItemWasted(wrinId2);
 		rawItemWastePage.addQuantitiesForMultipleWrin(wrinId1, "", caseQuantity, "");
@@ -879,21 +948,29 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		System.out.println("wasteAmount "+wasteAmount);
 		//Submit the raw waste entry
 		rawItemWastePage.Submit_BT.click();
+		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.RawWasteEntryConfirmation_PopUp_YES_BT));
+		rawItemWastePage.RawWasteEntryConfirmation_PopUp_YES_BT.click();
+		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.WasteEntrySaved_Confirmation_MSG));
 		Thread.sleep(5000);
 		promotionsAndWastePage.selectStartDate(startDate);
 		promotionsAndWastePage.selectEndDate(endDate);
 		promotionsAndWastePage.ShowResults_BT.click();
-		Thread.sleep(2000);
+		/*wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.SubmitRawWaste_PopUp_YES_BT)).click();
+		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.WasteEntrySaved_Confirmation_MSG));*/
+		Thread.sleep(5000);
 		//Verify that raw waste entry should displayed in Promotion and waste page
 		if (promotionsAndWastePage.isRawWasteEntryPresent(createDate, wasteAmount)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3250",
+					browser,
 					"System should allow user to submit entry if quantity is filled of at least one added WRIN.", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3250_Condition2","promotionWaste_US855_TC3250",
+					browser,
 					"System should allow user to submit entry if quantity is filled of at least one added WRIN.", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3250_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -902,6 +979,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3251() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3251";
 		PromotionsAndWastePage promotionsAndWastePage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -918,39 +996,47 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		RawItemWastePage rawItemWastePage = PageFactory.initElements(driver,RawItemWastePage.class);
 		// Navigate to Promotion and Waste page
 		promotionsAndWastePage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToPromotionsAndWastePage();
+				.goToPromotionsAndWastePage();
 		//CLick on Raw Waste Button
 		promotionsAndWastePage.RawWaste_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.RawWaste_Title));
 		rawItemWastePage.removeAllWrinIdFromRawWastePage();
 		//String time = rawItemWastePage.getTimeToSet();
-		rawItemWastePage.selectDateForRawWaste(createDate).selectTimeInRawWasteForm(time);
+		//rawItemWastePage.selectDateForRawWaste(createDate).selectTimeInRawWasteForm(time);
 		//Create a raw waste entry
 		rawItemWastePage.searchAndSelectRawItemWasted(wrinId1);
 		rawItemWastePage.searchAndSelectRawItemWasted(wrinId2);
 		rawItemWastePage.addQuantitiesForMultipleWrin(wrinId1, innerPackQuantity, caseQuantity, looseUnitQuantity);
+		rawItemWastePage.addQuantitiesForMultipleWrin(wrinId2, innerPackQuantity, caseQuantity, looseUnitQuantity);
 		if (rawItemWastePage.Submit_BT.getAttribute("disabled")== null) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3251",
-					"Submit button should be enabled when quantity is provided to at least one of the item quantity fields", "Pass");
+					browser,
+					"Submit button should be enabled when quantity is provided to all item quantity fields", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3251_Condition1","promotionWaste_US855_TC3251",
-					"Submit button should be enabled when quantity is provided to at least one of the item quantity fields", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3251_Condition1");
+					browser,
+					"Submit button should be enabled when quantity is provided to all item quantity fields", "Fail");
+			AbstractTest.takeSnapShot();
+			
 		}
 		rawItemWastePage.removeWrinIdFromRawWastePage(wrinId1);
 		rawItemWastePage.Submit_BT.click();
+		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.RawWasteEntryIncomplete_PopUp_YES_BT)).click();
 		Thread.sleep(1000);
-		if (Base.isElementDisplayed(rawItemWastePage.RawWaste_Title) & rawItemWastePage.Submit_BT.getAttribute("disabled").equals("true")) {
+		if (Base.isElementDisplayed(rawItemWastePage.WasteEntrySaved_Confirmation_MSG)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3251",
+					browser,
 					"Submit button should be disabled when quantity is not provided to any of the item quantity fields", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3251_Condition1","promotionWaste_US855_TC3251",
+					browser,
 					"Submit button should be disabled when quantity is not provided to any of the item quantity fields", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3251_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -959,6 +1045,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3252() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3252";
 		PromotionsAndWastePage promotionsAndWastePage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -969,7 +1056,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		RawItemWastePage rawItemWastePage = PageFactory.initElements(driver,RawItemWastePage.class);
 		// Navigate to Promotion and Waste page
 		promotionsAndWastePage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToPromotionsAndWastePage();
+				.goToPromotionsAndWastePage();
 		//CLick on Raw Waste Button
 		promotionsAndWastePage.RawWaste_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.RawWaste_Title));
@@ -981,40 +1068,49 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		Thread.sleep(2000);
 		if (warningMessageDisplayed & !Base.isElementDisplayed(rawItemWastePage.RawWasteEntryIncomplete_PopUp_NO_BT)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3252",
+					browser,
 					"On clickinng cancel button System should display a Warning message with No and Yes options and user should return to RawWaste form on clicking No button", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3252_Condition1","promotionWaste_US855_TC3252",
+					browser,
 					"On clickinng cancel button System should display a Warning message with No and Yes options and user should return to RawWaste form on clicking No button", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3252_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		rawItemWastePage.Cancel_BT.click();
 		warningMessageDisplayed = Base.isElementDisplayed(rawItemWastePage.CancelRawWastePopUp_Confirmation_Message);
 		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.RawWasteEntryIncomplete_PopUp_YES_BT)).click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		if (warningMessageDisplayed & !Base.isElementDisplayed(rawItemWastePage.RawWaste_Title)
 				& Base.isElementDisplayed(promotionsAndWastePage.PromotionAndWaste_Title)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3252",
+					browser,
 					"On clickinng cancel button System should display a Warning message with No and Yes options and RawWaste form should be closed on clicking Yes button", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3252_Condition2","promotionWaste_US855_TC3252",
+					browser,
 					"On clickinng cancel button System should display a Warning message with No and Yes options and RawWaste form should be closed on clicking Yes button", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3252_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 		promotionsAndWastePage.RawWaste_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.RawWaste_Title));
 		if (!rawItemWastePage.verifyWasteItemIsAdded(wrinId1)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3252",
+					browser,
 					"User should be able to open a fresh Raw Waste Form after canceling the previous entry", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3252_Condition3","promotionWaste_US855_TC3252",
+					browser,
 					"User should be able to open a fresh Raw Waste Form after canceling the previous entry", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3252_Condition3");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1023,6 +1119,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3253() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3253";
 		PromotionsAndWastePage promotionsAndWastePage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -1032,7 +1129,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		RawItemWastePage rawItemWastePage = PageFactory.initElements(driver,RawItemWastePage.class);
 		// Navigate to Promotion and Waste page
-		promotionsAndWastePage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+		promotionsAndWastePage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToPromotionsAndWastePage();
 		// CLick on Raw Waste Button
 		promotionsAndWastePage.RawWaste_BT.click();
@@ -1043,56 +1140,79 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		//verify that user User should be able to close add manual vendor form on clicking Cancel button
 		if (rawItemWastePage.RawWasteForm_Container.getAttribute("class").contains("modalCollapsedView")	) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3253",
+					browser,
 					"User should be able to collapse the Raw Waste screen","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3253_Condition1","promotionWaste_US855_TC3253",
+					browser,
 					"User should be able to collapse the Raw Waste screen","Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3253_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		promotionsAndWastePage.RawWaste_BT.click();
 		Thread.sleep(2000);
+		if (rawItemWastePage.RawWasteForm_Container.getAttribute("class").contains("modalExpandedView")	) {
+			Reporter.reportPassResult(
+					browser,
+					"User should be able to expand the Raw Waste screen","Pass");
+			
+		} else {
+			Reporter.reportTestFailure(
+					browser,
+					"User should be able to expand the Raw Waste screen","Fail");
+			AbstractTest.takeSnapShot();
+		}
 		rawItemWastePage.Cancel_BT.click();
 		boolean warningMessageDisplayed = Base.isElementDisplayed(rawItemWastePage.CancelRawWastePopUp_Confirmation_Message);
 		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.RawWasteEntryIncomplete_PopUp_NO_BT)).click();
 		Thread.sleep(2000);
 		if (warningMessageDisplayed & !Base.isElementDisplayed(rawItemWastePage.RawWasteEntryIncomplete_PopUp_NO_BT)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3253",
+					browser, 
 					"On clickinng cancel button System should display a Warning message with No and Yes options and user should return to RawWaste form on clicking No button", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3253_Condition2","promotionWaste_US855_TC3253",
+					browser,
 					"On clickinng cancel button System should display a Warning message with No and Yes options and user should return to RawWaste form on clicking No button", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3253_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 		rawItemWastePage.Cancel_BT.click();
 		warningMessageDisplayed = Base.isElementDisplayed(rawItemWastePage.CancelRawWastePopUp_Confirmation_Message);
 		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.RawWasteEntryIncomplete_PopUp_YES_BT)).click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		if (warningMessageDisplayed & !Base.isElementDisplayed(rawItemWastePage.RawWaste_Title)
 				& Base.isElementDisplayed(promotionsAndWastePage.PromotionAndWaste_Title)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3253",
+					browser, 
 					"On clickinng cancel button System should display a Warning message with No and Yes options and RawWaste form should be closed on clicking Yes button", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3253_Condition3","promotionWaste_US855_TC3253",
+					browser,
 					"On clickinng cancel button System should display a Warning message with No and Yes options and RawWaste form should be closed on clicking Yes button", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3253_Condition3");
+			AbstractTest.takeSnapShot();
+			
 		}
 		promotionsAndWastePage.RawWaste_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.RawWaste_Title));
 		if (!rawItemWastePage.verifyWasteItemIsAdded(wrinId1)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3253",
+					browser,
 					"User should be able to open a fresh Raw Waste Form after canceling the previous entry", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3253_Condition4","promotionWaste_US855_TC3253",
+					browser,
 					"User should be able to open a fresh Raw Waste Form after canceling the previous entry", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3253_Condition4");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1101,6 +1221,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3254() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3254";
 		PromotionsAndWastePage promotionsAndWastePage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -1110,7 +1231,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		RawItemWastePage rawItemWastePage = PageFactory.initElements(driver,RawItemWastePage.class);
 		// Navigate to Promotion and Waste page
-		promotionsAndWastePage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+		promotionsAndWastePage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToPromotionsAndWastePage();
 		// CLick on Raw Waste Button
 		promotionsAndWastePage.RawWaste_BT.click();
@@ -1121,56 +1242,81 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		//verify that user User should be able to close add manual vendor form on clicking Cancel button
 		if (rawItemWastePage.RawWasteForm_Container.getAttribute("class").contains("modalCollapsedView")	) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3254",
+					browser,
 					"User should be able to collapse the Raw Waste screen","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3254_Condition1","promotionWaste_US855_TC3254",
+					browser,
 					"User should be able to collapse the Raw Waste screen","Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3254_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		promotionsAndWastePage.RawWaste_BT.click();
 		Thread.sleep(2000);
+		if (rawItemWastePage.RawWasteForm_Container.getAttribute("class").contains("modalExpandedView")	) {
+			Reporter.reportPassResult(
+					browser,
+					"User should be able to expand the Raw Waste screen","Pass");
+			
+
+		} else {
+			Reporter.reportTestFailure(
+					browser,
+					"User should be able to expand the Raw Waste screen","Fail");
+			AbstractTest.takeSnapShot();
+			
+		}
 		rawItemWastePage.RawWasteForm_Close_BT.click();
 		boolean warningMessageDisplayed = Base.isElementDisplayed(rawItemWastePage.CancelRawWastePopUp_Confirmation_Message);
 		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.RawWasteEntryIncomplete_PopUp_NO_BT)).click();
 		Thread.sleep(2000);
 		if (warningMessageDisplayed & !Base.isElementDisplayed(rawItemWastePage.RawWasteEntryIncomplete_PopUp_NO_BT)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3254",
+					browser,
 					"On clickinng Close button System should display a Warning message with No and Yes options and user should return to RawWaste form on clicking No button", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3254_Condition2","promotionWaste_US855_TC3254",
+					browser,
 					"On clickinng Close button System should display a Warning message with No and Yes options and user should return to RawWaste form on clicking No button", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3254_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 		rawItemWastePage.RawWasteForm_Close_BT.click();
 		warningMessageDisplayed = Base.isElementDisplayed(rawItemWastePage.CancelRawWastePopUp_Confirmation_Message);
 		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.RawWasteEntryIncomplete_PopUp_YES_BT)).click();
-		Thread.sleep(4000);
+		Thread.sleep(6000);
 		if (warningMessageDisplayed & !Base.isElementDisplayed(rawItemWastePage.RawWaste_Title)
 				& Base.isElementDisplayed(promotionsAndWastePage.PromotionAndWaste_Title)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3254",
+					browser,
 					"On clickinng cancel button System should display a Warning message with No and Yes options and RawWaste form should be closed on clicking Yes button", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3254_Condition3","promotionWaste_US855_TC3254",
+					browser,
 					"On clickinng cancel button System should display a Warning message with No and Yes options and RawWaste form should be closed on clicking Yes button", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3254_Condition3");
+			AbstractTest.takeSnapShot();
+			
 		}
 		promotionsAndWastePage.RawWaste_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.RawWaste_Title));
 		if (!rawItemWastePage.verifyWasteItemIsAdded(wrinId1)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3254",
+					browser,
 					"User should be able to open a fresh Raw Waste Form after closing the previous entry", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3254_Condition4","promotionWaste_US855_TC3254",
+					browser,
 					"User should be able to open a fresh Raw Waste Form after closing the previous entry", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3254_Condition4");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1179,6 +1325,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3256() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3256";
 		PromotionsAndWastePage promotionsAndWastePage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -1193,40 +1340,46 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		RawItemWastePage rawItemWastePage = PageFactory.initElements(driver,RawItemWastePage.class);
 		// Navigate to Promotion and Waste page
-		promotionsAndWastePage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+		promotionsAndWastePage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToPromotionsAndWastePage();
 		// CLick on Raw Waste Button
 		promotionsAndWastePage.RawWaste_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.RawWaste_Title));
 		rawItemWastePage.removeAllWrinIdFromRawWastePage();
 		//String time = rawItemWastePage.getTimeToSet();
-		rawItemWastePage.selectDateForRawWaste(createDate).selectTimeInRawWasteForm(time);
+		//rawItemWastePage.selectDateForRawWaste(createDate).selectTimeInRawWasteForm(time);
 		rawItemWastePage.searchAndSelectRawItemWasted(wrinId1);
 		rawItemWastePage.RawWasteForm_SliderToggle_BT.click();
 		promotionsAndWastePage.RawWaste_BT.click();
 		Thread.sleep(2000);
 		if(rawItemWastePage.Submit_BT.getAttribute("disabled").equals("true")){
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3256",
+					browser,
 					"Submit button should be disabled when quantity is not added for raw waste item", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3256_Condition1","promotionWaste_US855_TC3256",
+					browser,
 					"Submit button should be disabled when quantity is not added for raw waste item", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3256_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		rawItemWastePage.addQuantitiesForMultipleWrin(wrinId1, innerPackQuantity, caseQuantity, looseUnitQuantity);
 		rawItemWastePage.Submit_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.SubmitRawWaste_PopUp_YES_BT)).click();
 		if (Base.isElementDisplayed(rawItemWastePage.WasteEntrySaved_Confirmation_MSG)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3256",
+					browser,
 					"Raw Waste screen should get closed with message Raw Waste entry saved at bottom of the screen on clicking submit button", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3256_Condition2","promotionWaste_US855_TC3256",
+					browser,
 					"Raw Waste screen should get closed with message Raw Waste entry saved at bottom of the screen on clicking submit button", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3256_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1235,6 +1388,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3258() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3258";
 		PromotionsAndWastePage promotionsAndWastePage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -1247,7 +1401,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		RawItemWastePage rawItemWastePage = PageFactory.initElements(driver,RawItemWastePage.class);
 		// Navigate to Promotion and Waste page
-		promotionsAndWastePage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+		promotionsAndWastePage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToPromotionsAndWastePage();
 		// CLick on Raw Waste Button
 		promotionsAndWastePage.RawWaste_BT.click();
@@ -1257,25 +1411,31 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		//verify that user User should be able to close add manual vendor form on clicking Cancel button
 		if (rawItemWastePage.RawWasteForm_Container.getAttribute("class").contains("modalCollapsedView")	) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3258",
+					browser,
 					"User should be able to collapse the Raw Waste screen","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3258_Condition1","promotionWaste_US855_TC3258",
+					browser,
 					"User should be able to collapse the Raw Waste screen","Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3258_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		rawItemWastePage.RawWasteForm_SliderToggle_BT.click();
 		//verify that User should be able to close add manual vendor form on clicking  Close(X) button
 		if (rawItemWastePage.RawWasteForm_Container.getAttribute("class").contains("modalExpandedView")	) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3258",
+					browser,
 					"User should be able to expand the collapsed screen","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3258_Condition2","promotionWaste_US855_TC3258",
+					browser,
 					"User should be able to expand the collapsed screen","Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3258_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 		rawItemWastePage.searchAndSelectRawItemWasted(wrinId1);
 		rawItemWastePage.searchAndSelectRawItemWasted(wrinId2);
@@ -1288,15 +1448,17 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		//verify that Promotion and Waste page is accessible from the Main Menu
 		if (rawItemWastePage.RawWasteForm_WasteItemEntry_List.get(noOfItem-1).isDisplayed()) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3258",
+					browser,
 					"Scroll bar should appear when added MI's exceed the fixed height in Raw Waste Form",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3258_Condition3","promotionWaste_US855_TC3258",
+					browser,
 					"Scroll bar should appear when added MI's exceed the fixed height in Raw Waste Form",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3258_Condition3");
+			AbstractTest.takeSnapShot();
 		}
 	}
 
@@ -1305,10 +1467,11 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3261() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3261";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String password = LoginTestData.operator_SSO_Password;
-		String storeId = LoginTestData.operatorStoreId;
+		String userId = LoginTestData.level1_SSO_UserId;
+		String password = LoginTestData.level1_SSO_Password;
+		String storeId = LoginTestData.level1StoreId;
 		String menuItemId = GlobalVariable.completedWasteWrin1;
 		String quantity = "2";
 		String createDate = GlobalVariable.createDate;
@@ -1320,16 +1483,16 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		CompletedWastePage completedWastePage = PageFactory.initElements(driver,CompletedWastePage.class);
 		// Navigate to Promotion and Waste page
 		promotionsAndWastePage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToPromotionsAndWastePage();
+				.goToPromotionsAndWastePage();
 		//CLick on Raw Waste Button
 		promotionsAndWastePage.CompletedWaste_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(completedWastePage.CompletedWaste_Title));
 		completedWastePage.removeAllWrinIdFromCompletedWastePage();
 		//String time = completedWastePage.getTimeToSet();
-		completedWastePage.selectDateForRawWaste(createDate).selectTimeInRawWasteForm(time);
+		//completedWastePage.selectDateForRawWaste(createDate).selectTimeInCompletedWasteForm(time);
 		//Create a raw waste entry
 		completedWastePage.searchMenuItemForCompletedWaste(menuItemId);
-		if(Base.isElementDisplayed(completedWastePage.CompletedWasteForm_ItemAdded_Message)){
+		/*if(Base.isElementDisplayed(completedWastePage.CompletedWasteForm_ItemAdded_Message)){
 			Reporter.reportPassResult(
 					browser, "promotionWaste_US855_TC3261",
 					"User should be able to view success message on adding a wrin in Completed Waste Form", "Pass");
@@ -1338,20 +1501,23 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 					browser, "promotionWaste_US855_TC3261_Condition1","promotionWaste_US855_TC3261",
 					"User should be able to view success message on adding a wrin in Completed Waste Form", "Fail");
 			AbstractTest.takeSnapShot("promotionWaste_US855_TC3261_Condition1");
-		}
+		}*/
 		if (Base.isElementDisplayed(completedWastePage.CompletedWaste_MenuItem_Header)
 				& Base.isElementDisplayed(completedWastePage.CompletedWaste_Description_Header)
 				& Base.isElementDisplayed(completedWastePage.CompletedWaste_QuantityWasted_Header)
 				& Base.isElementDisplayed(completedWastePage.CompletedWaste_SubTotal_Header)
 				& completedWastePage.Submit_BT.getAttribute("disabled").equals("true")) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3261",
+					browser,
 					"User should be able to view MenuItem, Description, QuantityWasted, SubTotal header in Completed waste form", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3261_Condition2","promotionWaste_US855_TC3261",
+					browser,
 					"User should be able to view MenuItem, Description, QuantityWasted, SubTotal header in Completed waste form", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3261_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 		completedWastePage.addQuantitiesForMultipleWrin(menuItemId, quantity);
 		//Get the total waste amount
@@ -1362,13 +1528,16 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		wait.until(ExpectedConditions.visibilityOf(completedWastePage.SubmitCompletedWaste_PopUp_YES_BT)).click();
 		if (Base.isElementDisplayed(completedWastePage.WasteEntrySaved_Confirmation_MSG)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3261",
+					browser,
 					"Complete Waste screen should get closed with an message Complete Waste entry saved at the bottom of the screen.", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3261_Condition3","promotionWaste_US855_TC3261",
+					browser,
 					"Complete Waste screen should get closed with an message Complete Waste entry saved at the bottom of the screen.", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3261_Condition3");
+			AbstractTest.takeSnapShot();
+			
 		}
 		Thread.sleep(3000);
 		promotionsAndWastePage.selectStartDate(startDate);
@@ -1378,13 +1547,16 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		//Verify that raw waste entry should displayed in Promotion and waste page
 		if (!wasteAmount.equals("0.00") & promotionsAndWastePage.isCompletedWasteEntryPresent(createDate, wasteAmount)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3261",
+					browser,
 					"User should be able to view Completed waste entry for selected date", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3261_Condition4","promotionWaste_US855_TC3261",
+					browser,
 					"User should be able to view Completed waste entry for selected date", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3261_Condition4");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1393,12 +1565,13 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3262() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3262";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String password = LoginTestData.operator_SSO_Password;
-		String storeId = LoginTestData.operatorStoreId;
-		String menuItemId1 = GlobalVariable.completedWasteWrin1;
-		String menuItem1Description = GlobalVariable.completedWasteWrin1Description;
+		String userId = LoginTestData.level1_SSO_UserId;
+		String password = LoginTestData.level1_SSO_Password;
+		String storeId = LoginTestData.level1StoreId;
+		String menuItemId1 = GlobalVariable.completedWasteWrin3;
+		String menuItem1Description = GlobalVariable.completedWasteWrin3Description;
 		String menuItemId2 = GlobalVariable.completedWasteWrin2;
 		String quantity = "2";
 		String createDate = GlobalVariable.createDate;
@@ -1408,40 +1581,47 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		CompletedWastePage completedWastePage = PageFactory.initElements(driver,CompletedWastePage.class);
 		// Navigate to Promotion and Waste page
 		promotionsAndWastePage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToPromotionsAndWastePage();
+				.goToPromotionsAndWastePage();
 		//CLick on Raw Waste Button
 		promotionsAndWastePage.CompletedWaste_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(completedWastePage.CompletedWaste_Title));
 		completedWastePage.removeAllWrinIdFromCompletedWastePage();
 		//String time = completedWastePage.getTimeToSet();
-		completedWastePage.selectDateForRawWaste(createDate).selectTimeInRawWasteForm(time);
+		//completedWastePage.selectDateForRawWaste(createDate).selectTimeInCompletedWasteForm(time);
 		//Create a raw waste entry
 		completedWastePage.searchMenuItemForCompletedWaste(menuItemId1);
 		completedWastePage.searchMenuItemForCompletedWaste(menuItem1Description);
 		if (Base.isElementDisplayed(completedWastePage.DuplicateItem_Error_Message)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3262",
+					browser,
 					"Duplicate Items not Allowed message should be displayed on screen when user will try to add the same menu item twice", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3262_Condition1","promotionWaste_US855_TC3262",
+					browser,
 					"Duplicate Items not Allowed message should be displayed on screen when user will try to add the same menu Item twice", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3262_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		completedWastePage.searchMenuItemForCompletedWaste(menuItemId2);
 		completedWastePage.addQuantitiesForMultipleWrin(menuItemId1,quantity);
+		completedWastePage.addQuantitiesForMultipleWrin(menuItemId2,quantity);
 		boolean submitButtonEnabled = (completedWastePage.Submit_BT.getAttribute("disabled")== null);
 		completedWastePage.Submit_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(completedWastePage.SubmitCompletedWaste_PopUp_YES_BT)).click();
 		if(submitButtonEnabled & Base.isElementDisplayed(completedWastePage.WasteEntrySaved_Confirmation_MSG)){
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3262",
-					"User is able to submit completed waste entry when quantity is filled of at least one added MI ", "Pass");
+					browser,
+					"User is able to submit completed waste entry when quantity is filled to added MI ", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3262_Condition2","promotionWaste_US855_TC3262",
-					"User is able to submit completed waste entry when quantity is filled of at least one added MI", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3262_Condition2");
+					browser,
+					"User is able to submit completed waste entry when quantity is filled to added MI", "Fail");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1450,10 +1630,11 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3263() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3263";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String password = LoginTestData.operator_SSO_Password;
-		String storeId = LoginTestData.operatorStoreId;
+		String userId = LoginTestData.level1_SSO_UserId;
+		String password = LoginTestData.level1_SSO_Password;
+		String storeId = LoginTestData.level1StoreId;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		String menuItemId2 = GlobalVariable.completedWasteWrin2;
 		String quantity = "2";
@@ -1464,44 +1645,51 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		CompletedWastePage completedWastePage = PageFactory.initElements(driver,CompletedWastePage.class);
 		// Navigate to Promotion and Waste page
 		promotionsAndWastePage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToPromotionsAndWastePage();
+				.goToPromotionsAndWastePage();
 		//CLick on Raw Waste Button
 		promotionsAndWastePage.CompletedWaste_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(completedWastePage.CompletedWaste_Title));
 		completedWastePage.removeAllWrinIdFromCompletedWastePage();
 		//String time = completedWastePage.getTimeToSet();
-		completedWastePage.selectDateForRawWaste(createDate).selectTimeInRawWasteForm(time);
+		//completedWastePage.selectDateForRawWaste(createDate).selectTimeInCompletedWasteForm(time);
 		//Create a raw waste entry
 		completedWastePage.searchMenuItemForCompletedWaste(menuItemId1);
 		completedWastePage.searchMenuItemForCompletedWaste(menuItemId2);
 		completedWastePage.addQuantitiesForMultipleWrin(menuItemId1,quantity);
+		completedWastePage.addQuantitiesForMultipleWrin(menuItemId2,quantity);
 		if (completedWastePage.Submit_BT.getAttribute("disabled") == null) {
 			Reporter.reportPassResult(
-					browser,"promotionWaste_US855_TC3263",
-					"Submit button should be enabled when quantity is provided to at least one of the item quantity fields",
+					browser,
+					"Submit button should be enabled when quantity is provided to all quantity fields",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser,"promotionWaste_US855_TC3263_Condition1","promotionWaste_US855_TC3263",
-					"Submit button should be enabled when quantity is provided to at least one of the item quantity fields",
+					browser,
+					"Submit button should be enabled when quantity is provided to all quantity fields",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3263_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		completedWastePage.removeWrinIdFromCompletedWastePage(menuItemId1);
 		Thread.sleep(1000);
 		completedWastePage.Submit_BT.click();
 		if (Base.isElementDisplayed(completedWastePage.CompletedWaste_Title)
-				& !Base.isElementDisplayed(completedWastePage.SubmitCompletedWaste_PopUp_YES_BT)) {
+				& Base.isElementDisplayed(completedWastePage.SubmitCompletedWaste_PopUp_YES_BT)) {
 			Reporter.reportPassResult(
-					browser,"promotionWaste_US855_TC3263",
-					"User should not be able to submit waste entry when quantity is not provided to any of the item quantity fields",
+					browser,
+					"User should not be able to submit waste entry when quantity is provided to all of the item quantity fields",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser,"promotionWaste_US855_TC3263_Condition1","promotionWaste_US855_TC3263",
-					"User should not be able to submit waste entry when quantity is not provided to any of the item quantity fields",
+					browser,
+					"User should not be able to submit waste entry when quantity is provided to all of the item quantity fields",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3263_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1510,17 +1698,18 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3264() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3264";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String password = LoginTestData.operator_SSO_Password;
-		String storeId = LoginTestData.operatorStoreId;
+		String userId = LoginTestData.level1_SSO_UserId;
+		String password = LoginTestData.level1_SSO_Password;
+		String storeId = LoginTestData.level1StoreId;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		CompletedWastePage completedWastePage = PageFactory.initElements(driver,CompletedWastePage.class);
 		// Navigate to Promotion and Waste page
 		promotionsAndWastePage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToPromotionsAndWastePage();
+				.goToPromotionsAndWastePage();
 		//CLick on Raw Waste Button
 		promotionsAndWastePage.CompletedWaste_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(completedWastePage.CompletedWaste_Title));
@@ -1537,40 +1726,49 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		Thread.sleep(2000);
 		if (warningMessageDisplayed & !Base.isElementDisplayed(completedWastePage.CompletedWasteEntryIncomplete_PopUp_NO_BT)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3264",
+					browser,
 					"On clickinng cancel button System should display a Warning message with No and Yes options and user should return to Completed Waste form on clicking No button", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3264_Condition1","promotionWaste_US855_TC3264",
+					browser,
 					"On clickinng cancel button System should display a Warning message with No and Yes options and user should return to Completed Waste form on clicking No button", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3264_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		completedWastePage.Cancel_BT.click();
 		warningMessageDisplayed = Base.isElementDisplayed(completedWastePage.CancelCompletedWastePopUp_Warning_Message);
 		wait.until(ExpectedConditions.visibilityOf(completedWastePage.CompletedWasteEntryIncomplete_PopUp_YES_BT)).click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		if (warningMessageDisplayed & !Base.isElementDisplayed(completedWastePage.CompletedWaste_Title)
 				& Base.isElementDisplayed(promotionsAndWastePage.PromotionAndWaste_Title)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3264",
+					browser, 
 					"On clickinng cancel button System should display a Warning message with No and Yes options and Completed Waste form should be closed on clicking Yes button", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3264_Condition2","promotionWaste_US855_TC3264",
+					browser,
 					"On clickinng cancel button System should display a Warning message with No and Yes options and Completed Waste form should be closed on clicking Yes button", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3264_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 		promotionsAndWastePage.CompletedWaste_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(completedWastePage.CompletedWaste_Title));
 		if (!completedWastePage.verifyCompletedWasteItemIsAdded(menuItemId1)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3264",
+					browser,
 					"User should be able to open a fresh Completed Waste Form after canceling the previous entry", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3264_Condition3","promotionWaste_US855_TC3264",
+					browser,
 					"User should be able to open a fresh Completed Waste Form after canceling the previous entry", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3264_Condition3");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1579,16 +1777,17 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3265() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3265";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String password = LoginTestData.operator_SSO_Password;
-		String storeId = LoginTestData.operatorStoreId;
+		String userId = LoginTestData.level1_SSO_UserId;
+		String password = LoginTestData.level1_SSO_Password;
+		String storeId = LoginTestData.level1StoreId;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		CompletedWastePage completedWastePage = PageFactory.initElements(driver,CompletedWastePage.class);
 		// Navigate to Promotion and Waste page
-		promotionsAndWastePage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+		promotionsAndWastePage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToPromotionsAndWastePage();
 		// CLick on Raw Waste Button
 		promotionsAndWastePage.CompletedWaste_BT.click();
@@ -1597,15 +1796,18 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		completedWastePage.searchMenuItemForCompletedWaste(menuItemId1);
 		completedWastePage.CompletedWasteForm_SliderToggle_BT.click();
 		//verify that user User should be able to close add manual vendor form on clicking Cancel button
-		if (completedWastePage.CompletedWasteForm_Container.getAttribute("class").contains("modalCollapsedView")	) {
+		if (completedWastePage.CompletedWasteForm_Container.getAttribute("class").contains("modalCollapsedView")) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3265",
+					browser,
 					"User should be able to collapse the Completed Waste screen","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3265_Condition1","promotionWaste_US855_TC3265",
+					browser,
 					"User should be able to collapse the Completed Waste screen","Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3265_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		promotionsAndWastePage.CompletedWaste_BT.click();
 		Thread.sleep(2000);
@@ -1619,40 +1821,49 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		Thread.sleep(2000);
 		if (warningMessageDisplayed & !Base.isElementDisplayed(completedWastePage.CompletedWasteEntryIncomplete_PopUp_NO_BT)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3265",
+					browser, 
 					"On clickinng cancel button System should display a Warning message with No and Yes options and user should return to Completed Waste form on clicking No button", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3265_Condition2","promotionWaste_US855_TC3265",
+					browser,
 					"On clickinng cancel button System should display a Warning message with No and Yes options and user should return to Completed Waste form on clicking No button", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3265_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 		completedWastePage.Cancel_BT.click();
 		warningMessageDisplayed = Base.isElementDisplayed(completedWastePage.CancelCompletedWastePopUp_Warning_Message);
 		wait.until(ExpectedConditions.visibilityOf(completedWastePage.CompletedWasteEntryIncomplete_PopUp_YES_BT)).click();
-		Thread.sleep(2000);
+		Thread.sleep(6000);
 		if (warningMessageDisplayed & !Base.isElementDisplayed(completedWastePage.CompletedWaste_Title)
 				& Base.isElementDisplayed(promotionsAndWastePage.PromotionAndWaste_Title)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3265",
+					browser,
 					"On clickinng cancel button System should display a Warning message with No and Yes options and Completed Waste form should be closed on clicking Yes button", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3265_Condition3","promotionWaste_US855_TC3265",
+					browser,
 					"On clickinng cancel button System should display a Warning message with No and Yes options and Completed Waste form should be closed on clicking Yes button", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3265_Condition3");
+			AbstractTest.takeSnapShot();
+			
 		}
 		promotionsAndWastePage.CompletedWaste_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(completedWastePage.CompletedWaste_Title));
 		if (!completedWastePage.verifyCompletedWasteItemIsAdded(menuItemId1)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3265",
+					browser,
 					"User should be able to open a fresh Completed Waste Form after canceling the previous entry", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3265_Condition4","promotionWaste_US855_TC3265",
+					browser,
 					"User should be able to open a fresh Completed Waste Form after canceling the previous entry", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3265_Condition4");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1661,16 +1872,17 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3266() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3266";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String password = LoginTestData.operator_SSO_Password;
-		String storeId = LoginTestData.operatorStoreId;
+		String userId = LoginTestData.level1_SSO_UserId;
+		String password = LoginTestData.level1_SSO_Password;
+		String storeId = LoginTestData.level1StoreId;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		CompletedWastePage completedWastePage = PageFactory.initElements(driver,CompletedWastePage.class);
 		// Navigate to Promotion and Waste page
-		promotionsAndWastePage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+		promotionsAndWastePage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToPromotionsAndWastePage();
 		// CLick on Raw Waste Button
 		promotionsAndWastePage.CompletedWaste_BT.click();
@@ -1681,13 +1893,16 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		//verify that user User should be able to close add manual vendor form on clicking Cancel button
 		if (completedWastePage.CompletedWasteForm_Container.getAttribute("class").contains("modalCollapsedView")	) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3266",
+					browser,
 					"User should be able to collapse the Completed Waste screen","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3266_Condition1","promotionWaste_US855_TC3266",
+					browser,
 					"User should be able to collapse the Completed Waste screen","Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3266_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		promotionsAndWastePage.CompletedWaste_BT.click();
 		Thread.sleep(2000);
@@ -1697,13 +1912,16 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		Thread.sleep(2000);
 		if (warningMessageDisplayed & !Base.isElementDisplayed(completedWastePage.CompletedWasteEntryIncomplete_PopUp_NO_BT)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3266",
+					browser,
 					"On clickinng Close button System should display a Warning message with No and Yes options and user should return to Completed Waste form on clicking No button", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3266_Condition2","promotionWaste_US855_TC3266",
+					browser,
 					"On clickinng Close button System should display a Warning message with No and Yes options and user should return to Completed Waste form on clicking No button", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3266_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 		completedWastePage.CompletedWasteForm_Close_BT.click();
 		warningMessageDisplayed = Base.isElementDisplayed(completedWastePage.CancelCompletedWastePopUp_Warning_Message);
@@ -1712,25 +1930,31 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		if (warningMessageDisplayed & !Base.isElementDisplayed(completedWastePage.CompletedWaste_Title)
 				& Base.isElementDisplayed(promotionsAndWastePage.PromotionAndWaste_Title)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3266",
+					browser,
 					"On clickinng Close button System should display a Warning message with No and Yes options and  Completed Waste form should be closed on clicking Yes button", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3266_Condition3","promotionWaste_US855_TC3266",
+					browser,
 					"On clickinng Close button System should display a Warning message with No and Yes options and  Completed Waste form should be closed on clicking Yes button", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3266_Condition3");
+			AbstractTest.takeSnapShot();
+			
 		}
 		promotionsAndWastePage.CompletedWaste_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(completedWastePage.CompletedWaste_Title));
 		if (!completedWastePage.verifyCompletedWasteItemIsAdded(menuItemId1)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3266",
+					browser,
 					"User should be able to open a fresh  Completed Waste Form after closing the previous entry", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3266_Condition4","promotionWaste_US855_TC3266",
+					browser,
 					"User should be able to open a fresh  Completed Waste Form after closing the previous entry", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3266_Condition4");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1739,11 +1963,13 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3267() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3267";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String password = LoginTestData.operator_SSO_Password;
-		String storeId = LoginTestData.operatorStoreId;
+		String userId = LoginTestData.level1_SSO_UserId;
+		String password = LoginTestData.level1_SSO_Password;
+		String storeId = LoginTestData.level1StoreId;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
+		String time=GlobalVariable.time;
 		String quantity = "2";
 		String createDate = GlobalVariable.createDate;
 		//String time = GlobalVariable.time;
@@ -1751,14 +1977,17 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		CompletedWastePage completedWastePage = PageFactory.initElements(driver,CompletedWastePage.class);
 		// Navigate to Promotion and Waste page
-		promotionsAndWastePage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+		promotionsAndWastePage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToPromotionsAndWastePage();
 		// CLick on Raw Waste Button
 		promotionsAndWastePage.CompletedWaste_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(completedWastePage.CompletedWaste_Title));
 		completedWastePage.removeAllWrinIdFromCompletedWastePage();
 		//String time = completedWastePage.getTimeToSet();
-		completedWastePage.selectDateForRawWaste(createDate);
+		/*completedWastePage.selectDateForRawWaste(createDate);
+		Thread.sleep(2000);
+		completedWastePage.selectTimeInCompletedWasteForm(time);
+		Thread.sleep(2000);*/
 		completedWastePage.searchMenuItemForCompletedWaste(menuItemId1);
 		completedWastePage.CompletedWasteForm_SliderToggle_BT.click();
 		Thread.sleep(1000);
@@ -1766,26 +1995,33 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		Thread.sleep(2000);
 		if(completedWastePage.Submit_BT.getAttribute("disabled").equals("true")){
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3267",
+					browser,
 					"Submit button should be disabled when quantity is not added for Completed waste item", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3267_Condition1","promotionWaste_US855_TC3267",
+					browser,
 					"Submit button should be disabled when quantity is not added for Completed waste item", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3267_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		completedWastePage.addQuantitiesForMultipleWrin(menuItemId1, quantity);
 		completedWastePage.Submit_BT.click();
+		boolean warningMsgDisplayed = Base.isElementDisplayed(completedWastePage.SubmitCompletedWaste_PopUp_Warning_Message);
 		wait.until(ExpectedConditions.visibilityOf(completedWastePage.SubmitCompletedWaste_PopUp_YES_BT)).click();
-		if (Base.isElementDisplayed(completedWastePage.WasteEntrySaved_Confirmation_MSG)) {
+		if (warningMsgDisplayed & Base.isElementDisplayed(completedWastePage.WasteEntrySaved_Confirmation_MSG)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3267",
+					browser,
 					"Completed Waste screen should get closed with message Completed Waste entry saved at bottom of the screen on clicking submit button", "Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3267_Condition2","promotionWaste_US855_TC3267",
+					browser,
 					"Completed Waste screen should get closed with message Completed Waste entry saved at bottom of the screen on clicking submit button", "Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3267_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	//TC3268: Verify scroll bar and form collapse and re-open feature on Enter Complete Waste screen.
@@ -1793,10 +2029,11 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3268() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3268";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String password = LoginTestData.operator_SSO_Password;
-		String storeId = LoginTestData.operatorStoreId;
+		String userId = LoginTestData.level1_SSO_UserId;
+		String password = LoginTestData.level1_SSO_Password;
+		String storeId = LoginTestData.level1StoreId;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		String menuItemId2 = GlobalVariable.completedWasteWrin2;
 		String menuItemId3 = GlobalVariable.completedWasteWrin3;
@@ -1806,7 +2043,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		CompletedWastePage completedWastePage = PageFactory.initElements(driver,CompletedWastePage.class);
 		// Navigate to Promotion and Waste page
-		promotionsAndWastePage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+		promotionsAndWastePage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToPromotionsAndWastePage();
 		// CLick on Raw Waste Button
 		promotionsAndWastePage.CompletedWaste_BT.click();
@@ -1816,25 +2053,31 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		//verify that user User should be able to close add manual vendor form on clicking Cancel button
 		if (completedWastePage.CompletedWasteForm_Container.getAttribute("class").contains("modalCollapsedView")	) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3268",
+					browser,
 					"User should be able to collapse the Completed Waste screen","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3268_Condition1","promotionWaste_US855_TC3268",
+					browser,
 					"User should be able to collapse the Completed Waste screen","Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3268_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		completedWastePage.CompletedWasteForm_SliderToggle_BT.click();
 		//verify that User should be able to close add manual vendor form on clicking  Close(X) button
 		if (completedWastePage.CompletedWasteForm_Container.getAttribute("class").contains("modalExpandedView")	) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3268",
+					browser, 
 					"User should be able to expand the collapsed Completed Waste screen","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3268_Condition2","promotionWaste_US855_TC3268",
+					browser,
 					"User should be able to expand the collapsed Completed Waste screen","Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3268_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 		completedWastePage.searchMenuItemForCompletedWaste(menuItemId1);
 		completedWastePage.searchMenuItemForCompletedWaste(menuItemId2);
@@ -1848,15 +2091,18 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		//verify that Promotion and Waste page is accessible from the Main Menu
 		if (completedWastePage.CompletedWasteForm_WasteItemEntry_List.get(noOfItem-1).isDisplayed()) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3268",
+					browser,
 					"Scroll bar should appear when added MI's exceed the fixed height in Completed Waste Form",
 					"Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3268_Condition3","promotionWaste_US855_TC3268",
+					browser,
 					"Scroll bar should appear when added MI's exceed the fixed height in Completed Waste Form",
 					"Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3268_Condition3");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1865,26 +2111,47 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3270() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3270";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String password = LoginTestData.operator_SSO_Password;
-		String storeId = LoginTestData.operatorStoreId;
+		String userId = LoginTestData.level1_SSO_UserId;
+		String password = LoginTestData.level1_SSO_Password;
+		String storeId = LoginTestData.level1StoreId;
+		String wrinId1 = GlobalVariable.rawItemWatsewrin1;
+		String caseQuantity = "7";
+		String innerPackQuantity = "2";
+		String looseUnitQuantity = "3";
+		String createDate = GlobalVariable.createDate;
+		String time = GlobalVariable.time;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
-		String createdate = GlobalVariable.createDate;
+		
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
+		RawItemWastePage rawItemWastePage = PageFactory.initElements(driver,RawItemWastePage.class);
 		// Navigate to Promotion and Waste page
-		promotionsAndWastePage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+		promotionsAndWastePage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToPromotionsAndWastePage();
-		wait.until(ExpectedConditions.visibilityOf(promotionsAndWastePage.PromotionAndWaste_Title));
+		promotionsAndWastePage.RawWaste_BT.click();
+		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.RawWaste_Title));
+		rawItemWastePage.removeAllWrinIdFromRawWastePage();
+		//rawItemWastePage.selectDateForRawWaste(createDate).selectTimeInRawWasteForm(time);
+		//Create a raw waste entry
+		rawItemWastePage.searchAndSelectRawItemWasted(wrinId1);
+		//rawItemWastePage.RawWasteForm_ItemAdded_Message.click();
+		rawItemWastePage.addQuantitiesForMultipleWrin(wrinId1, innerPackQuantity, caseQuantity, looseUnitQuantity);
+		String wasteAmount = rawItemWastePage.getTotalWasteAmunt();
+		System.out.println("wasteAmount " + wasteAmount);
+		rawItemWastePage.Submit_BT.click();
+		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.SubmitRawWaste_PopUp_YES_BT)).click();
+		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.WasteEntrySaved_Confirmation_MSG)).click();
+		Thread.sleep(5000);
 		promotionsAndWastePage.selectStartDate(startDate);
 		promotionsAndWastePage.selectEndDate(endDate);
-		promotionsAndWastePage.ShowResults_BT.click();
+		wait.until(ExpectedConditions.elementToBeClickable(promotionsAndWastePage.ShowResults_BT)).click();
 		Thread.sleep(5000);
-		promotionsAndWastePage.clickOnDateGroup(createdate);
-		promotionsAndWastePage.viewWasteEntry(createdate);
-		wait.until(ExpectedConditions.visibilityOf(promotionsAndWastePage.ViewWasteForm_Title));
+		promotionsAndWastePage.clickOnDateGroup(createDate);
+		promotionsAndWastePage.viewWasteEntry(createDate,wasteAmount);
+		//wait.until(ExpectedConditions.visibilityOf(promotionsAndWastePage.ViewWasteForm_Title));
 		//verify that user User should be able to close add manual vendor form on clicking Cancel button
 		if (Base.isElementDisplayed(promotionsAndWastePage.wasteDetail_WRINColumn_Label)
 				& Base.isElementDisplayed(promotionsAndWastePage.wasteDetail_DescriptionColumn_Label)
@@ -1894,27 +2161,33 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 				& Base.isElementDisplayed(promotionsAndWastePage.wasteDetail_TotalUnitsColumn_Label)
 				& Base.isElementDisplayed(promotionsAndWastePage.wasteDetail_SubtotalColumn_Label)) {
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3270",
+					browser,
 					"User should be able to view raw waste details with Columns WRIN b. Desciption c. Outer Pack d. Inner Pack "
 					+ "e. Loose Unit f. Total Unit g. Sub-total","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3270_Condition1","promotionWaste_US855_TC3270",
+					browser,
 					"User should be able to view raw waste details with Columns WRIN b. Desciption c. Outer Pack d. Inner Pack "
 					+ "e. Loose Unit f. Total Unit g. Sub-total","Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3270_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		if(promotionsAndWastePage.WasteDetailsEntries_List.size()>0
 				& Base.isElementDisplayed(promotionsAndWastePage.wasteDetail_Total_Label)
-				& !promotionsAndWastePage.wasteDetail_Total_Value.getText().equals("$0.00")){
+				& promotionsAndWastePage.wasteDetail_Total_Value.getText().equals("$"+wasteAmount)){
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3270",
+					browser,
 					"User should be able to view raw item records and total amount in waste details screen ","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3270_Condition2","promotionWaste_US855_TC3270",
+					browser,
 					"User should be able to view raw item records and total amount in waste details screen","Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3270_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1923,17 +2196,18 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 	public void promotionWaste_US855_TC3271() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="promotionWaste_US855_TC3271";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String password = LoginTestData.operator_SSO_Password;
-		String storeId = LoginTestData.operatorStoreId;
+		String userId = LoginTestData.level1_SSO_UserId;
+		String password = LoginTestData.level1_SSO_Password;
+		String storeId = LoginTestData.level1StoreId;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		String createdate = GlobalVariable.createDate;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
-		promotionsAndWastePage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+		promotionsAndWastePage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToPromotionsAndWastePage();
 		wait.until(ExpectedConditions.visibilityOf(promotionsAndWastePage.PromotionAndWaste_Title));
 		promotionsAndWastePage.selectStartDate(startDate);
@@ -1942,34 +2216,39 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		Thread.sleep(5000);
 		promotionsAndWastePage.clickOnDateGroup(createdate);
 		promotionsAndWastePage.viewCompletedWasteEntry(createdate);
-		wait.until(ExpectedConditions.visibilityOf(promotionsAndWastePage.ViewCompletedWasteForm_Title));
 		//verify that user User should be able to close add manual vendor form on clicking Cancel button
-		if (Base.isElementDisplayed(promotionsAndWastePage.ConpletedWasteDetail_MenuItem_Label)
+		if (Base.isElementDisplayed(promotionsAndWastePage.ViewCompletedWasteForm_Title)
+				& Base.isElementDisplayed(promotionsAndWastePage.ConpletedWasteDetail_MenuItem_Label)
+				& Base.isElementDisplayed(promotionsAndWastePage.ConpletedWasteDetail_MenuItem_Label)
 				& Base.isElementDisplayed(promotionsAndWastePage.ConpletedWasteDetail_Description_Label)
 				& Base.isElementDisplayed(promotionsAndWastePage.ConpletedWasteDetail_QuantityWasted_Label)
 				& Base.isElementDisplayed(promotionsAndWastePage.ConpletedWasteDetail_SubTotal_Label)) {
 			Reporter.reportPassResult(
-					browser,"promotionWaste_US855_TC3271",
+					browser,
 					"System should display Completed Waste details details with Columns a. WRIN-b. Desciption c. Quantity Wasted d. Sub-total ",
 					"Pass");
 		}
 		else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3271_Condition1","promotionWaste_US855_TC3271",
+					browser,
 					"System should display Completed Waste details details with Columns a. WRIN-b. Desciption c. Quantity Wasted d. Sub-total ","Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3271_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		if(promotionsAndWastePage.CompletedWasteDetailsEntries_List.size()>0
 				& Base.isElementDisplayed(promotionsAndWastePage.CompletedWasteDetail_Total_Label)
 				& !promotionsAndWastePage.CompletedWasteDetail_Total_Value.getText().equals("$0.00")){
 			Reporter.reportPassResult(
-					browser, "promotionWaste_US855_TC3271",
+					browser,
 					"User should be able to view menu item records and total amount in Completed waste details screen ","Pass");
+			
+
 		} else {
 			Reporter.reportTestFailure(
-					browser, "promotionWaste_US855_TC3271_Condition2","promotionWaste_US855_TC3271",
+					browser,
 					"User should be able to view menu item records and total amount in Completed waste details screen","Fail");
-			AbstractTest.takeSnapShot("promotionWaste_US855_TC3271_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	

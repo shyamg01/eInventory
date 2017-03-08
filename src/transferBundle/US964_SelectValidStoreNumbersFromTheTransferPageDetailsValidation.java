@@ -16,7 +16,7 @@ import common.LoginTestData;
 import common.Reporter;
 import eInventoryPageClasses.HomePage;
 import eInventoryPageClasses.TransferLandingPage;
-import sprint2.AbstractTest;
+import eInventoryPageClasses.AbstractTest;
 
 public class US964_SelectValidStoreNumbersFromTheTransferPageDetailsValidation extends AbstractTest
 {
@@ -25,19 +25,21 @@ public class US964_SelectValidStoreNumbersFromTheTransferPageDetailsValidation e
 	@Test()
 	public void transferBundle_US964_TC3189() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
+		
 		/** Variable Section : **/
+		AbstractTest.tcName="transferBundle_US964_TC3189";
 //		String userId = LoginTestData.operatorUserId;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String password = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 
-		String transferType="in";
-		String storeID="55";
+		String transferType="In";
+		String storeID=GlobalVariable.nationalStore1;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		TransferLandingPage transferLandingPage = PageFactory.initElements(driver, TransferLandingPage.class);
 		// Navigate to Transfer Landing page and click on create new transfer button
-		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToTransferLandingPage().CreateNewTransfers_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 		// Select the type of transfer as 'IN'
@@ -48,17 +50,19 @@ public class US964_SelectValidStoreNumbersFromTheTransferPageDetailsValidation e
 		{
 			transferLandingPage.selectLocationToTransfer(storeID);
 			Reporter.reportPassResult(
-					browser,"transferBundle_US964_TC3189",
+					browser,
 					"User should be able to select Store number for transfer type in", "Pass");
+			
 
 		}
 		catch(Exception e)
 		{
 			Reporter.reportTestFailure(
-					browser,"transferBundle_US964_TC3189","transferBundle_US964_TC3189",
+					browser,
 					"User should be able to select Store number for transfer type in",
 					"Fail");
-			AbstractTest.takeSnapShot("transferBundle_US964_TC3189");
+			AbstractTest.takeSnapShot();
+			
 		}
 		
 	}
@@ -72,18 +76,19 @@ public class US964_SelectValidStoreNumbersFromTheTransferPageDetailsValidation e
 			public void transferBundle_US964_TC3190() throws RowsExceededException,
 					BiffException, WriteException, IOException, InterruptedException {
 				/** Variable Section : **/
+				AbstractTest.tcName="transferBundle_US964_TC3190";
 //				String userId = LoginTestData.operatorUserId;
-				String userId = LoginTestData.operator_SSO_UserId;
-				String password = LoginTestData.operator_SSO_UserId;
-				String storeId = LoginTestData.operatorStoreId;
+				String userId = LoginTestData.userId;
+				String password = LoginTestData.password;
+				String storeId = LoginTestData.StoreId;
 
-				String transferType="out";
-				String storeID="55";
+				String transferType="Out";
+				String storeID=GlobalVariable.nationalStore1;
 				/***********************************/
 				HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 				TransferLandingPage transferLandingPage = PageFactory.initElements(driver, TransferLandingPage.class);
 				// Navigate to Transfer Landing page and click on create new transfer button
-				homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+				homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 						.goToTransferLandingPage().CreateNewTransfers_BT.click();
 				wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 				// Select the type of transfer as 'IN'
@@ -94,17 +99,19 @@ public class US964_SelectValidStoreNumbersFromTheTransferPageDetailsValidation e
 				{
 					transferLandingPage.selectLocationToTransfer(storeID);
 					Reporter.reportPassResult(
-							browser,"transferBundle_US964_TC3190",
+							browser,
 							"User should be able to select Store number for transfer type out", "Pass");
+					
 
 				}
 				catch(Exception e)
 				{
 					Reporter.reportTestFailure(
-							browser,"transferBundle_US964_TC3190","transferBundle_US964_TC3190",
+							browser,
 							"User should be able to select Store number for transfer type out",
 							"Fail");
-					AbstractTest.takeSnapShot("transferBundle_US964_TC3190");
+					AbstractTest.takeSnapShot();
+					
 				}
 				
 			}
@@ -117,17 +124,18 @@ public class US964_SelectValidStoreNumbersFromTheTransferPageDetailsValidation e
 					public void transferBundle_US964_TC3191() throws RowsExceededException,
 							BiffException, WriteException, IOException, InterruptedException {
 						/** Variable Section : **/
+						AbstractTest.tcName="transferBundle_US964_TC3191";
 //						String userId = LoginTestData.operatorUserId;
-						String userId = LoginTestData.operator_SSO_UserId;
-						String password = LoginTestData.operator_SSO_UserId;
-						String storeId = LoginTestData.operatorStoreId;
+						String userId = LoginTestData.userId;
+						String password = LoginTestData.password;
+						String storeId = LoginTestData.StoreId;
 
-						String transferType="office";
+						String transferType="Office";
 						/***********************************/
 						HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 						TransferLandingPage transferLandingPage = PageFactory.initElements(driver, TransferLandingPage.class);
 						// Navigate to Transfer Landing page and click on create new transfer button
-						homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+						homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 								.goToTransferLandingPage().CreateNewTransfers_BT.click();
 						wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 						// Select the type of transfer as 'IN'
@@ -136,104 +144,23 @@ public class US964_SelectValidStoreNumbersFromTheTransferPageDetailsValidation e
 						
 						if (!Base.isElementDisplayed(transferLandingPage.Location_DD)) {
 							Reporter.reportPassResult(
-									browser,"transferBundle_US964_TC3191",
+									browser,
 									"User should be able to select Store number for transfer type office", "Pass");
+							
 						} 
 						else
 						{
 							Reporter.reportTestFailure(
-									browser,"transferBundle_US964_TC3191","transferBundle_US964_TC3191",
+									browser,
 									"User should be able to select Store number for transfer type office",
 									"Fail");
-							AbstractTest.takeSnapShot("transferBundle_US964_TC3191");
+							AbstractTest.takeSnapShot();
+							
 						}
 					}
 				
 	
-					//TC3196 : 	Verify that user is able to select  under construction or opened store number while initiating transfer.
-					@Test()
-					public void transferBundle_US964_TC3196() throws RowsExceededException,
-							BiffException, WriteException, IOException, InterruptedException {
-						/** Variable Section : **/
-//						String userId = LoginTestData.operatorUserId;
-						String userId = LoginTestData.operator_SSO_UserId;
-						String password = LoginTestData.operator_SSO_UserId;
-						String storeId = LoginTestData.closeOpenStoreId;
-
-						String transferType="in";
-						String storeID=GlobalVariable.openStore;
-						/***********************************/
-						HomePage homePage = PageFactory.initElements(driver, HomePage.class);
-						TransferLandingPage transferLandingPage = PageFactory.initElements(driver, TransferLandingPage.class);
-						// Navigate to Transfer Landing page and click on create new transfer button
-						homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
-								.goToTransferLandingPage().CreateNewTransfers_BT.click();
-						wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
-						// Select the type of transfer as 'IN'
-						transferLandingPage.selectTransferType(transferType);
-						Thread.sleep(4000);
-						//Select the Store ID from the drop down
-						try
-						{
-							transferLandingPage.selectLocationToTransfer(storeID);
-							Reporter.reportPassResult(
-									browser,"transferBundle_US964_TC3196",
-									"User should be able to select Store number for transfer type in", "Pass");
-
-						}
-						catch(Exception e)
-						{
-							Reporter.reportTestFailure(
-									browser,"transferBundle_US964_TC3196","transferBundle_US964_TC3196",
-									"User should be able to select Store number for transfer type in",
-									"Fail");
-							AbstractTest.takeSnapShot("transferBundle_US964_TC3196");
-						}
-						
-					}
-	
-					//TC3197 : 	Verify that user is unable to select  store number with invalid status while initiating transfer.
-					@Test()
-					public void transferBundle_US964_TC3197() throws RowsExceededException,
-							BiffException, WriteException, IOException, InterruptedException {
-						/** Variable Section : **/
-//						String userId = LoginTestData.operatorUserId;
-						String userId = LoginTestData.operator_SSO_UserId;
-						String password = LoginTestData.operator_SSO_UserId;
-						String storeId = LoginTestData.closeOpenStoreId;
-						String transferType="in";
-						String storeID=GlobalVariable.closeStore;
-						/***********************************/
-						HomePage homePage = PageFactory.initElements(driver, HomePage.class);
-						TransferLandingPage transferLandingPage = PageFactory.initElements(driver, TransferLandingPage.class);
-						// Navigate to Transfer Landing page and click on create new transfer button
-						homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
-								.goToTransferLandingPage().CreateNewTransfers_BT.click();
-						wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
-						// Select the type of transfer as 'IN'
-						transferLandingPage.selectTransferType(transferType);
-						Thread.sleep(4000);
-						//Select the Store ID from the drop down
-						try
-						{
-							transferLandingPage.selectLocationToTransfer(storeID);
-							Reporter.reportTestFailure(
-									browser,"transferBundle_US964_TC3197","transferBundle_US964_TC3197",
-									"User should not be able to select Store number for transfer type in",
-									"Fail");
-							AbstractTest.takeSnapShot("transferBundle_US964_TC3197");
-
-						}
-						catch(Exception e)
-						
-						{
-							Reporter.reportPassResult(
-									browser,"transferBundle_US964_TC3197",
-									"User should not be able to select Store number for transfer type in", "Pass");
-							
-						}
-						
-					}
-	
+				
+				
 	
 }

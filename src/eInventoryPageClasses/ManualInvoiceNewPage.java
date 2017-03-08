@@ -1,6 +1,11 @@
 package eInventoryPageClasses;
 
+import java.io.IOException;
 import java.util.List;
+
+import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -12,12 +17,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import common.Base;
+import common.GenericMethods;
+import common.GlobalVariable;
+import common.Reporter;
 
 public class ManualInvoiceNewPage extends AbstractPage {
 
 	public ManualInvoiceNewPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		
 	}
 
 	@FindBy(xpath = "//tbody[@id='invoice_tbl_body']/tr/td[8]")
@@ -124,13 +133,25 @@ public class ManualInvoiceNewPage extends AbstractPage {
 	@FindBy(xpath = "//eb-button[@id='manual_purchase_modal_cancel_btn']/button")
 	public WebElement CreateManualInvoice_Cancel_BT;
 	
-	@FindBy(xpath = "//td[@class=' sub_total text-right']")
+	@FindBy(xpath = "//div[@id='dlgContent']/p[contains(text(),'Are you sure you want to')]/following-sibling::p[contains(text(),'cancel this purchase?')]")
+	public WebElement CreateManualInvoice_ConfirmCancel_Message;
+	
+	@FindBy(xpath = "//eb-modal[@id='manual_purchase_modal']/div[contains(@class,'container')]/div[@id='header-row']/div[contains(@class,'modal-close')]")
+	public WebElement CreateManualInvoice_Cross_BT;
+	
+	@FindBy(xpath = "//button/span[text()='No']")
+	public WebElement CreateManualInvoice_ConfirmationPopUp_No_BT;
+	
+	@FindBy(xpath = "//button/span[text()='Yes']")
+	public WebElement CreateManualInvoice_ConfirmationPopUp_Yes_BT;
+	
+	@FindBy(xpath = "//td[contains(@class,'sub_total dt-right')]")
 	public WebElement CreateManualInvoice_SubTotal_Value;
 
 	@FindBy(xpath = "//input[@placeholder='quantity']")
 	public List<WebElement> Quantity_TB_List;
 	
-	@FindBy(xpath = "//td[@class=' sub_total text-right']")
+	@FindBy(xpath = "//td[@class='sub_total dt-right']")
 	public List<WebElement> SubTotal_Value_List;
 
 	@FindBy(xpath = "//input[@placeholder='$']")
@@ -151,26 +172,29 @@ public class ManualInvoiceNewPage extends AbstractPage {
 	@FindBy(xpath = "//div[@class='autocomplete-no-suggestion']/div[@id='autocomplete_info_div']")
 	public WebElement CreateManualInvoice_NoSuggestionForWrinId_Msg;
 	
-	@FindBy(xpath="(//input[@id='validatedInput' and @placeholder='quantity'])/../following-sibling::div[@id='message_popup']/span[@id='message']")
+	@FindBy(xpath="//div[contains(@id,'popover') and @role='tooltip']/div[@class='popover-content']")
 	public WebElement InvalidQuantity_Error_Message;
 	
-	@FindBy(xpath="(//input[@id='validatedInput' and @placeholder='$'])/../following-sibling::div[@id='message_popup']/span[@id='message']")
+	@FindBy(xpath="//div[contains(@id,'popover') and @role='tooltip']/div[@class='popover-content']")
 	public WebElement InvalidPricePerCase_Error_Message;
 	
 	@FindBy(xpath = "//eb-datepicker[@id='disp_date_picker']/span[contains(text(),' Connection down! Ensure correct date!')]")
 	public WebElement CreateManualInvoice_ConnectionDown_Msg;
 	
 	/**************Create new invoice Fields Labels***************/
-	@FindBy(xpath="//span[text()='Source: Manual']")
+	@FindBy(xpath="//div[text()='Source: Manual']")
 	public WebElement CreateManualInvoice_ManualSource_Label;
 	
-	@FindBy(xpath="//span[@id='invoice_created_by']")
+	@FindBy(xpath="//div[@id='invoice_created_by']")
 	public WebElement CreateManualInvoice_CreatedBy_Label;
 	
-	@FindBy(xpath="//label[@id='vendor_label']")
+	@FindBy(xpath="//label[@id='vendor_list_label']")
 	public WebElement CreateManualInvoice_Vendor_Label;
 	
-	@FindBy(xpath="//label[contains(.,'Invoice Number:')]")
+	@FindBy(xpath = "//label[@id='vendor_list_label']/span[@class='fa fa-asterisk']")
+	public WebElement CreateManualInvoice_VendorAsterisk_Label;
+	
+	@FindBy(xpath="//label[contains(.,'Invoice Number')]")
 	public WebElement CreateManualInvoice_InvoiceNumber_Label;
 	
 	@FindBy(xpath="//eb-datepicker[@id='disp_date_picker']/div/label[contains(.,'Date:')]")
@@ -178,6 +202,9 @@ public class ManualInvoiceNewPage extends AbstractPage {
 	
 	@FindBy(xpath="//label[contains(.,'Item')]")
 	public WebElement CreateManualInvoice_Item_Label;
+	
+	@FindBy(xpath="//label[contains(.,'Item')]/span[contains(@class,'fa fa-asterisk')]")
+	public WebElement CreateManualInvoice_ItemAsterisk_Label;
 	
 	/****************Invoice Table columns Headers*****************/
 	
@@ -202,6 +229,9 @@ public class ManualInvoiceNewPage extends AbstractPage {
 	@FindBy(xpath="//table[@id='invoice_tbl']/thead/tr/th[text()='Sub-total']")
 	public WebElement CreateManualInvoiceTable_SubTotal_Label;
 	
+	@FindBy(xpath = "(//div[contains(@class,'slider-close')]/i[@id='modalToggle'])[1]")
+	public WebElement CreateManualInvoice_SliderToggle_BT;
+	
 	
 	public boolean isManualInvoiceNewPageIsLoaded() {
 		wait.until(ExpectedConditions.visibilityOf(CreateManualInvoice_PopUp_Lable));
@@ -215,25 +245,35 @@ public class ManualInvoiceNewPage extends AbstractPage {
 	 * Select the Invoice date from the calendar Invoice Date should be in
 	 * MM/DD/YYYY format
 	 */
-	public ManualInvoiceNewPage selectInvoiceDate(String invoiceDate)throws InterruptedException {
+	public ManualInvoiceNewPage selectInvoiceDate(String invoiceDate)throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException {
 		wait.until(ExpectedConditions.visibilityOf(CreateManualInvoice_PopUp_Lable));
-		CreateManualInvoice_InvoiceDate_TB.click();
+		GenericMethods.clickOnElement(CreateManualInvoice_InvoiceDate_TB, "CreateManualInvoice_InvoiceDate_TB");
 		Thread.sleep(2000);
-		int mon = Base.getMonthFromDate(invoiceDate);
 		int day = Base.getDayFromDate(invoiceDate);
-		String monthName = Base.getMonthName(mon + 1);
-		selectMonthFromDropDown(monthName);
-		driver.findElement(By.xpath("//div[@class='xdsoft_calendar']/table/tbody/tr/td[@data-month="+ (mon) + "]/div[text()=" + day + "]")).click();
-		CreateManualInvoice_PopUp_Lable.click();
+		int month = Base.getMonthFromDate(invoiceDate);
+		selectMonthFromDatePicker(Base.getMonthName(month+1),3);
+		Reporter.reportPassResult(AbstractTest.browser, "Month "+Base.getMonthName(month+1)+" is selected From Date Picker", "Pass");
+		GenericMethods.clickOnElement(driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[3]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")), "clicked on "+day+"in calender");
+		GenericMethods.clickOnElement(CreateManualInvoice_PopUp_Lable, "CreateManualInvoice_PopUp_Lable");
 		return PageFactory.initElements(driver, ManualInvoiceNewPage.class);
 	}
+	
+	public boolean verifyDateIsDisabled(String date) throws InterruptedException{
+		CreateManualInvoice_InvoiceDate_TB.click();
+		Thread.sleep(2000);
+		int day = Base.getDayFromDate(date);
+		int month = Base.getMonthFromDate(date);
+		selectMonthFromDatePicker(Base.getMonthName(month+1),3);
+		return driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[3]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")).getAttribute("class").contains("xdsoft_disabled");
+	}
+	
 
 	public void selectMonthFromDropDown(String month) {
-		String monthName = driver.findElement(By.xpath("(//div[@class='xdsoft_mounthpicker'])[4]/div[contains(@class,'xdsoft_month')]/span")).getText();
+		String monthName = driver.findElement(By.xpath("(//div[@class='xdsoft_mounthpicker'])[3]/div[contains(@class,'xdsoft_month')]/span")).getText();
 		System.out.println(monthName);
 		while (!monthName.equals(month)) {
-			driver.findElement(By.xpath("(//div[@class='xdsoft_mounthpicker'])[4]/button[@class='xdsoft_prev']")).click();
-			monthName = driver.findElement(By.xpath("(//div[@class='xdsoft_mounthpicker'])[4]/div[contains(@class,'xdsoft_month')]/span")).getText();
+			driver.findElement(By.xpath("(//div[@class='xdsoft_mounthpicker'])[3]/button[@class='xdsoft_prev']")).click();
+			monthName = driver.findElement(By.xpath("(//div[@class='xdsoft_mounthpicker'])[3]/div[contains(@class,'xdsoft_month')]/span")).getText();
 			System.out.println("monthName found " + monthName);
 		}
 	}
@@ -274,61 +314,89 @@ public class ManualInvoiceNewPage extends AbstractPage {
 	}
 
 	// Bundle Wise Function
-	public ManualInvoiceNewPage seacrhAndSelectRawItem(String samplewRINID)throws InterruptedException {
-		CreateManualInvoice_EnterRawItemNumberOrDescription_TB.click();
-		CreateManualInvoice_EnterRawItemNumberOrDescription_TB.clear();
-		CreateManualInvoice_EnterRawItemNumberOrDescription_TB.sendKeys(samplewRINID);
+	public ManualInvoiceNewPage seacrhAndSelectRawItem(String samplewRINID)throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException {
+//		CreateManualInvoice_EnterRawItemNumberOrDescription_TB.click();
+		GenericMethods.clickOnElement(CreateManualInvoice_EnterRawItemNumberOrDescription_TB, "CreateManualInvoice_EnterRawItemNumberOrDescription_TB");
+		GenericMethods.clearValueOfElement(CreateManualInvoice_EnterRawItemNumberOrDescription_TB, "CreateManualInvoice_EnterRawItemNumberOrDescription_TB");
+//		CreateManualInvoice_EnterRawItemNumberOrDescription_TB.clear();
+		GenericMethods.enterValueInElement(CreateManualInvoice_EnterRawItemNumberOrDescription_TB, "CreateManualInvoice_EnterRawItemNumberOrDescription_TB", samplewRINID);
+//		CreateManualInvoice_EnterRawItemNumberOrDescription_TB.sendKeys(samplewRINID);
 		action.sendKeys(Keys.SPACE).build().perform(); 
 		Thread.sleep(1500); 
 		action.sendKeys(Keys.BACK_SPACE).build().perform();
-		driver.findElement(By.xpath("(//strong[text()='"+samplewRINID+"'])[1]")).click();
+		GenericMethods.clickOnElement(driver.findElement(By.xpath("(//strong[text()='"+samplewRINID+"'])[1]")), "WRIN ID");
+//		driver.findElement(By.xpath("(//strong[text()='"+samplewRINID+"'])[1]")).click();
 		Thread.sleep(2000);
 		return PageFactory.initElements(driver, ManualInvoiceNewPage.class);
 	}
 
-	public ManualInvoiceNewPage selectAVendor(String vendorName)throws InterruptedException {
-		//CreateManualInvoice_Vendor_DD.click();
-		Select selectVendor = new Select(CreateManualInvoice_Vendor_DD);
-		selectVendor.selectByVisibleText(vendorName);
+	//Method Reporter
+	public ManualInvoiceNewPage selectAVendor(String vendorName)throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException {
+		GenericMethods.selectTextFormDropDownElement(CreateManualInvoice_Vendor_DD, "CreateManualInvoice_Vendor_DD", vendorName);
 		return PageFactory.initElements(driver, ManualInvoiceNewPage.class);
 	}
-
+	
 	// Create a Manual Purchase
-	public PurchasesPage createAManualPurchase(String vendorName,String invoiceNumber, String Wrin, String quantity,
-			String pricePerCase) throws InterruptedException {
-		PurchasesPage purchasePage = PageFactory.initElements(driver,PurchasesPage.class);
-		wait.until(ExpectedConditions.visibilityOf(purchasePage.Purchases_Label));
-		purchasePage.CreateManualInvoice_BT.click();
-		wait.until(ExpectedConditions.visibilityOf(CreateManualInvoice_PopUp_Lable));
-		// Search and Select the Vendor from the drop down
-		selectAVendor(vendorName);
-		seacrhAndSelectRawItem(Wrin);
-		executor.executeScript("document.getElementById('autocomplete_add_item_btn').click()");
-		wait.until(ExpectedConditions.visibilityOf(Quantity_TB_List.get(0)));
-		CreateManualInvoice_InvoiceNumber_TB.clear();
-		CreateManualInvoice_InvoiceNumber_TB.sendKeys("");
-		Thread.sleep(1500); 
-		CreateManualInvoice_InvoiceNumber_TB.sendKeys(invoiceNumber);
-		// Enter the quantity
-		Thread.sleep(2000);
-		Quantity_TB_List.get(0).clear();
-		Quantity_TB_List.get(0).sendKeys(quantity);
-		Thread.sleep(2000);
-		CreateManualInvoice_PopUp_Lable.click();
-		Thread.sleep(2000);
-		Submit_BT.click();
-		wait.until(ExpectedConditions.visibilityOf(InvoiceSaved_Confirmation_MSG));
-		return PageFactory.initElements(driver, PurchasesPage.class);
-	}
+			public PurchasesPage createAManualPurchase(String vendorName,String invoiceNumber, String Wrin, String quantity,
+					String pricePerCase) throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException {
+				PurchasesPage purchasePage = PageFactory.initElements(driver,PurchasesPage.class);
+				wait.until(ExpectedConditions.visibilityOf(purchasePage.Purchases_Label));
+				GenericMethods.clickOnElement(purchasePage.CreateManualInvoice_BT, "purchasePage.CreateManualInvoice_BT");
+				wait.until(ExpectedConditions.visibilityOf(CreateManualInvoice_PopUp_Lable));
+				// Search and Select the Vendor from the drop down
+				selectAVendor(vendorName);
+				selectInvoiceDate(GlobalVariable.createDate);
+				seacrhAndSelectRawItem(Wrin);
+				wait.until(ExpectedConditions.visibilityOf(Quantity_TB_List.get(0)));
+				GenericMethods.clearValueOfElement(CreateManualInvoice_InvoiceNumber_TB, "CreateManualInvoice_InvoiceNumber_TB");
+				GenericMethods.enterValueInElement(CreateManualInvoice_InvoiceNumber_TB, "CreateManualInvoice_InvoiceNumber_TB", invoiceNumber);
+				// Enter the quantity
+				Thread.sleep(2000);
+				GenericMethods.clearValueOfElement(Quantity_TB_List.get(0), "First Quntity text box");
+				GenericMethods.enterValueInElement(Quantity_TB_List.get(0), "First Quntity text box", quantity);
+				Thread.sleep(2000);
+				GenericMethods.clearValueOfElement(pricePerCase_TB_List.get(0), "First PricePerCase text box");
+				GenericMethods.enterValueInElement(pricePerCase_TB_List.get(0), "First PricePerCase text box", pricePerCase);
+				GenericMethods.clickOnElement(CreateManualInvoice_PopUp_Lable, "CreateManualInvoice_PopUp_Lable");
+				Thread.sleep(2000);
+				GenericMethods.clickOnElement(Submit_BT, "Submit_BT");
+				GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(CreateManualInvoice_ConfirmationPopUp_Yes_BT)), "CreateManualInvoice_ConfirmationPopUp_Yes_BT");
+				wait.until(ExpectedConditions.visibilityOf(InvoiceSaved_Confirmation_MSG));
+				Thread.sleep(5000);
+				return PageFactory.initElements(driver, PurchasesPage.class);
+			}
 	
 	public boolean verifyItemIsAddedForInvoice(String wrinId){
 		return Base.isElementDisplayed(By.xpath("//tbody[@id='invoice_tbl_body']/tr/td[contains(text(),'"+wrinId+"')]"));
 	}
 	
-	public void enterQuantityForMultipleWrin(String wrinId,String quantity){
+	public void enterQuantityForMultipleWrin(String wrinId,String quantity) throws RowsExceededException, BiffException, WriteException, IOException{
+		GenericMethods.enterValueInElement(driver.findElement(By.xpath("//tbody[@id='invoice_tbl_body']/tr/td[contains(text(),'"
+				+ wrinId+ "')]/following-sibling::td[contains(@class,'case_count')]/eb-validated-input/div/div/div/input[@placeholder='quantity']")), "wrinId", quantity);
+		GenericMethods.clickOnElement(CreateManualInvoice_PopUp_Lable, "CreateManualInvoice_PopUp_Lable");
+	}
+	
+	public void enterCasePriceForMultipleWrin(String wrinId,String casePrice) throws RowsExceededException, BiffException, WriteException, IOException{
+		WebElement casePriceTextBox = driver.findElement(By.xpath("//tbody[@id='invoice_tbl_body']/tr/td[contains(text(),'"
+				+ wrinId+ "')]/following-sibling::td[contains(@class,'case_price')]/eb-validated-input/div/div/div/input[@placeholder='$']"));
+		GenericMethods.enterValueInElement(casePriceTextBox, "wrinId", casePrice);
+		GenericMethods.clickOnElement(CreateManualInvoice_PopUp_Lable, "CreateManualInvoice_PopUp_Lable");
+	}
+	
+	public void removeWrinIdFromManualInvoiceNewPage(String wrinId) throws InterruptedException{
 		driver.findElement(By.xpath("//tbody[@id='invoice_tbl_body']/tr/td[contains(text(),'"
-						+ wrinId+ "')]/following-sibling::td[contains(@class,'case_count')]/eb-validated-input/div/div/div/input[@placeholder='quantity']")).sendKeys(quantity);
-		CreateManualInvoice_PopUp_Lable.click();
+						+ wrinId+ "')]/preceding-sibling::td[contains(@class,'select-checkbox')]")).click();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//ul[@id='utility-toolbar']/li[@id='deleteId'])"))).click();
+		Thread.sleep(3000);
+	}
+	
+	public void removeAllWrinIdFromManualInvoiceNewPage() throws InterruptedException{
+		List<WebElement> removeBtnList = driver.findElements(By.xpath("//tbody[@id='invoice_tbl_body']/tr/td[contains(@class,'select-checkbox')]"));
+		for(WebElement removeBtn : removeBtnList){
+			removeBtn.click();
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//ul[@id='utility-toolbar']/li[@id='deleteId'])"))).click();
+			Thread.sleep(3000);
+		}
 	}
 	
 }

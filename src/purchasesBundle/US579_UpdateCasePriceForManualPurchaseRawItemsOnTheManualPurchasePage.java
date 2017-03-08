@@ -20,7 +20,7 @@ import eInventoryPageClasses.HomePage;
 import eInventoryPageClasses.ManualInvoiceNewPage;
 import eInventoryPageClasses.PurchasesPage;
 import eInventoryPageClasses.RawItemActivityPage;
-import sprint2.AbstractTest;
+import eInventoryPageClasses.AbstractTest;
 
 public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePage extends AbstractTest
 {
@@ -28,11 +28,12 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 	//TC1243 : Verify the user is able to edit case price value for added item in manual purchase screen.
 	
 	
-	@Test()
+	@Test(groups={"Smoke"})
 	public void purchaseBundle_US579_TC1243() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 //		String userId = LoginTestData.supervisorUserId;
+		AbstractTest.tcName="purchaseBundle_US579_TC1243";
 		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
 		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
 		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
@@ -43,7 +44,7 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = PageFactory.initElements(driver, PurchasesPage.class);
 		ManualInvoiceNewPage manualInvoiceNewPage = PageFactory.initElements(driver, ManualInvoiceNewPage.class);
-		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement().goToPurchaseLandingPage();
+		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).goToPurchaseLandingPage();
 		wait.until(ExpectedConditions.visibilityOf(purchasesPage.Purchases_Label));
 		Thread.sleep(3000);
 		purchasesPage.CreateManualInvoice_BT.click();
@@ -53,7 +54,6 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 		manualInvoiceNewPage.seacrhAndSelectRawItem(wrin);
 		AbstractPage.executor.executeScript("document.getElementById('autocomplete_add_item_btn').click()");
 		wait.until(ExpectedConditions.visibilityOf(manualInvoiceNewPage.Quantity_TB_List.get(0)));
-		Thread.sleep(3000);
 		manualInvoiceNewPage.pricePerCase_TB_List.get(0).clear();
 		manualInvoiceNewPage.pricePerCase_TB_List.get(0).sendKeys(pricePerUnit);
 		Thread.sleep(2000);
@@ -61,20 +61,19 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 		if(manualInvoiceNewPage.pricePerCase_TB_List.get(0).getAttribute("value").equalsIgnoreCase(pricePerUnit+".0000"))
 		{
 			Reporter.reportPassResult(
-					browser,"purchaseBundle_US579_TC1243",
+					browser,
 					"User should be able to Price per case value",
 					"Pass");
+			
 		}
 		else
 		{
 			Reporter.reportTestFailure(
-					browser,"purchaseBundle_US579_TC1243","purchaseBundle_US579_TC1243",
+					browser,
 					"User should be able to Price per case value",
 					"Fail");
-			AbstractTest.takeSnapShot("purchaseBundle_US579_TC1243");
+			AbstractTest.takeSnapShot();
 		}	
-
-		
 	}			
 	
 	
@@ -84,7 +83,7 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 	public void purchaseBundle_US579_TC1244() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
-//		String userId = LoginTestData.supervisorUserId;
+		AbstractTest.tcName="purchaseBundle_US579_TC1244";
 		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
 		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
 		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
@@ -95,7 +94,7 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = PageFactory.initElements(driver, PurchasesPage.class);
 		ManualInvoiceNewPage manualInvoiceNewPage = PageFactory.initElements(driver, ManualInvoiceNewPage.class);
-		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement().goToPurchaseLandingPage();
+		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).goToPurchaseLandingPage();
 		wait.until(ExpectedConditions.visibilityOf(purchasesPage.Purchases_Label));
 		Thread.sleep(3000);
 		purchasesPage.CreateManualInvoice_BT.click();
@@ -113,19 +112,131 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 		if(manualInvoiceNewPage.pricePerCase_TB_List.get(0).getAttribute("value").equalsIgnoreCase("10.1234"))
 		{
 			Reporter.reportPassResult(
-					browser,"purchaseBundle_US579_TC1244",
+					browser,
 					"User should not be able to enter Wrong Price per case value",
 					"Pass");
+			
 		}
 		else
 		{
 			Reporter.reportTestFailure(
-					browser,"purchaseBundle_US579_TC1244","purchaseBundle_US579_TC1244",
+					browser,
 					"User should not be able to enter Wrong Price per case value",
 					"Fail");
-			AbstractTest.takeSnapShot("purchaseBundle_US579_TC1244");
+			AbstractTest.takeSnapShot();
+			
 		}	
 
+	}			
+	
+	@Test()
+	public void purchaseBundle_US579_TC1277() throws RowsExceededException,
+			BiffException, WriteException, IOException, InterruptedException {
+		/** Variable Section : **/
+//		String userId = LoginTestData.supervisorUserId;
+		AbstractTest.tcName="purchaseBundle_US579_TC1277";
+		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
+		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
+		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String vendorName=GlobalVariable.vendorName;
+		String wrin=GlobalVariable.createPurchaseWrin1;	
+	/****************************/
+		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
+		PurchasesPage purchasesPage = PageFactory.initElements(driver, PurchasesPage.class);
+		RawItemActivityPage rawItemActivityPage = PageFactory.initElements(driver, RawItemActivityPage.class);
+		ManualInvoiceNewPage manualInvoiceNewPage = PageFactory.initElements(driver, ManualInvoiceNewPage.class);
+		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).goToRawItemActivityPage();
+		rawItemActivityPage.searchAndSelectWRINID(wrin);
+		Thread.sleep(5000);
+		rawItemActivityPage.Information_BT.click();
+		wait.until(ExpectedConditions.visibilityOf(rawItemActivityPage.RawItemInformation_Title));
+		if(!rawItemActivityPage.RawItemInformation_popUp_ManualPurchase_CB.isSelected())
+		{
+			rawItemActivityPage.RawItemInformation_popUp_ManualPurchase_CB.click();
+
+		}
+		Thread.sleep(3000);
+		String expCasePrice=rawItemActivityPage.RawItemInformation_popUp_CasePrice_TB.getAttribute("value");
+		System.out.println("expCasePrice"+expCasePrice);
+		//Now go to Purchase landing page
+		homePage.Menu_DD_BT.click();
+		Thread.sleep(3000);
+		wait.until(ExpectedConditions.visibilityOf(homePage.Purchases_BT)).click();
+		wait.until(ExpectedConditions.visibilityOf(purchasesPage.Purchases_Label));
+		Thread.sleep(3000);
+		purchasesPage.CreateManualInvoice_BT.click();
+		wait.until(ExpectedConditions.visibilityOf(manualInvoiceNewPage.CreateManualInvoice_PopUp_Lable));
+		// Search and Select the Vendor from the drop down
+		manualInvoiceNewPage.selectAVendor(vendorName);
+		manualInvoiceNewPage.seacrhAndSelectRawItem(wrin);
+		AbstractPage.executor.executeScript("document.getElementById('autocomplete_add_item_btn').click()");
+		wait.until(ExpectedConditions.visibilityOf(manualInvoiceNewPage.Quantity_TB_List.get(0)));
+		Thread.sleep(3000);
+		String actualCasePrice=manualInvoiceNewPage.pricePerCase_TB_List.get(0).getAttribute("value");
+		System.out.println("actualCasePrice"+actualCasePrice);
+		if(actualCasePrice.equalsIgnoreCase(expCasePrice))
+		{
+			Reporter.reportPassResult(
+					browser,
+					"User should be able to view the defaule value of Case price",
+					"Pass");
+			
+		}
+		else
+		{
+			Reporter.reportTestFailure(
+					browser,
+					"User should be able to view the defaule value of Case price",
+					"Fail");
+			AbstractTest.takeSnapShot();
+			
+		}
+		manualInvoiceNewPage.pricePerCase_TB_List.get(0).clear();
+		manualInvoiceNewPage.pricePerCase_TB_List.get(0).sendKeys("2");
+		Thread.sleep(2000);
+		manualInvoiceNewPage.Quantity_TB_List.get(0).click();
+		Thread.sleep(2000);
+		System.out.println("manualInvoiceNewPage.pricePerCase_TB_List.get(0).getText()"+manualInvoiceNewPage.pricePerCase_TB_List.get(0).getAttribute("value"));
+		if(manualInvoiceNewPage.pricePerCase_TB_List.get(0).getAttribute("value").equalsIgnoreCase("2.0000"))
+		{
+			Reporter.reportPassResult(
+					browser,
+					"User should be able to view the case price with correct decimal value",
+					"Pass");
+			
+		}
+		else
+		{
+			Reporter.reportTestFailure(
+					browser,
+					"User should be able to view the case price with correct decimal value",
+					"Fail");
+			AbstractTest.takeSnapShot();
+			
+		}
+		manualInvoiceNewPage.pricePerCase_TB_List.get(0).clear();
+		manualInvoiceNewPage.pricePerCase_TB_List.get(0).sendKeys("40.00");
+		Thread.sleep(2000);
+		manualInvoiceNewPage.Quantity_TB_List.get(0).click();
+		manualInvoiceNewPage.Quantity_TB_List.get(0).sendKeys("5");
+		Thread.sleep(4000);
+		System.out.println("manualInvoiceNewPage.Submit_BT.getAttribute"+manualInvoiceNewPage.Submit_BT.getAttribute("disabled"));
+		if(manualInvoiceNewPage.Submit_BT.isEnabled())
+		{
+			Reporter.reportPassResult(
+					browser,
+					"User should be allowed to enter valid case price value and submit button should display as enabled",
+					"Pass");
+		}
+		else
+		{
+			
+			Reporter.reportTestFailure(
+					browser,
+					"User should be allowed to enter valid case price value and submit button should display as enabled",
+					"Fail");
+			AbstractTest.takeSnapShot();
+		}
 	}			
 	
 	
@@ -136,7 +247,7 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 	public void purchaseBundle_US579_TC1279() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
-//		String userId = LoginTestData.supervisorUserId;
+		AbstractTest.tcName="purchaseBundle_US579_TC1279";
 		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
 		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
 		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
@@ -145,7 +256,7 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = PageFactory.initElements(driver, PurchasesPage.class);
 		ManualInvoiceNewPage manualInvoiceNewPage = PageFactory.initElements(driver, ManualInvoiceNewPage.class);
-		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement().goToPurchaseLandingPage();
+		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).goToPurchaseLandingPage();
 		wait.until(ExpectedConditions.visibilityOf(purchasesPage.Purchases_Label));
 		Thread.sleep(3000);
 		purchasesPage.CreateManualInvoice_BT.click();
@@ -157,7 +268,6 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 		4)Date selection method.
 		5)Vendor selection method.
 		6)Item selection method*/
-		Thread.sleep(6000);
 		if(manualInvoiceNewPage.CreateManualInvoice_Vendor_DD.isDisplayed() &&
 		manualInvoiceNewPage.CreateManualInvoice_InvoiceNumber_TB.isDisplayed() &&
 		manualInvoiceNewPage.CreateManualInvoice_Cancel_BT.isDisplayed() &&
@@ -166,17 +276,19 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 		Base.isElementDisplayed(By.xpath("//input[@id='disp_date']")))
 		{
 			Reporter.reportPassResult(
-					browser,"purchaseBundle_US579_TC1279",
+					browser,
 					"User should be able to View all the options",
 					"Pass");
+			
 		}
 		else
 		{
 			Reporter.reportTestFailure(
-					browser,"purchaseBundle_US579_TC1279","purchaseBundle_US579_TC1279",
+					browser,
 					"User should be able to View all the options",
 					"Fail");
-			AbstractTest.takeSnapShot("purchaseBundle_US579_TC1279");
+			AbstractTest.takeSnapShot();
+			
 		}	
 
 		
@@ -191,7 +303,7 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 		public void purchaseBundle_US579_TC3506() throws RowsExceededException,
 				BiffException, WriteException, IOException, InterruptedException {
 			/** Variable Section : **/
-//			String userId = LoginTestData.supervisorUserId;
+			AbstractTest.tcName="purchaseBundle_US579_TC3506";
 			String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
 			String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
 			String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
@@ -202,7 +314,7 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 			HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 			PurchasesPage purchasesPage = PageFactory.initElements(driver, PurchasesPage.class);
 			ManualInvoiceNewPage manualInvoiceNewPage = PageFactory.initElements(driver, ManualInvoiceNewPage.class);
-			homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement().goToPurchaseLandingPage();
+			homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).goToPurchaseLandingPage();
 			wait.until(ExpectedConditions.visibilityOf(purchasesPage.Purchases_Label));
 			Thread.sleep(3000);
 			purchasesPage.CreateManualInvoice_BT.click();
@@ -220,17 +332,19 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 			if(manualInvoiceNewPage.pricePerCase_TB_List.get(0).getAttribute("value").equalsIgnoreCase(pricePerUnit+".0000"))
 			{
 				Reporter.reportPassResult(
-						browser,"purchaseBundle_US579_TC3506",
+						browser,
 						"User should be able to Price per case value",
 						"Pass");
+				
 			}
 			else
 			{
 				Reporter.reportTestFailure(
-						browser,"purchaseBundle_US579_TC3506","purchaseBundle_US579_TC3506",
+						browser,
 						"User should be able to Price per case value",
 						"Fail");
-				AbstractTest.takeSnapShot("purchaseBundle_US579_TC3506");
+				AbstractTest.takeSnapShot();
+				
 			}	
 
 			
@@ -243,6 +357,7 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 				BiffException, WriteException, IOException, InterruptedException {
 			/** Variable Section : **/
 //			String userId = LoginTestData.supervisorUserId;
+			AbstractTest.tcName="purchaseBundle_US579_TC3588";
 			String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
 			String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
 			String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
@@ -253,7 +368,7 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 			HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 			PurchasesPage purchasesPage = PageFactory.initElements(driver, PurchasesPage.class);
 			ManualInvoiceNewPage manualInvoiceNewPage = PageFactory.initElements(driver, ManualInvoiceNewPage.class);
-			RawItemActivityPage rawItemActivityPage=homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement().goToRawItemActivityPage();
+			RawItemActivityPage rawItemActivityPage=homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).goToRawItemActivityPage();
 			//Search and select a raw item 
 			rawItemActivityPage.searchAndSelectWRINID(wrin);
 			Thread.sleep(3000);
@@ -278,8 +393,9 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 			Thread.sleep(5000);
 			//Go to Purchase landing page
 			homePage.Menu_DD_BT.click();
-			wait.until(ExpectedConditions.visibilityOf(homePage.Menu_Back_BT));
-			homePage.Menu_Back_BT.click();
+			Thread.sleep(3000);
+			/*wait.until(ExpectedConditions.visibilityOf(homePage.Menu_Back_BT));
+			homePage.Menu_Back_BT.click();*/
 			wait.until(ExpectedConditions.visibilityOf(homePage.Purchases_BT));
 			homePage.Purchases_BT.click();
 			wait.until(ExpectedConditions.visibilityOf(purchasesPage.Purchases_Label));
@@ -292,45 +408,59 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 			Thread.sleep(3000);
 			String actualCasePrice=manualInvoiceNewPage.pricePerCase_TB_List.get(0).getAttribute("value");
 			System.out.println("actualCasePrice"+actualCasePrice);
-			if(expectedCasePrice.equalsIgnoreCase("$"+actualCasePrice))
+			if(expectedCasePrice.equalsIgnoreCase(actualCasePrice))
 			{
 				Reporter.reportPassResult(
-						browser,"purchaseBundle_US579_TC3588",
+						browser,
 						"User should be able to view the same Price per case value",
 						"Pass");
+				
 			}
 			else
 			{
 				Reporter.reportTestFailure(
-						browser,"purchaseBundle_US579_TC3588","purchaseBundle_US579_TC3588",
+						browser,
 						"User should be able to view the same Price per case value",
 						"Fail");
-				AbstractTest.takeSnapShot("purchaseBundle_US579_TC3588");
+				AbstractTest.takeSnapShot();
 			}
-				
 		}			
 		
 		
 		
-//TC1309 : Verify the error message while submitting an added WRIN from manual purchase detail screen without entering any value for $/case.
-		
-		
-		@Test(enabled=false)
+		//TC1309 : 	Verify submit button disabled while submitting an added WRIN from manual purchase detail screen without entering any value for $/case.
+		@Test()
 		public void purchaseBundle_US579_TC1309() throws RowsExceededException,
 				BiffException, WriteException, IOException, InterruptedException {
 			/** Variable Section : **/
-//			String userId = LoginTestData.supervisorUserId;
+			AbstractTest.tcName="purchaseBundle_US579_TC1309";
 			String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
 			String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
 			String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
 			String vendorName=GlobalVariable.vendorName;
 			String wrin=GlobalVariable.createPurchaseWrin1;	
-			String pricePerUnit="10";
-		   /****************************/
+		/****************************/
 			HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 			PurchasesPage purchasesPage = PageFactory.initElements(driver, PurchasesPage.class);
+			RawItemActivityPage rawItemActivityPage = PageFactory.initElements(driver, RawItemActivityPage.class);
 			ManualInvoiceNewPage manualInvoiceNewPage = PageFactory.initElements(driver, ManualInvoiceNewPage.class);
-			homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement().goToPurchaseLandingPage();
+			homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).goToRawItemActivityPage();
+			rawItemActivityPage.searchAndSelectWRINID(wrin);
+			Thread.sleep(5000);
+			rawItemActivityPage.Information_BT.click();
+			wait.until(ExpectedConditions.visibilityOf(rawItemActivityPage.RawItemInformation_Title));
+			if(!rawItemActivityPage.RawItemInformation_popUp_ManualPurchase_CB.isSelected())
+			{
+				rawItemActivityPage.RawItemInformation_popUp_ManualPurchase_CB.click();
+
+			}
+			Thread.sleep(3000);
+			String expCasePrice=rawItemActivityPage.RawItemInformation_popUp_CasePrice_TB.getAttribute("value");
+			System.out.println("expCasePrice"+expCasePrice);
+			//Now go to Purchase landing page
+			homePage.Menu_DD_BT.click();
+			Thread.sleep(3000);
+			wait.until(ExpectedConditions.visibilityOf(homePage.Purchases_BT)).click();
 			wait.until(ExpectedConditions.visibilityOf(purchasesPage.Purchases_Label));
 			Thread.sleep(3000);
 			purchasesPage.CreateManualInvoice_BT.click();
@@ -341,72 +471,49 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 			AbstractPage.executor.executeScript("document.getElementById('autocomplete_add_item_btn').click()");
 			wait.until(ExpectedConditions.visibilityOf(manualInvoiceNewPage.Quantity_TB_List.get(0)));
 			Thread.sleep(3000);
-			manualInvoiceNewPage.pricePerCase_TB_List.get(0).clear();
-			Thread.sleep(2000);
-			manualInvoiceNewPage.Quantity_TB_List.get(0).click();
-			manualInvoiceNewPage.Quantity_TB_List.get(0).sendKeys(pricePerUnit);
-			Thread.sleep(4000);
-			manualInvoiceNewPage.Submit_BT.click();
-			/*if(manualInvoiceNewPage.pricePerCase_TB_List.get(0).getAttribute("value").equalsIgnoreCase(pricePerUnit+".0000"))
+			String actualCasePrice=manualInvoiceNewPage.pricePerCase_TB_List.get(0).getAttribute("value");
+			System.out.println("actualCasePrice"+actualCasePrice);
+			if(actualCasePrice.equalsIgnoreCase(expCasePrice))
 			{
 				Reporter.reportPassResult(
-						browser,"purchaseBundle_US579_TC3506",
-						"User should be able to Price per case value",
+						browser,
+						"User should be able to view the defaule value of Case price",
 						"Pass");
+				
 			}
 			else
 			{
 				Reporter.reportTestFailure(
-						browser,"purchaseBundle_US579_TC3506","purchaseBundle_US579_TC3506",
-						"User should be able to Price per case value",
+						browser,
+						"User should be able to view the defaule value of Case price",
 						"Fail");
-				AbstractTest.takeSnapShot("purchaseBundle_US579_TC3506");
-			}	
-
-			*/
+				AbstractTest.takeSnapShot();
+				
+			}
+			manualInvoiceNewPage.pricePerCase_TB_List.get(0).clear();
+			Thread.sleep(2000);
+			manualInvoiceNewPage.Quantity_TB_List.get(0).click();
+			Thread.sleep(3000);
+			if(!manualInvoiceNewPage.Submit_BT.isEnabled())
+			{
+				Reporter.reportPassResult(
+						browser,
+						"Submit button Should display as disabled",
+						"Pass");
+				
+			}
+			else
+			{
+				Reporter.reportTestFailure(
+						browser,
+						"Submit button Should display as disabled",
+						"Fail");
+				AbstractTest.takeSnapShot();
+				
+			}
+			
+			
 		}			
 			
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	
-	
-	
-	
-	
-	
-	
 	
 }

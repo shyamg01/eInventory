@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import eInventoryPageClasses.AbstractTest;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.format.Alignment;
@@ -114,44 +116,54 @@ public class Reporter
 			 wsheet4.addCell(l20);
 			 wsheet4.addCell(l21);
 			 //For IE Test step report
-			 Label l22 = new Label(1,1,"Step Defination",fcell);
-			 Label l23 = new Label(2,1,"Result",fcell);
-			 Label l24 = new Label(3,1,"ScreenShot",fcell);
+			 Label l22 = new Label(2,1,"Step Defination",fcell);
+			 Label l23 = new Label(3,1,"Result",fcell);
+			 Label l24 = new Label(4,1,"ScreenShot",fcell);
 			 Label l25 = new Label(0,1,"Test Case ID",fcell);
+			 Label l100 = new Label(1,1,"Step ID",fcell);
 			 wsheet1.setColumnView(0, 25);
 			 wsheet1.setColumnView(1, 25);
-			 wsheet1.setColumnView(2, 25);
+			 wsheet1.setColumnView(2, 50);
 			 wsheet1.setColumnView(3, 25);
+			 wsheet1.setColumnView(4, 25);
 			 wsheet1.addCell(l22);
 			 wsheet1.addCell(l23);
 			 wsheet1.addCell(l24);
 			 wsheet1.addCell(l25);
+			 wsheet1.addCell(l100);
 			//For FF Test step report
-			 Label l26 = new Label(1,1,"Step Defination",fcell);
-			 Label l27 = new Label(2,1,"Result",fcell);
-			 Label l28 = new Label(3,1,"ScreenShot",fcell);
+			 Label l26 = new Label(2,1,"Step Defination",fcell);
+			 Label l27 = new Label(3,1,"Result",fcell);
+			 Label l28 = new Label(4,1,"ScreenShot",fcell);
 			 Label l29 = new Label(0,1,"Test Case ID",fcell);
+			 Label l101 = new Label(1,1,"Step ID",fcell);
 			 wsheet3.setColumnView(0, 25);
 			 wsheet3.setColumnView(1, 25);
-			 wsheet3.setColumnView(2, 25);
+			 wsheet3.setColumnView(2, 50);
 			 wsheet3.setColumnView(3, 25);
+			 wsheet3.setColumnView(4, 25);
 			 wsheet3.addCell(l26);
 			 wsheet3.addCell(l27);
 			 wsheet3.addCell(l28);
 			 wsheet3.addCell(l29);
+			 wsheet3.addCell(l101);
 			//For Chrome Test step report
-			 Label l30 = new Label(1,1,"Step Defination",fcell);
-			 Label l31 = new Label(2,1,"Result",fcell);
-			 Label l32 = new Label(3,1,"ScreenShot",fcell);
+			 Label l30 = new Label(2,1,"Step Defination",fcell);
+			 Label l31 = new Label(3,1,"Result",fcell);
+			 Label l32 = new Label(4,1,"ScreenShot",fcell);
 			 Label l33 = new Label(0,1,"Test Case ID",fcell);
+			 Label l102 = new Label(1,1,"Step ID",fcell);
+
 			 wsheet5.setColumnView(0, 25);
 			 wsheet5.setColumnView(1, 25);
-			 wsheet5.setColumnView(2, 25);
+			 wsheet5.setColumnView(2, 50);
 			 wsheet5.setColumnView(3, 25);
+			 wsheet5.setColumnView(4, 25);
 			 wsheet5.addCell(l30);
 			 wsheet5.addCell(l31);
 			 wsheet5.addCell(l32);
 			 wsheet5.addCell(l33);
+			 wsheet5.addCell(l102);
 			 wbook.write();
 			 wbook.close();
 
@@ -296,7 +308,7 @@ public class Reporter
 				copy.close();
 		
 	}
-	public static void reportPassResult(String browser,String TCName,String stepDefination,String result) throws IOException, BiffException, RowsExceededException, WriteException
+	public static void reportPassResult(String browser,String stepDefination,String result) throws IOException, BiffException, RowsExceededException, WriteException
 	{
 		if(browser.equalsIgnoreCase("IE"))
 		{
@@ -326,13 +338,19 @@ public class Reporter
 			fcellYellow.setAlignment(Alignment.GENERAL);
 			Sheet wsheet=wbook.getSheet("IE_TestStepReport");
 			int usedRows=wsheet.getRows();
-			Label level = new Label(0,usedRows,TCName,fcell1);
-			Label level1 = new Label(1,usedRows,stepDefination,fcell1);
-			Label levelGreen = new Label(2,usedRows,result,fcellGreen);
-			Label levelRed = new Label(2,usedRows,result,fcellRed);
-			Label levelYello = new Label(2,usedRows,result,fcellYellow);
+			Label level = new Label(0,usedRows,AbstractTest.tcName,fcell1);
+			Label levelForStep = new Label(1,usedRows,"Step "+AbstractTest.stepValue,fcell1);
+			Label level1 = new Label(2,usedRows,stepDefination,fcell1);
+			Label levelGreen = new Label(3,usedRows,result,fcellGreen);
+			Label levelRed = new Label(3,usedRows,result,fcellRed);
+			Label levelYello = new Label(3,usedRows,result,fcellYellow);
 			WritableSheet wsheetNew=copy.getSheet("IE_TestStepReport");
-			wsheetNew.addCell(level);
+			if(AbstractTest.stepValue==1)
+			{
+				wsheetNew.addCell(level);
+
+			}
+			wsheetNew.addCell(levelForStep);
 			wsheetNew.addCell(level1);
 			if(result.equalsIgnoreCase("Pass"))
 			{
@@ -350,6 +368,7 @@ public class Reporter
 
 			}
 			copy.write();
+			AbstractTest.stepValue=AbstractTest.stepValue+1;
 			copy.close();
 		
 		}
@@ -381,13 +400,19 @@ public class Reporter
 			fcellYellow.setAlignment(Alignment.GENERAL);
 			Sheet wsheet=wbook.getSheet("FF_TestStepReport");
 			int usedRows=wsheet.getRows();
-			Label level = new Label(0,usedRows,TCName,fcell1);
-			Label level1 = new Label(1,usedRows,stepDefination,fcell1);
-			Label levelGreen = new Label(2,usedRows,result,fcellGreen);
-			Label levelRed = new Label(2,usedRows,result,fcellRed);
-			Label levelYello = new Label(2,usedRows,result,fcellYellow);
+			Label level = new Label(0,usedRows,AbstractTest.tcName,fcell1);
+			Label levelForStep = new Label(1,usedRows,"Step "+AbstractTest.stepValue,fcell1);
+			Label level1 = new Label(2,usedRows,stepDefination,fcell1);
+			Label levelGreen = new Label(3,usedRows,result,fcellGreen);
+			Label levelRed = new Label(3,usedRows,result,fcellRed);
+			Label levelYello = new Label(3,usedRows,result,fcellYellow);
 			WritableSheet wsheetNew=copy.getSheet("FF_TestStepReport");
-			wsheetNew.addCell(level);
+			if(AbstractTest.stepValue==1)
+			{
+				wsheetNew.addCell(level);
+
+			}
+			wsheetNew.addCell(levelForStep);
 			wsheetNew.addCell(level1);
 			if(result.equalsIgnoreCase("Pass"))
 			{
@@ -406,6 +431,7 @@ public class Reporter
 
 			}
 			copy.write();
+			AbstractTest.stepValue=AbstractTest.stepValue+1;
 			copy.close();
 		}
 		else if(browser.equalsIgnoreCase("Chrome"))
@@ -436,13 +462,19 @@ public class Reporter
 			fcellYellow.setAlignment(Alignment.GENERAL);
 			Sheet wsheet=wbook.getSheet("Chrome_TestStepReport");
 			int usedRows=wsheet.getRows();
-			Label level = new Label(0,usedRows,TCName,fcell1);
-			Label level1 = new Label(1,usedRows,stepDefination,fcell1);
-			Label levelGreen = new Label(2,usedRows,result,fcellGreen);
-			Label levelRed = new Label(2,usedRows,result,fcellRed);
-			Label levelYello = new Label(2,usedRows,result,fcellYellow);
+			Label level = new Label(0,usedRows,AbstractTest.tcName,fcell1);
+			Label levelForStep = new Label(1,usedRows,"Step "+AbstractTest.stepValue,fcell1);
+			Label level1 = new Label(2,usedRows,stepDefination,fcell1);
+			Label levelGreen = new Label(3,usedRows,result,fcellGreen);
+			Label levelRed = new Label(3,usedRows,result,fcellRed);
+			Label levelYello = new Label(3,usedRows,result,fcellYellow);
 			WritableSheet wsheetNew=copy.getSheet("Chrome_TestStepReport");
-			wsheetNew.addCell(level);
+			if(AbstractTest.stepValue==1)
+			{
+				wsheetNew.addCell(level);
+
+			}
+			wsheetNew.addCell(levelForStep);
 			wsheetNew.addCell(level1);
 			if(result.equalsIgnoreCase("Pass"))
 			{
@@ -461,17 +493,18 @@ public class Reporter
 
 			}
 			copy.write();
+			AbstractTest.stepValue=AbstractTest.stepValue+1;
 			copy.close();
 		}
 	}
 
 	
 		
-	public static void reportTestFailure(String browser,String screenshot,String TCName,String stepDefination,String result) throws IOException, BiffException, RowsExceededException, WriteException
+	public static void reportTestFailure(String browser,String stepDefination,String result) throws IOException, BiffException, RowsExceededException, WriteException
 		{
 			if(browser.equalsIgnoreCase("IE"))
 			{
-				File f=new File("FailureScreenshot/"+browser+"_"+screenshot+".png");
+				File f=new File("FailureScreenshot/"+browser+"_"+AbstractTest.tcName+AbstractTest.stepValue+".png");
 				file= new File("Report_Excel/Report.xls");
 				FileInputStream is = new FileInputStream(file);
 				Workbook wbook =Workbook.getWorkbook(is);
@@ -498,15 +531,22 @@ public class Reporter
 				fcellYellow.setAlignment(Alignment.GENERAL);
 				Sheet wsheet=wbook.getSheet("IE_TestStepReport");
 				int usedRows=wsheet.getRows();
-				Label level = new Label(0,usedRows,TCName,fcell1);
-				Label level1 = new Label(1,usedRows,stepDefination,fcell1);
-				Label levelGreen = new Label(2,usedRows,result,fcellGreen);
-				Label levelRed = new Label(2,usedRows,result,fcellRed);
-				Label levelYello = new Label(2,usedRows,result,fcellYellow);
+				Label level = new Label(0,usedRows,AbstractTest.tcName,fcell1);
+				Label levelForStep = new Label(1,usedRows,"Step "+AbstractTest.stepValue,fcell1);
+				Label level1 = new Label(2,usedRows,stepDefination,fcell1);
+				Label levelGreen = new Label(3,usedRows,result,fcellGreen);
+				Label levelRed = new Label(3,usedRows,result,fcellRed);
+				Label levelYello = new Label(3,usedRows,result,fcellYellow);
 				WritableSheet wsheetNew=copy.getSheet("IE_TestStepReport");
-			    WritableHyperlink wh2 = new WritableHyperlink(3, usedRows, 4, usedRows, f.getAbsoluteFile(), "Failure Image");
-				wsheetNew.addCell(level);
+			    WritableHyperlink wh2 = new WritableHyperlink(4, usedRows, 5, usedRows, f.getAbsoluteFile(), "Failure Image");
+			    if(AbstractTest.stepValue==1)
+			    {
+					wsheetNew.addCell(level);
+
+			    }
 				wsheetNew.addCell(level1);
+				wsheetNew.addCell(levelForStep);
+
 				if(result.equalsIgnoreCase("Pass"))
 				{
 					wsheetNew.addCell(levelGreen);
@@ -526,12 +566,13 @@ public class Reporter
 
 				}
 				copy.write();
+				AbstractTest.stepValue=AbstractTest.stepValue+1;
 				copy.close();
 			
 			}
 			else if(browser.equalsIgnoreCase("FF"))
 			{
-				File f=new File("FailureScreenshot/"+browser+"_"+screenshot+".png");
+				File f=new File("FailureScreenshot/"+browser+"_"+AbstractTest.tcName+AbstractTest.stepValue+".png");
 				file= new File("Report_Excel/Report.xls");
 				FileInputStream is = new FileInputStream(file);
 				Workbook wbook =Workbook.getWorkbook(is);
@@ -558,14 +599,20 @@ public class Reporter
 				fcellYellow.setAlignment(Alignment.GENERAL);
 				Sheet wsheet=wbook.getSheet("FF_TestStepReport");
 				int usedRows=wsheet.getRows();
-				Label level = new Label(0,usedRows,TCName,fcell1);
-				Label level1 = new Label(1,usedRows,stepDefination,fcell1);
-				Label levelGreen = new Label(2,usedRows,result,fcellGreen);
-				Label levelRed = new Label(2,usedRows,result,fcellRed);
-				Label levelYello = new Label(2,usedRows,result,fcellYellow);
+				Label level = new Label(0,usedRows,AbstractTest.tcName,fcell1);
+				Label levelForStep = new Label(1,usedRows,"Step "+AbstractTest.stepValue,fcell1);
+				Label level1 = new Label(2,usedRows,stepDefination,fcell1);
+				Label levelGreen = new Label(3,usedRows,result,fcellGreen);
+				Label levelRed = new Label(3,usedRows,result,fcellRed);
+				Label levelYello = new Label(3,usedRows,result,fcellYellow);
 				WritableSheet wsheetNew=copy.getSheet("FF_TestStepReport");
-			    WritableHyperlink wh2 = new WritableHyperlink(3, usedRows, 4, usedRows,f.getAbsoluteFile(), "Failure Image");
-				wsheetNew.addCell(level);
+			    WritableHyperlink wh2 = new WritableHyperlink(4, usedRows, 5, usedRows,f.getAbsoluteFile(), "Failure Image");
+			    if(AbstractTest.stepValue==1)
+			    {
+					wsheetNew.addCell(level);
+
+			    }
+			    wsheetNew.addCell(levelForStep);
 				wsheetNew.addCell(level1);
 				if(result.equalsIgnoreCase("Pass"))
 				{
@@ -586,11 +633,12 @@ public class Reporter
 
 				}
 				copy.write();
+				AbstractTest.stepValue=AbstractTest.stepValue+1;
 				copy.close();
 			}
 			else if(browser.equalsIgnoreCase("Chrome"))
 			{
-				File f=new File("FailureScreenshot/"+browser+"_"+screenshot+".png");
+				File f=new File("FailureScreenshot/"+browser+"_"+AbstractTest.tcName+AbstractTest.stepValue+".png");
 				file= new File("Report_Excel/Report.xls");
 				FileInputStream is = new FileInputStream(file);
 				Workbook wbook =Workbook.getWorkbook(is);
@@ -617,14 +665,20 @@ public class Reporter
 				fcellYellow.setAlignment(Alignment.GENERAL);
 				Sheet wsheet=wbook.getSheet("Chrome_TestStepReport");
 				int usedRows=wsheet.getRows();
-				Label level = new Label(0,usedRows,TCName,fcell1);
-				Label level1 = new Label(1,usedRows,stepDefination,fcell1);
-				Label levelGreen = new Label(2,usedRows,result,fcellGreen);
-				Label levelRed = new Label(2,usedRows,result,fcellRed);
-				Label levelYello = new Label(2,usedRows,result,fcellYellow);
+				Label level = new Label(0,usedRows,AbstractTest.tcName,fcell1);
+				Label levelForStep = new Label(1,usedRows,"Step "+AbstractTest.stepValue,fcell1);
+				Label level1 = new Label(2,usedRows,stepDefination,fcell1);
+				Label levelGreen = new Label(3,usedRows,result,fcellGreen);
+				Label levelRed = new Label(3,usedRows,result,fcellRed);
+				Label levelYello = new Label(3,usedRows,result,fcellYellow);
 				WritableSheet wsheetNew=copy.getSheet("Chrome_TestStepReport");
-			    WritableHyperlink wh2 = new WritableHyperlink(3, usedRows, 4, usedRows,f.getAbsoluteFile(), "Failure Image");
-				wsheetNew.addCell(level);
+			    WritableHyperlink wh2 = new WritableHyperlink(4, usedRows, 5, usedRows,f.getAbsoluteFile(), "Failure Image");
+			    if(AbstractTest.stepValue==1)
+			    {
+					wsheetNew.addCell(level);
+
+			    }
+			    wsheetNew.addCell(levelForStep);
 				wsheetNew.addCell(level1);
 				if(result.equalsIgnoreCase("Pass"))
 				{
@@ -646,6 +700,7 @@ public class Reporter
 
 				}
 				copy.write();
+				AbstractTest.stepValue=AbstractTest.stepValue+1;
 				copy.close();
 			}
 		}
@@ -658,6 +713,8 @@ public class Reporter
 			String tcName=null;
 			String tcNamePrevious=null;
 			String resultCurrent=null;
+			String tcNameForVerify=null;
+
 
 	
 			file= new File("Report_Excel/Report.xls");
@@ -690,8 +747,21 @@ public class Reporter
 //			tcName=wsheet.getCell(0, 2).getContents();
 			for(int i=size-1;i>=2;i--)
 			{
-				 resultCurrent=wsheet.getCell(2, i).getContents();
 				 tcName=wsheet.getCell(0, i).getContents();
+				 if(tcName.equalsIgnoreCase(""))
+				 {
+					 continue;
+				 }
+				 else
+				 {
+					 break;
+				 }
+
+			}
+			for(int i=size-1;i>=2;i--)
+			{
+				 resultCurrent=wsheet.getCell(3, i).getContents();
+				 tcNameForVerify=wsheet.getCell(0, i).getContents();
 				 tcNamePrevious=wsheet.getCell(0, i-1).getContents();
 				 if(resultCurrent.equalsIgnoreCase("Fail"))
 				 {
@@ -720,7 +790,7 @@ public class Reporter
 						fftestReport.addCell(level2);
 						break;
 				 }
-				 else if(resultCurrent.equalsIgnoreCase("Pass") & !tcName.equalsIgnoreCase(tcNamePrevious))
+				 else if(resultCurrent.equalsIgnoreCase("Pass") && !tcNameForVerify.equalsIgnoreCase("") && !tcNameForVerify.equalsIgnoreCase(tcNamePrevious))
 				 {
 					   int size1=fftestReport.getRows();
 						Label levell = new Label(0,size1,tcName,fcell1);
@@ -746,6 +816,7 @@ public class Reporter
 			String tcName=null;
 			String tcNamePrevious=null;
 			String resultCurrent=null;
+			String tcNameForVerify=null;
 	
 			file= new File("Report_Excel/Report.xls");
 			FileInputStream is = new FileInputStream(file);
@@ -777,8 +848,21 @@ public class Reporter
 //			tcName=wsheet.getCell(0, 2).getContents();
 			for(int i=size-1;i>=2;i--)
 			{
-				 resultCurrent=wsheet.getCell(2, i).getContents();
 				 tcName=wsheet.getCell(0, i).getContents();
+				 if(tcName.equalsIgnoreCase(""))
+				 {
+					 continue;
+				 }
+				 else
+				 {
+					 break;
+				 }
+
+			}
+			for(int i=size-1;i>=2;i--)
+			{
+				 resultCurrent=wsheet.getCell(3, i).getContents();
+				 tcNameForVerify=wsheet.getCell(0, i).getContents();
 				 tcNamePrevious=wsheet.getCell(0, i-1).getContents();
 				 if(resultCurrent.equalsIgnoreCase("Fail"))
 				 {
@@ -798,7 +882,7 @@ public class Reporter
 						fftestReport.addCell(level2);
 						break;
 				 }
-				 else if(resultCurrent.equalsIgnoreCase("Pass") & i==2)
+				 else if(resultCurrent.equalsIgnoreCase("Pass") && i==2)
 				 {
 					 int size1=fftestReport.getRows();
 						Label levell = new Label(0,size1,tcName,fcell1);
@@ -807,7 +891,7 @@ public class Reporter
 						fftestReport.addCell(level2);
 						break;
 				 }
-				 else if(resultCurrent.equalsIgnoreCase("Pass") & !tcName.equalsIgnoreCase(tcNamePrevious))
+				 else if(resultCurrent.equalsIgnoreCase("Pass") && !tcNameForVerify.equalsIgnoreCase("") && !tcNameForVerify.equalsIgnoreCase(tcNamePrevious))
 				 {
 					   int size1=fftestReport.getRows();
 						Label levell = new Label(0,size1,tcName,fcell1);
@@ -833,6 +917,8 @@ public class Reporter
 			String tcName=null;
 			String tcNamePrevious=null;
 			String resultCurrent=null;
+			String tcNameForVerify=null;
+
 	
 			file= new File("Report_Excel/Report.xls");
 			FileInputStream is = new FileInputStream(file);
@@ -864,8 +950,21 @@ public class Reporter
 //			tcName=wsheet.getCell(0, 2).getContents();
 			for(int i=size-1;i>=2;i--)
 			{
-				 resultCurrent=wsheet.getCell(2, i).getContents();
 				 tcName=wsheet.getCell(0, i).getContents();
+				 if(tcName.equalsIgnoreCase(""))
+				 {
+					 continue;
+				 }
+				 else
+				 {
+					 break;
+				 }
+
+			}
+			for(int i=size-1;i>=2;i--)
+			{
+				 resultCurrent=wsheet.getCell(3, i).getContents();
+				 tcNameForVerify=wsheet.getCell(0, i).getContents();
 				 tcNamePrevious=wsheet.getCell(0, i-1).getContents();
 				 if(resultCurrent.equalsIgnoreCase("Fail"))
 				 {
@@ -885,7 +984,7 @@ public class Reporter
 						fftestReport.addCell(level2);
 						break;
 				 }
-				 else if(resultCurrent.equalsIgnoreCase("Pass") & i==2)
+				 else if(resultCurrent.equalsIgnoreCase("Pass") && i==2)
 				 {
 					 int size1=fftestReport.getRows();
 						Label levell = new Label(0,size1,tcName,fcell1);
@@ -894,7 +993,7 @@ public class Reporter
 						fftestReport.addCell(level2);
 						break;
 				 }
-				 else if(resultCurrent.equalsIgnoreCase("Pass") & !tcName.equalsIgnoreCase(tcNamePrevious))
+				 else if(resultCurrent.equalsIgnoreCase("Pass") && !tcNameForVerify.equalsIgnoreCase("") && !tcNameForVerify.equalsIgnoreCase(tcNamePrevious))
 				 {
 					   int size1=fftestReport.getRows();
 						Label levell = new Label(0,size1,tcName,fcell1);

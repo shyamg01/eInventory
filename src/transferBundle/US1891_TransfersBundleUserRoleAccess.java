@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
-import sprint2.AbstractTest;
+import eInventoryPageClasses.AbstractTest;
 import common.Base;
 import common.GlobalVariable;
 import common.LoginTestData;
@@ -24,36 +24,37 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	@Test()
 	public void transferBundle_US1891_TC3060_Supervisor() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
+		
 		/**Variable Section :**/
+		AbstractTest.tcName="transferBundle_US1891_TC3060_Supervisor";
 		String password = LoginTestData.supervisor_SSO_Password;
 		String userId = LoginTestData.supervisor_SSO_UserId;
 		String storeId = LoginTestData.supervisorStoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeIn;
 		String transferStoreNumber = GlobalVariable.nationalStore1;
-		String caseQuantity = "3";
-		String innerPackQuantity ="1";
-		String looseUnitQuantity ="4";
+		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String date = GlobalVariable.createDate;
-		String transferTime = GlobalVariable.transferTime;
+		/*String transferTime = GlobalVariable.transferTime;*/
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
 		TransferLandingPage transferLandingPage =homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToTransferLandingPage();
+				.goToTransferLandingPage();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.CreateNewTransfers_BT)).click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 		//Select date and time
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
+	/*	transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
 		//Get the time of transfer
-		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();*/
 		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
 		transferLandingPage.selectTransferType(transferType).selectLocationToTransfer(transferStoreNumber)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
 		Thread.sleep(2000);
 		//Verify that cancel and print button are displayed  
-		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT)
-				& Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Print_BT);
+		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT);
 		//Get the total transfer amount
 		String amount = transferLandingPage.AddTransferPopup_TotalAmount_Value.getText().split("\\$")[1];
 		//Submit the transfer
@@ -64,17 +65,19 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(5000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		//Verify that transfer entries should displayed in Transfer landing page
-		if (result & transferLandingPage.verifyTransferPlaced(date, time, transferStoreNumber,amount)) {
+		if (result & transferLandingPage.verifyTransferPlaced(date,transferType, transferStoreNumber,amount)) {
 			Reporter.reportPassResult(
-					browser,"transferBundle_US1891_TC3060_Supervisor",
+					browser,
 					"Supervisor should be able to transfer raw items in/out to other stores and able to view print button",
 					"Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser,"transferBundle_US1891_TC3060_Supervisor_Condition1","transferBundle_US1891_TC3060_Supervisor",
+					browser,
 					"Supervisor should be able to transfer raw items in/out to other stores and able to view print button",
 					"Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3060_Supervisor_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		int caseQty2 = Integer.parseInt(caseQuantity) + 10;
 		int innerPackQty2 = Integer.parseInt(innerPackQuantity) + 10;
@@ -84,11 +87,12 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 //		transferLandingPage.BackToTop_BT.click();
 		transferLandingPage.CreateNewTransfers_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
-		//Get the time of transfer
-		String time2=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
 		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTransferType(transferType).selectLocationToTransfer(transferStoreNumber)
+		/*transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);*/
+		transferLandingPage.selectTransferType(transferType).selectLocationToTransfer(transferStoreNumber)
 				.insertAndAddDetailsToTransfer(samplewRINID,String.valueOf(caseQty2),String.valueOf(innerPackQty2),String.valueOf(looseUnitsQty2));
+		//Get the time of transfer
+		/*String time2=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();*/
 		//Get the amount
 		String amount2 = transferLandingPage.AddTransferPopup_TotalAmount_Value.getText().split("\\$")[1];
 		System.out.println("amount "+amount2);
@@ -98,15 +102,17 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(2000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		// Verify that user should be able to cancel transfer and transfer entries should not displayed in transfer page 
-		if (!transferLandingPage.verifyTransferPlaced(date,time2, amount2)) {
-			Reporter.reportPassResult(browser, "transferBundle_US1891_TC3060_Supervisor",
+		if (!transferLandingPage.verifyTransferPlaced(date,amount2)) {
+			Reporter.reportPassResult(browser,
 					"Supervisor should be able to cancel transfer for raw items in/out to other stores",
 					"Pass");
+			
 		} else {
-			Reporter.reportTestFailure(browser, "transferBundle_US1891_TC3060_Supervisor_Condition2","transferBundle_US1891_TC3060_Supervisor",
+			Reporter.reportTestFailure(browser,
 					"Supervisor should be able to cancel transfer for raw items in/out to other stores",
 					"Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3060_Supervisor_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -115,35 +121,35 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3060_Operator() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/**Variable Section :**/
+		AbstractTest.tcName="transferBundle_US1891_TC3060_Operator";
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
 		String storeId = LoginTestData.operatorStoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin2;
 		String transferType = GlobalVariable.transferTypeIn;
 		String transferStoreNumber = GlobalVariable.nationalStore1;
-		String caseQuantity = "3";
-		String innerPackQuantity ="4";
-		String looseUnitQuantity ="1";
+		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String date = GlobalVariable.createDate;
-		String transferTime = GlobalVariable.transferTime;
+//		String transferTime = GlobalVariable.transferTime;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
 		TransferLandingPage transferLandingPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToTransferLandingPage();
+				.selectLocation(storeId).goToTransferLandingPage();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.CreateNewTransfers_BT)).click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
-		//Get the time of transfer
-		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
 		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
 		System.out.println("Type is"+transferType);
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
+		/*transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);*/
 		transferLandingPage.selectTransferType(transferType).selectLocationToTransfer(transferStoreNumber)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
+		//Get the time of transfer
+		/*String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();*/
 		Thread.sleep(2000);
 		//Verify that cancel and print button are displayed  
-		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT)
-				& Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Print_BT);
+		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT);
 		//Get the total transfer amount
 		String amount = transferLandingPage.AddTransferPopup_TotalAmount_Value.getText().split("\\$")[1];
 		//Submit the transfer
@@ -154,17 +160,19 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(5000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		//Verify that transfer entries should displayed in Transfer landing page
-		if (result & transferLandingPage.verifyTransferPlaced(date, time, transferStoreNumber,amount)) {
+		if (result & transferLandingPage.verifyTransferPlaced(date,transferType, transferStoreNumber,amount)) {
 			Reporter.reportPassResult(
-					browser,"transferBundle_US1891_TC3060_Operator",
+					browser,
 					"Operator should be able to transfer raw items in/out to other stores and able to view print button",
 					"Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser,"transferBundle_US1891_TC3060_Operator_Condition1","transferBundle_US1891_TC3060_Operator",
+					browser,
 					"Operator should be able to transfer raw items in/out to other stores and able to view print button",
 					"Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3060_Operator_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		int caseQty2 = Integer.parseInt(caseQuantity) + 10;
 		int innerPackQty2 = Integer.parseInt(innerPackQuantity) + 10;
@@ -174,10 +182,11 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 //		transferLandingPage.BackToTop_BT.click();
 		transferLandingPage.CreateNewTransfers_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
-		//Get the time of transfer
-		String time2=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
 		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTransferType(transferType).insertAndAddDetailsToTransfer(samplewRINID,
+	/*	transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);*/
+		//Get the time of transfer
+		/*String time2=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();*/
+		transferLandingPage.selectTransferType(transferType).insertAndAddDetailsToTransfer(samplewRINID,
 				String.valueOf(caseQty2), String.valueOf(innerPackQty2),String.valueOf(looseUnitsQty2));
 		//Get the amount
 		String amount2 = transferLandingPage.AddTransferPopup_TotalAmount_Value.getText().split("\\$")[1];
@@ -188,15 +197,17 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(2000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		// Verify that user should be able to cancel transfer and transfer entries should not displayed in transfer page 
-		if (!transferLandingPage.verifyTransferPlaced(date,time2, amount2)) {
-			Reporter.reportPassResult(browser, "transferBundle_US1891_TC3060_Operator",
+		if (!transferLandingPage.verifyTransferPlaced(date, amount2)) {
+			Reporter.reportPassResult(browser,
 					"Operator should be able to cancel transfer for raw items in/out to other stores",
 					"Pass");
+			
 		} else {
-			Reporter.reportTestFailure(browser, "transferBundle_US1891_TC3060_Operator_Condition2","transferBundle_US1891_TC3060_Operator",
+			Reporter.reportTestFailure(browser,
 					"Operator should be able to cancel transfer for raw items in/out to other stores",
 					"Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3060_Operator_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -205,34 +216,34 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3060_Level1() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/**Variable Section :**/
+		AbstractTest.tcName="transferBundle_US1891_TC3060_Level1";
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
 		String storeId = LoginTestData.level1StoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin3;
 		String transferType = GlobalVariable.transferTypeIn;
 		String transferStoreNumber = GlobalVariable.nationalStore1;
-		String caseQuantity = "1";
-		String innerPackQuantity ="3";
-		String looseUnitQuantity ="4";
+		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String date = GlobalVariable.createDate;
-		String transferTime = GlobalVariable.transferTime;
+//		String transferTime = GlobalVariable.transferTime;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
 		TransferLandingPage transferLandingPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToTransferLandingPage();
+				.goToTransferLandingPage();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.CreateNewTransfers_BT)).click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
+		/*transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);*/
 		//Get the time of transfer
-		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+//		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
 		transferLandingPage.selectTransferType(transferType).selectLocationToTransfer(transferStoreNumber)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
 		Thread.sleep(2000);
 		//Verify that cancel and print button are displayed  
-		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT)
-				& Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Print_BT);
+		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT);
 		//Get the total transfer amount
 		String amount = transferLandingPage.AddTransferPopup_TotalAmount_Value.getText().split("\\$")[1];
 		//Submit the transfer
@@ -243,17 +254,19 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(5000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		//Verify that transfer entries should displayed in Transfer landing page
-		if (result & transferLandingPage.verifyTransferPlaced(date, time, transferStoreNumber,amount)) {
+		if (result & transferLandingPage.verifyTransferPlaced(date,transferType, transferStoreNumber,amount)) {
 			Reporter.reportPassResult(
-					browser,"transferBundle_US1891_TC3060_Level1",
+					browser,
 					"Level1 User should be able to transfer raw items in/out to other stores and able to view print button",
 					"Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser,"transferBundle_US1891_TC3060_Level1_Condition1","transferBundle_US1891_TC3060_Level1",
+					browser,
 					"Level1 User should be able to transfer raw items in/out to other stores and able to view print button",
 					"Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3060_Level1_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		int caseQty2 = Integer.parseInt(caseQuantity) + 10;
 		int innerPackQty2 = Integer.parseInt(innerPackQuantity) + 10;
@@ -263,11 +276,12 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 //		transferLandingPage.BackToTop_BT.click();
 		transferLandingPage.CreateNewTransfers_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
-		//Get the time of transfer
-		String time2=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
 		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTransferType(transferType).insertAndAddDetailsToTransfer(samplewRINID,
+		/*transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);*/
+		transferLandingPage.selectTransferType(transferType).insertAndAddDetailsToTransfer(samplewRINID,
 				String.valueOf(caseQty2), String.valueOf(innerPackQty2),String.valueOf(looseUnitsQty2));
+		//Get the time of transfer
+//		String time2=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
 		//Get the amount
 		String amount2 = transferLandingPage.AddTransferPopup_TotalAmount_Value.getText().split("\\$")[1];
 		System.out.println("amount "+amount2);
@@ -277,15 +291,17 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(2000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		// Verify that user should be able to cancel transfer and transfer entries should not displayed in transfer page 
-		if (!transferLandingPage.verifyTransferPlaced(date,time2, amount2)) {
-			Reporter.reportPassResult(browser, "transferBundle_US1891_TC3060_Level1",
+		if (!transferLandingPage.verifyTransferPlaced(date,amount2)) {
+			Reporter.reportPassResult(browser,
 					"Level1 user should be able to cancel transfer for raw items in/out to other stores",
 					"Pass");
+			
 		} else {
-			Reporter.reportTestFailure(browser, "transferBundle_US1891_TC3060_Level1_Condition2","transferBundle_US1891_TC3060_Level1",
+			Reporter.reportTestFailure(browser,
 					"Level1 user should be able to cancel transfer for raw items in/out to other stores",
 					"Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3060_Level1_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -294,34 +310,34 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3060_SupervisorWithRoleAssignment() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/**Variable Section :**/
+		AbstractTest.tcName="transferBundle_US1891_TC3060_SupervisorWithRoleAssignment";
 		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
 		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
 		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin4;
 		String transferType = GlobalVariable.transferTypeIn;
 		String transferStoreNumber = GlobalVariable.nationalStore1;
-		String caseQuantity = "1";
-		String innerPackQuantity ="4";
-		String looseUnitQuantity ="3";
+		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String date = GlobalVariable.createDate;
-		String transferTime = GlobalVariable.transferTime;
+//		String transferTime = GlobalVariable.transferTime;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
 		TransferLandingPage transferLandingPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToTransferLandingPage();
+				.goToTransferLandingPage();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.CreateNewTransfers_BT)).click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
+		/*transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);*/
 		//Get the time of transfer
-		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+//		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
 		transferLandingPage.selectTransferType(transferType).selectLocationToTransfer(transferStoreNumber)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
 		Thread.sleep(2000);
 		//Verify that cancel and print button are displayed  
-		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT)
-				& Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Print_BT);
+		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT);
 		//Get the total transfer amount
 		String amount = transferLandingPage.AddTransferPopup_TotalAmount_Value.getText().split("\\$")[1];
 		//Submit the transfer
@@ -332,17 +348,19 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(5000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		//Verify that transfer entries should displayed in Transfer landing page
-		if (result & transferLandingPage.verifyTransferPlaced(date, time, transferStoreNumber,amount)) {
+		if (result & transferLandingPage.verifyTransferPlaced(date,transferType, transferStoreNumber,amount)) {
 			Reporter.reportPassResult(
-					browser,"transferBundle_US1891_TC3060_SupervisorWithRoleAssignment",
+					browser,
 					"SupervisorWithRoleAssignment User should be able to transfer raw items in/out to other stores and able to view print button",
 					"Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser,"transferBundle_US1891_TC3060_SupervisorWithRoleAssignment_Condition1","transferBundle_US1891_TC3060_SupervisorWithRoleAssignment",
+					browser,
 					"SupervisorWithRoleAssignment User should be able to transfer raw items in/out to other stores and able to view print button",
 					"Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3060_SupervisorWithRoleAssignment_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		int caseQty2 = Integer.parseInt(caseQuantity) + 10;
 		int innerPackQty2 = Integer.parseInt(innerPackQuantity) + 10;
@@ -353,9 +371,9 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		transferLandingPage.CreateNewTransfers_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 		//Get the time of transfer
-		String time2=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+//		String time2=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
 		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTransferType(transferType).insertAndAddDetailsToTransfer(samplewRINID,
+		transferLandingPage.selectTransferType(transferType).insertAndAddDetailsToTransfer(samplewRINID,
 				String.valueOf(caseQty2), String.valueOf(innerPackQty2),String.valueOf(looseUnitsQty2));
 		//Get the amount
 		String amount2 = transferLandingPage.AddTransferPopup_TotalAmount_Value.getText().split("\\$")[1];
@@ -366,15 +384,18 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(2000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		// Verify that user should be able to cancel transfer and transfer entries should not displayed in transfer page 
-		if (!transferLandingPage.verifyTransferPlaced(date,time2, amount2)) {
-			Reporter.reportPassResult(browser, "transferBundle_US1891_TC3060_SupervisorWithRoleAssignment",
+		if (!transferLandingPage.verifyTransferPlaced(date,transferType,transferStoreNumber, amount2)) {
+			Reporter.reportPassResult(browser,
 					"SupervisorWithRoleAssignment user should be able to cancel transfer for raw items in/out to other stores",
 					"Pass");
+			
 		} else {
-			Reporter.reportTestFailure(browser, "transferBundle_US1891_TC3060_SupervisorWithRoleAssignment_Condition2","transferBundle_US1891_TC3060_SupervisorWithRoleAssignment",
+
+			Reporter.reportTestFailure(browser, 
 					"SupervisorWithRoleAssignment user should be able to cancel transfer for raw items in/out to other stores",
 					"Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3060_SupervisorWithRoleAssignment_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -383,34 +404,34 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3060_OrgAdmin() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/**Variable Section :**/
+		AbstractTest.tcName="transferBundle_US1891_TC3060_OrgAdmin";
 		String userId = LoginTestData.orgAdmin_SSO_UserId;
 		String password = LoginTestData.orgAdmin_SSO_Password;
 		String storeId = LoginTestData.orgAdminStoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin1;
 		String transferType = GlobalVariable.transferTypeIn;
 		String transferStoreNumber = GlobalVariable.nationalStore1;
-		String caseQuantity = "4";
-		String innerPackQuantity ="1";
-		String looseUnitQuantity ="3";
+		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String date = GlobalVariable.createDate;
-		String transferTime = GlobalVariable.transferTime;
+//		String transferTime = GlobalVariable.transferTime;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
 		TransferLandingPage transferLandingPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToTransferLandingPage();
+				.goToTransferLandingPage();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.CreateNewTransfers_BT)).click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
+		/*transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);*/
 		//Get the time of transfer
-		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+//		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
 		transferLandingPage.selectTransferType(transferType).selectLocationToTransfer(transferStoreNumber)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
 		Thread.sleep(2000);
 		//Verify that cancel and print button are displayed  
-		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT)
-				& Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Print_BT);
+		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT);
 		//Get the total transfer amount
 		String amount = transferLandingPage.AddTransferPopup_TotalAmount_Value.getText().split("\\$")[1];
 		//Submit the transfer
@@ -421,17 +442,19 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(5000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		//Verify that transfer entries should displayed in Transfer landing page
-		if (result & transferLandingPage.verifyTransferPlaced(date, time, transferStoreNumber,amount)) {
+		if (result & transferLandingPage.verifyTransferPlaced(date,transferType, transferStoreNumber,amount)) {
 			Reporter.reportPassResult(
-					browser,"transferBundle_US1891_TC3060_OrgAdmin",
+					browser,
 					"OrgAdmin User should be able to transfer raw items in/out to other stores and able to view print button",
 					"Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser,"transferBundle_US1891_TC3060_OrgAdmin_Condition1","transferBundle_US1891_TC3060_OrgAdmin",
+					browser,
 					"OrgAdmin User should be able to transfer raw items in/out to other stores and able to view print button",
 					"Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3060_OrgAdmin_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		int caseQty2 = Integer.parseInt(caseQuantity) + 1;
 		int innerPackQty2 = Integer.parseInt(innerPackQuantity) + 1;
@@ -442,9 +465,9 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		transferLandingPage.CreateNewTransfers_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 		//Get the time of transfer
-		String time2=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+//		String time2=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
 		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTransferType(transferType).insertAndAddDetailsToTransfer(samplewRINID,
+		transferLandingPage.selectTransferType(transferType).insertAndAddDetailsToTransfer(samplewRINID,
 				String.valueOf(caseQty2), String.valueOf(innerPackQty2),String.valueOf(looseUnitsQty2));
 		//Get the amount
 		String amount2 = transferLandingPage.AddTransferPopup_TotalAmount_Value.getText().split("\\$")[1];
@@ -455,15 +478,17 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(2000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		// Verify that user should be able to cancel transfer and transfer entries should not displayed in transfer page 
-		if (!transferLandingPage.verifyTransferPlaced(date,time2, amount2)) {
-			Reporter.reportPassResult(browser, "transferBundle_US1891_TC3060_OrgAdmin",
+		if (!transferLandingPage.verifyTransferPlaced(date,transferType,transferStoreNumber, amount2)) {
+			Reporter.reportPassResult(browser,
 					"OrgAdmin user should be able to cancel transfer for raw items in/out to other stores",
 					"Pass");
+			
 		} else {
-			Reporter.reportTestFailure(browser, "transferBundle_US1891_TC3060_OrgAdmin_Condition2","transferBundle_US1891_TC3060_OrgAdmin",
+			Reporter.reportTestFailure(browser,
 					"OrgAdmin user should be able to cancel transfer for raw items in/out to other stores",
 					"Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3060_OrgAdmin_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 
@@ -472,31 +497,34 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3061_Supervisor() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="transferBundle_US1891_TC3061_Supervisor";
 		String password = LoginTestData.supervisor_SSO_Password;
 		String userId = LoginTestData.supervisor_SSO_UserId;
 		String storeId = LoginTestData.supervisorStoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin1;
 		String transferType = GlobalVariable.transferTypeOffice;
-		String caseQuantity = "2";
-		String innerPackQuantity ="1";
-		String looseUnitQuantity ="4";
+		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String date = GlobalVariable.createDate;
+//		String transferTime = GlobalVariable.transferTime;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		TransferLandingPage transferLandingPage = PageFactory.initElements(driver, TransferLandingPage.class);
 		// Navigate to Transfer Landing page and click on create new transfer button
-		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToTransferLandingPage().CreateNewTransfers_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
-		// Get the time of transfer
-		String time = transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
+		/*transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
+		//Get the time of transfer
+		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();*/
 		// Select the transfer type as "Office" and add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTransferType(transferType)
+		transferLandingPage.selectTransferType(transferType)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
 		Thread.sleep(2000);
 		// Verify that cancel and print button are displayed
-		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT)
-				& Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Print_BT);
+		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT);
 		// Get the total transfer amount
 		String amount = transferLandingPage.AddTransferPopup_TotalAmount_Value.getText().split("\\$")[1];
 		// Submit the transfer
@@ -507,15 +535,17 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(5000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		// Verify that transfer entries should displayed in Transfer landing page
-		if (result & transferLandingPage.verifyTransferPlaced(date, time, "Office",amount)) {
+		if (result & transferLandingPage.verifyTransferPlaced(date,transferType, "Office",amount)) {
 			Reporter.reportPassResult(
-					browser, "transferBundle_US1891_TC3061_Supervisor",
+					browser,
 					"Supervisor should be able to submit transfer to office","Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser, "transferBundle_US1891_TC3061_Supervisor","transferBundle_US1891_TC3061_Supervisor",
+					browser,
 					"Supervisor should be able to submit transfer to office","Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3061_Supervisor");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -524,31 +554,34 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3061_Operator() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="transferBundle_US1891_TC3061_Operator";
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
 		String storeId = LoginTestData.operatorStoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeOffice;
-		String caseQuantity = "2";
-		String innerPackQuantity ="4";
-		String looseUnitQuantity ="1";
+		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String date = GlobalVariable.createDate;
+//		String transferTime = GlobalVariable.transferTime;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		TransferLandingPage transferLandingPage = PageFactory.initElements(driver, TransferLandingPage.class);
 		// Navigate to Transfer Landing page and click on create new transfer button
-		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToTransferLandingPage().CreateNewTransfers_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
-		// Get the time of transfer
-		String time = transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
+		/*transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
+		//Get the time of transfer
+		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();*/
 		// Select the transfer type as "Office" and add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTransferType(transferType)
+		transferLandingPage.selectTransferType(transferType)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
 		Thread.sleep(2000);
 		// Verify that cancel and print button are displayed
-		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT)
-				& Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Print_BT);
+		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT);
 		// Get the total transfer amount
 		String amount = transferLandingPage.AddTransferPopup_TotalAmount_Value.getText().split("\\$")[1];
 		// Submit the transfer
@@ -559,15 +592,17 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(5000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		// Verify that transfer entries should displayed in Transfer landing page
-		if (result & transferLandingPage.verifyTransferPlaced(date, time, "Office",amount)) {
+		if (result & transferLandingPage.verifyTransferPlaced(date,transferType, "Office",amount)) {
 			Reporter.reportPassResult(
-					browser, "transferBundle_US1891_TC3061_Operator",
+					browser,
 					"Operator should be able to submit transfer to office","Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser, "transferBundle_US1891_TC3061_Operator","transferBundle_US1891_TC3061_Operator",
+					browser,
 					"Operator should be able to submit transfer to office","Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3061_Operator");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -576,31 +611,34 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3061_Level1() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="transferBundle_US1891_TC3061_Level1";
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
 		String storeId = LoginTestData.level1StoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeOffice;
-		String caseQuantity = "1";
-		String innerPackQuantity ="2";
-		String looseUnitQuantity ="4";
+		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String date = GlobalVariable.createDate;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		TransferLandingPage transferLandingPage = PageFactory.initElements(driver, TransferLandingPage.class);
 		// Navigate to Transfer Landing page and click on create new transfer button
-		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToTransferLandingPage().CreateNewTransfers_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
-		// Get the time of transfer
-		String time = transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+		
 		// Select the transfer type as "Office" and add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTransferType(transferType)
+		// Select the transfer type as "Office" and add the transfer details
+		/*transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(GlobalVariable.time);
+		// Get the time of transfer
+				String time = transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();*/
+		transferLandingPage.selectTransferType(transferType)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
 		Thread.sleep(2000);
 		// Verify that cancel and print button are displayed
-		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT)
-				& Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Print_BT);
+		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT);
 		// Get the total transfer amount
 		String amount = transferLandingPage.AddTransferPopup_TotalAmount_Value.getText().split("\\$")[1];
 		// Submit the transfer
@@ -611,15 +649,17 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(5000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		// Verify that transfer entries should displayed in Transfer landing page
-		if (result & transferLandingPage.verifyTransferPlaced(date, time, "Office",amount)) {
+		if (result & transferLandingPage.verifyTransferPlaced(date,transferType, "Office",amount)) {
 			Reporter.reportPassResult(
-					browser, "transferBundle_US1891_TC3061_Level1",
+					browser,
 					"Level1 user should be able to submit transfer to office","Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser, "transferBundle_US1891_TC3061_Level1","transferBundle_US1891_TC3061_Level1",
+					browser,
 					"Level1 user should be able to submit transfer to office","Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3061_Level1");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -628,31 +668,32 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3061_SupervisorWithRoleAssignment() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="transferBundle_US1891_TC3061_SupervisorWithRoleAssignment";
 		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
 		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
 		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeOffice;
-		String caseQuantity = "1";
-		String innerPackQuantity ="4";
-		String looseUnitQuantity ="2";
+		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String date = GlobalVariable.createDate;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		TransferLandingPage transferLandingPage = PageFactory.initElements(driver, TransferLandingPage.class);
 		// Navigate to Transfer Landing page and click on create new transfer button
-		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToTransferLandingPage().CreateNewTransfers_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
-		// Get the time of transfer
-		String time = transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
 		// Select the transfer type as "Office" and add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTransferType(transferType)
+	/*	transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(GlobalVariable.time);*/
+		transferLandingPage.selectTransferType(transferType)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
 		Thread.sleep(2000);
+		// Get the time of transfer
+		/*String time = transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();*/
 		// Verify that cancel and print button are displayed
-		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT)
-				& Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Print_BT);
+		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT);
 		// Get the total transfer amount
 		String amount = transferLandingPage.AddTransferPopup_TotalAmount_Value.getText().split("\\$")[1];
 		// Submit the transfer
@@ -663,15 +704,17 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(5000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		// Verify that transfer entries should displayed in Transfer landing page
-		if (result & transferLandingPage.verifyTransferPlaced(date, time, "Office",amount)) {
+		if (result & transferLandingPage.verifyTransferPlaced(date,transferType, "Office",amount)) {
 			Reporter.reportPassResult(
-					browser, "transferBundle_US1891_TC3061_SupervisorWithRoleAssignment",
+					browser,
 					"SupervisorWithRoleAssignment user should be able to submit transfer to office","Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser, "transferBundle_US1891_TC3061_SupervisorWithRoleAssignment","transferBundle_US1891_TC3061_SupervisorWithRoleAssignment",
+					browser,
 					"SupervisorWithRoleAssignment user should be able to submit transfer to office","Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3061_SupervisorWithRoleAssignment");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -680,31 +723,32 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3061_OrgAdmin() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="transferBundle_US1891_TC3061_OrgAdmin";
 		String userId = LoginTestData.orgAdmin_SSO_UserId;
 		String password = LoginTestData.orgAdmin_SSO_Password;
 		String storeId = LoginTestData.orgAdminStoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeOffice;
-		String caseQuantity = "4";
-		String innerPackQuantity ="2";
-		String looseUnitQuantity ="1";
+		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String date = GlobalVariable.createDate;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		TransferLandingPage transferLandingPage = PageFactory.initElements(driver, TransferLandingPage.class);
 		// Navigate to Transfer Landing page and click on create new transfer button
-		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToTransferLandingPage().CreateNewTransfers_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
-		// Get the time of transfer
-		String time = transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
 		// Select the transfer type as "Office" and add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTransferType(transferType)
+//		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(GlobalVariable.transferTime);
+		transferLandingPage.selectTransferType(transferType)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
 		Thread.sleep(2000);
+		// Get the time of transfer
+//		String time = transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
 		// Verify that cancel and print button are displayed
-		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT)
-				& Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Print_BT);
+		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT);
 		// Get the total transfer amount
 		String amount = transferLandingPage.AddTransferPopup_TotalAmount_Value.getText().split("\\$")[1];
 		// Submit the transfer
@@ -715,15 +759,17 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(5000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		// Verify that transfer entries should displayed in Transfer landing page
-		if (result & transferLandingPage.verifyTransferPlaced(date, time, "Office",amount)) {
+		if (result & transferLandingPage.verifyTransferPlaced(date,transferType, "Office",amount)) {
 			Reporter.reportPassResult(
-					browser, "transferBundle_US1891_TC3061_OrgAdmin",
+					browser,
 					"OrgAdmin should be able to submit transfer to office","Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser, "transferBundle_US1891_TC3061_OrgAdmin","transferBundle_US1891_TC3061_OrgAdmin",
+					browser,
 					"OrgAdmin should be able to submit transfer to office","Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3061_OrgAdmin");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 
@@ -732,26 +778,29 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3062_Supervisor() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="transferBundle_US1891_TC3062_Supervisor";
 		String password = LoginTestData.supervisor_SSO_Password;
 		String userId = LoginTestData.supervisor_SSO_UserId;
 		String storeId = LoginTestData.supervisorStoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeOffice;
-		String caseQuantity = "2";
-		String innerPackQuantity ="1";
-		String looseUnitQuantity ="4";
+		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String date = GlobalVariable.createDate;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
 		TransferLandingPage transferLandingPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToTransferLandingPage();
+				.goToTransferLandingPage();
 		transferLandingPage.CreateNewTransfers_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 		//Get the time of transfer
-		String time = transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+		// Select the transfer type as "Office" and add the transfer details
+/*		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(GlobalVariable.time);
+		String time = transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();*/
 		//Select the transfer type as "Office" and add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectDateInAddNewTransferPopUp(date).selectTransferType(transferType)
+		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTransferType(transferType)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
 		Thread.sleep(2000);
 		//Get the total transfer amount
@@ -764,19 +813,21 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(5000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		//View the transfer entry
-		transferLandingPage.viewTransfer(date, time, amount);
+		transferLandingPage.viewTransfer(date,amount);
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.ViewTransferItemsPopup_GrandTotal_Value));
 		//Verify that user is able to view the transfer entry details
 		if (transferLandingPage.ViewTransferItemsPopup_GrandTotal_Value.getText().equals(amount)
 				& Base.isElementDisplayed(transferLandingPage.ViewTransferItemsPopup_Print_BT)) {
 			Reporter.reportPassResult(
-					browser, "transferBundle_US1891_TC3062_Supervisor",
+					browser,
 					"Supervisor is able to view raw items transfer details and able to view print button", "Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser, "transferBundle_US1891_TC3062_Supervisor","transferBundle_US1891_TC3062_Supervisor",
+					browser,
 					"Supervisor is able to view raw items transfer details and able to view print button", "Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3062_Supervisor");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -785,26 +836,29 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3062_Operator() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="transferBundle_US1891_TC3062_Operator";
 		String password = LoginTestData.operator_SSO_Password;
 		String userId = LoginTestData.operator_SSO_UserId;
 		String storeId = LoginTestData.operatorStoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeOffice;
-		String caseQuantity = "2";
-		String innerPackQuantity ="3";
-		String looseUnitQuantity ="4";
+		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String date = GlobalVariable.createDate;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
 		TransferLandingPage transferLandingPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToTransferLandingPage();
+				.goToTransferLandingPage();
 		transferLandingPage.CreateNewTransfers_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
-		//Get the time of transfer
-		String time = transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
 		//Select the transfer type as "Office" and add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectDateInAddNewTransferPopUp(date).selectTransferType(transferType)
+		// Select the transfer type as "Office" and add the transfer details
+/*		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(GlobalVariable.time);
+		//Get the time of transfer
+		String time = transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();*/
+		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTransferType(transferType)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
 		Thread.sleep(2000);
 		//Get the total transfer amount
@@ -817,19 +871,21 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(5000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		//View the transfer entry
-		transferLandingPage.viewTransfer(date, time, amount);
+		transferLandingPage.viewTransfer(date,amount);
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.ViewTransferItemsPopup_GrandTotal_Value));
 		//Verify that user is able to view the transfer entry details
 		if (transferLandingPage.ViewTransferItemsPopup_GrandTotal_Value.getText().equals(amount)
 				& Base.isElementDisplayed(transferLandingPage.ViewTransferItemsPopup_Print_BT)) {
 			Reporter.reportPassResult(
-					browser, "transferBundle_US1891_TC3062_Operator",
+					browser,
 					"operator is able to view raw items transfer details and able to view print button", "Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser, "transferBundle_US1891_TC3062_Operator","transferBundle_US1891_TC3062_Operator",
+					browser,
 					"operator is able to view raw items transfer details and able to view print button", "Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3062_Operator");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -838,26 +894,28 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3062_Level1() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="transferBundle_US1891_TC3062_Level1";
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
 		String storeId = LoginTestData.level1StoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeOffice;
-		String caseQuantity = "1";
-		String innerPackQuantity ="3";
-		String looseUnitQuantity ="3";
+		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String date = GlobalVariable.createDate;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
 		TransferLandingPage transferLandingPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToTransferLandingPage();
+				.goToTransferLandingPage();
 		transferLandingPage.CreateNewTransfers_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
-		//Get the time of transfer
-		String time = transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+	/*	// Select the transfer type as "Office" and add the transfer details
+		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(GlobalVariable.time);*/
+		/*String time = transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();*/
 		//Select the transfer type as "Office" and add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectDateInAddNewTransferPopUp(date).selectTransferType(transferType)
+		transferLandingPage.selectTransferType(transferType)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
 		Thread.sleep(2000);
 		//Get the total transfer amount
@@ -870,19 +928,21 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(5000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		//View the transfer entry
-		transferLandingPage.viewTransfer(date, time, amount);
+		transferLandingPage.viewTransfer(date,amount);
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.ViewTransferItemsPopup_GrandTotal_Value));
 		//Verify that user is able to view the transfer entry details
 		if (transferLandingPage.ViewTransferItemsPopup_GrandTotal_Value.getText().equals(amount)
 				& Base.isElementDisplayed(transferLandingPage.ViewTransferItemsPopup_Print_BT)) {
 			Reporter.reportPassResult(
-					browser, "transferBundle_US1891_TC3062_Level1",
+					browser,
 					"Level1 user is able to view raw items transfer details and able to view print button", "Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser, "transferBundle_US1891_TC3062_Level1","transferBundle_US1891_TC3062_Level1",
+					browser,
 					"Level1 user is able to view raw items transfer details and able to view print button", "Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3062_Level1");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -891,26 +951,29 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3062_SupervisorWithRoleAssignment() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="transferBundle_US1891_TC3062_SupervisorWithRoleAssignment";
 		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
 		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
 		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeOffice;
-		String caseQuantity = "1";
-		String innerPackQuantity ="3";
-		String looseUnitQuantity ="3";
+		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String date = GlobalVariable.createDate;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
 		TransferLandingPage transferLandingPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToTransferLandingPage();
+				.goToTransferLandingPage();
 		transferLandingPage.CreateNewTransfers_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 		//Get the time of transfer
-		String time = transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+		// Select the transfer type as "Office" and add the transfer details
+	/*	transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(GlobalVariable.time);
+		String time = transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();*/
 		//Select the transfer type as "Office" and add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectDateInAddNewTransferPopUp(date).selectTransferType(transferType)
+		transferLandingPage.selectTransferType(transferType)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
 		Thread.sleep(2000);
 		//Get the total transfer amount
@@ -923,19 +986,21 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(5000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		//View the transfer entry
-		transferLandingPage.viewTransfer(date, time, amount);
+		transferLandingPage.viewTransfer(date,amount);
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.ViewTransferItemsPopup_GrandTotal_Value));
 		//Verify that user is able to view the transfer entry details
 		if (transferLandingPage.ViewTransferItemsPopup_GrandTotal_Value.getText().equals(amount)
 				& Base.isElementDisplayed(transferLandingPage.ViewTransferItemsPopup_Print_BT)) {
 			Reporter.reportPassResult(
-					browser, "transferBundle_US1891_TC3062_SupervisorWithRoleAssignment",
+					browser,
 					"SupervisorWithRoleAssignment user is able to view raw items transfer details and able to view print button", "Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser, "transferBundle_US1891_TC3062_SupervisorWithRoleAssignment","transferBundle_US1891_TC3062_SupervisorWithRoleAssignment",
+					browser,
 					"SupervisorWithRoleAssignment user is able to view raw items transfer details and able to view print button", "Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3062_SupervisorWithRoleAssignment");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -944,26 +1009,29 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3062_OrgAdmin() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="transferBundle_US1891_TC3062_OrgAdmin";
 		String userId = LoginTestData.orgAdmin_SSO_UserId;
 		String password = LoginTestData.orgAdmin_SSO_Password;
 		String storeId = LoginTestData.orgAdminStoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeOffice;
-		String caseQuantity = "1";
-		String innerPackQuantity ="3";
-		String looseUnitQuantity ="3";
+		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String date = GlobalVariable.createDate;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
 		TransferLandingPage transferLandingPage =  homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToTransferLandingPage();
+				.goToTransferLandingPage();
 		transferLandingPage.CreateNewTransfers_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 		//Get the time of transfer
-		String time = transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+		// Select the transfer type as "Office" and add the transfer details
+/*		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(GlobalVariable.time);
+		String time = transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();*/
 		//Select the transfer type as "Office" and add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectDateInAddNewTransferPopUp(date).selectTransferType(transferType)
+		transferLandingPage.selectTransferType(transferType)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
 		Thread.sleep(2000);
 		//Get the total transfer amount
@@ -976,19 +1044,21 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(5000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		//View the transfer entry
-		transferLandingPage.viewTransfer(date, time, amount);
+		transferLandingPage.viewTransfer(date,amount);
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.ViewTransferItemsPopup_GrandTotal_Value));
 		//Verify that user is able to view the transfer entry details
 		if (transferLandingPage.ViewTransferItemsPopup_GrandTotal_Value.getText().equals(amount)
 				& Base.isElementDisplayed(transferLandingPage.ViewTransferItemsPopup_Print_BT)) {
 			Reporter.reportPassResult(
-					browser, "transferBundle_US1891_TC3062_OrgAdmin",
+					browser,
 					"OrgAdmin user is able to view raw items transfer details and able to view print button", "Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser, "transferBundle_US1891_TC3062_OrgAdmin","transferBundle_US1891_TC3062_OrgAdmin",
+					browser,
 					"OrgAdmin user is able to view raw items transfer details and able to view print button", "Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3062_OrgAdmin");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 
@@ -997,35 +1067,35 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3063_level2() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/**Variable Section :**/
+		AbstractTest.tcName="transferBundle_US1891_TC3063_level2";
 		String password = LoginTestData.level2_SSO_Password;
 		String userId = LoginTestData.level2_SSO_UserId;
 		String storeId = LoginTestData.level2StoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeOut;
 		String transferStoreNumber = GlobalVariable.nationalStore2;
-		String caseQuantity = "2";
-		String innerPackQuantity ="1";
-		String looseUnitQuantity ="5";
+		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String date = GlobalVariable.createDate;
-		String transferTime = GlobalVariable.transferTime;
+//		String transferTime = GlobalVariable.transferTime;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
 		TransferLandingPage transferLandingPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToTransferLandingPage();
+				.goToTransferLandingPage();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.CreateNewTransfers_BT)).click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 		//Select date and time
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
+	/*	transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
 		//Get the time of transfer
-		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();*/
 		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
 		transferLandingPage.selectTransferType(transferType).selectLocationToTransfer(transferStoreNumber)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
 		Thread.sleep(2000);
 		//Verify that cancel and print button are displayed  
-		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT)
-				& Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Print_BT);
+		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT);
 		//Get the total transfer amount
 		String amount = transferLandingPage.AddTransferPopup_TotalAmount_Value.getText().split("\\$")[1];
 		//Submit the transfer
@@ -1036,17 +1106,19 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(5000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		//Verify that transfer entries should displayed in Transfer landing page
-		if (result & transferLandingPage.verifyTransferPlaced(date, time, transferStoreNumber,amount)) {
+		if (result & transferLandingPage.verifyTransferPlaced(date,transferType, transferStoreNumber,amount)) {
 			Reporter.reportPassResult(
-					browser,"transferBundle_US1891_TC3063_level2",
+					browser,
 					"level2 user should be able to transfer raw items in/out to other stores and able to view print button",
 					"Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser,"transferBundle_US1891_TC3063_level2_Condition1","transferBundle_US1891_TC3063_level2",
+					browser,
 					"level2 user should be able to transfer raw items in/out to other stores and able to view print button",
 					"Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3063_level2_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		int caseQty2 = Integer.parseInt(caseQuantity) + 1;
 		int innerPackQty2 = Integer.parseInt(innerPackQuantity) + 1;
@@ -1056,10 +1128,12 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 //		transferLandingPage.BackToTop_BT.click();
 		transferLandingPage.CreateNewTransfers_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
+		// Select the transfer type as "Office" and add the transfer details
+	/*	transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(GlobalVariable.time);*/
 		//Get the time of transfer
-		String time2=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+//		String time2=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
 		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTransferType(transferType).selectLocationToTransfer(transferStoreNumber)
+		transferLandingPage.selectTransferType(transferType).selectLocationToTransfer(transferStoreNumber)
 				.insertAndAddDetailsToTransfer(samplewRINID,String.valueOf(caseQty2),String.valueOf(innerPackQty2),String.valueOf(looseUnitsQty2));
 		//Get the amount
 		String amount2 = transferLandingPage.AddTransferPopup_TotalAmount_Value.getText().split("\\$")[1];
@@ -1070,15 +1144,18 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(2000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		// Verify that user should be able to cancel transfer and transfer entries should not displayed in transfer page 
-		if (!transferLandingPage.verifyTransferPlaced(date,time2, amount2)) {
-			Reporter.reportPassResult(browser, "transferBundle_US1891_TC3063_level2",
+		if (!transferLandingPage.verifyTransferPlaced(date,amount2)) {
+			Reporter.reportPassResult(browser,
 					"level2 user should be able to cancel transfer for raw items in/out to other stores",
 					"Pass");
+			
 		} else {
-			Reporter.reportTestFailure(browser, "transferBundle_US1891_TC3063_level2_Condition2","transferBundle_US1891_TC3063_level2",
+
+			Reporter.reportTestFailure(browser, 
 					"level2 user should be able to cancel transfer for raw items in/out to other stores",
 					"Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3063_level2_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1087,35 +1164,35 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3063_level3() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/**Variable Section :**/
+		AbstractTest.tcName="transferBundle_US1891_TC3063_level3";
 		String password = LoginTestData.level3_SSO_Password;
 		String userId = LoginTestData.level3_SSO_UserId;
 		String storeId = LoginTestData.level3StoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeOut;
 		String transferStoreNumber = GlobalVariable.nationalStore2;
-		String caseQuantity = "1";
-		String innerPackQuantity ="1";
-		String looseUnitQuantity ="5";
+		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String date = GlobalVariable.createDate;
-		String transferTime = GlobalVariable.transferTime;
+//		String transferTime = GlobalVariable.transferTime;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
 		TransferLandingPage transferLandingPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToTransferLandingPage();
+				.goToTransferLandingPage();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.CreateNewTransfers_BT)).click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 		//Select date and time
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
+	/*	transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
 		//Get the time of transfer
-		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();*/
 		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
 		transferLandingPage.selectTransferType(transferType).selectLocationToTransfer(transferStoreNumber)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
 		Thread.sleep(2000);
 		//Verify that cancel and print button are displayed  
-		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT)
-				& Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Print_BT);
+		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT);
 		//Get the total transfer amount
 		String amount = transferLandingPage.AddTransferPopup_TotalAmount_Value.getText().split("\\$")[1];
 		//Submit the transfer
@@ -1126,17 +1203,19 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(5000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		//Verify that transfer entries should displayed in Transfer landing page
-		if (result & transferLandingPage.verifyTransferPlaced(date, time, transferStoreNumber,amount)) {
+		if (result & transferLandingPage.verifyTransferPlaced(date,transferType, transferStoreNumber,amount)) {
 			Reporter.reportPassResult(
-					browser,"transferBundle_US1891_TC3063_level3",
+					browser,
 					"level3 user should be able to transfer raw items in/out to other stores and able to view print button",
 					"Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser,"transferBundle_US1891_TC3063_level3_Condition1","transferBundle_US1891_TC3063_level3",
+					browser,
 					"level3 user should be able to transfer raw items in/out to other stores and able to view print button",
 					"Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3063_level3_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		int caseQty2 = Integer.parseInt(caseQuantity) + 1;
 		int innerPackQty2 = Integer.parseInt(innerPackQuantity) + 1;
@@ -1147,9 +1226,11 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		transferLandingPage.CreateNewTransfers_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 		//Get the time of transfer
-		String time2=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+		// Select the transfer type as "Office" and add the transfer details
+		/*transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(GlobalVariable.time);*/
+//		String time2=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
 		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTransferType(transferType).selectLocationToTransfer(transferStoreNumber)
+		transferLandingPage.selectTransferType(transferType).selectLocationToTransfer(transferStoreNumber)
 				.insertAndAddDetailsToTransfer(samplewRINID,String.valueOf(caseQty2),String.valueOf(innerPackQty2),String.valueOf(looseUnitsQty2));
 		//Get the amount
 		String amount2 = transferLandingPage.AddTransferPopup_TotalAmount_Value.getText().split("\\$")[1];
@@ -1160,15 +1241,17 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(2000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		// Verify that user should be able to cancel transfer and transfer entries should not displayed in transfer page 
-		if (!transferLandingPage.verifyTransferPlaced(date,time2, amount2)) {
-			Reporter.reportPassResult(browser, "transferBundle_US1891_TC3063_level3",
+		if (!transferLandingPage.verifyTransferPlaced(date,amount2)) {
+			Reporter.reportPassResult(browser,
 					"level3 user should be able to cancel transfer for raw items in/out to other stores",
 					"Pass");
+			
 		} else {
-			Reporter.reportTestFailure(browser, "transferBundle_US1891_TC3063_level3_Condition2","transferBundle_US1891_TC3063_level3",
+			Reporter.reportTestFailure(browser,
 					"level3 user should be able to cancel transfer for raw items in/out to other stores",
 					"Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3063_level3_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1177,35 +1260,35 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3063_level4() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/**Variable Section :**/
+		AbstractTest.tcName="transferBundle_US1891_TC3063_level4";
 		String password = LoginTestData.level4_SSO_Password;
 		String userId = LoginTestData.level4_SSO_UserId;
 		String storeId = LoginTestData.level4StoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin3;
 		String transferType = GlobalVariable.transferTypeOut;
 		String transferStoreNumber = GlobalVariable.nationalStore2;
-		String caseQuantity = "1";
-		String innerPackQuantity ="1";
-		String looseUnitQuantity ="5";
+		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String date = GlobalVariable.createDate;
-		String transferTime = GlobalVariable.transferTime;
+//		String transferTime = GlobalVariable.transferTime;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
 		TransferLandingPage transferLandingPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToTransferLandingPage();
+				.goToTransferLandingPage();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.CreateNewTransfers_BT)).click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 		//Select date and time
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
+		/*transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
 		//Get the time of transfer
-		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();*/
 		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
 		transferLandingPage.selectTransferType(transferType).selectLocationToTransfer(transferStoreNumber)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
 		Thread.sleep(2000);
 		//Verify that cancel and print button are displayed  
-		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT)
-				& Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Print_BT);
+		boolean result = Base.isElementDisplayed(transferLandingPage.AddTransferItemsPopup_Cancel_BT);
 		//Get the total transfer amount
 		String amount = transferLandingPage.AddTransferPopup_TotalAmount_Value.getText().split("\\$")[1];
 		//Submit the transfer
@@ -1216,17 +1299,19 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(5000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		//Verify that transfer entries should displayed in Transfer landing page
-		if (result & transferLandingPage.verifyTransferPlaced(date, time, transferStoreNumber,amount)) {
+		if (result & transferLandingPage.verifyTransferPlaced(date,transferType, transferStoreNumber,amount)) {
 			Reporter.reportPassResult(
-					browser,"transferBundle_US1891_TC3063_level4",
+					browser,
 					"level4 user should be able to transfer raw items in/out to other stores and able to view print button",
 					"Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser,"transferBundle_US1891_TC3063_level4_Condition1","transferBundle_US1891_TC3063_level4",
+					browser,
 					"level4 user should be able to transfer raw items in/out to other stores and able to view print button",
 					"Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3063_level4_Condition1");
+			AbstractTest.takeSnapShot();
+			
 		}
 		int caseQty2 = Integer.parseInt(caseQuantity) + 1;
 		int innerPackQty2 = Integer.parseInt(innerPackQuantity) + 1;
@@ -1236,10 +1321,12 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 //		transferLandingPage.BackToTop_BT.click();
 		transferLandingPage.CreateNewTransfers_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
+		// Select the transfer type as "Office" and add the transfer details
+		/*transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(GlobalVariable.time);*/
 		//Get the time of transfer
-		String time2=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+//		String time2=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
 		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTransferType(transferType).selectLocationToTransfer(transferStoreNumber)
+		transferLandingPage.selectTransferType(transferType).selectLocationToTransfer(transferStoreNumber)
 				.insertAndAddDetailsToTransfer(samplewRINID,String.valueOf(caseQty2),String.valueOf(innerPackQty2),String.valueOf(looseUnitsQty2));
 		//Get the amount
 		String amount2 = transferLandingPage.AddTransferPopup_TotalAmount_Value.getText().split("\\$")[1];
@@ -1250,15 +1337,17 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(2000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		// Verify that user should be able to cancel transfer and transfer entries should not displayed in transfer page 
-		if (!transferLandingPage.verifyTransferPlaced(date,time2, amount2)) {
-			Reporter.reportPassResult(browser, "transferBundle_US1891_TC3063_level4",
+		if (!transferLandingPage.verifyTransferPlaced(date,amount2)) {
+			Reporter.reportPassResult(browser,
 					"level4 user should be able to cancel transfer for raw items in/out to other stores",
 					"Pass");
+			
 		} else {
-			Reporter.reportTestFailure(browser, "transferBundle_US1891_TC3063_level4_Condition2","transferBundle_US1891_TC3063_level4",
+			Reporter.reportTestFailure(browser,
 					"level4 user should be able to cancel transfer for raw items in/out to other stores",
 					"Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3063_level4_Condition2");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 
@@ -1267,6 +1356,7 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3064_Level2() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="transferBundle_US1891_TC3064_Level2";
 		String password = LoginTestData.level2_SSO_Password;
 		String userId = LoginTestData.level2_SSO_UserId;
 		String storeId = LoginTestData.level2StoreId;
@@ -1275,24 +1365,26 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		String caseQuantity = "3";
 		String innerPackQuantity ="2";
 		String looseUnitQuantity ="1";*/
-		String date = GlobalVariable.createDate;
+//		String date = GlobalVariable.createDate;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		TransferLandingPage transferLandingPage = PageFactory.initElements(driver, TransferLandingPage.class);
 		// Navigate to Transfer Landing page and click on create new transfer button
-		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToTransferLandingPage().CreateNewTransfers_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 		// Select the transfer type as "Office" and add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date);
+//		transferLandingPage.selectDateInAddNewTransferPopUp(date);
 		if (transferLandingPage.verifyOfficeTransferIsPresent()) {
 			Reporter.reportTestFailure(
-					browser,"transferBundle_US1891_TC3064_Level2","transferBundle_US1891_TC3064_Level2",
+					browser,
 					"level 2 user is restricted to office transfer", "Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3064_Level2");
+			AbstractTest.takeSnapShot();
+			
 		} else {
-			Reporter.reportPassResult(browser,"transferBundle_US1891_TC3064_Level2",
+			Reporter.reportPassResult(browser,
 					"level 2 user is restricted to office transfer", "Pass");
+			
 		}
 	}
 	
@@ -1301,6 +1393,7 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3064_Level3() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="transferBundle_US1891_TC3064_Level3";
 		String password = LoginTestData.level3_SSO_Password;
 		String userId = LoginTestData.level3_SSO_UserId;
 		String storeId = LoginTestData.level3StoreId;
@@ -1309,26 +1402,25 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		String caseQuantity = "2";
 		String innerPackQuantity ="2";
 		String looseUnitQuantity ="1";*/
-		String date = GlobalVariable.createDate;
+//		String date = GlobalVariable.createDate;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		TransferLandingPage transferLandingPage = PageFactory.initElements(driver, TransferLandingPage.class);
 		// Navigate to Transfer Landing page and click on create new transfer button
-		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToTransferLandingPage().CreateNewTransfers_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
-		homePage.selectUser(userId).selectLocation(storeId).navigateToInventoryManagement()
-				.goToTransferLandingPage().CreateNewTransfers_BT.click();
-		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
-		transferLandingPage.selectDateInAddNewTransferPopUp(date);
+//		transferLandingPage.selectDateInAddNewTransferPopUp(date);
 		if (transferLandingPage.verifyOfficeTransferIsPresent()) {
 			Reporter.reportTestFailure(
-					browser,"transferBundle_US1891_TC3064_Level3","transferBundle_US1891_TC3064_Level3",
+					browser,
 					"level 3 user is restricted to office transfer", "Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3064_Level3");
+			AbstractTest.takeSnapShot();
+			
 		} else {
-			Reporter.reportPassResult(browser,"transferBundle_US1891_TC3064_Level3",
+			Reporter.reportPassResult(browser,
 					"level 3 user is restricted to office transfer", "Pass");
+			
 		}
 	}
 	
@@ -1337,6 +1429,7 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3064_Level4() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="transferBundle_US1891_TC3064_Level4";
 		String password = LoginTestData.level4_SSO_Password;
 		String userId = LoginTestData.level4_SSO_UserId;
 		String storeId = LoginTestData.level4StoreId;
@@ -1345,26 +1438,25 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		String caseQuantity = "1";
 		String innerPackQuantity ="2";
 		String looseUnitQuantity ="1";*/
-		String date = GlobalVariable.createDate;
+//		String date = GlobalVariable.createDate;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		TransferLandingPage transferLandingPage = PageFactory.initElements(driver, TransferLandingPage.class);
 		// Navigate to Transfer Landing page and click on create new transfer button
-		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement()
+		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToTransferLandingPage().CreateNewTransfers_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
-		homePage.selectUser(userId).selectLocation(storeId).navigateToInventoryManagement()
-				.goToTransferLandingPage().CreateNewTransfers_BT.click();
-		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
-		transferLandingPage.selectDateInAddNewTransferPopUp(date);
+//		transferLandingPage.selectDateInAddNewTransferPopUp(date);
 		if (transferLandingPage.verifyOfficeTransferIsPresent()) {
 			Reporter.reportTestFailure(
-					browser,"transferBundle_US1891_TC3064_Level4","transferBundle_US1891_TC3064_Level4",
+					browser,
 					"level 4 user is restricted to office transfer", "Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3064_Level4");
+			AbstractTest.takeSnapShot();
+			
 		} else {
-			Reporter.reportPassResult(browser,"transferBundle_US1891_TC3064_Level4",
+			Reporter.reportPassResult(browser,
 					"level 4 user is restricted to office transfer", "Pass");
+			
 		}
 	}
 
@@ -1373,28 +1465,29 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3065_level2() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="transferBundle_US1891_TC3065_level2";
 		String password = LoginTestData.level2_SSO_Password;
 		String userId = LoginTestData.level2_SSO_UserId;
 		String storeId = LoginTestData.level2StoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeIn;
 		String transferStoreNumber = GlobalVariable.nationalStore1;
-		String caseQuantity = "1";
-		String innerPackQuantity ="1";
-		String looseUnitQuantity ="2";
+		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String date = GlobalVariable.createDate;
-		String transferTime = GlobalVariable.transferTime;
+//		String transferTime = GlobalVariable.transferTime;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
 		TransferLandingPage transferLandingPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToTransferLandingPage();
+				.goToTransferLandingPage();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.CreateNewTransfers_BT)).click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 		//Select date and time
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
+	/*	transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
 		//Get the time of transfer
-		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();*/
 		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
 		transferLandingPage.selectTransferType(transferType).selectLocationToTransfer(transferStoreNumber)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
@@ -1409,19 +1502,23 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(5000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		//View the transfer entry
-		transferLandingPage.viewTransfer(date, time, amount);
+		transferLandingPage.viewTransfer(date, amount);
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.ViewTransferItemsPopup_GrandTotal_Value));
 		//Verify that user is able to view the transfer entry details
 		if (transferLandingPage.ViewTransferItemsPopup_GrandTotal_Value.getText().equals(amount)
 				& Base.isElementDisplayed(transferLandingPage.ViewTransferItemsPopup_Print_BT)) {
 			Reporter.reportPassResult(
-					browser, "transferBundle_US1891_TC3065_level2",
+					browser,
 					"level2 user is able to view raw items transfer details and able to view print button", "Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser, "transferBundle_US1891_TC3065_level2","transferBundle_US1891_TC3065_level2",
+
+					browser,
+
 					"level2 user is able to view raw items transfer details and able to view print button", "Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3065_level2");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1430,28 +1527,29 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3065_level3() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="transferBundle_US1891_TC3065_level3";
 		String password = LoginTestData.level3_SSO_Password;
 		String userId = LoginTestData.level3_SSO_UserId;
 		String storeId = LoginTestData.level3StoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeIn;
 		String transferStoreNumber = GlobalVariable.nationalStore1;
-		String caseQuantity = "1";
-		String innerPackQuantity ="1";
-		String looseUnitQuantity ="7";
+		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String date = GlobalVariable.createDate;
-		String transferTime = GlobalVariable.transferTime;
+//		String transferTime = GlobalVariable.transferTime;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
 		TransferLandingPage transferLandingPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToTransferLandingPage();
+				.goToTransferLandingPage();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.CreateNewTransfers_BT)).click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 		//Select date and time
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
+		/*transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
 		//Get the time of transfer
-		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();*/
 		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
 		transferLandingPage.selectTransferType(transferType).selectLocationToTransfer(transferStoreNumber)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
@@ -1466,19 +1564,21 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(5000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		//View the transfer entry
-		transferLandingPage.viewTransfer(date, time, amount);
+		transferLandingPage.viewTransfer(date,amount);
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.ViewTransferItemsPopup_GrandTotal_Value));
 		//Verify that user is able to view the transfer entry details
 		if (transferLandingPage.ViewTransferItemsPopup_GrandTotal_Value.getText().equals(amount)
 				& Base.isElementDisplayed(transferLandingPage.ViewTransferItemsPopup_Print_BT)) {
 			Reporter.reportPassResult(
-					browser, "transferBundle_US1891_TC3065_level3",
+					browser,
 					"level3 user is able to view raw items transfer details and able to view print button", "Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser, "transferBundle_US1891_TC3065_level3","transferBundle_US1891_TC3065_level3",
+					browser,
 					"level3 user is able to view raw items transfer details and able to view print button", "Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3065_level3");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1487,28 +1587,29 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3065_level4() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="transferBundle_US1891_TC3065_level4";
 		String password = LoginTestData.level4_SSO_Password;
 		String userId = LoginTestData.level4_SSO_UserId;
 		String storeId = LoginTestData.level4StoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeIn;
 		String transferStoreNumber = GlobalVariable.nationalStore1;
-		String caseQuantity = "2";
-		String innerPackQuantity ="1";
-		String looseUnitQuantity ="3";
+		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String date = GlobalVariable.createDate;
-		String transferTime = GlobalVariable.transferTime;
+//		String transferTime = GlobalVariable.transferTime;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
 		TransferLandingPage transferLandingPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.navigateToInventoryManagement().goToTransferLandingPage();
+				.goToTransferLandingPage();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.CreateNewTransfers_BT)).click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 		//Select date and time
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
+		/*transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
 		//Get the time of transfer
-		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
+		String time=transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();*/
 		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
 		transferLandingPage.selectTransferType(transferType).selectLocationToTransfer(transferStoreNumber)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
@@ -1523,19 +1624,21 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 		Thread.sleep(5000);
 		transferLandingPage.selectStartDate(GlobalVariable.startDate).selectEndDate(GlobalVariable.endDate).ShowResults_BT.click();
 		//View the transfer entry
-		transferLandingPage.viewTransfer(date, time, amount);
+		transferLandingPage.viewTransfer(date,amount);
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.ViewTransferItemsPopup_GrandTotal_Value));
 		//Verify that user is able to view the transfer entry details
 		if (transferLandingPage.ViewTransferItemsPopup_GrandTotal_Value.getText().equals(amount)
 				& Base.isElementDisplayed(transferLandingPage.ViewTransferItemsPopup_Print_BT)) {
 			Reporter.reportPassResult(
-					browser, "transferBundle_US1891_TC3065_level3",
+					browser,
 					"level3 user is able to view raw items transfer details and able to view print button", "Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser, "transferBundle_US1891_TC3065_level3","transferBundle_US1891_TC3065_level3",
+					browser,
 					"level3 user is able to view raw items transfer details and able to view print button", "Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3065_level3");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1544,25 +1647,29 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3067_level5() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="transferBundle_US1891_TC3067_level5";
+
 		String password = LoginTestData.level5_SSO_Password;
 		String userId = LoginTestData.level5_SSO_UserId;
 		String storeId = LoginTestData.level5StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
-		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement();
-		 wait.until(ExpectedConditions.visibilityOf(homePage.OtherInventoryFunctions_BT));
-		 homePage.OtherInventoryFunctions_BT.click();
+		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId);
+		Thread.sleep(3000);
+		wait.until(ExpectedConditions.elementToBeClickable(homePage.Menu_DD_BT)).click();
 		//Verify that user is able to view the transfer entry details
 		if (!Base.isElementDisplayed(homePage.Transfers_BT)) {
 			Reporter.reportPassResult(
-					browser, "transferBundle_US1891_TC3067_level5",
+					browser,
 					"level5 user is not able to view Transfer option from Main Menu", "Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser, "transferBundle_US1891_TC3067_level5","transferBundle_US1891_TC3067_level5",
+					browser,
 					"level5 user is not able to view Transfer option from Main Menu", "Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3067_level5");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 	
@@ -1571,25 +1678,27 @@ public class US1891_TransfersBundleUserRoleAccess extends AbstractTest{
 	public void transferBundle_US1891_TC3067_level6() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="transferBundle_US1891_TC3067_level6";
 		String password = LoginTestData.level6_SSO_Password;
 		String userId = LoginTestData.level6_SSO_UserId;
 		String storeId = LoginTestData.level6StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
-		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement();
-		 wait.until(ExpectedConditions.visibilityOf(homePage.OtherInventoryFunctions_BT));
-		 homePage.OtherInventoryFunctions_BT.click();
+		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId);
+		Thread.sleep(3000);
+		wait.until(ExpectedConditions.elementToBeClickable(homePage.Menu_DD_BT)).click();
 		//Verify that user is able to view the transfer entry details
 		if (!Base.isElementDisplayed(homePage.Transfers_BT)) {
 			Reporter.reportPassResult(
-					browser, "transferBundle_US1891_TC3067_level6",
+					browser,
 					"level6 user is not able to view Transfer option from Main Menu", "Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "transferBundle_US1891_TC3067_level6","transferBundle_US1891_TC3067_level6",
+					browser,
 					"level6 user is not able to view Transfer option from Main Menu", "Fail");
-			AbstractTest.takeSnapShot("transferBundle_US1891_TC3067_level6");
+			AbstractTest.takeSnapShot();
+			
 		}
 	}
 }

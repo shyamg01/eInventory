@@ -14,22 +14,23 @@ import common.Base;
 import common.GlobalVariable;
 import common.LoginTestData;
 import common.Reporter;
+import eInventoryPageClasses.AbstractTest;
 import eInventoryPageClasses.HomePage;
 import eInventoryPageClasses.MenuItemActivityAndInformationPage;
-import sprint2.AbstractTest;
 
 public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTest{
 	
 	//TC3626_Level1 : User can use all of the functionality available on the Menu Item Activity  & Information page.
-	@Test()
+	@Test(groups="Smoke")
 	public void menuItemActivity_US1926_TC3626_Level1() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3626_Level1";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
 		String storeId = LoginTestData.level1StoreId;
-		String menuItem = GlobalVariable.menuItem2;
+		String menuItem = GlobalVariable.menuItem;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		String startTime = GlobalVariable.startTime;
@@ -38,23 +39,23 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
-		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
+		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectEndTime(endTime).selectStartTime(startTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		if (menuItemActivityPage.SelectItem_Value.getText().contains(menuItem)
 				& menuItemActivityPage.verifyMenuActivityTimeForSelectedDateRange(startDate, endDate, startTime, endTime)) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US1926_TC3626_Level1",
+					browser,
 					"Level1 User should be able to view the list of menu item activity for the selected menu item, date range and time range",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US1926_TC3626_Level1","menuItemActivity_US1926_TC3626_Level1",
+					browser,
 					"Level1 User should be able to view the list of menu item activity for the selected menu item, date range and time range",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3626_Level1");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -63,6 +64,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3626_Level2() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3626_Level2";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level2_SSO_UserId;
 		String password = LoginTestData.level2_SSO_Password;
@@ -76,23 +78,23 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
-		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
+		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectEndTime(endTime).selectStartTime(startTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		if (menuItemActivityPage.SelectItem_Value.getText().contains(menuItem)
 				& menuItemActivityPage.verifyMenuActivityTimeForSelectedDateRange(startDate, endDate, startTime, endTime)) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US1926_TC3626_Level2",
+					browser,
 					"Level2 User should be able to view the list of menu item activity for the selected menu item, date range and time range",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US1926_TC3626_Level2","menuItemActivity_US1926_TC3626_Level2",
+					browser,
 					"Level2 User should be able to view the list of menu item activity for the selected menu item, date range and time range",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3626_Level2");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -101,6 +103,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3626_Level3() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3626_Level3";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level3_SSO_UserId;
 		String password = LoginTestData.level3_SSO_Password;
@@ -114,23 +117,23 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
-		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
+		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectEndTime(endTime).selectStartTime(startTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		if (menuItemActivityPage.SelectItem_Value.getText().contains(menuItem)
 				& menuItemActivityPage.verifyMenuActivityTimeForSelectedDateRange(startDate, endDate, startTime, endTime)) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US1926_TC3626_Level3",
+					browser,
 					"Level3 User should be able to view the list of menu item activity for the selected menu item, date range and time range",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US1926_TC3626_Level3","menuItemActivity_US1926_TC3626_Level3",
+					browser,
 					"Level3 User should be able to view the list of menu item activity for the selected menu item, date range and time range",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3626_Level3");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -139,6 +142,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3626_Level4() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3626_Level4";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level4_SSO_UserId;
 		String password = LoginTestData.level4_SSO_Password;
@@ -152,23 +156,23 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
-		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
+		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectEndTime(endTime).selectStartTime(startTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		if (menuItemActivityPage.SelectItem_Value.getText().contains(menuItem)
 				& menuItemActivityPage.verifyMenuActivityTimeForSelectedDateRange(startDate, endDate, startTime, endTime)) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US1926_TC3626_Level4",
+					browser,
 					"Level4 User should be able to view the list of menu item activity for the selected menu item, date range and time range",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US1926_TC3626_Level4","menuItemActivity_US1926_TC3626_Level4",
+					browser,
 					"Level4 User should be able to view the list of menu item activity for the selected menu item, date range and time range",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3626_Level4");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -177,6 +181,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3626_Level5() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3626_Level5";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level5_SSO_UserId;
 		String password = LoginTestData.level5_SSO_Password;
@@ -190,23 +195,23 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
-		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
+		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectEndTime(endTime).selectStartTime(startTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		if (menuItemActivityPage.SelectItem_Value.getText().contains(menuItem)
 				& menuItemActivityPage.verifyMenuActivityTimeForSelectedDateRange(startDate, endDate, startTime, endTime)) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US1926_TC3626_Level5",
+					browser,
 					"Level5 User should be able to view the list of menu item activity for the selected menu item, date range and time range",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US1926_TC3626_Level5","menuItemActivity_US1926_TC3626_Level5",
+					browser,
 					"Level5 User should be able to view the list of menu item activity for the selected menu item, date range and time range",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3626_Level5");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -215,6 +220,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3626_Level6() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3626_Level6";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level6_SSO_UserId;
 		String password = LoginTestData.level6_SSO_Password;
@@ -228,23 +234,23 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
-		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
+		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectEndTime(endTime).selectStartTime(startTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		if (menuItemActivityPage.SelectItem_Value.getText().contains(menuItem)
 				& menuItemActivityPage.verifyMenuActivityTimeForSelectedDateRange(startDate, endDate, startTime, endTime)) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US1926_TC3626_Level6",
+					browser,
 					"Level6 User should be able to view the list of menu item activity for the selected menu item, date range and time range",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US1926_TC3626_Level6","menuItemActivity_US1926_TC3626_Level6",
+					browser,
 					"Level6 User should be able to view the list of menu item activity for the selected menu item, date range and time range",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3626_Level6");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -253,6 +259,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3626_Operator() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3626_Operator";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.operator_SSO_UserId;
 		String password = LoginTestData.operator_SSO_Password;
@@ -266,23 +273,23 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
-		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
+		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectEndTime(endTime).selectStartTime(startTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		if (menuItemActivityPage.SelectItem_Value.getText().contains(menuItem)
 				& menuItemActivityPage.verifyMenuActivityTimeForSelectedDateRange(startDate, endDate, startTime, endTime)) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US1926_TC3626_Operator",
+					browser,
 					"operator should be able to view the list of menu item activity for the selected menu item, date range and time range",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US1926_TC3626_Operator","menuItemActivity_US1926_TC3626_Operator",
+					browser,
 					"operator should be able to view the list of menu item activity for the selected menu item, date range and time range",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3626_Operator");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -291,6 +298,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3626_Supervisor() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3626_Supervisor";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.supervisor_SSO_UserId;
 		String password = LoginTestData.supervisor_SSO_Password;
@@ -304,23 +312,23 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
-		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
+		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectEndTime(endTime).selectStartTime(startTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		if (menuItemActivityPage.SelectItem_Value.getText().contains(menuItem)
 				& menuItemActivityPage.verifyMenuActivityTimeForSelectedDateRange(startDate, endDate, startTime, endTime)) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US1926_TC3626_Supervisor",
+					browser,
 					"supervisor should be able to view the list of menu item activity for the selected menu item, date range and time range",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US1926_TC3626_Supervisor","menuItemActivity_US1926_TC3626_Supervisor",
+					browser,
 					"supervisor should be able to view the list of menu item activity for the selected menu item, date range and time range",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3626_Supervisor");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -329,6 +337,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3626_SupervisorWithRoleAssignment() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3626_SupervisorWithRoleAssignment";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
 		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
@@ -342,23 +351,23 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
-		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
+		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectEndTime(endTime).selectStartTime(startTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		if (menuItemActivityPage.SelectItem_Value.getText().contains(menuItem)
 				& menuItemActivityPage.verifyMenuActivityTimeForSelectedDateRange(startDate, endDate, startTime, endTime)) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US1926_TC3626_SupervisorWithRoleAssignment",
+					browser,
 					"SupervisorWithRoleAssignment should be able to view the list of menu item activity for the selected menu item, date range and time range",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US1926_TC3626_SupervisorWithRoleAssignment","menuItemActivity_US1926_TC3626_SupervisorWithRoleAssignment",
+					browser,
 					"SupervisorWithRoleAssignment should be able to view the list of menu item activity for the selected menu item, date range and time range",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3626_SupervisorWithRoleAssignment");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -367,6 +376,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3626_OrgAdmin() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3626_OrgAdmin";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.orgAdmin_SSO_UserId;
 		String password = LoginTestData.orgAdmin_SSO_Password;
@@ -380,36 +390,37 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
-		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
+		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectEndTime(endTime).selectStartTime(startTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		if (menuItemActivityPage.SelectItem_Value.getText().contains(menuItem)
 				& menuItemActivityPage.verifyMenuActivityTimeForSelectedDateRange(startDate, endDate, startTime, endTime)) {
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US1926_TC3626_OrgAdmin",
+					browser,
 					"OrgAdmin should be able to view the list of menu item activity for the selected menu item, date range and time range",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US1926_TC3626_OrgAdmin","menuItemActivity_US1926_TC3626_OrgAdmin",
+					browser,
 					"OrgAdmin should be able to view the list of menu item activity for the selected menu item, date range and time range",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3626_OrgAdmin");
+			AbstractTest.takeSnapShot();
 		}
 	}
 
 	//TC3629_Level1 : User can use all of the functionality available on the Menu Item Activity  & Information page.
-	@Test()
+	@Test(groups="Smoke")
 	public void menuItemActivity_US1926_TC3629_Level1() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3629_Level1";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
 		String storeId = LoginTestData.level1StoreId;
-		String menuItem = GlobalVariable.menuItem2;
+		String menuItem = GlobalVariable.menuItem;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		String startTime = GlobalVariable.startTime;
@@ -418,9 +429,9 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
-		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
+		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectEndTime(endTime).selectStartTime(startTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		menuItemActivityPage.Information_BT.click();
@@ -431,15 +442,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_DaypartCodeHeader)
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_FamilyGroupHeader)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3629_Level1",
+					browser,
 					"Level 1 user should be able to view Menu Item Information page with Information of searched Menu item",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3629_Level1_Condition1","menuItemActivity_US1926_TC3629_Level1",
+					browser,
 					"Level 1 user should be able to view Menu Item Information page with Information of searched Menu item",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3629_Level1_Condition1");
+			AbstractTest.takeSnapShot();
 		}
 		menuItemActivityPage.MenuItemInformation_Receipe_Expand_BT.click();
 		menuItemActivityPage.MenuItemInformation_HistoricReceipe_Expand_BT.click();
@@ -447,15 +458,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_ReceipeEffectiveDate_Value)
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_HistoricReceipe_Table)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3629_Level1",
+					browser,
 					"Level 1 User should be able to see Recipe and Historic Recipe information for the menu Item",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3629_Level1_Condition2","menuItemActivity_US1926_TC3629_Level1",
+					browser,
 					"Level 1 User should be able to see Recipe and Historic Recipe information for the menu Item",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3629_Level1_Condition2");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -464,11 +475,12 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3629_Level2() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3629_Level2";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level2_SSO_UserId;
 		String password = LoginTestData.level2_SSO_Password;
 		String storeId = LoginTestData.level2StoreId;
-		String menuItem = GlobalVariable.menuItem2;
+		String menuItem = GlobalVariable.menuItem;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		String startTime = GlobalVariable.startTime;
@@ -477,9 +489,9 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
-		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
+		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectEndTime(endTime).selectStartTime(startTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		menuItemActivityPage.Information_BT.click();
@@ -490,15 +502,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_DaypartCodeHeader)
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_FamilyGroupHeader)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3629_Level2",
+					browser,
 					"Level 2 user should be able to view Menu Item Information page with Information of searched Menu item",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3629_Level2_Condition1","menuItemActivity_US1926_TC3629_Level2",
+					browser,
 					"Level 2 user should be able to view Menu Item Information page with Information of searched Menu item",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3629_Level2_Condition1");
+			AbstractTest.takeSnapShot();
 		}
 		menuItemActivityPage.MenuItemInformation_Receipe_Expand_BT.click();
 		menuItemActivityPage.MenuItemInformation_HistoricReceipe_Expand_BT.click();
@@ -506,15 +518,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_ReceipeEffectiveDate_Value)
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_HistoricReceipe_Table)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3629_Level2",
+					browser,
 					"Level 2 User should be able to see Recipe and Historic Recipe information for the menu Item",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3629_Level2_Condition2","menuItemActivity_US1926_TC3629_Level2",
+					browser,
 					"Level 2 User should be able to see Recipe and Historic Recipe information for the menu Item",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3629_Level2_Condition2");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -523,11 +535,12 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3629_Level3() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3629_Level3";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level3_SSO_UserId;
 		String password = LoginTestData.level3_SSO_Password;
 		String storeId = LoginTestData.level3StoreId;
-		String menuItem = GlobalVariable.menuItem2;
+		String menuItem = GlobalVariable.menuItem;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		String startTime = GlobalVariable.startTime;
@@ -536,9 +549,9 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
-		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
+		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectEndTime(endTime).selectStartTime(startTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		menuItemActivityPage.Information_BT.click();
@@ -549,15 +562,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_DaypartCodeHeader)
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_FamilyGroupHeader)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3629_Level3",
+					browser,
 					"Level 3 user should be able to view Menu Item Information page with Information of searched Menu item",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3629_Level3_Condition1","menuItemActivity_US1926_TC3629_Level3",
+					browser,
 					"Level 3 user should be able to view Menu Item Information page with Information of searched Menu item",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3629_Level3_Condition1");
+			AbstractTest.takeSnapShot();
 		}
 		menuItemActivityPage.MenuItemInformation_Receipe_Expand_BT.click();
 		menuItemActivityPage.MenuItemInformation_HistoricReceipe_Expand_BT.click();
@@ -565,15 +578,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_ReceipeEffectiveDate_Value)
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_HistoricReceipe_Table)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3629_Level3",
+					browser,
 					"Level 3 User should be able to see Recipe and Historic Recipe information for the menu Item",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3629_Level3_Condition2","menuItemActivity_US1926_TC3629_Level3",
+					browser,
 					"Level 3 User should be able to see Recipe and Historic Recipe information for the menu Item",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3629_Level3_Condition2");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -582,11 +595,12 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3629_Level4() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3629_Level4";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level4_SSO_UserId;
 		String password = LoginTestData.level4_SSO_Password;
 		String storeId = LoginTestData.level4StoreId;
-		String menuItem = GlobalVariable.menuItem2;
+		String menuItem = GlobalVariable.menuItem;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		String startTime = GlobalVariable.startTime;
@@ -595,9 +609,9 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
-		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
+		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectEndTime(endTime).selectStartTime(startTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		menuItemActivityPage.Information_BT.click();
@@ -608,15 +622,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_DaypartCodeHeader)
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_FamilyGroupHeader)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3629_Level4",
+					browser,
 					"Level 4 user should be able to view Menu Item Information page with Information of searched Menu item",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3629_Level4_Condition1","menuItemActivity_US1926_TC3629_Level4",
+					browser,
 					"Level 4 user should be able to view Menu Item Information page with Information of searched Menu item",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3629_Level4_Condition1");
+			AbstractTest.takeSnapShot();
 		}
 		menuItemActivityPage.MenuItemInformation_Receipe_Expand_BT.click();
 		menuItemActivityPage.MenuItemInformation_HistoricReceipe_Expand_BT.click();
@@ -624,15 +638,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_ReceipeEffectiveDate_Value)
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_HistoricReceipe_Table)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3629_Level4",
+					browser,
 					"Level4 User should be able to see Recipe and Historic Recipe information for the menu Item",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3629_Level4_Condition2","menuItemActivity_US1926_TC3629_Level4",
+					browser,
 					"Level 4 User should be able to see Recipe and Historic Recipe information for the menu Item",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3629_Level4_Condition2");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -641,11 +655,12 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3629_Level5() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3629_Level5";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level5_SSO_UserId;
 		String password = LoginTestData.level5_SSO_Password;
 		String storeId = LoginTestData.level5StoreId;
-		String menuItem = GlobalVariable.menuItem2;
+		String menuItem = GlobalVariable.menuItem;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		String startTime = GlobalVariable.startTime;
@@ -654,9 +669,9 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
-		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
+		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectEndTime(endTime).selectStartTime(startTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		menuItemActivityPage.Information_BT.click();
@@ -667,15 +682,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_DaypartCodeHeader)
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_FamilyGroupHeader)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3629_Level5",
+					browser,
 					"Level 5 user should be able to view Menu Item Information page with Information of searched Menu item",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3629_Level5_Condition1","menuItemActivity_US1926_TC3629_Level5",
+					browser,
 					"Level 5 user should be able to view Menu Item Information page with Information of searched Menu item",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3629_Level5_Condition1");
+			AbstractTest.takeSnapShot();
 		}
 		menuItemActivityPage.MenuItemInformation_Receipe_Expand_BT.click();
 		menuItemActivityPage.MenuItemInformation_HistoricReceipe_Expand_BT.click();
@@ -683,15 +698,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_ReceipeEffectiveDate_Value)
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_HistoricReceipe_Table)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3629_Level5",
+					browser,
 					"Level 5 User should be able to see Recipe and Historic Recipe information for the menu Item",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3629_Level5_Condition2","menuItemActivity_US1926_TC3629_Level5",
+					browser,
 					"Level 5 User should be able to see Recipe and Historic Recipe information for the menu Item",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3629_Level5_Condition2");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -700,11 +715,12 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3629_Level6() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3629_Level6";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level6_SSO_UserId;
 		String password = LoginTestData.level6_SSO_Password;
 		String storeId = LoginTestData.level6StoreId;
-		String menuItem = GlobalVariable.menuItem2;
+		String menuItem = GlobalVariable.menuItem;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		String startTime = GlobalVariable.startTime;
@@ -713,9 +729,9 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
-		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
+		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectEndTime(endTime).selectStartTime(startTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		menuItemActivityPage.Information_BT.click();
@@ -726,15 +742,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_DaypartCodeHeader)
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_FamilyGroupHeader)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3629_Level6",
+					browser,
 					"Level 6 user should be able to view Menu Item Information page with Information of searched Menu item",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3629_Level6_Condition1","menuItemActivity_US1926_TC3629_Level6",
+					browser,
 					"Level 6 user should be able to view Menu Item Information page with Information of searched Menu item",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3629_Level6_Condition1");
+			AbstractTest.takeSnapShot();
 		}
 		menuItemActivityPage.MenuItemInformation_Receipe_Expand_BT.click();
 		menuItemActivityPage.MenuItemInformation_HistoricReceipe_Expand_BT.click();
@@ -742,15 +758,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_ReceipeEffectiveDate_Value)
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_HistoricReceipe_Table)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3629_Level6",
+					browser,
 					"Level 6 User should be able to see Recipe and Historic Recipe information for the menu Item",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3629_Level6_Condition2","menuItemActivity_US1926_TC3629_Level6",
+					browser,
 					"Level 6 User should be able to see Recipe and Historic Recipe information for the menu Item",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3629_Level6_Condition2");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -759,11 +775,12 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3629_Operator() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3629_Operator";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.operator_SSO_UserId;
 		String password = LoginTestData.operator_SSO_Password;
 		String storeId = LoginTestData.operatorStoreId;
-		String menuItem = GlobalVariable.menuItem2;
+		String menuItem = GlobalVariable.menuItem;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		String startTime = GlobalVariable.startTime;
@@ -772,9 +789,9 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
-		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
+		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectEndTime(endTime).selectStartTime(startTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		menuItemActivityPage.Information_BT.click();
@@ -785,15 +802,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_DaypartCodeHeader)
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_FamilyGroupHeader)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3629_Operator",
+					browser,
 					"Operator should be able to view Menu Item Information page with Information of searched Menu item",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3629_Operator_Condition1","menuItemActivity_US1926_TC3629_Operator",
+					browser,
 					"Operator should be able to view Menu Item Information page with Information of searched Menu item",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3629_Operator_Condition1");
+			AbstractTest.takeSnapShot();
 		}
 		menuItemActivityPage.MenuItemInformation_Receipe_Expand_BT.click();
 		menuItemActivityPage.MenuItemInformation_HistoricReceipe_Expand_BT.click();
@@ -801,15 +818,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_ReceipeEffectiveDate_Value)
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_HistoricReceipe_Table)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3629_Level6",
+					browser,
 					"Operator should be able to see Recipe and Historic Recipe information for the menu Item",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3629_Operator_Condition2","menuItemActivity_US1926_TC3629_Operator",
+					browser,
 					"Operator should be able to see Recipe and Historic Recipe information for the menu Item",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3629_Operator_Condition2");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -818,11 +835,12 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3629_Supervisor() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3629_Supervisor";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.supervisor_SSO_UserId;
 		String password = LoginTestData.supervisor_SSO_Password;
 		String storeId = LoginTestData.supervisorStoreId;
-		String menuItem = GlobalVariable.menuItem2;
+		String menuItem = GlobalVariable.menuItem;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		String startTime = GlobalVariable.startTime;
@@ -831,9 +849,9 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
-		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
+		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectEndTime(endTime).selectStartTime(startTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		menuItemActivityPage.Information_BT.click();
@@ -844,15 +862,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_DaypartCodeHeader)
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_FamilyGroupHeader)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3629_Supervisor",
+					browser,
 					"Supervisor should be able to view Menu Item Information page with Information of searched Menu item",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3629_Supervisor_Condition1","menuItemActivity_US1926_TC3629_Supervisor",
+					browser,
 					"Supervisor should be able to view Menu Item Information page with Information of searched Menu item",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3629_Supervisor_Condition1");
+			AbstractTest.takeSnapShot();
 		}
 		menuItemActivityPage.MenuItemInformation_Receipe_Expand_BT.click();
 		menuItemActivityPage.MenuItemInformation_HistoricReceipe_Expand_BT.click();
@@ -860,15 +878,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_ReceipeEffectiveDate_Value)
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_HistoricReceipe_Table)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3629_Level6",
+					browser,
 					"Supervisor should be able to see Recipe and Historic Recipe information for the menu Item",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3629_Supervisor_Condition2","menuItemActivity_US1926_TC3629_Supervisor",
+					browser,
 					"Supervisor should be able to see Recipe and Historic Recipe information for the menu Item",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3629_Supervisor_Condition2");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -877,11 +895,12 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3629_SupervisorWithRoleAssignment() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3629_SupervisorWithRoleAssignment";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
 		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
 		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
-		String menuItem = GlobalVariable.menuItem2;
+		String menuItem = GlobalVariable.menuItem;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		String startTime = GlobalVariable.startTime;
@@ -890,9 +909,9 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
-		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
+		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectEndTime(endTime).selectStartTime(startTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		menuItemActivityPage.Information_BT.click();
@@ -903,15 +922,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_DaypartCodeHeader)
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_FamilyGroupHeader)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3629_SupervisorWithRoleAssignment",
+					browser,
 					"SupervisorWithRoleAssignment should be able to view Menu Item Information page with Information of searched Menu item",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3629_SupervisorWithRoleAssignment_Condition1","menuItemActivity_US1926_TC3629_SupervisorWithRoleAssignment",
+					browser,
 					"SupervisorWithRoleAssignment should be able to view Menu Item Information page with Information of searched Menu item",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3629_SupervisorWithRoleAssignment_Condition1");
+			AbstractTest.takeSnapShot();
 		}
 		menuItemActivityPage.MenuItemInformation_Receipe_Expand_BT.click();
 		menuItemActivityPage.MenuItemInformation_HistoricReceipe_Expand_BT.click();
@@ -919,15 +938,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_ReceipeEffectiveDate_Value)
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_HistoricReceipe_Table)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3629_Level6",
+					browser,
 					"SupervisorWithRoleAssignment should be able to see Recipe and Historic Recipe information for the menu Item",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3629_SupervisorWithRoleAssignment_Condition2","menuItemActivity_US1926_TC3629_SupervisorWithRoleAssignment",
+					browser,
 					"SupervisorWithRoleAssignment should be able to see Recipe and Historic Recipe information for the menu Item",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3629_SupervisorWithRoleAssignment_Condition2");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -936,11 +955,12 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3629_OrgAdmin() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3629_OrgAdmin";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.orgAdmin_SSO_UserId;
 		String password = LoginTestData.orgAdmin_SSO_Password;
 		String storeId = LoginTestData.orgAdminStoreId;
-		String menuItem = GlobalVariable.menuItem2;
+		String menuItem = GlobalVariable.menuItem;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		String startTime = GlobalVariable.startTime;
@@ -949,9 +969,9 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
-		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
+		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectEndTime(endTime).selectStartTime(startTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		menuItemActivityPage.Information_BT.click();
@@ -962,15 +982,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_DaypartCodeHeader)
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_FamilyGroupHeader)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3629_OrgAdmin",
+					browser,
 					"OrgAdmin should be able to view Menu Item Information page with Information of searched Menu item",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3629_OrgAdmin_Condition1","menuItemActivity_US1926_TC3629_OrgAdmin",
+					browser,
 					"OrgAdmin should be able to view Menu Item Information page with Information of searched Menu item",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3629_OrgAdmin_Condition1");
+			AbstractTest.takeSnapShot();
 		}
 		menuItemActivityPage.MenuItemInformation_Receipe_Expand_BT.click();
 		menuItemActivityPage.MenuItemInformation_HistoricReceipe_Expand_BT.click();
@@ -978,15 +998,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_ReceipeEffectiveDate_Value)
 				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_HistoricReceipe_Table)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3629_Level6",
+					browser,
 					"OrgAdmin should be able to see Recipe and Historic Recipe information for the menu Item",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3629_OrgAdmin_Condition2","menuItemActivity_US1926_TC3629_OrgAdmin",
+					browser,
 					"OrgAdmin should be able to see Recipe and Historic Recipe information for the menu Item",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3629_OrgAdmin_Condition2");
+			AbstractTest.takeSnapShot();
 		}
 	}
 
@@ -995,6 +1015,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3631_Level1() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3631_Level1";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -1003,7 +1024,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.Kpi_Toggle_BT.click();
 		Thread.sleep(2000);
 		if(Base.isElementDisplayed(menuItemActivityPage.Kpi_Model_Header)
@@ -1012,15 +1033,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.KpiModel_TopMenuItemsPromo_Table)
 				& Base.isElementDisplayed(menuItemActivityPage.KpiModel_TopMenuItemsManagerMeals_Table)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3631_Level1",
+					browser,
 					"Level 1 User should be able to see expanded KPi Model and it should display KPIs of the day",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3631_Level1","menuItemActivity_US1926_TC3631_Level1",
+					browser,
 					"Level 1 User should be able to see expanded KPi Model and it should display KPIs of the day",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3631_Level1");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -1029,6 +1050,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3631_Level2() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3631_Level2";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level2_SSO_UserId;
 		String password = LoginTestData.level2_SSO_Password;
@@ -1037,7 +1059,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.Kpi_Toggle_BT.click();
 		Thread.sleep(2000);
 		if(Base.isElementDisplayed(menuItemActivityPage.Kpi_Model_Header)
@@ -1046,15 +1068,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.KpiModel_TopMenuItemsPromo_Table)
 				& Base.isElementDisplayed(menuItemActivityPage.KpiModel_TopMenuItemsManagerMeals_Table)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3631_Level2",
+					browser,
 					"Level 2 User should be able to see expanded KPi Model and it should display KPIs of the day",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3631_Level2","menuItemActivity_US1926_TC3631_Level2",
+					browser, 
 					"Level 2 User should be able to see expanded KPi Model and it should display KPIs of the day",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3631_Level2");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -1063,6 +1085,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3631_Level3() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3631_Level3";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level3_SSO_UserId;
 		String password = LoginTestData.level3_SSO_Password;
@@ -1071,7 +1094,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.Kpi_Toggle_BT.click();
 		Thread.sleep(2000);
 		if(Base.isElementDisplayed(menuItemActivityPage.Kpi_Model_Header)
@@ -1080,15 +1103,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.KpiModel_TopMenuItemsPromo_Table)
 				& Base.isElementDisplayed(menuItemActivityPage.KpiModel_TopMenuItemsManagerMeals_Table)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3631_Level3",
+					browser,
 					"Level 3 User should be able to see expanded KPi Model and it should display KPIs of the day",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3631_Level3","menuItemActivity_US1926_TC3631_Level3",
+					browser, 
 					"Level 3 User should be able to see expanded KPi Model and it should display KPIs of the day",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3631_Level3");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -1097,6 +1120,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3631_Level4() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3631_Level4";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level4_SSO_UserId;
 		String password = LoginTestData.level4_SSO_Password;
@@ -1105,7 +1129,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.Kpi_Toggle_BT.click();
 		Thread.sleep(2000);
 		if(Base.isElementDisplayed(menuItemActivityPage.Kpi_Model_Header)
@@ -1114,15 +1138,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.KpiModel_TopMenuItemsPromo_Table)
 				& Base.isElementDisplayed(menuItemActivityPage.KpiModel_TopMenuItemsManagerMeals_Table)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3631_Level4",
+					browser,
 					"Level 4 User should be able to see expanded KPi Model and it should display KPIs of the day",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3631_Level4","menuItemActivity_US1926_TC3631_Level4",
+					browser,
 					"Level 4 User should be able to see expanded KPi Model and it should display KPIs of the day",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3631_Level4");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -1131,6 +1155,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3631_Level5() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3631_Level5";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level5_SSO_UserId;
 		String password = LoginTestData.level5_SSO_Password;
@@ -1139,7 +1164,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.Kpi_Toggle_BT.click();
 		Thread.sleep(2000);
 		if(Base.isElementDisplayed(menuItemActivityPage.Kpi_Model_Header)
@@ -1148,15 +1173,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.KpiModel_TopMenuItemsPromo_Table)
 				& Base.isElementDisplayed(menuItemActivityPage.KpiModel_TopMenuItemsManagerMeals_Table)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3631_Level5",
+					browser,
 					"Level 5 User should be able to see expanded KPi Model and it should display KPIs of the day",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3631_Level5","menuItemActivity_US1926_TC3631_Level5",
+					browser,
 					"Level 5 User should be able to see expanded KPi Model and it should display KPIs of the day",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3631_Level5");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -1165,6 +1190,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3631_Level6() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3631_Level6";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.level6_SSO_UserId;
 		String password = LoginTestData.level6_SSO_Password;
@@ -1173,7 +1199,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.Kpi_Toggle_BT.click();
 		Thread.sleep(2000);
 		if(Base.isElementDisplayed(menuItemActivityPage.Kpi_Model_Header)
@@ -1182,15 +1208,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.KpiModel_TopMenuItemsPromo_Table)
 				& Base.isElementDisplayed(menuItemActivityPage.KpiModel_TopMenuItemsManagerMeals_Table)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3631_Level6",
+					browser,
 					"Level 6 User should be able to see expanded KPi Model and it should display KPIs of the day",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3631_Level6","menuItemActivity_US1926_TC3631_Level6",
+					browser,
 					"Level 6 User should be able to see expanded KPi Model and it should display KPIs of the day",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3631_Level6");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -1199,6 +1225,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3631_Operator() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3631_Operator";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.operator_SSO_UserId;
 		String password = LoginTestData.operator_SSO_Password;
@@ -1207,7 +1234,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.Kpi_Toggle_BT.click();
 		Thread.sleep(2000);
 		if(Base.isElementDisplayed(menuItemActivityPage.Kpi_Model_Header)
@@ -1216,15 +1243,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.KpiModel_TopMenuItemsPromo_Table)
 				& Base.isElementDisplayed(menuItemActivityPage.KpiModel_TopMenuItemsManagerMeals_Table)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3631_Operator",
+					browser,
 					"Operator User should be able to see expanded KPi Model and it should display KPIs of the day",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3631_Operator","menuItemActivity_US1926_TC3631_Operator",
+					browser,
 					"Operator User should be able to see expanded KPi Model and it should display KPIs of the day",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3631_Operator");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -1233,6 +1260,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3631_Supervisor() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3631_Supervisor";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.supervisor_SSO_UserId;
 		String password = LoginTestData.supervisor_SSO_Password;
@@ -1241,7 +1269,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.Kpi_Toggle_BT.click();
 		Thread.sleep(2000);
 		if(Base.isElementDisplayed(menuItemActivityPage.Kpi_Model_Header)
@@ -1250,15 +1278,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.KpiModel_TopMenuItemsPromo_Table)
 				& Base.isElementDisplayed(menuItemActivityPage.KpiModel_TopMenuItemsManagerMeals_Table)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3631_Supervisor",
+					browser,
 					"Supervisor User should be able to see expanded KPi Model and it should display KPIs of the day",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3631_Supervisor","menuItemActivity_US1926_TC3631_Supervisor",
+					browser,
 					"Supervisor User should be able to see expanded KPi Model and it should display KPIs of the day",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3631_Supervisor");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -1267,6 +1295,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3631_SupervisorWithRoleAssignment() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3631_SupervisorWithRoleAssignment";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
 		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
@@ -1275,7 +1304,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.Kpi_Toggle_BT.click();
 		Thread.sleep(2000);
 		if(Base.isElementDisplayed(menuItemActivityPage.Kpi_Model_Header)
@@ -1284,15 +1313,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.KpiModel_TopMenuItemsPromo_Table)
 				& Base.isElementDisplayed(menuItemActivityPage.KpiModel_TopMenuItemsManagerMeals_Table)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3631_SupervisorWithRoleAssignment",
+					browser,
 					"SupervisorWithRoleAssignment User should be able to see expanded KPi Model and it should display KPIs of the day",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3631_SupervisorWithRoleAssignment","menuItemActivity_US1926_TC3631_SupervisorWithRoleAssignment",
+					browser,
 					"SupervisorWithRoleAssignment User should be able to see expanded KPi Model and it should display KPIs of the day",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3631_SupervisorWithRoleAssignment");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -1301,6 +1330,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 	public void menuItemActivity_US1926_TC3631_OrgAdmin() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US1926_TC3631_OrgAdmin";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.orgAdmin_SSO_UserId;
 		String password = LoginTestData.orgAdmin_SSO_Password;
@@ -1309,7 +1339,7 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.Kpi_Toggle_BT.click();
 		Thread.sleep(2000);
 		if(Base.isElementDisplayed(menuItemActivityPage.Kpi_Model_Header)
@@ -1318,15 +1348,15 @@ public class US1926_MenuItemActivityInfoBundleUserRoleAccess extends AbstractTes
 				& Base.isElementDisplayed(menuItemActivityPage.KpiModel_TopMenuItemsPromo_Table)
 				& Base.isElementDisplayed(menuItemActivityPage.KpiModel_TopMenuItemsManagerMeals_Table)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US1926_TC3631_OrgAdmin",
+					browser,
 					"OrgAdmin User should be able to see expanded KPi Model and it should display KPIs of the day",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US1926_TC3631_OrgAdmin","menuItemActivity_US1926_TC3631_OrgAdmin",
+					browser, 
 					"OrgAdmin User should be able to see expanded KPi Model and it should display KPIs of the day",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US1926_TC3631_OrgAdmin");
+			AbstractTest.takeSnapShot();
 		}
 	}
 }

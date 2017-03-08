@@ -6,7 +6,6 @@ import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
@@ -20,7 +19,7 @@ import eInventoryPageClasses.ManualInvoiceNewPage;
 import eInventoryPageClasses.PurchasesPage;
 import eInventoryPageClasses.StoreLedgerDetailPage;
 import eInventoryPageClasses.TransferLandingPage;
-import sprint2.AbstractTest;
+import eInventoryPageClasses.AbstractTest;
 
 public class US759_Storeledger extends AbstractTest
 {
@@ -29,50 +28,44 @@ public class US759_Storeledger extends AbstractTest
 	@Test()
 	public void purchaseBundle_US759_TC1549() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
+		
 		/** Variable Section : **/
 //		String userId = LoginTestData.operatorUserId;
+		AbstractTest.tcName="purchaseBundle_US759_TC1549";
 		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
 		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
 		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String wrin=GlobalVariable.createPurchaseWrin;
 		String date=GlobalVariable.approveDate;
-		String monthYear="2016-02-01";
+		/*String monthYear=GlobalVariable.viewLedger_monthDate;*/
 		String invoiceNumber=Integer.toString(Base.generateNdigitRandomNumber(4));
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = PageFactory.initElements(driver, PurchasesPage.class);
 		ManualInvoiceNewPage manualInvoiceNewPage = PageFactory.initElements(driver, ManualInvoiceNewPage.class);
 		StoreLedgerDetailPage storeLedgerDetailPage = PageFactory.initElements(driver, StoreLedgerDetailPage.class);
-		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).navigateToInventoryManagement().goToPurchaseLandingPage();
+		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).goToPurchaseLandingPage();
 		wait.until(ExpectedConditions.visibilityOf(purchasesPage.Purchases_Label));
-		Thread.sleep(3000);
 		manualInvoiceNewPage.createAManualPurchase(vendorName, invoiceNumber, wrin,"2","3");
-		Thread.sleep(8000);
-		System.out.println(invoiceNumber);
-		driver.navigate().refresh();
-		Thread.sleep(3000);
-		purchasesPage.approveAManualInvoice(invoiceNumber,date);
-		Thread.sleep(5000);
+		purchasesPage.approveAManualInvoice(invoiceNumber);
 		purchasesPage.ViewLedger_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(storeLedgerDetailPage.month_DD));
-		storeLedgerDetailPage.selectMonthFromStoreLedgerDrpDwn(monthYear);
-		Thread.sleep(4000);
-		storeLedgerDetailPage.clickOnVendorGroup(vendorName);
-		Thread.sleep(4000);
 		if(storeLedgerDetailPage.verifyPosetedPurchaseDisplayedForNewVendor(vendorName, date, invoiceNumber))
 		{
 			Reporter.reportPassResult(
-					browser,"purchaseBundle_US759_TC1549",
+					browser,
 					"User should be able to view the Invoice on Store ledger page",
 					"Pass");
+			
 		}
 		else
 		{
 			Reporter.reportTestFailure(
-					browser,"purchaseBundle_US759_TC1549","purchaseBundle_US759_TC1549",
+					browser,
 					"User should be able to view the Invoice on Store ledger page",
 					"Fail");
-			AbstractTest.takeSnapShot("purchaseBundle_US759_TC1549");
+			AbstractTest.takeSnapShot();
+			
 		}
 		
 				
@@ -84,18 +77,19 @@ public class US759_Storeledger extends AbstractTest
 				BiffException, WriteException, IOException, InterruptedException {
 		/**Variable Section :**/
 //		String userId = LoginTestData.operatorUserId;
+		AbstractTest.tcName="purchaseBundle_US759_TC3469";
 		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
 		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
 		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType1 = GlobalVariable.transferTypeIn;
 		String transferType2 = GlobalVariable.transferTypeOut;
-		String monthYear="February 2016";
-		String transferStoreNumber = "73";
-		String caseQuantity = "2";
-		String innerPackQuantity ="4";
-		String looseUnitQuantity ="2";
-		String date = GlobalVariable.createDate;
+//		String monthYear=GlobalVariable.viewLedger_monthDate;
+		String transferStoreNumber = GlobalVariable.nationalStore1;
+		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
+		String date = GlobalVariable.transferDate;
 //		String transferTime = GlobalVariable.transferTime;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -103,7 +97,7 @@ public class US759_Storeledger extends AbstractTest
 		PurchasesPage purchasesPage = PageFactory.initElements(driver, PurchasesPage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
 		TransferLandingPage transferLandingPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).selectLocation(storeId)
-				.navigateToInventoryManagement().goToTransferLandingPage();
+				.goToTransferLandingPage();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.CreateNewTransfers_BT)).click();
 		Thread.sleep(10000);
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
@@ -147,9 +141,10 @@ public class US759_Storeledger extends AbstractTest
 		//Go to Purchase landing page
 		homePage.Menu_DD_BT.click();
 		Thread.sleep(2000);
+		/*Thread.sleep(2000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='mm-panel mm-hasnavbar mm-highest mm-current mm-opened']/div/a[@class='mm-btn mm-prev' ]")));
 		Thread.sleep(2000);
-		driver.findElement(By.xpath("//div[@class='mm-panel mm-hasnavbar mm-highest mm-current mm-opened']/div/a[@class='mm-btn mm-prev' ]")).click();
+		driver.findElement(By.xpath("//div[@class='mm-panel mm-hasnavbar mm-highest mm-current mm-opened']/div/a[@class='mm-btn mm-prev' ]")).click();*/
 		wait.until(ExpectedConditions.visibilityOf(homePage.Purchases_BT));
 		Thread.sleep(2000);
 		homePage.Purchases_BT.click();
@@ -157,22 +152,24 @@ public class US759_Storeledger extends AbstractTest
 		Thread.sleep(2000);
 		purchasesPage.ViewLedger_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(storeLedgerDetailPage.month_DD));
-		storeLedgerDetailPage.selectMonthFromStoreLedgerDrpDwn(monthYear);
+		/*storeLedgerDetailPage.selectMonthFromStoreLedgerDrpDwn(monthYear);*/
 		Thread.sleep(4000);
 //		storeLedgerDetailPage.clickOnVendorGroup("Transfers");
 		//Verify that transfer entries should displayed in Transfer landing page		
 		if (storeLedgerDetailPage.verifyTransferIsDisplayedInStoreLedgerPage(transferStoreNumber, date, amount,transferType1) &&
 				storeLedgerDetailPage.verifyTransferIsDisplayedInStoreLedgerPage(transferStoreNumber, date, amount1,transferType2)) {
 			Reporter.reportPassResult(
-					browser,"purchaseBundle_US759_TC3469",
+					browser,
 					"Transfer in and Out entries should display on store ledger page",
 					"Pass");
+			
 		} else {
 			Reporter.reportTestFailure(
-					browser,"purchaseBundle_US759_TC3469","purchaseBundle_US759_TC3469",
+					browser,
 					"Transfer in and Out entries should display on store ledger page",
 					"Fail");
-			AbstractTest.takeSnapShot("purchaseBundle_US759_TC3469");
+			AbstractTest.takeSnapShot();
+			
 		}
 
 	}

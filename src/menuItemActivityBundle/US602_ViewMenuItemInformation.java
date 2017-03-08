@@ -11,12 +11,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 import common.Base;
+import common.GenericMethods;
 import common.GlobalVariable;
 import common.LoginTestData;
 import common.Reporter;
+import eInventoryPageClasses.AbstractTest;
 import eInventoryPageClasses.HomePage;
 import eInventoryPageClasses.MenuItemActivityAndInformationPage;
-import sprint2.AbstractTest;
 
 public class US602_ViewMenuItemInformation extends AbstractTest
 {
@@ -26,7 +27,9 @@ public class US602_ViewMenuItemInformation extends AbstractTest
 	@Test()
 	public void menuItemActivity_US602_TC1349() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
+		
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US602_TC1349";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.operator_SSO_UserId;
 		String password = LoginTestData.operator_SSO_Password;
@@ -40,7 +43,7 @@ public class US602_ViewMenuItemInformation extends AbstractTest
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
 		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
 		menuItemActivityPage.ShowResults_BT.click();
@@ -49,17 +52,17 @@ public class US602_ViewMenuItemInformation extends AbstractTest
 		if(Base.isElementDisplayed(By.xpath("//table[@id='mia_table']/tbody/tr")))
 		{
 			Reporter.reportPassResult(
-					browser,"menuItemActivity_US602_TC1349",
+					browser,
 					"User should be able to view all the activity",
 					"Pass");
 		}
 		else
 		{
 			Reporter.reportTestFailure(
-					browser,"menuItemActivity_US602_TC1349","menuItemActivity_US602_TC1349",
+					browser,
 					"User should be able to view all the activity",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US602_TC1349");
+			AbstractTest.takeSnapShot();
 		}	
 		
 	}
@@ -81,6 +84,7 @@ public class US602_ViewMenuItemInformation extends AbstractTest
 	public void menuItemActivity_US602_TC1350() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US602_TC1350";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.operator_SSO_UserId;
 		String password = LoginTestData.operator_SSO_Password;
@@ -94,46 +98,65 @@ public class US602_ViewMenuItemInformation extends AbstractTest
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
 		menuItemActivityPage.selectStartDate(startDate).selectEndDate(endDate).selectStartTime(startTime).selectEndTime(endTime);
 		menuItemActivityPage.ShowResults_BT.click();
 		Thread.sleep(5000);
 		menuItemActivityPage.Information_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(menuItemActivityPage.MenuItemInformation_PopUp_Title));
-		if(Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_MenuItemNumberHeader)
-				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_DescriptionHeader)
-				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_OnPOSHeader)
-				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_DaypartCodeHeader)
-				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_FamilyGroupHeader)){
+		if(GenericMethods.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_MenuItemNumberHeader, "menuItemActivityPage.MenuItemInformation_Table_MenuItemNumberHeader")
+				&& GenericMethods.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_DescriptionHeader, "menuItemActivityPage.MenuItemInformation_Table_DescriptionHeader")
+				&& GenericMethods.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_OnPOSHeader, "menuItemActivityPage.MenuItemInformation_Table_OnPOSHeader")
+				&& GenericMethods.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_DaypartCodeHeader, "menuItemActivityPage.MenuItemInformation_Table_DaypartCodeHeader")
+				&& GenericMethods.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Table_FamilyGroupHeader, "menuItemActivityPage.MenuItemInformation_Table_FamilyGroupHeader"))
+		{
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US602_TC1350",
+					browser,
 					"User should be able to view Menu Item Information page with Information of searched Menu item",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US602_TC1350_Condition1","menuItemActivity_US602_TC1350",
+					browser,
 					"User should be able to view Menu Item Information page with Information of searched Menu item",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US602_TC1350_Condition1");
+			AbstractTest.takeSnapShot();
 		}
 		menuItemActivityPage.MenuItemInformation_Receipe_Expand_BT.click();
-		if(Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Receipe_Table)
-				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_ReceipeTable_WRINHeader)
-				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_ReceipeTable_DescriptionHeader)
-				& Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_ReceipeTable_ServingFactorHeader)
-				& menuItemActivityPage.MenuItemInformation_ReceipeTable_ItemList.size()>0){
-			Reporter.reportPassResult(
-					browser, "menuItemActivity_US602_TC1350",
-					"User should be able to view columns with label name WRIN, Description, Serving factor with required data to each column",
-					"Pass");
-		} else {
-			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US602_TC1350_Condition2","menuItemActivity_US602_TC1350",
-					"User should be able to view columns with label name WRIN, Description, Serving factor with required data to each column",
-					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US602_TC1350_Condition2");
+		if(Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Receipe_Table))
+		{
+			if(GenericMethods.isElementDisplayed(menuItemActivityPage.MenuItemInformation_ReceipeTable_WRINHeader, "menuItemActivityPage.MenuItemInformation_ReceipeTable_WRINHeader")
+					&& GenericMethods.isElementDisplayed(menuItemActivityPage.MenuItemInformation_ReceipeTable_DescriptionHeader, "menuItemActivityPage.MenuItemInformation_ReceipeTable_DescriptionHeader")
+					&& GenericMethods.isElementDisplayed(menuItemActivityPage.MenuItemInformation_ReceipeTable_ServingFactorHeader, "menuItemActivityPage.MenuItemInformation_ReceipeTable_ServingFactorHeader")
+					&& menuItemActivityPage.MenuItemInformation_ReceipeTable_ItemList.size()>0){
+				Reporter.reportPassResult(
+						browser,
+						"User should be able to view columns with label name WRIN, Description, Serving factor with required data to each column",
+						"Pass");
+			}
+			else {
+				Reporter.reportTestFailure(
+						browser,
+						"User should be able to view columns with label name WRIN, Description, Serving factor with required data to each column",
+						"Fail");
+				AbstractTest.takeSnapShot();
+			}
 		}
+		 else if(Base.isElementDisplayed(By.xpath("//span[text()='No Recipe Information Available']")))
+		 {
+			 Reporter.reportPassResult(
+						browser,
+						"User should be able to view columns with label name WRIN, Description, Serving factor with required data to each column",
+						"Pass");
+		}
+		 else
+		 {
+			 Reporter.reportTestFailure(
+						browser,
+						"User should be able to view columns with label name WRIN, Description, Serving factor with required data to each column",
+						"Fail");
+				AbstractTest.takeSnapShot();
+		 }
 		
 	}
 	
@@ -149,6 +172,7 @@ public class US602_ViewMenuItemInformation extends AbstractTest
 	public void menuItemActivity_US602_TC1351() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US602_TC1351";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.operator_SSO_UserId;
 		String password = LoginTestData.operator_SSO_Password;
@@ -159,7 +183,7 @@ public class US602_ViewMenuItemInformation extends AbstractTest
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
 		Thread.sleep(5000);
 		menuItemActivityPage.Information_BT.click();
@@ -174,20 +198,20 @@ public class US602_ViewMenuItemInformation extends AbstractTest
 		Thread.sleep(4000);
 		System.out.println("descLength"+descLength);
 		System.out.println("posValue"+posValue);
-		if(descLength<=20 && (posValue.equalsIgnoreCase("Yes") || posValue.equalsIgnoreCase("No")) && menuItemActivityPage.MenuItemInformation_Receipe_Table.isDisplayed())
+		if(descLength<=20 && (posValue.equalsIgnoreCase("Yes") || posValue.equalsIgnoreCase("No")) && (Base.isElementDisplayed(menuItemActivityPage.MenuItemInformation_Receipe_Table) ||Base.isElementDisplayed(By.xpath("//span[text()='No Recipe Information Available']"))))
 		{
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US602_TC1351",
+					browser,
 					"'Description' field length should display characters not more than 20 max and 'Currently on POS' should have either 'Yes' or 'No' as its value and System should display recipe against Menu Item if exists on clicking down arrow button.",
 					"Pass");
 		}
 		else
 		{
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US602_TC1351","menuItemActivity_US602_TC1351",
+					browser,
 					"'Description' field length should display characters not more than 20 max and 'Currently on POS' should have either 'Yes' or 'No' as its value and System should display recipe against Menu Item if exists on clicking down arrow button.",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US602_TC1351");
+			AbstractTest.takeSnapShot();
 		}
 			
 	}
@@ -197,6 +221,7 @@ public class US602_ViewMenuItemInformation extends AbstractTest
 	public void menuItemActivity_US602_TC1373() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US602_TC1373";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.operator_SSO_UserId;
 		String password = LoginTestData.operator_SSO_Password;
@@ -207,7 +232,7 @@ public class US602_ViewMenuItemInformation extends AbstractTest
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
 		Thread.sleep(5000);
 		menuItemActivityPage.Information_BT.click();
@@ -220,17 +245,17 @@ public class US602_ViewMenuItemInformation extends AbstractTest
 				Base.isElementDisplayed(By.xpath("//div[@id='mia-info-recipe-table']/span[text()='No Recipe Information Available']")))
 		{
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US602_TC1373",
+					browser, 
 					"Correct Recepie information should display",
 					"Pass");
 		}
 		else
 		{
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US602_TC1373","menuItemActivity_US602_TC1373",
+					browser,
 					"Correct Recepie information should display",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US602_TC1373");
+			AbstractTest.takeSnapShot();
 		}		
 		
 	}
@@ -241,6 +266,7 @@ public class US602_ViewMenuItemInformation extends AbstractTest
 	public void menuItemActivity_US602_TC1458() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US602_TC1458";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String userId = LoginTestData.operator_SSO_UserId;
 		String password = LoginTestData.operator_SSO_Password;
@@ -250,7 +276,7 @@ public class US602_ViewMenuItemInformation extends AbstractTest
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		menuItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToMenuItemActivityAndInformationPage();
+				.selectLocation(storeId).goToMenuItemActivityAndInformationPage();
 		menuItemActivityPage.searchAndSelectMenuItem(menuItem);
 		Thread.sleep(5000);
 		menuItemActivityPage.Information_BT.click();
@@ -260,7 +286,7 @@ public class US602_ViewMenuItemInformation extends AbstractTest
 		menuItemActivityPage.MenuItemInformation_Receipe_Expand_BT.click();
 		Thread.sleep(3000);
 		
-		System.out.println(driver.findElement(By.xpath("//div[@id='mia-info-recipe-table']/div/table/tbody/tr/td[3]/span")).getText());
+		/*System.out.println(driver.findElement(By.xpath("//div[@id='mia-info-recipe-table']/div/table/tbody/tr/td[3]/span")).getText());*/
 		if(!Base.isElementDisplayed(By.xpath("//div[@id='mia-info-recipe-table']/span[text()='No Recipe Information Available']")))
 		{
 			int size=driver.findElements(By.xpath("//div[@id='mia-info-recipe-table']/div/table/tbody/tr/td[3]/span")).size();
@@ -272,7 +298,7 @@ public class US602_ViewMenuItemInformation extends AbstractTest
 					if( i==size)
 					{
 						Reporter.reportPassResult(
-								browser, "menuItemActivity_US602_TC1458",
+								browser,
 								"Correct Serving factor information should display",
 								"Pass");
 					}
@@ -284,10 +310,10 @@ public class US602_ViewMenuItemInformation extends AbstractTest
 				else
 				{
 					Reporter.reportTestFailure(
-							browser, "menuItemActivity_US602_TC1458","menuItemActivity_US602_TC1458",
+							browser,
 							"Receipe Information should be displaying",
 							"Fail");
-					AbstractTest.takeSnapShot("menuItemActivity_US602_TC1458");
+					AbstractTest.takeSnapShot();
 				}
 			}
 
@@ -295,7 +321,7 @@ public class US602_ViewMenuItemInformation extends AbstractTest
 		else
 		{
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US602_TC1458",
+					browser,
 					"No Receipe Information is present",
 					"Pass");
 		}

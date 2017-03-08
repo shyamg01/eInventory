@@ -1,6 +1,7 @@
 package common;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,7 +17,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import eInventoryPageClasses.AbstractPage;
-import sprint2.AbstractTest;
+import eInventoryPageClasses.AbstractTest;
 
 public class Base extends AbstractTest {
 
@@ -45,6 +46,8 @@ public class Base extends AbstractTest {
 			wait.until(ExpectedConditions.visibilityOf(driver.findElement(by)));
 			return driver.findElement(by).isDisplayed();
 		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Catch " + by);
 			return false;
 		}
 	}
@@ -67,6 +70,16 @@ public class Base extends AbstractTest {
 		int randomNum = randGen.nextInt(range) + num1;
 		return randomNum;
 	}
+	
+	//Generate N Digit Random Number
+	public static BigDecimal generateDecimalRandomNumber(int n){
+		BigDecimal randomNumber = new BigDecimal(generateNdigitRandomNumber(n));
+		System.out.println("randomNumber "+randomNumber);
+		BigDecimal decimalNumber = randomNumber.divide(new BigDecimal(100));
+		return decimalNumber;
+	}
+	
+	
 	
 	public static String getMonthName(int Month) {
 		String month;
@@ -152,6 +165,26 @@ public class Base extends AbstractTest {
 		return hourValue + ":" + minuteValue;
 
 	}
+	
+	// This method will take hour and minutes as parameter and return next 15 minutes time
+	public static String getNext15MinuteTimeSlice(int hour, int minute) {
+		int nextMinute;
+		if (minute == 45) {
+			nextMinute = 0;
+			hour++;
+		}else
+		{nextMinute = minute + 15;}
+		String hourValue = String.valueOf(hour);
+		if (hourValue.length() == 1) {
+			hourValue = "0" + hourValue;
+		}
+		String minuteValue = String.valueOf(nextMinute);
+		if (minuteValue.equals("0")) {
+			minuteValue = "00";
+		}
+		return hourValue + ":" + minuteValue;
+
+	}
 		
 	// This method will return hour value from the time(HH:MM)
 	public static int getHourFromTime(String time) {
@@ -162,6 +195,30 @@ public class Base extends AbstractTest {
 	public static int getMinuteFromTime(String time) {
 		return Integer.parseInt(time.split(":")[1]);
 	}
+	
+	public static String get15MinuteTimeStamp(int hour, int minutes) {
+		String timeStamp ="";
+		if (minutes >= 0 && minutes < 15) {
+			timeStamp = (getHourInTwoDigit(hour) + ":" + "00");
+		} else if (minutes >= 15 && minutes < 30) {
+			timeStamp = (getHourInTwoDigit(hour) + ":" + "15");
+		} else if (minutes >= 30 && minutes < 45) {
+			timeStamp = (getHourInTwoDigit(hour) + ":" + "30");
+		} else if (minutes >= 45 && minutes <= 59) {
+			timeStamp = (getHourInTwoDigit(hour) + ":" + "45");
+		}
+
+		return timeStamp;
+	}
+	
+	private static String getHourInTwoDigit(int hour){
+		String hourValue = String.valueOf(hour);
+		if (hourValue.length() == 1) {
+			hourValue = "0" + hourValue;
+		}
+		return hourValue;
+	}
+	
 	
 	public static String getCurrentTimeStamp() {
 		String currentTime = new SimpleDateFormat("HH:mm").format(new Date());
@@ -225,9 +282,53 @@ public class Base extends AbstractTest {
 	public static List<String> getTextListFromWebElements(List<WebElement> elementList){
 		ArrayList<String>textValueList = new ArrayList<String>();
 		for(WebElement element : elementList){
-			textValueList.add(element.getText().trim());
+			System.out.println("Element "+element.getText().replace("$", "").replace(",", ""));
+			textValueList.add(element.getText().replace("$", "").replace(",", "").trim());
 		}
 		return textValueList;
+	}
+	
+	public static boolean verifyBigIntInAsscendingOrder(List<String> stringList)throws ParseException {
+		boolean result = true;
+		for (int i = 0; i < stringList.size(); i++) {
+			if (i < stringList.size() - 1) {
+				if (!stringList.get(i).equals("") && !stringList.get(i + 1).equals("")) {
+					BigInteger Value1 = new BigInteger(stringList.get(i).replace("-", ""));
+					System.out.println("Ascending Value2 " + Value1);
+					BigInteger Value2 = new BigInteger(stringList.get(i + 1).replace("-", ""));
+					System.out.println("Ascending Value2 " + Value2);
+					System.out.println("Compare " + Value1.compareTo(Value2));
+					System.out.println("Ascending result is "+ (Value1.compareTo(Value2) < 0 || Value1.compareTo(Value2) == 0));
+					if ((Value1.compareTo(Value2) < 0 || Value1	.compareTo(Value2) == 0)) {
+						result = result & true;
+					} else {
+						result = result & false;
+					}
+				}
+			}
+		}
+		return result;
+	}
+	
+	public static boolean verifyBigIntInDescendingOrder(List<String> stringList) throws ParseException{
+		boolean result = true;
+		for(int i=0;i< stringList.size();i++){
+			if(i<stringList.size()-1){
+				if(!stringList.get(i).equals("") && !stringList.get(i+1).equals("")){
+				BigInteger Value1 = new BigInteger(stringList.get(i).replace("-", ""));
+				System.out.println("Descending Value2 "+Value1);
+				BigInteger Value2  = new BigInteger(stringList.get(i+1).replace("-", ""));
+				System.out.println("Descending Value2 "+Value2);
+				System.out.println("Descending result is "+ (Value1.compareTo(Value2)>0 || Value1.compareTo(Value2) == 0));
+				if((Value1.compareTo(Value2)>0 || Value1.compareTo(Value2) == 0)){
+					result = result & true;
+				}else{
+					result = result & false;
+					}
+				}
+			}
+		}
+		return result;
 	}
 	
 	public static boolean verifyStringInDescendingOrder(List<String> stringList) throws ParseException{
@@ -316,10 +417,10 @@ public class Base extends AbstractTest {
 		boolean result = true;
 		for(int i = 0;i<amountList.size();i++){
 			if(i<amountList.size()-1){
-				String amountValue1 = amountList.get(i);
+				String amountValue1 = amountList.get(i).replace("-", "").replace("$", "");
 				System.out.println("amountValue1 "+amountValue1);
 				BigDecimal value1 = new BigDecimal(amountValue1);
-				String amountValue2 = amountList.get(i + 1);
+				String amountValue2 = amountList.get(i + 1).replace("-", "").replace("$", "");
 				System.out.println("amountValue2 "+amountValue2);
 				BigDecimal value2 = new BigDecimal(amountValue2);
 				System.out.println("Comp "+ ((value1.compareTo(value2) < 0) ||(value1.compareTo(value2) == 0)));
@@ -333,10 +434,10 @@ public class Base extends AbstractTest {
 		boolean result = true;
 		for(int i = 0;i<amountList.size();i++){
 			if(i<amountList.size()-1){
-				String amountValue1 = amountList.get(i);
+				String amountValue1 = amountList.get(i).replace("-", "").replace("$", "");
 				System.out.println("amountValue1 "+amountValue1);
 				BigDecimal value1 = new BigDecimal(amountValue1);
-				String amountValue2 = amountList.get(i + 1);
+				String amountValue2 = amountList.get(i + 1).replace("-", "").replace("$", "");
 				System.out.println("amountValue2 "+amountValue2);
 				BigDecimal value2 = new BigDecimal(amountValue2);
 				System.out.println("Comp "+ ((value1.compareTo(value2) > 0) ||(value1.compareTo(value2) == 0)));
@@ -356,6 +457,48 @@ public class Base extends AbstractTest {
 	{
 		AbstractPage.executor.executeScript("window.scrollTo(0, 0)");
 
+	}
+	
+	public static String getCurrentTimeForStore(String storeId){
+		int hour = 0;
+		int minute = 0;
+		switch (storeId) {
+		case "1532":
+			java.util.TimeZone tz = java.util.TimeZone.getTimeZone("America/Toronto");
+			java.util.Calendar c = java.util.Calendar.getInstance(tz);
+			hour = c.get(java.util.Calendar.HOUR_OF_DAY);
+			minute = c.get(java.util.Calendar.MINUTE);
+			break;
+		default:
+			break;
+		}
+		String hourValue;
+		if (hour >= 0 && hour < 10) {
+			hourValue = "0" + hour;
+		} else {
+			hourValue = String.valueOf(hour);
+		}
+		String minuteValue;
+		if (minute >= 0 && minute < 10) {
+			minuteValue = "0" + minute;
+		} else {
+			minuteValue = String.valueOf(minute);
+		}
+		System.out.println(hourValue+":"+minuteValue);
+		return hourValue+":"+minuteValue;
+	}
+	
+	public static String toCamelCase(String s) {
+		String[] parts = s.split(" ");
+		String camelCaseString = "";
+		for (String part : parts) {
+			camelCaseString = camelCaseString + toProperCase(part) + " ";
+		}
+		return camelCaseString;
+	}
+
+	public static String toProperCase(String s) {
+		return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
 	}
 	
 }

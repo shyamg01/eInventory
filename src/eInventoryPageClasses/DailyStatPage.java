@@ -13,6 +13,7 @@ public class DailyStatPage  extends AbstractPage{
 	public DailyStatPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		
 	}
 	
 	@FindBy(xpath = "//h3[text()='Daily Inventory Stat']")

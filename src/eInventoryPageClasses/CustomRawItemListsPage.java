@@ -19,6 +19,7 @@ public class CustomRawItemListsPage extends AbstractPage
 	{
 		super(driver);
 		PageFactory.initElements(driver, this);
+		
 		// TODO Auto-generated constructor stub
 	}
 	

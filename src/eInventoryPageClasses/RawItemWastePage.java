@@ -21,19 +21,14 @@ public class RawItemWastePage extends AbstractPage
 	{
 		super(driver);
 		PageFactory.initElements(driver, this);
+		
 	}
-	
-	@FindBy(xpath ="//button[contains(.,'Add New Entry')]")
-	public WebElement AddNewEntry_BT;
 	
 	@FindBy(xpath ="//input[@id='insert_new_waste_date']")
 	public WebElement SelectDateAndTime_TB;
 	
 	@FindBy(xpath ="//h2[text()='Raw Waste']")
 	public WebElement RawWaste_Title;
-	
-	@FindBy(xpath ="//h3[contains(.,'	Enter New Raw Waste')]")
-	public WebElement EnterNewRawWaste_Title;
 	
 	@FindBy(xpath ="//div[@id='data_entry_modal' and @aria-hidden='false']")
 	public WebElement AddWasteItemPopUpWindow;
@@ -68,24 +63,14 @@ public class RawItemWastePage extends AbstractPage
 	@FindBy(xpath ="(//button[@id='htmlButton' and @value='Add Item' and text()='Add Item'])[1]")
 	public WebElement AddItem_BT;
 	
-	@FindBy(xpath="//div[@class='toast-message' and text()='Raw Item Added']")
-	public WebElement RawWasteForm_ItemAdded_Message;
-	
-	@FindBy(xpath ="//button[contains(.,'Cancel')]")
-	public WebElement AddWasteItemPopUpWindow_Cancel_BT;
-	
 	@FindBy(xpath ="//input[@id='raw_waste_entry_autocomplete']")
 	public WebElement RawItemWasted_TB;
 
 	@FindBy(xpath ="//eb-button[@id='submit_raw_waste_btn']/button")
 	public WebElement Submit_BT;
-	
 
 	@FindBy(xpath ="//button/span[text()='Yes']")
 	public WebElement RawWasteEntryConfirmation_PopUp_YES_BT;
-	
-	@FindBy(xpath ="//button/span[text()='No']")
-	public WebElement RawWasteEntryConfirmation_PopUp_NO_BT;
 	
 	@FindBy(xpath ="//button/span[text()='Yes']")
 	public WebElement SubmitRawWaste_PopUp_YES_BT;
@@ -93,17 +78,8 @@ public class RawItemWastePage extends AbstractPage
 	@FindBy(xpath ="//button/span[text()='No']")
 	public WebElement SubmitRawWaste_PopUp_NO_BT;
 	
-	@FindBy(xpath ="//input[@id='submit_raw_waste_btn']")
-	public WebElement SubmitEntry_BT;
-	
 	@FindBy(xpath ="//eb-button[@id='cancel_raw_waste_btn']/button")
 	public WebElement Cancel_BT;
-	
-	@FindBy(xpath ="//input[@id='cancel_raw_waste_btn']")
-	public WebElement CancelEntry_BT;
-	
-	/*@FindBy(xpath ="//div[@class='modal-content' and contains(.,'All entered information will be lost.  Are you sure you want to cancel?')]")
-	public WebElement RawWasteEntryIncomplete_PopUp_Window;*/
 	
 	@FindBy(xpath ="//button/span[text()='Yes']")
 	public WebElement RawWasteEntryIncomplete_PopUp_YES_BT;
@@ -114,34 +90,22 @@ public class RawItemWastePage extends AbstractPage
 	@FindBy(xpath="//div[contains(@id,'popover')]/div[@class='popover-content']")
 	public WebElement LooseUnitsInvalidValue_Error_Message;
 	
-	@FindBy(id = "back-to-top")
-	public WebElement BackToTop_BT;
-	
-	@FindBy(id = "autosearchAddInputBtn")
-	public WebElement AddWrinFromSearchBox_BT;
-	
 	@FindBy(xpath ="(//div[@id ='eb_tp_input']/span)[1]")
 	public WebElement SelectTime_TB;
 	
 	@FindBy(xpath ="(//i[@id ='autosearchAdditionSign'])[1]")
 	public WebElement AddSearchItem_Icon;
 	
-	@FindBy(xpath ="(//div[@id='eb_tp_hr_control']/div[contains(@class,'eb_tp_hr_min')]/div[@id='eb_tp_hr_span'])[1]")
+	@FindBy(xpath ="(//div[@id='eb_tp_hr_control']/div[contains(@class,'eb_tp_hr_min')]/span[@id='eb_tp_hr_span'])[1]")
 	public WebElement RawWaste_hourSpan_Value;
 	
-	@FindBy(xpath ="(//div[@id='eb_tp_hr_control']/div[@id='eb_tp_hour_up'])[1]")
-	public WebElement RawWaste_HourUp_BT;
-	
-	@FindBy(xpath ="(//div[@id='eb_tp_min_control']/div[contains(@class,'eb_tp_hr_min')]/div[@id='eb_tp_min_span'])[1]")
+	@FindBy(xpath ="(//div[@id='eb_tp_min_control']/div[contains(@class,'eb_tp_hr_min')]/span[@id='eb_tp_min_span'])[1]")
 	public WebElement RawWaste_MinSpan_Value;
-	
-	@FindBy(xpath ="(//div[@id='eb_tp_min_up'])[1]")
-	public WebElement RawWaste_MinUp_BT;
 	
 	@FindBy(xpath="//div[@class='toast-message' and contains(.,'Duplicate Items not Allowed')]")
 	public WebElement DuplicateItem_Error_Message;
 	
-	@FindBy(xpath = "//div[@id='dlgContent']")
+	@FindBy(xpath = "//div[@id='dlgContent' and contains(text(),'All entered information will be lost.  Are you sure you want to cancel?')]")
 	public WebElement CancelRawWastePopUp_Confirmation_Message;
 	
 	@FindBy(xpath = "(//div[contains(@class,'slider-close')]/i[@id='modalToggle'])[1]")
@@ -171,9 +135,6 @@ public class RawItemWastePage extends AbstractPage
 	@FindBy(xpath ="//table[@id='raw_waste_entry_table']/thead/tr/th[text()='Sub-total']")
 	public WebElement RawWaste_Subtotal_Header;
 	
-	/*@FindBy(xpath ="//th[text()='Remove']")
-	public WebElement RawWaste_Remove_Header;*/
-	
 	@FindBy(xpath = "//tbody[@id='waste_entry_table_body']/tr")
 	public List<WebElement> RawWasteForm_WasteItemEntry_List;
 	
@@ -182,7 +143,12 @@ public class RawItemWastePage extends AbstractPage
 	
 	@FindBy(xpath ="//div[@class='toast-message' and text()='Raw Waste Entry Saved']")
 	public WebElement WasteEntrySaved_Confirmation_MSG;
-
+	
+	@FindBy(xpath =".//div[@id='dlgContent']/p[contains(text(),'Are you sure you want to')]/following-sibling::p[contains(text(),'submit this raw waste?')]")
+	public WebElement SubmitRawWaste_ConfirmationPopUp_Msg;
+	
+	@FindBy(xpath = "//tbody[@id='waste_entry_table_body']/tr/td[7]")
+	public WebElement RawWasteForm_TotalUnitsValue;
 	
 	public boolean isAddWasteItemPopUpWindowLoaded()
 	{
@@ -193,19 +159,7 @@ public class RawItemWastePage extends AbstractPage
 				&	driver.findElement(By.xpath("//div[@class='dataTables_scrollHead']//table[@class='display compact dataTable no-footer']/thead/tr/th[3]")).getText().trim().equalsIgnoreCase("Add")
 				& 	AddWasteItemPopUpWindow_Search_TB.isDisplayed();
 	}
-	
-	//To enter current date and time in the field
-	public RawItemWastePage enterCurrentDateAndTimeInRawWasteOccurredAtField() throws InterruptedException
-	{
-		//Click on Select Date and Time text box
-		String todayDate=Base.returnTodayDate();
-		int date = Base.getDayFromDate(todayDate);
-		int month = Base.getMonthFromDate(todayDate);
-		SelectDateAndTime_TB.click();
-		Thread.sleep(3000);
-		driver.findElement(By.xpath("(//div[@class='xdsoft_calendar']/table/tbody/tr/td[@data-month='"+month+"']/div[text()='"+date+"'])[3]")).click();
-		return PageFactory.initElements(driver, RawItemWastePage.class);
-	}
+
 	//To Search and select a raw Item wasted
 	public RawItemWastePage searchAndSelectRawItemWasted(String wrin) throws InterruptedException
 	{
@@ -242,60 +196,6 @@ public class RawItemWastePage extends AbstractPage
 		return PageFactory.initElements(driver, RawItemWastePage.class);
 	}
 	
-	public RawItemWastePage addASecondRawItem(String wrin, String innerPack,
-			String outerPack, String looseUnits) throws InterruptedException {
-		searchAndSelectRawItemWasted(wrin);
-		try {
-			InnerPack_TB.sendKeys(innerPack);
-		} catch (Exception e) {
-			// Do nothing
-		}
-		Thread.sleep(3000);
-		OuterPack_TB.sendKeys(outerPack);
-		LooseUnits_TB.sendKeys(looseUnits);
-		AddItem_BT.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@id='waste_entry_table']//td[1][contains(.,'"+ wrin + "')]")));
-		return PageFactory.initElements(driver, RawItemWastePage.class);
-	}
-	
-	//Add a Waste raw item with given WRIN ID
-	public RawItemWastePage addAWasteRawItem(String wrinID) {
-		wait.until(ExpectedConditions.visibilityOf(AddWasteItemPopUpWindow));
-		int size = driver.findElements(By.xpath("//table[@id='raw_items_tbl']/tbody/tr")).size();
-		for (int i = 1; i <= size; i++) {
-			if (driver.findElement(By.xpath("//table[@id='raw_items_tbl']/tbody/tr["+ i + "]/td[1]")).getText().trim().equalsIgnoreCase(wrinID)) {
-				driver.findElement(By.xpath("//table[@id='raw_items_tbl']/tbody/tr[" + i+ "]/td[3]/button")).click();
-				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='item_wrin' and text()='" + wrinID+ "']")));
-				// Verify the OuterPack label and text box
-				Assert.assertTrue(AddWasteItemPopUpWindow_OuterPack_Label.isDisplayed()& OuterPack_TB.isDisplayed(),"OuterPack label and text box should display");
-				// Verify the InnerPack label and text box
-				Assert.assertTrue(AddWasteItemPopUpWindow_InnerPack_Label.isDisplayed() & InnerPack_TB.isDisplayed(),"InnerPack label and text box should display");
-				// Verify the Loose Units label and text box
-				Assert.assertTrue(AddWasteItemPopUpWindow_LooseUnits_Label.isDisplayed() & LooseUnits_TB.isDisplayed(),"Loose unit label and text box should display");
-				// verify the Total Units label
-				Assert.assertTrue( AddWasteItemPopUpWindow_TotalUnits_Label.isDisplayed(),"Total unit label should display successfully");
-				// Verify the Cost Label
-				Assert.assertTrue(AddWasteItemPopUpWindow_Cost_Label.isDisplayed(),"Cost label should display successfully");
-			}
-		}
-		return PageFactory.initElements(driver, RawItemWastePage.class);
-	}
-
-	// Search a Raw Item
-	public boolean searchARawItem(String itemName) throws InterruptedException {
-		wait.until(ExpectedConditions.visibilityOf(AddWasteItemPopUpWindow));
-		AddWasteItemPopUpWindow_Search_TB.clear();
-		AddWasteItemPopUpWindow_Search_TB.sendKeys(itemName);
-		Thread.sleep(2000);
-		int size = driver.findElements(By.xpath("//table[@id='raw_items_tbl']/tbody/tr")).size();
-		if (size == 1) {
-			if (driver.findElement(By.xpath("//table[@id='raw_items_tbl']/tbody/tr[1]/td[2]")).getText().trim().equalsIgnoreCase(itemName)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	/*This method will return total waste amount added*/
 	public String getTotalWasteAmunt(){
 		List<WebElement> wasteItemSubtotalList = driver.findElements(By.xpath("//table[@id='raw_waste_entry_table']/tbody/tr/td[8]"));
@@ -320,18 +220,16 @@ public class RawItemWastePage extends AbstractPage
 		selectMonthFromDatePicker(Base.getMonthName(month+1),1);
 		driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[1]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")).click();
 		return PageFactory.initElements(driver, RawItemWastePage.class);
-	
 	}
 	
-	/*public RawItemWastePage selectMonthFromDatePicker(String monthName,int calIndex){
-		String selectedMonth = driver.findElement(By.xpath("(//div[@class='xdsoft_mounthpicker'])["+calIndex+"]/div[1]/span")).getText();
-		while (!selectedMonth.equals(monthName)) {
-			driver.findElement(By.xpath("(//div[@class='xdsoft_mounthpicker'])["+calIndex+"]/button[@class='xdsoft_prev']")).click();
-			selectedMonth = driver.findElement(By.xpath("(//div[@class='xdsoft_mounthpicker'])["+calIndex+"]/div[contains(@class,'xdsoft_month')]/span")).getText();
-			System.out.println("monthName found "+selectedMonth);
-		}
-		return PageFactory.initElements(driver, RawItemWastePage.class);
-	}*/
+	public boolean verifyDateIsDisabled(String date) throws InterruptedException{
+		SelectDateAndTime_TB.click();
+		Thread.sleep(2000);
+		int day = Base.getDayFromDate(date);
+		int month = Base.getMonthFromDate(date);
+		selectMonthFromDatePicker(Base.getMonthName(month+1),1);
+		return driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[1]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")).getAttribute("class").contains("xdsoft_disabled");
+	}
 	
 	public String getTimeToSet() throws InterruptedException{
 		SelectTime_TB.click();
@@ -362,6 +260,8 @@ public class RawItemWastePage extends AbstractPage
 		SelectTime_TB.click();
 		Thread.sleep(1000);
 		String hourValue = time.split(":")[0];
+		System.out.println("hourValue"+hourValue);
+		System.out.println("RawWaste_hourSpan_Value.getText()"+RawWaste_hourSpan_Value.getText());
 		while(!RawWaste_hourSpan_Value.getText().equals(hourValue)){
 			Base.executeJavaScript("document.getElementById('eb_tp_hour_up').click();");
 		}
@@ -419,6 +319,10 @@ public class RawItemWastePage extends AbstractPage
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//ul[@id='utility-toolbar']/li[@id='deleteId'])[1]"))).click();
 			Thread.sleep(3000);
 		}
+	}
+	
+	public String getSubTotalForAWrin(String wrinId){
+		return driver.findElement(By.xpath("//tbody[@id='waste_entry_table_body']/tr/td[contains(text(),'"+wrinId+"')]/following-sibling::td[6]")).getText();
 	}
 	
 	

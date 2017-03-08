@@ -20,6 +20,7 @@ public class ApproveAdjustmentsPage extends AbstractPage{
 	{
 		super(driver);
 		PageFactory.initElements(driver, this);
+		
 	}
 	
 	@FindBy(xpath = "//a[text()='Approve Adjustments']/span")
@@ -52,11 +53,11 @@ public class ApproveAdjustmentsPage extends AbstractPage{
 	@FindBy(xpath="//th[@aria-controls='eb_adjustment_table' and text()='Description']")
 	public WebElement ApproveAdjustmentsTable_Description_header;
 	
-	@FindBy(xpath="//th[@aria-controls='eb_adjustment_table' and text()='Cases Purchased']")
-	public WebElement ApproveAdjustmentsTable_CasesPurchased_header;
+	@FindBy(xpath="//th[@aria-controls='eb_adjustment_table' and text()='Purchased']")
+	public WebElement ApproveAdjustmentsTable_Purchased_header;
 	
-	@FindBy(xpath="//th[@aria-controls='eb_adjustment_table' and text()='Cases Credit']")
-	public WebElement ApproveAdjustmentsTable_CasesCredit_header;
+	@FindBy(xpath="//th[@aria-controls='eb_adjustment_table' and text()='Adjusted']")
+	public WebElement ApproveAdjustmentsTable_Adjusted_header;
 	
 	@FindBy(xpath="//table[@id='eb_adjustment_table']/tbody/tr/td[1]")
 	public List<WebElement> ApproveAdjustmentsTable_DeliveryDate_List;
@@ -66,7 +67,7 @@ public class ApproveAdjustmentsPage extends AbstractPage{
 		List<WebElement>adjustmentsList = driver.findElements(By.xpath("//table[@id='eb_adjustment_table']/tbody/tr/td[text()='Needs Approval!']"));
 		boolean result = true;
 		for(int i=1;i<=adjustmentsList.size();i++){
-			result = result & Base.isElementDisplayed(By.xpath("(//table[@id='eb_adjustment_table']/tbody/tr/td[text()='Needs Approval!'])["+i+"]/following-sibling::td/eb-button[@id='eb_approve_button']"));
+			result = result & Base.isElementDisplayed(By.xpath("(//table[@id='eb_adjustment_table']/tbody/tr/td[text()='Needs Approval!'])["+i+"]/following-sibling::td/eb-button[@id='adj_approve_button']"));
 		}
 		return result;
 	}
@@ -75,7 +76,7 @@ public class ApproveAdjustmentsPage extends AbstractPage{
 	{
 		List<WebElement>dateList = driver.findElements(By.xpath("//table[@id='eb_adjustment_table']/tbody/tr/td[1]"));
 		List<String>dateValueList = Base.getTextListFromWebElements(dateList);
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 		boolean result = true;
 		for(int i=0;i< dateList.size();i++){
 			if(i<dateList.size()-1){
@@ -99,7 +100,7 @@ public class ApproveAdjustmentsPage extends AbstractPage{
 	public boolean verifyDeliverDateInAscendingOrder() throws ParseException{
 		List<WebElement>dateList = driver.findElements(By.xpath("//table[@id='eb_adjustment_table']/tbody/tr/td[1]"));
 		List<String>dateValueList = Base.getTextListFromWebElements(dateList);
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 		boolean result = true;
 		for(int i=0;i< dateList.size();i++){
 			if(i<dateList.size()-1){
@@ -147,25 +148,25 @@ public class ApproveAdjustmentsPage extends AbstractPage{
 	public boolean verifyInvoiceInDescendingOrder() throws ParseException{
 		List<WebElement>invoiceList = driver.findElements(By.xpath("//table[@id='eb_adjustment_table']/tbody/tr/td[4]"));
 		List<String>invoiceValueList = Base.getTextListFromWebElements(invoiceList);
-		return Base.verifyStringInDescendingOrder(invoiceValueList);
+		return Base.verifyBigIntInDescendingOrder(invoiceValueList);
 	}
 	
 	public boolean verifyInvoiceInAscendingOrder() throws ParseException{
 		List<WebElement>invoiceList = driver.findElements(By.xpath("//table[@id='eb_adjustment_table']/tbody/tr/td[4]"));
 		List<String>invoiceValueList = Base.getTextListFromWebElements(invoiceList);
-		return Base.verifyStringInAsscendingOrder(invoiceValueList);
+		return Base.verifyBigIntInAsscendingOrder(invoiceValueList);
 	}
 	
 	public boolean verifyWrinInAscendingOrder() throws ParseException{
 		List<WebElement>wrinList = driver.findElements(By.xpath("//table[@id='eb_adjustment_table']/tbody/tr/td[5]"));
 		List<String>wrinValueList = Base.getTextListFromWebElements(wrinList);
-		return Base.verifyStringInAsscendingOrder(wrinValueList);
+		return Base.verifyBigIntInAsscendingOrder(wrinValueList);
 	}
 	
 	public boolean verifyWrinInDescendingOrder() throws ParseException{
 		List<WebElement>wrinList = driver.findElements(By.xpath("//table[@id='eb_adjustment_table']/tbody/tr/td[5]"));
 		List<String>wrinValueList = Base.getTextListFromWebElements(wrinList);
-		return Base.verifyStringInAsscendingOrder(wrinValueList);
+		return Base.verifyBigIntInDescendingOrder(wrinValueList);
 	}
 	
 	public boolean verifyDescriptionInAscendingOrder() throws ParseException{

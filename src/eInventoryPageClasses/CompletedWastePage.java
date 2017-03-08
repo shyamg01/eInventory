@@ -18,16 +18,9 @@ public class CompletedWastePage extends AbstractPage {
 	public CompletedWastePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		// TODO Auto-generated constructor stub
 	}
 	
-	@FindBy(xpath ="//input[@id='insert_new_comp_waste_date']")
-	public WebElement SelectDate_TB;
-	
-	@FindBy(xpath ="//button[@id='insert_new_comp_waste_date_btn']")
-	public WebElement SelectDate_BT;
-	
-	@FindBy(xpath ="//h2[text()='Completed Waste']")
+	@FindBy(xpath ="(//h2[text()='Completed Waste'])[2]")
 	public WebElement CompletedWaste_Title;
 	
 	@FindBy(xpath ="//input[@id='comp_waste_autocomplete']")
@@ -36,11 +29,11 @@ public class CompletedWastePage extends AbstractPage {
 	@FindBy(xpath ="//input[@id='validatedInput' and @colname='qty_wasted']")
 	public WebElement CompletedWastePopUp_QuantityWasted_TB ;
 	
-	@FindBy(xpath ="(//button[@value='Add Item'])[3]")
-	public WebElement AddItem_BT;
-	
 	@FindBy(xpath ="//eb-button[@id='submit_comp_waste_btn']/button")
 	public WebElement Submit_BT;
+	
+	@FindBy(xpath ="//div[@id='dlgContent']/p[contains(text(),'Are you sure you want to')]/following-sibling::p[contains(text(),'submit this completed waste?')]")
+	public WebElement SubmitCompletedWaste_PopUp_Warning_Message;
 	
 	@FindBy(xpath ="//button/span[text()='Yes']")
 	public WebElement SubmitCompletedWaste_PopUp_YES_BT;
@@ -57,9 +50,6 @@ public class CompletedWastePage extends AbstractPage {
 	@FindBy(xpath ="//button/span[text()='No']")
 	public WebElement CompletedWasteEntryIncomplete_PopUp_NO_BT;
 	
-	@FindBy(xpath = "(//button[@id='autosearchAddInputBtn'])[3]")
-	public WebElement AddWrinFromSearchBox_BT;
-	
 	@FindBy(xpath ="//input[@id='insert_new_comp_date']")
 	public WebElement SelectDateAndTime_TB;
 	
@@ -69,17 +59,11 @@ public class CompletedWastePage extends AbstractPage {
 	@FindBy(xpath ="(//i[@id ='autosearchAdditionSign'])[3]")
 	public WebElement AddSearchItem_Icon;
 	
-	@FindBy(xpath ="(//div[@id='eb_tp_hr_control']/div[contains(@class,'eb_tp_hr_min')]/div[@id='eb_tp_hr_span'])[3]")
+	@FindBy(xpath ="(//div[@id='eb_tp_hr_control']/div[contains(@class,'eb_tp_hr_min')]/span[@id='eb_tp_hr_span'])[3]")
 	public WebElement CompletedWaste_hourSpan_Value;
 	
-	@FindBy(xpath ="(//div[@id='eb_tp_hr_control']/div[@id='eb_tp_hour_up'])[3]")
-	public WebElement CompletedWaste_HourUp_BT;
-	
-	@FindBy(xpath ="(//div[@id='eb_tp_min_control']/div[contains(@class,'eb_tp_hr_min')]/div[@id='eb_tp_min_span'])[3]")
+	@FindBy(xpath ="(//div[@id='eb_tp_min_control']/div[contains(@class,'eb_tp_hr_min')]/span[@id='eb_tp_min_span'])[3]")
 	public WebElement CompletedWaste_MinSpan_Value;
-	
-	@FindBy(xpath ="(//div[@id='eb_tp_min_up'])[3]")
-	public WebElement CompletedWaste_MinUp_BT;
 	
 	@FindBy(xpath ="//th[text()='Menu Item #']")
 	public WebElement CompletedWaste_MenuItem_Header;
@@ -93,12 +77,8 @@ public class CompletedWastePage extends AbstractPage {
 	@FindBy(xpath ="//table[@id='comp_waste_entry_table']/thead/tr/th[text()='Sub-total']")
 	public WebElement CompletedWaste_SubTotal_Header;
 	
-	@FindBy(xpath ="//table[@id='comp_waste_entry_table']/thead/tr/th[text()='Remove']")
-	public WebElement CompletedWaste_Remove_Header;
-	
-	@FindBy(xpath="//div[@class='toast-message' and text()='Menu Item Added']")
-	public WebElement CompletedWasteForm_ItemAdded_Message;
-	
+	@FindBy(xpath="//div[@class='toast-message' and text()='Error: Cannot submit WRIN with a 0 quantity.']")
+	public WebElement CompletedWasteForm_ZeroQuantityError_Message;
 
 	@FindBy(xpath ="(//input[@id='validatedInput' and @colname='inner_pack_count'])[1]")
 	public WebElement InnerPack_TB;
@@ -115,7 +95,7 @@ public class CompletedWastePage extends AbstractPage {
 	@FindBy(xpath="//div[@class='toast-message' and contains(.,'Duplicate Items not Allowed')]")
 	public WebElement DuplicateItem_Error_Message;
 	
-	@FindBy(xpath = "//div[@id='dlgContent']")
+	@FindBy(xpath = "//div[@id='dlgContent' and contains(text(),'All entered information will be lost.  Are you sure you want to cancel?')]")
 	public WebElement CancelCompletedWastePopUp_Warning_Message;
 	
 	@FindBy(xpath = "(//div[contains(@class,'slider-close')]/i[@id='modalToggle'])[3]")
@@ -134,53 +114,24 @@ public class CompletedWastePage extends AbstractPage {
 	public WebElement InvalidQuantity_Error_Message;
 	
 	
-	// To Add a Raw Waste Item
-	public RawItemWastePage addARawItem(String wrin, String innerPack,
-			String outerPack, String looseUnits) throws InterruptedException {
-		// enterCurrentDateAndTimeInRawWasteOccurredAtField();
-		// SelectDateAndTime_TB.click();
-		searchMenuItemForCompletedWaste(wrin);
-		try {
-			InnerPack_TB.sendKeys(innerPack);
-		} catch (Exception e) {
-			// Do nothing
-		}
-		Thread.sleep(3000);
-		OuterPack_TB.sendKeys(outerPack);
-		LooseUnits_TB.sendKeys(looseUnits);
-		CompletedWaste_Title.click();
-		// AddItem_BT.click();
-		// wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//table[@id='waste_entry_table'])[1]/tbody/tr/td[contains(.,'"+
-		// wrin + "')]")));
-		// Submit_BT.click();
-		return PageFactory.initElements(driver, RawItemWastePage.class);
-	}
-	
 	public void searchMenuItemForCompletedWaste(String menuItemId) throws InterruptedException{
 		CompletedWastePopUp_SearchBox_TB.clear();
 		CompletedWastePopUp_SearchBox_TB.sendKeys(menuItemId);
 		action.sendKeys(Keys.SPACE).build().perform();
 		Thread.sleep(1500);
 		action.sendKeys(Keys.BACK_SPACE).build().perform();
-		int size = driver.findElements(By.xpath("//strong[text()='" + menuItemId + "']")).size();
 		driver.findElement(By.xpath("(//strong[text()='" + menuItemId + "'])[1]")).click();
 		Thread.sleep(2000);
-		//wait.until(ExpectedConditions.visibilityOf(AddWrinFromSearchBox_BT));
-		//AddWrinFromSearchBox_BT.click();
 	}
 	
 	//not completed yet functionality not working
 	public void addAMenuItemOnCompletedWastePage(String menuItemId,	String quantity) throws InterruptedException {
 		searchMenuItemForCompletedWaste(menuItemId);
 		Thread.sleep(2000);
-		/*wait.until(ExpectedConditions.visibilityOf(CompletedWasteForm_ItemAdded_Message));
-		CompletedWasteForm_ItemAdded_Message.click();*/
-		//wait.until(ExpectedConditions.visibilityOf(CompletedWasteForm_ItemAdded_Message)).click();
 		// Enter quantity in quantity text box
+		CompletedWastePopUp_QuantityWasted_TB.clear();
 		CompletedWastePopUp_QuantityWasted_TB.sendKeys(quantity);
 		CompletedWaste_Title.click();
-		//wait.until(ExpectedConditions.visibilityOf(AddItem_BT));
-		//AddItem_BT.click();
 	}
 	
 	public String getTotalCompletedWasteAmount(){
@@ -199,8 +150,8 @@ public class CompletedWastePage extends AbstractPage {
 		Thread.sleep(1000);
 		int day = Base.getDayFromDate(date);
 		int month = Base.getMonthFromDate(date);
-		selectMonthFromDatePicker(Base.getMonthName(month+1),2);
-		driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[2]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")).click();
+		selectMonthFromDatePicker(Base.getMonthName(month+1),3);
+		driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[3]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")).click();
 		return PageFactory.initElements(driver, CompletedWastePage.class);
 	
 	}
@@ -241,7 +192,7 @@ public class CompletedWastePage extends AbstractPage {
 		return timeToSet;
 	}
 	
-	public void selectTimeInRawWasteForm(String time) throws InterruptedException{
+	public void selectTimeInCompletedWasteForm(String time) throws InterruptedException{
 		SelectTime_TB.click();
 		Thread.sleep(1000);
 		String hourValue = time.split(":")[0];
@@ -249,15 +200,11 @@ public class CompletedWastePage extends AbstractPage {
 			System.out.println("Hour");
 			Base.executeJavaScript("document.getElementsByClassName('eb_tp_time_up style-scope eb-timepicker')[4].click();");
 		}
-		/*Thread.sleep(1000);
-		RawWaste_hourSpan_Value.click();*/
 		String minuteValue = time.split(":")[1];
 		while(!CompletedWaste_MinSpan_Value.getText().equals(minuteValue)){
 			System.out.println("Minute");
 			Base.executeJavaScript("document.getElementsByClassName('eb_tp_time_up style-scope eb-timepicker')[5].click();");
 		}
-		/*Thread.sleep(1000);
-		RawWaste_MinSpan_Value.click();*/
 		CompletedWaste_Title.click();
 		Thread.sleep(1000);
 	}

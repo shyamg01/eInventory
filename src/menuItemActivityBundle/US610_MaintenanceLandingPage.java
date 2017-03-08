@@ -9,13 +9,13 @@ import jxl.write.biff.RowsExceededException;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
-import sprint2.AbstractTest;
+
 
 import common.Base;
 import common.GlobalVariable;
 import common.LoginTestData;
 import common.Reporter;
-
+import eInventoryPageClasses.AbstractTest;
 import eInventoryPageClasses.HomePage;
 import eInventoryPageClasses.RawItemActivityPage;
 
@@ -25,7 +25,9 @@ public class US610_MaintenanceLandingPage extends AbstractTest{
 	@Test()
 	public void menuItemActivity_US610_TC772() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
+		
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US610_TC772";
 		RawItemActivityPage rawItemActivityPage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -34,18 +36,18 @@ public class US610_MaintenanceLandingPage extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		rawItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToRawItemActivityPage();
+				.selectLocation(storeId).goToRawItemActivityPage();
 		if(Base.isElementDisplayed(rawItemActivityPage.RawItemActivity_Title)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US610_TC772",
+					browser,
 					"Verify that user is able to select Raw Item Activity from Inventory drop-down list.",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US610_TC772","menuItemActivity_US610_TC772",
+					browser,
 					"Verify that user is able to select Raw Item Activity from Inventory drop-down list.",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US610_TC772");
+			AbstractTest.takeSnapShot();
 		}
 	}
 	
@@ -54,6 +56,7 @@ public class US610_MaintenanceLandingPage extends AbstractTest{
 	public void menuItemActivity_US610_TC773() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
+		AbstractTest.tcName="menuItemActivity_US610_TC773";
 		RawItemActivityPage rawItemActivityPage;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String password = LoginTestData.level1_SSO_Password;
@@ -65,7 +68,7 @@ public class US610_MaintenanceLandingPage extends AbstractTest{
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
 		rawItemActivityPage = homePage.selectUserWithSSOLogin(userId, password)
-				.selectLocation(storeId).navigateToInventoryManagement().goToRawItemActivityPage();
+				.selectLocation(storeId).goToRawItemActivityPage();
 		rawItemActivityPage.selectStartDate(startDate).selectEndDate(endDate);
 		rawItemActivityPage.searchAndSelectWRINID(wrinId);
 		Thread.sleep(5000);
@@ -73,29 +76,29 @@ public class US610_MaintenanceLandingPage extends AbstractTest{
 				& rawItemActivityPage.verifyWrinItemDisplayed(wrinId)
 				& Base.isElementDisplayed(rawItemActivityPage.Information_BT)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US610_TC773",
+					browser,
 					"System should display all the activity related to selected Raw Item along with Information button.",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US610_TC773_Condition1","menuItemActivity_US610_TC773",
+					browser,
 					"System should display all the activity related to selected Raw Item along with Information button.",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US610_TC773_Condition1");
+			AbstractTest.takeSnapShot();
 		}
 		rawItemActivityPage.Information_BT.click();
 		if(Base.isElementDisplayed(rawItemActivityPage.RawItemInformation_Title)
 				& rawItemActivityPage.verifyWrinItemDisplayedInRawItemInformationPopUp(wrinId)){
 			Reporter.reportPassResult(
-					browser, "menuItemActivity_US610_TC773",
+					browser, 
 					"A new modal screen should get opened and it should display information related to selected Raw Item.",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
-					browser, "menuItemActivity_US610_TC773_Condition2","menuItemActivity_US610_TC773",
+					browser,
 					"A new modal screen should get opened and it should display information related to selected Raw Item.",
 					"Fail");
-			AbstractTest.takeSnapShot("menuItemActivity_US610_TC773_Condition2");
+			AbstractTest.takeSnapShot();
 		}
 	}
 

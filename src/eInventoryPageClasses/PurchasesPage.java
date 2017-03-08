@@ -1,9 +1,14 @@
 package eInventoryPageClasses;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +18,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import common.Base;
+import common.GenericMethods;
+import common.GlobalVariable;
+import common.Reporter;
 
 public class PurchasesPage extends AbstractPage
 {
@@ -25,34 +33,16 @@ public class PurchasesPage extends AbstractPage
 	@FindBy(xpath="//h1[text()='Purchases']")
 	public WebElement Purchases_Label;	
 	
-	@FindBy(xpath="//strong[text()='Pending Adjustments']")
-	public WebElement PendingAdjustments_Title;
-	
-	@FindBy(xpath="//th[text()='Audit']")
-	public WebElement Audit_Label; 
-	
 	@FindBy(xpath="//b[text()='Audit For Manual Purchase Invoice on ']")
 	public WebElement AuditPopUp_AuditForManualPurchase_Title; 
 	
-	@FindBy(xpath="//table[@id='purchase_audit_modal_tbl']//th[text()='Time Stamp']")
-	public WebElement AuditPopUp_TimeStamp_Column_Label; 
-	
-	@FindBy(xpath="//table[@id='purchase_audit_modal_tbl']//th[text()='Field Name']")
-	public WebElement AuditPopUp_FieldName_Column_Label; 
-	
-	@FindBy(xpath="//table[@id='purchase_audit_modal_tbl']//th[text()='Before Value']")
-	public WebElement AuditPopUp_BeforeValue_Column_Label; 
-	
-	@FindBy(xpath="//table[@id='purchase_audit_modal_tbl']//th[text()='After Value']")
-	public WebElement AuditPopUp_AfterValue_Column_Label; 
-		
 	@FindBy(xpath="//button[@value='Create Manual Invoice']")
 	public WebElement CreateManualInvoice_BT; 
 	
 	@FindBy(xpath = "//table[@id='eb_purchase_table']/tbody/tr")
 	public List<WebElement> PendingPurchase_List;
 	
-	@FindBy(xpath = "//table[@id='eb_adjustment_table']/tbody/tr")
+	@FindBy(xpath = "//table[@id='eb_adjustment_table']/tbody/tr[@role='row']")
 	public List<WebElement> PendingAdjustments_List;
 	
 	/*****Purchase Page Tab and Count locater***/
@@ -85,28 +75,28 @@ public class PurchasesPage extends AbstractPage
 	@FindBy(xpath="//button[@id='htmlButton' and @value='Show Results']")
 	public WebElement ViewHistory_ShowResults_BT; 
 	
-	@FindBy(xpath="//h2[text()='View Invoice']")
+	@FindBy(xpath="//h2[text()='View Purchase']")
 	public WebElement ViewInvoice_PopUp_Label; 	
 	
-	@FindBy(xpath="//table[@id='eb_purchase_table']/thead/tr/th[1]")
+	@FindBy(xpath="//table[@id='eb_purchase_his_table']/thead/tr/th[1]")
 	public WebElement ViewHistory_DeliveryDate_Column_Header; 	
 	
-	@FindBy(xpath="//table[@id='eb_purchase_table']/thead/tr/th[2]")
+	@FindBy(xpath="//table[@id='eb_purchase_his_table']/thead/tr/th[2]")
 	public WebElement ViewHistory_Vendor_Column_Header; 
 	
-	@FindBy(xpath="//table[@id='eb_purchase_table']/thead/tr/th[3]")
+	@FindBy(xpath="//table[@id='eb_purchase_his_table']/thead/tr/th[3]")
 	public WebElement ViewHistory_Invoice_Column_Header; 
 	
-	@FindBy(xpath="//table[@id='eb_purchase_table']/thead/tr/th[4]")
+	@FindBy(xpath="//table[@id='eb_purchase_his_table']/thead/tr/th[4]")
 	public WebElement ViewHistory_InvoiceTotal_Column_Header; 
 	
-	@FindBy(xpath="//table[@id='eb_purchase_table']/thead/tr/th[5]")
+	@FindBy(xpath="//table[@id='eb_purchase_his_table']/thead/tr/th[5]")
 	public WebElement ViewHistory_AmountOff_Column_Header; 
 	
-	@FindBy(xpath="//table[@id='eb_purchase_table']/thead/tr/th[6]")
+	@FindBy(xpath="//table[@id='eb_purchase_his_table']/thead/tr/th[6]")
 	public WebElement ViewHistory_AutoApprove_Column_Header;
 	
-	@FindBy(xpath="//table[@id='eb_purchase_table']/thead/tr/th[7]")
+	@FindBy(xpath="//table[@id='eb_purchase_his_table']/thead/tr/th[7]")
 	public WebElement ViewHistory_Type_Column_Header; 
 	
 	/*****Restore Invoice Form *******/
@@ -122,9 +112,11 @@ public class PurchasesPage extends AbstractPage
 	@FindBy(xpath="//eb-button[@id='restore_purchase_modal_restore_btn']/button")
 	public WebElement RestoreManualInvoice_Cancel_BT;
 	
-	@FindBy(xpath="//input[@id='restore_purchases_confirmation']")
-	public WebElement RestorePurchasesConfirmationPopUp_RestorePurchase_BT;
+    @FindBy(xpath="//div[@id='dlgContent']/p[contains(text(),'Are you sure you want to')]/following-sibling::p[contains(text(),'restore purchase(s)?')]")
+	public WebElement RestorePurchasesConfirmationPopUp_Warning_Msg;
 	
+	@FindBy(xpath="//th[text()='All']")
+	public WebElement RestoreManualInvoice_All_Header;	
 	@FindBy(xpath="//th[text()='Invoice Date']")
 	public WebElement RestoreManualInvoice_InvoiceDate_Header;
 	
@@ -134,7 +126,7 @@ public class PurchasesPage extends AbstractPage
 	@FindBy(xpath="//th[text()='Vendor']")
 	public WebElement RestoreManualInvoice_Vendor_Header;
 	
-	@FindBy(xpath="//div[@id='restore_purchase_modal_content']/div/div/div/p")
+	@FindBy(xpath="//div[@id='restore_purchase_modal_content']/div/div/div/p[contains(text(),'We don’t have any invoices,')]/following-sibling::p[contains(text(),'deleted within the past 10 days, to show.')]")
 	public WebElement RestoreManualInvoice_NoDeletedInvoicePresent_Msg;
 	
 	@FindBy(xpath = "//eb-modal[@id='restore_purchase_modal']/div[contains(@class,'container')]/div[@id='header-row']/div[contains(@class,'modal-close')]")
@@ -143,13 +135,13 @@ public class PurchasesPage extends AbstractPage
 	@FindBy(xpath = "//eb-button[@id='restore_purchase_modal_close_btn']/button")
 	public WebElement RestoreManualInvoice_Close_BT;
 	
-	@FindBy(xpath="//eb-container-messagebox/div/div[contains(@class,'theMessage')]")
+	@FindBy(xpath="//eb-container-messagebox/div/div/div[contains(text(),'Oops, accidentally delete')]/following-sibling::div[contains(text(),'a manual invoice?')]")
 	public WebElement RestorePurchases_Msg;
 	
-	@FindBy(xpath="(//div[@class='row purchase_to_restore'])[1]/div[2]/span")
+	@FindBy(xpath="//span[contains(text(),'Deleted manual invoices are retained for up to 10 days')]")
 	public WebElement RestoreManualInvoice_TimeDisclaimer_Msg;
 	
-	@FindBy(xpath="(//div[@class='row purchase_to_restore'])[2]/div[1]/h4")
+	@FindBy(xpath=".//span[contains(text(),'Select the invoices you want to restore')]")
 	public WebElement RestoreManualInvoice_SelectInvoice_Msg;
 	
 	@FindBy(xpath = "//table[@id='deleted_purchases']/tbody/tr")
@@ -167,71 +159,82 @@ public class PurchasesPage extends AbstractPage
 	@FindBy(xpath = "//eb-modal[@id='restore_purchase_modal']/div[contains(@class,'container')]")
 	public WebElement RestoreManualInvoice_Container;
 	
-	@FindBy(xpath = "//div[@class='toast-message' and text()='Restored invoice added']")
+	@FindBy(xpath = "//div[@class='toast-message' and text()='Invoice Restored']")
 	public WebElement RestoredInvoiceAdded_Msg;
+	
+	@FindBy(xpath = "//button/span[text()='Yes']")
+	public WebElement RestoreManualInvoice_ConfirmationPopUp_Yes_BT;
 	
 	/**************Approve Pending Table Column Headers**********/
 	
-	@FindBy(xpath="//th[text()='Delivery Date']")
+	@FindBy(xpath="//th[text()='Delivery Date' and @aria-controls = 'eb_purchase_table']")
 	public WebElement ApprovePendingTable_DeliveryDate_Header;
 	
-	@FindBy(xpath="//th[text()='Status']")
+	@FindBy(xpath="//th[text()='Status' and @aria-controls = 'eb_purchase_table']")
 	public WebElement ApprovePendingTable_Status_Header;
 	
-	@FindBy(xpath="//th[text()='Vendor']")
+	@FindBy(xpath="//th[text()='Vendor' and @aria-controls = 'eb_purchase_table']")
 	public WebElement ApprovePendingTable_Vendor_Header;
 	
-	@FindBy(xpath="//th[text()='Invoice']")
+	@FindBy(xpath="//th[text()='Invoice' and @aria-controls = 'eb_purchase_table']")
 	public WebElement ApprovePendingTable_Invoice_Header;
 	
-	@FindBy(xpath="//th[text()='Invoice Total']")
+	@FindBy(xpath="//th[text()='Invoice Total' and @aria-controls = 'eb_purchase_table']")
 	public WebElement ApprovePendingTable_InvoiceTotal_Header;
 	
-	@FindBy(xpath="//th[text()='Amount Off']")
+	@FindBy(xpath="//th[text()='Amount Off' and @aria-controls = 'eb_purchase_table']")
 	public WebElement ApprovePendingTable_AmountOff_Header;
 	
-	@FindBy(xpath="//th[text()='Auto Approve']")
+	@FindBy(xpath="//th[text()='Auto Approve' and @aria-controls = 'eb_purchase_table']")
 	public WebElement ApprovePendingTable_AutoApprove_Header;
 	
-	@FindBy(xpath="//th[text()='Type']")
+	@FindBy(xpath="//th[text()='Type' and @aria-controls = 'eb_purchase_table']")
 	public WebElement ApprovePendingTable_Type_Header;
 	
-	@FindBy(xpath="//td[@class='dataTables_empty']/div[2]")
+	@FindBy(xpath="//td[@class='dataTables_empty']/div[2]/p")
 	public WebElement ApprovePendingTable_NoPendingPurchases_Msg;
 	
 	@FindBy(xpath="//td[@class='dataTables_empty']/div[1]/img")
 	public WebElement ApprovePendingTable_NoPendingPurchases_Img;
-	
+
+	@FindBy(xpath="//eb-container-messagebox/div/div/div[contains(text(),'Oops, accidentally delete')]/following-sibling::div[contains(text(),'a manual invoice?')]")
+	public WebElement MissingInvoice_Msg;
 	/**********Approve Pending PopUp****/
 
-	@FindBy(xpath="//h2[text()='Approve Manual Invoice']")
+	@FindBy(xpath="//h2[text()='Purchase']")
 	public WebElement ApproveManualInvoice_PopUp_Lable;
 	
-	@FindBy(xpath="//input[@id='disp_date']")
+	@FindBy(xpath="//input[@id='purchase_modal_date_input']")
 	public WebElement ApproveManualInvoice_SelectDate_TB;
+	
+	@FindBy(xpath ="//div[@id ='eb_tp_input']")
+	public WebElement ApproveManualInvoice_SelectTime_TB;
+	
+	@FindBy(xpath ="//div[@id='eb_tp_hr_control']/div[contains(@class,'eb_tp_hr_min')]/span[@id='eb_tp_hr_span']")
+	public WebElement ApproveManualInvoice_hourSpan_Value;
+	
+	@FindBy(xpath ="//div[@id='eb_tp_min_control']/div[contains(@class,'eb_tp_hr_min')]/span[@id='eb_tp_min_span']")
+	public WebElement ApproveManualInvoice_MinSpan_Value;
 	
 	@FindBy(xpath="//button[@role='button' and @value='Delete']")
 	public WebElement ApproveManualInvoice_PopUp_Delete_BT;
 	
-	@FindBy(xpath="//div[text()='Are you sure you want to delete this manual invoice?']")
+	@FindBy(xpath="//div[@id='dlgContent']/p[contains(text(),'Are you sure you want to')]/following-sibling::p[contains(text(),'delete this manual invoice?')]")
 	public WebElement ApproveManualInvoice_PopUp_Confirmation_MSG;
 	
 	@FindBy(xpath="//button[@id='htmlButton']/span[text()='Yes']")
 	public WebElement ApproveManualInvoice_PopUp_ConfirmationMessage_Yes_BT;
 	
+	@FindBy(xpath="//button[@id='htmlButton']/span[text()='No']")
+	public WebElement ApproveManualInvoice_PopUp_ConfirmationMessage_No_BT;
+	
 	@FindBy(xpath ="//div[@class='toast-message' and text()='Invoice deleted.']")
 	public WebElement ApproveManualInvoice_PopUp_InvoiceDelete_Confirmation_MSG;
 	
-	@FindBy(xpath ="//div[@class='toast-message' and text()='Manual Purchase Posted']")
+	@FindBy(xpath ="//div[@class='toast-message' and text()='Approved purchase saved']")
 	public WebElement ApproveManualInvoice_PopUp_InvoiceApprove_Confirmation_MSG;
 	
-	@FindBy(xpath="//input[@id='selected_vendor']")
-	public WebElement ApproveManualInvoice_Vendor_TB;
-	
-	@FindBy(xpath="//input[@placeholder='Enter Invoice #']")
-	public WebElement ApproveManualInvoice_InvoiceNumber_TB;
-	
-	@FindBy(xpath="//input[@id='disp_date']")
+	@FindBy(xpath="//input[@id='purchase_modal_date_input']")
 	public WebElement ApproveManualInvoice_Date_TB;
 	
 	@FindBy(xpath = "//eb-button[@id='purchase_modal_approve_btn']/button")
@@ -242,18 +245,15 @@ public class PurchasesPage extends AbstractPage
 	
 	@FindBy(xpath = "//button/span[text()='Yes']")
 	public WebElement ManualInvoiceApprove_ConfirmationPopUp_Yes_BT;
-	
-	@FindBy(xpath = "//div[@id='close']/a")
-	public WebElement ManualInvoiceApprove_ConfirmationPopUp_Close_BT;
 
 	@FindBy(xpath = "//eb-button[@id='purchase_modal_cancel_btn']/button")
 	public WebElement ManualInvoiceApprove_Cancel_BT;
 	
-	@FindBy(xpath = "//eb-modal[@id='purchase_modal']/div[contains(@class,'container')]/div[@id='header-row']/div[contains(@class,'modal-close')]")
+    @FindBy(xpath = "//div[@id='dlgContent']/p[contains(text(),'Are you sure you want to')]/following-sibling::p[contains(text(),'cancel this manual invoice?')]")
+	public WebElement ManualInvoiceApproveForm_ConfirmCancel_Message;
+	
+    @FindBy(xpath = "//eb-modal[@id='purchase_modal']/div[contains(@class,'container')]/div[@id='header-row']/div[contains(@class,'modal-close')]")
 	public WebElement ManualInvoiceApprove_Close_BT;
-
-	@FindBy(xpath="//div[@class='toast-message' and contains(.,'Invoice deleted.')]")
-	public WebElement InvoiceDeleted_Confirmation_MSG;
 	
 	@FindBy(xpath="(//th[text()='WRIN'])[2]")
 	public WebElement ManualInvoiceApprove_WRIN_Label;
@@ -261,41 +261,20 @@ public class PurchasesPage extends AbstractPage
 	@FindBy(xpath="(//th[text()='Description'])[2]")
 	public WebElement ManualInvoiceApprove_Description_Label;
 	
-	@FindBy(xpath="(//th[text()='UOM'])[1]")
-	public WebElement ManualInvoiceApprove_UOM_Label;
+	@FindBy(xpath="//table[@id='purchase_detail_table']/thead/tr/th[text()='Cases Purchased']")
+	public WebElement ManualInvoiceApprove_CasePurchased_Label;
 	
-	@FindBy(xpath="(//th[text()='Case'])[1]")
-	public WebElement ManualInvoiceApprove_Case_Label;
-	
-	@FindBy(xpath="(//th[text()='Quantity'])[1]")
-	public WebElement ManualInvoiceApprove_Quantity_Label;
-	
-	@FindBy(xpath="(//th[text()='Price Per Case'])[1]")
+	@FindBy(xpath="//table[@id='purchase_detail_table']/thead/tr/th[text()='Price Per Case']")
 	public WebElement ManualInvoiceApprove_PricePerCase_Label;
 	
-	@FindBy(xpath="(//th[text()='Sub-total'])[1]")
+	@FindBy(xpath="//table[@id='purchase_detail_table']/thead/tr/th[text()='Sub total']")
 	public WebElement ManualInvoiceApprove_SubTotal_Label;
 	
-	@FindBy(xpath="//span[contains(.,'Break Down By Cost Type')]")
+	@FindBy(xpath="//h3[text()='Break Down By Cost Type']")
 	public WebElement ManualInvoiceApprove_BreakDownByCostType_Label;
 	
-	@FindBy(xpath="//div[@id='total_food_div']")
+	@FindBy(xpath="//div[@id='total_row']/div[2]/div[2]/span[contains(text(),'Total Food:')]")
 	public WebElement ManualInvoiceApprove_TotalFood_Section;
-	
-	@FindBy(xpath="//div[@id='total_ops_div']")
-	public WebElement ManualInvoiceApprove_TotalOps_Section;
-	
-	@FindBy(xpath="//div[@id='total_paper_div']")
-	public WebElement ManualInvoiceApprove_Paper_Section;
-	
-	@FindBy(xpath="//div[@id='total_linens_div']")
-	public WebElement ManualInvoiceApprove_Linens_Section;
-	
-	@FindBy(xpath="//div[@id='total_other_div']")
-	public WebElement ManualInvoiceApprove_Others_Section;
-	
-	@FindBy(xpath="//div[@id='total_happy_meal_div']")
-	public WebElement ManualInvoiceApprove_TotalHappyMeal_Section;
 	
 	@FindBy(xpath = "(//div[contains(@class,'slider-close')]/i[@id='modalToggle'])[1]")
 	public WebElement ManualInvoiceApprove_SliderToggle_BT;
@@ -303,7 +282,7 @@ public class PurchasesPage extends AbstractPage
 	@FindBy(xpath = "//eb-modal[@id='purchase_modal']/div[contains(@class,'container')]")
 	public WebElement ManualInvoiceApproveForm_Container;
 	
-	@FindBy(xpath = "//div[contains(@class,'dialog-content')]/div[@id='dlgContent']")
+	@FindBy(xpath = "//div[@id='dlgContent']/p[contains(text(),'Are you sure you want to')]/following-sibling::p[contains(text(),'approve this manual invoice?')]")
 	public WebElement ManualInvoiceApproveForm_ConfirmApprove_Message;
 	
 	@FindBy(xpath="//div[text()='Source: Manual']")
@@ -312,24 +291,51 @@ public class PurchasesPage extends AbstractPage
 	@FindBy(xpath="//div[@id='subtitle_name']")
 	public WebElement ManualInvoiceApprove_CreatedBy_Label;
 	
-	@FindBy(xpath="//label[@id='vendor_label']")
+	@FindBy(xpath="//span[contains(text(),'Vendor:')]")
 	public WebElement ManualInvoiceApprove_Vendor_Label;
 	
-	@FindBy(xpath="//label[contains(.,'Invoice Number:')]")
+	@FindBy(xpath="//span[contains(text(),'Vendor:')]/span")
+	public WebElement ManualInvoiceApprove_Vendor_Value;
+	
+	@FindBy(xpath="//span[contains(.,'Invoice:')]")
 	public WebElement ManualInvoiceApprove_InvoiceNumber_Label;
 	
-	@FindBy(xpath="//eb-datepicker[@id='disp_date_picker']/div/label[contains(.,'Date:')]")
+	@FindBy(xpath="//span[contains(.,'Invoice:')]/span")
+	public WebElement ManualInvoiceApprove_InvoiceNumber_Value;
+	
+	@FindBy(xpath="//eb-datepicker[@id='purchase_modal_date_picker']/div/label[contains(.,'Date:')]")
 	public WebElement ManualInvoiceApprove_Date_Label;
 	
-	@FindBy(xpath="//label[contains(.,'Item')]")
-	public WebElement ManualInvoiceApprove_Item_Label;
+	@FindBy(xpath="//div[@id='outside_table']/div/div[2]/span[contains(text(),'Invoice Date:')]")
+	public WebElement ApproveInvoiceForm_InvoiceDate_Label;
+	
+	@FindBy(xpath="//div[@id='outside_table']/div/div[2]/span[contains(text(),'Invoice Date:')]/span")
+	public WebElement ApproveInvoiceForm_InvoiceDate_Value;
+	
+	@FindBy(xpath="//div[@id='outside_table']/div/div[1]/span[contains(text(),'Invoice:')]")
+	public WebElement ApproveInvoiceForm_Invoice_Label;
+	
+	@FindBy(xpath="//div[@id='outside_table']/div/div[1]/span[contains(text(),'Invoice:')]/span")
+	public WebElement ApproveInvoiceForm_Invoice_Value;
+	
+	@FindBy(xpath="//div[@id='outside_table']/div/div[3]/span[contains(text(),'Vendor:')]")
+	public WebElement ApproveInvoiceForm_Vendor_Label;
+	
+	@FindBy(xpath="//div[@id='outside_table']/div/div[3]/span[contains(text(),'Vendor:')]/span")
+	public WebElement ApproveInvoiceForm_Vendor_Value;
+	
+	@FindBy(xpath = "//div[@id='purchase_content']/div[2]/div[2]/span[contains(text(),'Grand Total:')]")
+	public WebElement ApproveInvoiceForm_GrandTotal_Label;
+	
+	@FindBy(xpath = "//span[@id='grand_amount']/strong")
+	public WebElement ApproveInvoiceForm_GrandTotal_Value;
 	
 	/**************Approve Electronic Invoice*************************/
 	
-	@FindBy(xpath="//h2[text()='Approve Electronic Invoice']")
+	@FindBy(xpath="//h2[text()='Purchase']")
 	public WebElement ApproveElectronicInvoice_PopUp_Lable;
 	
-	@FindBy(xpath="//input[@id='insert_new_promo_date']")
+	@FindBy(xpath="//input[@id='purchase_modal_date_input']")
 	public WebElement ApproveElectronicInvoice_Date_TB;
 	
 	@FindBy(xpath="//div[@id ='eb_tp_input']/span")
@@ -341,8 +347,23 @@ public class PurchasesPage extends AbstractPage
 	@FindBy(xpath ="//div[@id='eb_tp_min_control']/div[contains(@class,'eb_tp_hr_min')]/span[@id='eb_tp_min_span']")
 	public WebElement ApproveElectronicInvoice_MinSpan_Value;
 	
-	@FindBy(xpath ="//div[@class='toast-message' and text()='Purchase Posted']")
+	@FindBy(xpath ="//div[@class='toast-message' and text()='Approved purchase saved']")
 	public WebElement ApproveElectronicInvoice_PopUp_InvoiceApprove_Confirmation_MSG;
+	
+	@FindBy(xpath="//table[@id='purchase_detail_table']/thead/tr/th[text()='WRIN']")
+	public WebElement ApproveElectronicInvoice_WRIN_Label;
+	
+	@FindBy(xpath="//table[@id='purchase_detail_table']/thead/tr/th[text()='Description']")
+	public WebElement ApproveElectronicInvoice_Description_Label;
+	
+	@FindBy(xpath="//table[@id='purchase_detail_table']/thead/tr/th[text()='Cases Purchased']")
+	public WebElement ApproveElectronicInvoice_CasePurchased_Label;
+	
+	@FindBy(xpath="//table[@id='purchase_detail_table']/thead/tr/th[text()='Price Per Case']")
+	public WebElement ApproveElectronicInvoice_PricePerCase_Label;
+	
+	@FindBy(xpath="//table[@id='purchase_detail_table']/thead/tr/th[text()='Sub total']")
+	public WebElement ApproveElectronicInvoice_SubTotal_Label;
 	
 	
 	//To verify purchase landing page loaded successfully	
@@ -358,6 +379,8 @@ public class PurchasesPage extends AbstractPage
 	// Go to Create manual invoice page
 	public ManualInvoiceNewPage goToManualInvoiceNewPage() {
 		wait.until(ExpectedConditions.elementToBeClickable(CreateManualInvoice_BT)).click();
+		ManualInvoiceNewPage manualInvoiceNewPage=PageFactory.initElements(driver, ManualInvoiceNewPage.class);
+		wait.until(ExpectedConditions.elementToBeClickable(manualInvoiceNewPage.CreateManualInvoice_Vendor_DD));
 		return PageFactory.initElements(driver, ManualInvoiceNewPage.class);
 	}
 	
@@ -370,27 +393,12 @@ public class PurchasesPage extends AbstractPage
 		return PageFactory.initElements(driver, StoreLedgerDetailPage.class);
 	}
 	
-	public void selectDateToApprove(String date) throws InterruptedException{
-		ApproveManualInvoice_Date_TB.click();
-		Thread.sleep(1000);
-		int day = Base.getDayFromDate(date);
-		int month = Base.getMonthFromDate(date);
-		selectMonthFromDatePicker(Base.getMonthName(month+1),4);
-		driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[4]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")).click();
-	}
-	
 	public boolean verifyRemoveWrinOptionIsNotPresent() throws InterruptedException{
 		List<WebElement> removeChkBox = driver.findElements(By.xpath("//tbody[@id='invoice_tbl_body']/tr/td[contains(@class,' select-checkbox')]"));
+		System.out.println("removeChkBox "+ removeChkBox.size());
 		return removeChkBox.size()==0;
 	}
 
-	// This method will take invoiceID as a argument and will click on the 'Audit' button for this invoice
-	public PurchasesPage clickOnAuditButtonForInvoice(String invoiceID) {
-		driver.findElement(By.xpath("//table[@id='purchases_selection_table']//tr/td/span[text()='"+ invoiceID + "']/../following-sibling::td[6]/span")).click();
-		wait.until(ExpectedConditions.visibilityOf(AuditPopUp_AuditForManualPurchase_Title));
-		return PageFactory.initElements(driver, PurchasesPage.class);
-	}
-		
 	public int getNumberOfRecords() {
 		return driver.findElements(By.xpath("//table[@id='purchases_selection_table']/tbody/tr")).size();
 	}
@@ -415,7 +423,7 @@ public class PurchasesPage extends AbstractPage
 		return String.valueOf(rawItemCost);
 	}
 	
-	public void restoreDeletedPurchases(String invoiceId){
+	public void restoreDeletedPurchases(String invoiceId)throws InterruptedException{
 		Base.toReachbottomOfthePage();
 		executor.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 		RestorePurchases_BT.click();
@@ -423,9 +431,11 @@ public class PurchasesPage extends AbstractPage
 		restoreInvoice(invoiceId);
 	}
 	
-	public void restoreInvoice(String invoiceId){
+	public void restoreInvoice(String invoiceId)throws InterruptedException{
 		driver.findElement(By.xpath("//tr[contains(@class,'deleted_purchases_history')]/td[text()='"+invoiceId+"']/preceding-sibling::td[@class='restore_purchase select-checkbox']")).click();
 		wait.until(ExpectedConditions.visibilityOf(RestoreManualInvoice_Restore_BT)).click();
+		wait.until(ExpectedConditions.visibilityOf(RestoreManualInvoice_ConfirmationPopUp_Yes_BT)).click();
+		Thread.sleep(5000);
 	}
 	
 	public boolean verifyApproveButtonDisplayedForRecordsWithNeedsApprovalStatus(){
@@ -486,23 +496,23 @@ public class PurchasesPage extends AbstractPage
 	public boolean verifyInvoiceInDescendingOrder() throws ParseException{
 		List<WebElement>invoiceList = driver.findElements(By.xpath("//table[@id='eb_purchase_table']/tbody/tr/td[4]/span"));
 		List<String>invoiceValueList = Base.getTextListFromWebElements(invoiceList);
-		return Base.verifyStringInDescendingOrder(invoiceValueList);
+		return Base.verifyBigIntInDescendingOrder(invoiceValueList);
 	}
 	
 	public boolean verifyInvoiceInAscendingOrder() throws ParseException{
 		List<WebElement>invoiceList = driver.findElements(By.xpath("//table[@id='eb_purchase_table']/tbody/tr/td[4]/span"));
 		List<String>invoiceValueList = Base.getTextListFromWebElements(invoiceList);
-		return Base.verifyStringInAsscendingOrder(invoiceValueList);
+		return Base.verifyBigIntInAsscendingOrder(invoiceValueList);
 	}
 	
 	public boolean verifyInvoiceTotalInDescendingOrder() throws ParseException{
-		List<WebElement>invoiceTotalList = driver.findElements(By.xpath("//table[@id='eb_purchase_table']/tbody/tr/td[5]/span"));
+		List<WebElement>invoiceTotalList = driver.findElements(By.xpath("//table[@id='eb_purchase_table']/tbody/tr/td[5]"));
 		List<String>invoiceTotalValueList = Base.getTextListFromWebElements(invoiceTotalList);
 		return Base.verifyAmountIsInDescendingOrder(invoiceTotalValueList);
 	}
 	
 	public boolean verifyInvoiceTotalInAscendingOrder() throws ParseException{
-		List<WebElement>invoiceTotalList = driver.findElements(By.xpath("//table[@id='eb_purchase_table']/tbody/tr/td[5]/span"));
+		List<WebElement>invoiceTotalList = driver.findElements(By.xpath("//table[@id='eb_purchase_table']/tbody/tr/td[5]"));
 		List<String>invoiceTotalValueList = Base.getTextListFromWebElements(invoiceTotalList);
 		return Base.verifyAmountIsInAscendingOrder(invoiceTotalValueList);
 	}
@@ -557,36 +567,33 @@ public class PurchasesPage extends AbstractPage
 		List<WebElement>statusList = driver.findElements(By.xpath("//table[@id='eb_purchase_table']/tbody/tr/td[text()='Exceeds Variance!']"));
 		String toolTipMsgArea;
 		if(statusList.size()>0){
-			WebElement tootlTip = driver.findElement(By.xpath("(//table[@id='eb_purchase_table']/tbody/tr/td[text()='Exceeds Variance!'])[1]/following-sibling::td[3]/div/eb-tooltip/a"));
+			WebElement tootlTip = driver.findElement(By.xpath("(//table[@id='eb_purchase_table']/tbody/tr/td[text()='Exceeds Variance!'])[1]/following-sibling::td[4]/eb-tooltip/a"));
 			tootlTip.click();
-			toolTipMsgArea = tootlTip.getAttribute("aria-describedby");
+//			toolTipMsgArea = tootlTip.getAttribute("aria-describedby");
+			toolTipMsgArea = tootlTip.getAttribute("data-toggle");
 			System.out.println("toolTipMsgArea "+toolTipMsgArea);
 			return toolTipMsgArea.contains("tooltip");
 		}
 		return true;
 	}
-	
 	//This method will verify that pending transaction is displayed in purchase page
-	public boolean verifyPendindInvoiceIsPresent(String invoiceNumber) {
-		return Base.isElementDisplayed(By.xpath("//table[@id='eb_purchase_table']/tbody/tr/td/span[text()='"+invoiceNumber+"']"));
-	}
-	
-	public boolean verifyPendindInvoiceIsPresent(String todayDate,String amount) {
-		return Base.isElementDisplayed(By.xpath("//table[@id='eb_purchase_table']/tbody/tr/td[10][preceding-sibling::td/span[text()='"+todayDate+"'] and preceding-sibling::td[text()='$"+amount+"'] ]/eb-button/button"));
-
-	}
+		public boolean verifyPendindInvoiceIsPresent(String invoiceNumber) throws RowsExceededException, BiffException, WriteException, IOException {
+			return Base.isElementDisplayed((By.xpath("//table[@id='eb_purchase_table']/tbody/tr/td/span[text()='"+invoiceNumber+"']")));
+		}
 	
 	//Delete a Manual Invoice
-	public PurchasesPage deleteAManualInvoice(String invoiceNumber) throws InterruptedException 
+	public PurchasesPage deleteAManualInvoice(String invoiceNumber) throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException 
 	{
 		//click on the Approve button against the invoice number 
 		clickOnApproveButtonForManualPurchase(invoiceNumber);
 		Thread.sleep(3000);
 		ApproveManualInvoice_PopUp_Delete_BT.click();
+		Thread.sleep(3000);
 		wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_ConfirmationMessage_Yes_BT));
 		Thread.sleep(3000);
 		ApproveManualInvoice_PopUp_ConfirmationMessage_Yes_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_InvoiceDelete_Confirmation_MSG));
+		Thread.sleep(3000);
 		return PageFactory.initElements(driver, PurchasesPage.class);
 		
 	}
@@ -602,108 +609,116 @@ public class PurchasesPage extends AbstractPage
 		return true;
 	}
 	
-    public PurchasesPage selectDateForApproveInvoice(String date) throws InterruptedException{
-		ApproveManualInvoice_SelectDate_TB.click();
+    public PurchasesPage selectDateForApproveInvoice(String date) throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException{
+    	ApproveManualInvoice_Date_TB.click();
 		Thread.sleep(1000);
 		int day = Base.getDayFromDate(date);
 		int month = Base.getMonthFromDate(date);
-		selectMonthFromDatePicker(Base.getMonthName(month+1),4);
-		driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[4]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")).click();
+
+		System.out.println("month"+month);
+		/*selectMonthFromDatePicker(Base.getMonthName(month+1),1);
+		driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[1]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")).click();*/
+
+		selectMonthFromDatePicker(Base.getMonthName(month+1),1);
+		Reporter.reportPassResult(AbstractTest.browser, "Month "+Base.getMonthName(month+1)+"is selected in the calender", "Pass");
+		GenericMethods.clickOnElement(driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[1]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")), "Day"+day);
+		return PageFactory.initElements(driver, PurchasesPage.class);
+	}
+    
+    public PurchasesPage selectTimeForApproveInvoice(String time) throws InterruptedException{
+    	ApproveManualInvoice_SelectTime_TB.click();
+		Thread.sleep(1000);
+		String hourValue = time.split(":")[0];
+		while(!ApproveManualInvoice_hourSpan_Value.getText().equals(hourValue)){
+			Base.executeJavaScript("document.getElementById('eb_tp_hour_up').click();");
+		}
+		String minuteValue = time.split(":")[1];
+		while(!ApproveManualInvoice_MinSpan_Value.getText().equals(minuteValue)){
+			Base.executeJavaScript("document.getElementById('eb_tp_min_up').click();");
+		}
+		ApproveManualInvoice_PopUp_Lable.click();
+		Thread.sleep(1000);
 		return PageFactory.initElements(driver, PurchasesPage.class);
 	}
 	
 	
-	public PurchasesPage clickOnApproveButtonForManualPurchase(String invoiceId){
-		driver.findElement(By.xpath("//table[@id='eb_purchase_table']/tbody/tr/td/span[text()='"+invoiceId+"']/../following-sibling::td/eb-button[@id='eb_approve_button']/button")).click();
+	public PurchasesPage clickOnApproveButtonForManualPurchase(String invoiceId) throws RowsExceededException, BiffException, WriteException, IOException, InterruptedException{
+		WebElement approveButton = driver.findElement(By.xpath("//table[@id='eb_purchase_table']/tbody/tr/td/span[text()='"+invoiceId+"']/../following-sibling::td/eb-button[@id='eb_approve_button']/button"));
+//		executor.executeScript("arguments[0].click();", approveButton);
+		action.moveToElement(approveButton).build().perform();
+		Thread.sleep(1500);
+		executor.executeScript("arguments[0].click();", approveButton);
+//		GenericMethods.clickOnElement(approveButton, "approveButton");
+//		Reporter.reportPassResult(AbstractTest.browser, "Clicked on "+approveButton, "Pass");
 		wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_Lable));
 		return PageFactory.initElements(driver, PurchasesPage.class);
 	}
 	
 	//Method to Approve a manual Invoice
 	
-public PurchasesPage approveAManualInvoice(String invoiceId,String approveDate) throws InterruptedException
+public PurchasesPage approveAManualInvoice(String invoiceId) throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException
 {
-		clickOnApproveButtonForManualPurchase(invoiceId);
-		wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_Lable));
-		selectDateForApproveInvoice(approveDate);
-		ApproveManualInvoice_Approve_BT.click();
-		wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_ConfirmationMessage_Yes_BT));
-		ApproveManualInvoice_PopUp_ConfirmationMessage_Yes_BT.click();
-		wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_InvoiceApprove_Confirmation_MSG));
-		return PageFactory.initElements(driver, PurchasesPage.class);
-	}
+	clickOnApproveButtonForManualPurchase(invoiceId);
+	wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_Lable));
+	//selectDateForApproveInvoice(approveDate);
+	//selectTimeForApproveInvoice(GlobalVariable.time);
+	ApproveManualInvoice_Approve_BT.click();
+	wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_ConfirmationMessage_Yes_BT));
+	ApproveManualInvoice_PopUp_ConfirmationMessage_Yes_BT.click();
+	wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_InvoiceApprove_Confirmation_MSG));
+	Thread.sleep(5000);
+	return PageFactory.initElements(driver, PurchasesPage.class);
+}
 
-public PurchasesPage approveAManualInvoice(String todayDate,String amount,String approveDate) throws InterruptedException
+public PurchasesPage approveAManualInvoice(String todayDate,String amount,String approveDate) throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException
 {
-	    driver.findElement(By.xpath("//table[@id='eb_purchase_table']/tbody/tr/td[9][preceding-sibling::td/span[text()='"+todayDate+"'] and preceding-sibling::td/span[text()='"+amount+"'] ]/eb-button/button")).click();
-	    wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_Lable));
-		wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_Lable));
-		selectDateForApproveInvoice(approveDate);
-		ApproveManualInvoice_Approve_BT.click();
-		wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_ConfirmationMessage_Yes_BT));
-		ApproveManualInvoice_PopUp_ConfirmationMessage_Yes_BT.click();
-		wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_InvoiceApprove_Confirmation_MSG));
-		return PageFactory.initElements(driver, PurchasesPage.class);
+	System.out.println("//table[@id='eb_purchase_table']/tbody/tr/td[10][preceding-sibling::td/span[text()='"+todayDate+"'] and preceding-sibling::td[text()='$"+amount+"'] ]/eb-button/button");
+	WebElement element =driver.findElement(By.xpath("//table[@id='eb_purchase_table']/tbody/tr/td[10][preceding-sibling::td/span[text()='"+todayDate+"'] and preceding-sibling::td[text()='$"+amount+"'] ]/eb-button/button"));
+	executor.executeScript("arguments[0].click();", element);
+    wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_Lable));
+	wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_Lable));
+	selectDateForApproveInvoice(approveDate);
+	selectTimeForApproveInvoice(GlobalVariable.time);
+	ApproveManualInvoice_Approve_BT.click();
+	wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_ConfirmationMessage_Yes_BT));
+	ApproveManualInvoice_PopUp_ConfirmationMessage_Yes_BT.click();
+	wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_InvoiceApprove_Confirmation_MSG));
+	return PageFactory.initElements(driver, PurchasesPage.class);
 	}
 	
 	//Method to select the start date on View History page
-	public PurchasesPage selectStartDate(String startDate) throws InterruptedException{
+	public PurchasesPage selectStartDate(String startDate) throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException{
 	
-		ViewHistory_StartDate_TB.click();
+		GenericMethods.clickOnElement(ViewHistory_StartDate_TB, "ViewHistory_StartDate_TB");
 		Thread.sleep(3000);
 		int day = Base.getDayFromDate(startDate);
 		int month = Base.getMonthFromDate(startDate);
-		selectMonthFromDatePicker(Base.getMonthName(month+1),2);
-		driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[2]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")).click();
+		selectMonthFromDatePicker(Base.getMonthName(month+1),1);
+		Reporter.reportPassResult(AbstractTest.browser, "Month "+Base.getMonthName(month+1)+"is selected in calendar", "Pass");
+		GenericMethods.clickOnElement(driver.findElement(By.xpath("(//div[@class='xdsoft_calendar'])[1]//tbody/tr//td[@data-month='"+month+"']/div[text()='"+day+"']")), " Date "+day);
 		return PageFactory.initElements(driver, PurchasesPage.class);
 	}
 	
 	//Method to View the invoice in View History page that is already approved
-	public PurchasesPage viewApprovedInvoiceOnViewHistory(String invoiceId,String startDate) throws InterruptedException
+	public PurchasesPage viewApprovedInvoiceOnViewHistory(String invoiceId,String startDate) throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException
 	{
-			ViewHistory_BT.click();
+			GenericMethods.clickOnElement(ViewHistory_BT, "ViewHistory_BT");
 			wait.until(ExpectedConditions.visibilityOf(ViewHistory_ShowResults_BT));
 			Thread.sleep(4000);
 //			selectDateForApproveInvoice(date);
 			selectStartDate(startDate);
 			Thread.sleep(2000);
-			ViewHistory_Vendor_DD.click();
+			GenericMethods.clickOnElement(ViewHistory_Vendor_DD, "ViewHistory_Vendor_DD");
 			Thread.sleep(2000);
-			ViewHistory_ShowResults_BT.click();
+			GenericMethods.clickOnElement(ViewHistory_ShowResults_BT, "ViewHistory_ShowResults_BT");
 			Thread.sleep(10000);
 			//click on the View button against the invoice number 
-			driver.findElement(By.xpath("//table[@id='eb_purchase_table']/tbody/tr/td[8][preceding-sibling::td/span[text()='"+invoiceId+"']]/eb-button/button[@value='View']")).click();
+			GenericMethods.clickOnElement(driver.findElement(By.xpath("//table[@id='eb_purchase_his_table']/tbody/tr/td[8][preceding-sibling::td/span[text()='"+invoiceId+"']]/eb-button/button[@value='View']")), "Invoice with Invoice Id "+invoiceId);
 			Thread.sleep(10000);
 			wait.until(ExpectedConditions.visibilityOf(ViewInvoice_PopUp_Label));
-			/*wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_ConfirmationMessage_Yes_BT));
-			ApproveManualInvoice_PopUp_ConfirmationMessage_Yes_BT.click();
-			wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_InvoiceApprove_Confirmation_MSG));*/
-
 			return PageFactory.initElements(driver, PurchasesPage.class);
 		}
 	
-	public PurchasesPage viewApprovedInvoiceOnViewHistory(String approveDate,String amount,String startDate) throws InterruptedException
-	{
-			ViewHistory_BT.click();
-			wait.until(ExpectedConditions.visibilityOf(ViewHistory_ShowResults_BT));
-			Thread.sleep(4000);
-//			selectDateForApproveInvoice(date);
-			selectStartDate(startDate);
-			Thread.sleep(2000);
-			ViewHistory_Vendor_DD.click();
-			Thread.sleep(2000);
-			ViewHistory_ShowResults_BT.click();
-			Thread.sleep(10000);
-			//click on the View button against the invoice number 
-			driver.findElement(By.xpath("//table[@id='eb_purchase_his_table']/tbody/tr/td[8][preceding-sibling::td/span[text()='"+approveDate+"']  and preceding-sibling::td[text()='$"+amount+"']]/eb-button/button[@value='View']")).click();
-			Thread.sleep(10000);
-			wait.until(ExpectedConditions.visibilityOf(ViewInvoice_PopUp_Label));
-			/*wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_ConfirmationMessage_Yes_BT));
-			ApproveManualInvoice_PopUp_ConfirmationMessage_Yes_BT.click();
-			wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_InvoiceApprove_Confirmation_MSG));*/
-
-			return PageFactory.initElements(driver, PurchasesPage.class);
-		}
 			
 	public PurchasesPage clickOnApproveButtonForElectronicPurchase(String invoiceId) {
 		driver.findElement(By.xpath("//table[@id='eb_purchase_table']/tbody/tr/td/span[text()='"+ invoiceId+ "']/../following-sibling::td/eb-button[@id='eb_approve_button']/button")).click();
@@ -730,7 +745,7 @@ public PurchasesPage approveAManualInvoice(String todayDate,String amount,String
 		while (!ApproveElectronicInvoice_MinSpan_Value.getText().equals(minuteValue)) {
 			Base.executeJavaScript("document.getElementsByClassName('eb_tp_time_up style-scope eb-timepicker')[1].click();");
 		}
-		ApproveElectronicInvoice_PopUp_Lable.click();
+		ApproveManualInvoice_PopUp_Lable.click();
 		Thread.sleep(1000);
 	}
 	
@@ -769,26 +784,59 @@ public PurchasesPage approveAManualInvoice(String todayDate,String amount,String
 		return driver.findElement(By.xpath("//table[@id='purchase_detail_table']/tbody/tr/td/span[contains(text(),'"+wrinId+"')]/../following-sibling::td[5]")).getText().substring(1);
 	}
 	
+	public String getCasesPurchasedForAWrin(String wrinId){
+		return driver.findElement(By.xpath("//table[@id='purchase_detail_table']/tbody/tr/td/span[contains(text(),'"+wrinId+"')]/../following-sibling::td[2]/span")).getText();
+		
+	}
+	
 	public String getBreakDownCostForEachCategory(String productCategory){
 		String productCatergoryCost;
 		switch (productCategory.toLowerCase()) {
         case "food":
-        	productCatergoryCost = driver.findElement(By.xpath("//div[@id='total_food_div']/div[2]/span[text()='Total Food']/../following-sibling::div/span[@id='total_food']")).getText();
+        	productCatergoryCost = driver.findElement(By.xpath("//div[@id='total_food_div']/div[2]/span[contains(text(),'Total Food')]/../following-sibling::div/span[@id='total_food']")).getText();
             break;
         case "ops supplies":
-        	productCatergoryCost = driver.findElement(By.xpath("//div[@id='total_ops_div']/div[2]/span[text()='Total Ops Supplies']/../following-sibling::div/span[@id='total_ops']")).getText();
+        	productCatergoryCost = driver.findElement(By.xpath("//div[@id='total_ops_div']/div[2]/span[contains(text(),'Total Ops Supplies')]/../following-sibling::div/span[@id='total_ops']")).getText();
             break;
         case "paper":
-        	productCatergoryCost = driver.findElement(By.xpath("//div[@id='total_paper_div']/div[2]/span[text()='Total Paper']/../following-sibling::div/span[@id='total_paper']")).getText();
+        	productCatergoryCost = driver.findElement(By.xpath("//div[@id='total_paper_div']/div[2]/span[contains(text(),'Total Paper')]/../following-sibling::div/span[@id='total_paper']")).getText();
             break;
         case "linens":
-        	productCatergoryCost = driver.findElement(By.xpath("//div[@id='total_linens_div']/div[2]/span[text()='Total Linens']/../following-sibling::div/span[@id='total_linens']")).getText();
+        	productCatergoryCost = driver.findElement(By.xpath("//div[@id='total_linens_div']/div[2]/span[contains(text(),'Total Linens')]/../following-sibling::div/span[@id='total_linens']")).getText();
             break;
         case "others":
-        	productCatergoryCost = driver.findElement(By.xpath("//div[@id='total_other_div']/div[2]/span[text()='Total Other']/../following-sibling::div/span[@id='total_other']")).getText();
+        	productCatergoryCost = driver.findElement(By.xpath("//div[@id='total_other_div']/div[2]/span[contains(text(),'Total Other')]/../following-sibling::div/span[@id='total_other']")).getText();
             break;
         case "happy meal":
-        	productCatergoryCost = driver.findElement(By.xpath("//div[@id='total_happy_meal_div']/div[2]/span[text()='Total Happy  Meal']/../following-sibling::div/span[@id='total_happy_meal']")).getText();
+        	productCatergoryCost = driver.findElement(By.xpath("//div[@id='total_happy_meal_div']/div[2]/span[contains(text(),'Total Happy  Meal')]/../following-sibling::div/span[@id='total_happy_meal']")).getText();
+            break;
+        default: 
+			productCatergoryCost = "0";
+			break;
+		}
+		return productCatergoryCost;
+	}
+	
+	public String getBreakDownCostForElectronicInvoice(String productCategory){
+		String productCatergoryCost;
+		switch (productCategory.toLowerCase()) {
+        case "food":
+        	productCatergoryCost = driver.findElement(By.xpath("//div[@id='total_row']/div[2]/div/span[contains(text(),'Total Food')]/../following-sibling::div/span")).getText();
+            break;
+        case "ops supplies":
+        	productCatergoryCost = driver.findElement(By.xpath("//div[@id='total_row']/div[2]/div/span[contains(text(),'Total Ops Supplies')]/../following-sibling::div/span")).getText();
+            break;
+        case "paper":
+        	productCatergoryCost = driver.findElement(By.xpath("//div[@id='total_row']/div[2]/div/span[contains(text(),'Total Paper')]/../following-sibling::div/span")).getText();
+            break;
+        case "linens":
+        	productCatergoryCost = driver.findElement(By.xpath("//div[@id='total_row']/div[2]/div/span[contains(text(),'Total Linens')]/../following-sibling::div/span")).getText();
+            break;
+        case "others":
+        	productCatergoryCost = driver.findElement(By.xpath("//div[@id='total_row']/div[2]/div/span[contains(text(),'Total Other')]/../following-sibling::div/span")).getText();
+            break;
+        case "happy meal":
+        	productCatergoryCost = driver.findElement(By.xpath("//div[@id='total_row']/div[2]/div/span[contains(text(),'Total Happy  Meal')]/../following-sibling::div/span")).getText();
             break;
         default: 
 			productCatergoryCost = "0";

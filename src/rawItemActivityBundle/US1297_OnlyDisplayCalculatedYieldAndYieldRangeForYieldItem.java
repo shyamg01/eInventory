@@ -101,7 +101,7 @@ public class US1297_OnlyDisplayCalculatedYieldAndYieldRangeForYieldItem extends 
 		String password = LoginTestData.password;
 		String userId = LoginTestData.userId;
 		String storeId = LoginTestData.StoreId;
-		String samplewRINID = GlobalVariable.createMonthlyInventoryWrin1;
+		String samplewRINID = GlobalVariable.dailyInventoryWrin_YieldValue;
 		//String stratDate=GlobalVariable.startDate;
 		//String endDate=GlobalVariable.endDate;
 		/***********************************/

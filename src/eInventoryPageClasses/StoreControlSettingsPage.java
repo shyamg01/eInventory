@@ -1,5 +1,7 @@
 package eInventoryPageClasses;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,8 +15,57 @@ public class StoreControlSettingsPage extends AbstractPage {
 		
 	}
 
-	@FindBy(xpath = "//input[@value='Inventory Settings']")
+	@FindBy(xpath = "//a[@id='tabLinkInventorySettings']")
 	public WebElement InventorySetting_BT;
+	
+	@FindBy(xpath = "//h3[text()='Invoices']")
+	public WebElement InventorySetting_Invoices_Label;
+	
+	@FindBy(xpath = ".//h3[text()='Transfers']")
+	public WebElement InventorySetting_Transfers_Label;
+	
+	@FindBy(xpath = "//h3[text()='Physical Inventory']")
+	public WebElement InventorySetting_PhysicalInventory_Label;
+	
+	@FindBy(xpath = "//span[@id='physical-inventory-edit-button']")
+	public WebElement InventorySetting_PhysicalInventory_Edit_BT;
+	
+	@FindBy(xpath = "//span[contains(text(),'Number of days before the end of month to allow inventories of Monthly Food items excluding condiments:')]")
+	public WebElement PhysicalInventorySetting_FoodItem_InventoryDaysPrior_Label;
+	
+	@FindBy(xpath = "//span[contains(text(),'Number of days before the end of month to allow inventories of Monthly Non Food and Condiments:')]")
+	public WebElement PhysicalInventorySetting_NonFoodItem_InventoryDaysPrior_Label;
+	
+	@FindBy(xpath = "(//input[@name='inventoryDaysPriorEOM'])[1]")
+	public WebElement PhysicalInventorySetting_FoodItem_InventoryDaysPrior_TB;
+	
+	@FindBy(xpath = "(//input[@name='inventoryDaysPriorEOM'])[2]")
+	public WebElement PhysicalInventorySetting_NonFoodItem_InventoryDaysPrior_TB;
+	
+	@FindBy(xpath = "//h2[text()='Inventory - Physical Inventory Settings']")
+	public WebElement PhysicalInventorySetting_Popup_Title;
+	
+	@FindBy(xpath="//div[contains(@id,'popover') and @role='tooltip']/div[@class='popover-content']")
+	public WebElement InvalidValue_Error_Message;
+	
+	@FindBy(xpath="//ul[@id='physicalInventoryWeeklyDay']/li[@class='selected']")
+	public WebElement PhysicalInventorySetting_SelectedDay_BT;
+	
+	@FindBy(xpath="//ul[@id='physicalInventoryWeeklyDay']/li")
+	public List<WebElement> PhysicalInventorySetting_WeekDays_List;
+	
+	@FindBy(xpath="//eb-button[@id='btnSaveInventoryPhysInvSettings']/button")
+	public WebElement PhysicalInventorySetting_Save_BT;
+	
+	@FindBy(xpath ="//div[@class='toast-message' and text()='Your Physical Inventory settings have been saved.']")
+	public WebElement PhysicalInventorySettingSaved_Confirmation_MSG;
+	
+	@FindBy(xpath ="//section[@id='inventoryPhysInvSettings']/div/div[2]/div[3]/div[contains(@class,'bootstrap-switch')]")
+	public WebElement PhysicalInventorySetting_WeeklySetting_Toggle_BT;
+	
+	//
+	
+	/************************************************/
 	
 	@FindBy(xpath = "//input[@id='dollar_variance']")
 	public WebElement TotalInvoiceAmountVariance_TB;

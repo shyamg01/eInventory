@@ -160,7 +160,9 @@ public class VarianceStatPage  extends AbstractPage{
 	}
 	
 	public String getDifferenceForAWrin(String wrinId){
-		return driver.findElement(By.xpath("//tbody[@id='daily_inv_table_body']/tr[@role='row']/td[contains(text(),'"+wrinId+"')]/following-sibling::td[7]")).getText();
+		String amount = driver.findElement(By.xpath("//tbody[@id='daily_inv_table_body']/tr[@role='row']/td[contains(text(),'"+wrinId+"')]/following-sibling::td[7]")).getText();
+		amount = amount.replace("$","");
+		return amount;
 	}
 	
 	public String getActualUsageForAWrin(String wrinId){
@@ -185,11 +187,18 @@ public class VarianceStatPage  extends AbstractPage{
 		return recordIsCollapsed;
 	}
 	
+	public boolean verifySelectedDateIsExpanded(String date){
+		String formattedDate =  Base.getFormattedDate1(date);
+		boolean recordIsExpanded =  !(driver.findElement(By.xpath("//tr[contains(@class,'date"+formattedDate+" ')]")).getAttribute("class").contains("hidden"));
+		return recordIsExpanded;
+	}
+	
 	public BigDecimal getStatGainFromDifference(){
 		BigDecimal gain = new BigDecimal(0.00);
 		for (WebElement difference : DifferenceValue_List){
-			if (!difference.getText().contains("-")){
-				gain = gain.add(new BigDecimal(difference.getText()));
+			String  diff = difference.getText().replace("$", "");
+			if (!diff.contains("-")){
+				gain = gain.add(new BigDecimal(diff));
 				System.out.println("Gain "+gain);
 			}
 		}
@@ -199,8 +208,9 @@ public class VarianceStatPage  extends AbstractPage{
 	public BigDecimal getStatLossFromDifference(){
 		BigDecimal loss = new BigDecimal(0.00);
 		for (WebElement difference : DifferenceValue_List){
-			if (difference.getText().contains("-")){
-				loss = loss.add(new BigDecimal(difference.getText().replace("-", "")));
+			String  diff = difference.getText().replace("$", "");
+			if (diff.contains("-")){
+				loss = loss.add(new BigDecimal(diff.replace("-", "")));
 				System.out.println("Loss "+loss);
 			}
 		}

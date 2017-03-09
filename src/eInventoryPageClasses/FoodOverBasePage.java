@@ -254,7 +254,7 @@ public class FoodOverBasePage extends AbstractPage {
 	@FindBy(xpath = "//div[@class='toast-message' and contains(text(),'Projected fields saved')]")
 	public WebElement Projections_ChangesSaved_Confirmation_MSG;
 	
-	@FindBy(xpath = "(//textarea [@id='current_month_comment'])[2]")
+	@FindBy(xpath = "//textarea[@id='next_month_comment']")
 	public WebElement Projections_Comments_TB;
 	
 	@FindBy(xpath = "//table[@id='projections_right']/tbody/tr/td[text()='Unexplained']")
@@ -282,34 +282,40 @@ public class FoodOverBasePage extends AbstractPage {
 	@FindBy(xpath = "//thead[@id='projections_right_tbl_head']/tr/th[4]")
 	public WebElement Historicals_PastMonth3Column_Label;
 	
-	@FindBy(xpath = "//table[@id='projections_right']//tr/td[contains(text(),'Emp/Mgr Meals')]/following-sibling::td[1]/span")
+	@FindBy(xpath = "//table[@id='projections_right']//tr/td[contains(text(),'Emp/Mgr Meals')]/following-sibling::td[1]")
 	public WebElement Historicals_EmpMgrMeals_PastMonth1_Value;
 	
-	@FindBy(xpath = "//table[@id='projections_right']//tr/td[contains(text(),'Emp/Mgr Meals')]/following-sibling::td[2]/span")
+	@FindBy(xpath = "//table[@id='projections_right']//tr/td[contains(text(),'Emp/Mgr Meals')]/following-sibling::td[2]")
 	public WebElement Historicals_EmpMgrMeals_PastMonth2_Value;
 	
-	@FindBy(xpath = "//table[@id='projections_right']//tr/td[contains(text(),'Emp/Mgr Meals')]/following-sibling::td[3]/span")
+	@FindBy(xpath = "//table[@id='projections_right']//tr/td[contains(text(),'Emp/Mgr Meals')]/following-sibling::td[3]")
 	public WebElement Historicals_EmpMgrMeals_PastMonth3_Value;
 	
-	@FindBy(xpath = "//table[@id='projections_right']//tr/td[contains(text(),'Discount/Coupons')]/following-sibling::td[1]/span")
+	@FindBy(xpath = "//table[@id='projections_right']//tr/td[contains(text(),'Discount/Coupons')]/following-sibling::td[1]")
 	public WebElement Historicals_DiscountCoupon_PastMonth1_Value;
 	
-	@FindBy(xpath = "//table[@id='projections_right']//tr/td[contains(text(),'Completed Waste')]/following-sibling::td[1]/span")
+	@FindBy(xpath = "//table[@id='projections_right']//tr/td[contains(text(),'Discount/Coupons')]/following-sibling::td[2]")
+	public WebElement Historicals_DiscountCoupon_PastMonth2_Value;
+	
+	@FindBy(xpath = "//table[@id='projections_right']//tr/td[contains(text(),'Discount/Coupons')]/following-sibling::td[3]")
+	public WebElement Historicals_DiscountCoupon_PastMonth3_Value;
+	
+	@FindBy(xpath = "//table[@id='projections_right']//tr/td[contains(text(),'Completed Waste')]/following-sibling::td[1]")
 	public WebElement Historicals_CompletedWaste_PastMonth1_Value;
 	
-	@FindBy(xpath = "//table[@id='projections_right']//tr/td[contains(text(),'Completed Waste')]/following-sibling::td[2]/span")
+	@FindBy(xpath = "//table[@id='projections_right']//tr/td[contains(text(),'Completed Waste')]/following-sibling::td[2]")
 	public WebElement Historicals_CompletedWaste_PastMonth2_Value;
 	
-	@FindBy(xpath = "//table[@id='projections_right']//tr/td[contains(text(),'Completed Waste')]/following-sibling::td[3]/span")
+	@FindBy(xpath = "//table[@id='projections_right']//tr/td[contains(text(),'Completed Waste')]/following-sibling::td[3]")
 	public WebElement Historicals_CompletedWaste_PastMonth3_Value;
 	
-	@FindBy(xpath = "//table[@id='projections_right']//tr/td[contains(text(),'Stat Variance')]/following-sibling::td[1]/span")
+	@FindBy(xpath = "//table[@id='projections_right']//tr/td[contains(text(),'Stat Variance')]/following-sibling::td[1]")
 	public WebElement Historicals_StatVariance_PastMonth1_Value;
 	
-	@FindBy(xpath = "//table[@id='projections_right']//tr/td[contains(text(),'Stat Variance')]/following-sibling::td[2]/span")
+	@FindBy(xpath = "//table[@id='projections_right']//tr/td[contains(text(),'Stat Variance')]/following-sibling::td[2]")
 	public WebElement Historicals_StatVariance_PastMonth2_Value;
 	
-	@FindBy(xpath = "//table[@id='projections_right']//tr/td[contains(text(),'Stat Variance')]/following-sibling::td[3]/span")
+	@FindBy(xpath = "//table[@id='projections_right']//tr/td[contains(text(),'Stat Variance')]/following-sibling::td[3]")
 	public WebElement Historicals_StatVariance_PastMonth3_Value;
 	
 	/**********Month End Section UI**********/
@@ -679,9 +685,9 @@ public class FoodOverBasePage extends AbstractPage {
 	}
 	
 	public boolean verifyCommentsDisplayedForLastThreeMonths(){
-		return driver.findElement(By.xpath("//table[@id='projections_right']/tbody/tr/td[text()='Factors impacting food cost']/following-sibling::td[1]/textarea")).isDisplayed()
-				& driver.findElement(By.xpath("//table[@id='projections_right']/tbody/tr/td[text()='Factors impacting food cost']/following-sibling::td[2]/textarea")).isDisplayed()
-				& driver.findElement(By.xpath("//table[@id='projections_right']/tbody/tr/td[text()='Factors impacting food cost']/following-sibling::td[3]/textarea")).isDisplayed();
+		return driver.findElement(By.xpath("//table[@id='projections_right']/tbody/tr/td/span[text()='Factors Impacting Food Cost']/../following-sibling::td[1]/div[@class='dataFoodCostFactors']")).isDisplayed()
+				& driver.findElement(By.xpath("//table[@id='projections_right']/tbody/tr/td/span[text()='Factors Impacting Food Cost']/../following-sibling::td[2]/div[@class='dataFoodCostFactors']")).isDisplayed()
+				& driver.findElement(By.xpath("//table[@id='projections_right']/tbody/tr/td/span[text()='Factors Impacting Food Cost']/../following-sibling::td[3]/div[@class='dataFoodCostFactors']")).isDisplayed();
 	}
 	
 	public String[] getDataForLastThreeMonths(String fieldName){

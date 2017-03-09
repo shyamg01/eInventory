@@ -32,33 +32,33 @@ public class AuditPage extends AbstractPage {
 	public WebElement Employee_DD;
 	
 	public boolean verifyManualVendorNameAuditDisplayed(String eId, String beforeValue, String afterValue, String date){
-		return Base.isElementDisplayed(By.xpath(".//*[@id='audit_landing_table']//tr/td/span[contains(text(),'"+date+"')]/../following-sibling::td/span[text()='"+eId+"']/../following-sibling::td/span[text()='Inventory']/../following-sibling::td/span[text()='Vendors']/../following-sibling::td/span[text()='Name']/../following-sibling::td/span[text()='"+beforeValue+"']/../following-sibling::td/span[text()='"+afterValue+"']"));
+		return Base.isElementDisplayed(By.xpath(".//*[@id='audit_landing_table']//tr/td/span[contains(text(),'"+date+"')]/../following-sibling::td/span[contains(text(),'"+eId+"')]/../following-sibling::td/span[text()='Inventory']/../following-sibling::td/span[text()='Vendors']/../following-sibling::td/span[text()='Name']/../following-sibling::td/span[text()='"+beforeValue+"']/../following-sibling::td/span[text()='"+afterValue+"']"));
 	}
 	
 	public boolean verifyManualVendorNumberAuditDisplayed(String eId, String beforeValue, String afterValue, String date){
-		return Base.isElementDisplayed(By.xpath(".//*[@id='audit_landing_table']//tr/td/span[contains(text(),'"+date+"')]/../following-sibling::td/span[text()='"+eId+"']/../following-sibling::td/span[text()='Inventory']/../following-sibling::td/span[text()='Vendors']/../following-sibling::td/span[text()='Manual Number']/../following-sibling::td/span[text()='"+beforeValue+"']/../following-sibling::td/span[text()='"+afterValue+"']"));
+		return Base.isElementDisplayed(By.xpath(".//*[@id='audit_landing_table']//tr/td/span[contains(text(),'"+date+"')]/../following-sibling::td/span[contains(text(),'"+eId+"')]/../following-sibling::td/span[text()='Inventory']/../following-sibling::td/span[text()='Vendors']/../following-sibling::td/span[text()='Manual Number']/../following-sibling::td/span[text()='"+beforeValue+"']/../following-sibling::td/span[text()='"+afterValue+"']"));
 	}
 	
 	//Raw Item Information Audit Log
 	
 	public boolean verifyRawItemInvoiceTypeAuditDisplayed(String eId, String beforeValue, String afterValue, String date){
-		return Base.isElementDisplayed(By.xpath(".//*[@id='audit_landing_table']//tr/td/span[contains(text(),'"+date+"')]/../following-sibling::td/span[text()='"+eId+"']/../following-sibling::td/span[text()='Inventory']/../following-sibling::td/span[text()='Raw Item Info']/../following-sibling::td/span[text()='Invoice Type']/../following-sibling::td/span[text()='"+beforeValue+"']/../following-sibling::td/span[text()='"+afterValue+"']"));
+		return Base.isElementDisplayed(By.xpath(".//*[@id='audit_landing_table']//tr/td/span[contains(text(),'"+date+"')]/../following-sibling::td/span[contains(text(),'"+eId+"')]/../following-sibling::td/span[text()='Inventory']/../following-sibling::td/span[text()='Raw Item Info']/../following-sibling::td/span[text()='Invoice Type']/../following-sibling::td/span[text()='"+beforeValue+"']/../following-sibling::td/span[text()='"+afterValue+"']"));
 	}
 	
 	public boolean verifyRawItemCasePriceAuditDisplayed(String eId, String beforeValue, String afterValue, String date){
-		return Base.isElementDisplayed(By.xpath(".//*[@id='audit_landing_table']//tr/td/span[contains(text(),'"+date+"')]/../following-sibling::td/span[text()='"+eId+"']/../following-sibling::td/span[text()='Inventory']/../following-sibling::td/span[text()='Raw Item Info']/../following-sibling::td/span[text()='Case Price']/../following-sibling::td/span[text()='"+beforeValue+"']/../following-sibling::td/span[text()='"+afterValue+"']"));
+		return Base.isElementDisplayed(By.xpath(".//*[@id='audit_landing_table']//tr/td/span[contains(text(),'"+date+"')]/../following-sibling::td/span[contains(text(),'"+eId+"')]/../following-sibling::td/span[text()='Inventory']/../following-sibling::td/span[text()='Raw Item Info']/../following-sibling::td/span[text()='Case Price']/../following-sibling::td/span[text()='"+beforeValue+"']/../following-sibling::td/span[text()='"+afterValue+"']"));
 	}
 	
 	public boolean verifyRawItemFrequencyAuditDisplayed(String eId, String beforeValue, String afterValue, String date){
-		return Base.isElementDisplayed(By.xpath(".//*[@id='audit_landing_table']//tr/td/span[contains(text(),'"+date+"')]/../following-sibling::td/span[text()='"+eId+"']/../following-sibling::td/span[text()='Inventory']/../following-sibling::td/span[text()='Raw Item Info']/../following-sibling::td/span[text()='Frequency']/../following-sibling::td/span[text()='"+beforeValue+"']/../following-sibling::td/span[text()='"+afterValue+"']"));
+		return Base.isElementDisplayed(By.xpath(".//*[@id='audit_landing_table']//tr/td/span[contains(text(),'"+date+"')]/../following-sibling::td/span[contains(text(),'"+eId+"')]/../following-sibling::td/span[text()='Inventory']/../following-sibling::td/span[text()='Raw Item Info']/../following-sibling::td/span[text()='Frequency']/../following-sibling::td/span[text()='"+beforeValue+"']/../following-sibling::td/span[text()='"+afterValue+"']"));
 	}
 	
 	public boolean verifyRawItemAccountNumberAuditDisplayed(String eId, String beforeValue, String afterValue, String date){
-		return Base.isElementDisplayed(By.xpath(".//*[@id='audit_landing_table']//tr/td/span[contains(text(),'"+date+"')]/../following-sibling::td/span[text()='"+eId+"']/../following-sibling::td/span[text()='Inventory']/../following-sibling::td/span[text()='Raw Item Info']/../following-sibling::td/span[text()='McD GL Acct Number']/../following-sibling::td/span[text()='"+beforeValue+"']/../following-sibling::td/span[text()='"+afterValue+"']"));
+		return Base.isElementDisplayed(By.xpath(".//*[@id='audit_landing_table']//tr/td/span[contains(text(),'"+date+"')]/../following-sibling::td/span[contains(text(),'"+eId+"')]/../following-sibling::td/span[text()='Inventory']/../following-sibling::td/span[text()='Raw Item Info']/../following-sibling::td/span[text()='McD GL Acct Number']/../following-sibling::td/span[text()='"+beforeValue+"']/../following-sibling::td/span[text()='"+afterValue+"']"));
 	}
 	
 	public boolean verifyRawItemAccountPrimaryVendorAuditDisplayed(String eId, String beforeValue, String afterValue, String date){
-		return Base.isElementDisplayed(By.xpath(".//*[@id='audit_landing_table']//tr/td/span[contains(text(),'"+date+"')]/../following-sibling::td/span[text()='"+eId+"']/../following-sibling::td/span[text()='Inventory']/../following-sibling::td/span[text()='Raw Item Info']/../following-sibling::td/span[text()='Primary Vendor']/../following-sibling::td/span[text()='"+beforeValue+"']/../following-sibling::td/span[text()='"+afterValue+"']"));
+		return Base.isElementDisplayed(By.xpath(".//*[@id='audit_landing_table']//tr/td/span[contains(text(),'"+date+"')]/../following-sibling::td/span[contains(text(),'"+eId+"')]/../following-sibling::td/span[text()='Inventory']/../following-sibling::td/span[text()='Raw Item Info']/../following-sibling::td/span[text()='Primary Vendor']/../following-sibling::td/span[text()='"+beforeValue+"']/../following-sibling::td/span[text()='"+afterValue+"']"));
 	}
 	
 	public String getListType(String listType){
@@ -76,6 +76,6 @@ public class AuditPage extends AbstractPage {
 	
 	//Food Over BAse Page Audit
 	public boolean verifyFOBCommentsAuditDisplayed(String eId, String beforeValue, String afterValue, String date){
-		return Base.isElementDisplayed(By.xpath(".//*[@id='audit_landing_table']//tr/td/span[contains(text(),'"+date+"')]/../following-sibling::td/span[text()='"+eId+"']/../following-sibling::td/span[text()='Inventory']/../following-sibling::td/span[text()='Store Food Over Base']/../following-sibling::td/span[text()='Save Comments']/../following-sibling::td/span[text()='"+beforeValue+"']/../following-sibling::td/span[text()='"+afterValue+"']"));
+		return Base.isElementDisplayed(By.xpath(".//*[@id='audit_landing_table']//tr/td/span[contains(text(),'"+date+"')]/../following-sibling::td/span[contains(text(),'"+eId+"')]/../following-sibling::td/span[text()='Inventory']/../following-sibling::td/span[text()='Store Food Over Base']/../following-sibling::td/span[text()='Save Comments']/../following-sibling::td/span[text()='"+beforeValue+"']/../following-sibling::td/span[text()='"+afterValue+"']"));
 	}
 }

@@ -64,42 +64,23 @@ public class US970_Part2StatVariance extends AbstractTest{
 		String userId = LoginTestData.level1_SSO_UserId;
 		String storeId = LoginTestData.level1StoreId;
 		String samplewRINID1 = GlobalVariable.createDailyInventoryWrin2;
-		String stratDate=GlobalVariable.startDate;
 		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
+		String quantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PhysicalInventoryPage physicalInventoryPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToPhysicalInventoryPage();
-		physicalInventoryPage.selectStartDate(stratDate);
-		Thread.sleep(5000);
-		String inventoryTime = physicalInventoryPage.getTimeForNewInventory(createDate, time);
-		System.out.println("inventoryTime "+inventoryTime);
-		GenericMethods.clickOnElement(physicalInventoryPage.CreateDailyInventory_BT,"CreateDailyInventory_BT");
-		wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.DailyInventoryList_Title));
-		Thread.sleep(5000);
-		physicalInventoryPage.selectADateForPhysicalInventory(createDate).selectTimeForPhysicalInventory(inventoryTime);;
-		physicalInventoryPage.searchRawItemInInventoryList(samplewRINID1);
-		GenericMethods.clearValueOfElement(physicalInventoryPage.OuterPackQty_TB,"OuterPackQty_TB");
-		GenericMethods.enterValueInElement(physicalInventoryPage.OuterPackQty_TB,"OuterPackQty_TB","12");
-		String itemTotal = physicalInventoryPage.getItemTotalCountForWrinIdInCreateInventoryTable(samplewRINID1);
-		GenericMethods.clickOnElement(physicalInventoryPage.CreateInventoryPopUp_Submit_BT,"CreateInventoryPopUp_Submit_BT");
-		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.Confirmation_PopUp_YES_BT)),"Confirmation_PopUp_YES_BT");
-		wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.DailyInventorySaved_Confirmation_MSG));
-		physicalInventoryPage.selectStartDate(stratDate);
-		Thread.sleep(2000); 
-		if(physicalInventoryPage.verifyInventorySaved(createDate, inventoryTime, "Daily")){
-			Reporter.reportPassResult(
-					browser,
-					"User should be able to view Saved physical inventory",
-					"Pass");
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"User should be able to view Saved physical inventory",
-					"Fail");
-			AbstractTest.takeSnapShot();
+		GenericMethods.clickOnElement(physicalInventoryPage.DailyInventory_BT, "DailyInventory_BT");
+		wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.DailyInventoryPopUp_Title));
+		physicalInventoryPage.verifyAndAddWrinInTable(samplewRINID1, quantity, quantity, quantity);
+		Thread.sleep(2000);
+		String itemTotal = physicalInventoryPage.getItemTotalForAWrin(samplewRINID1);
+		GenericMethods.clickOnElement(physicalInventoryPage.DailyInventoryPopUp_Submit_BT, "DailyInventoryPopUp_Submit_BT");
+		if(Base.isElementDisplayed(physicalInventoryPage.ConfirmationPopUp_YES_BT)){
+			GenericMethods.clickOnElement(physicalInventoryPage.ConfirmationPopUp_YES_BT, "ConfirmationPopUp_YES_BT");
 		}
+		wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.DailyInventorySubmitted_Confirmation_MSG));
+		Thread.sleep(5000);
 		RawItemActivityPage rawItemActivityPage = homePage.goToRawItemActivityPage();
 		rawItemActivityPage.searchAndSelectWRINID(samplewRINID1);
 		Thread.sleep(5000);
@@ -111,7 +92,6 @@ public class US970_Part2StatVariance extends AbstractTest{
 		Thread.sleep(5000);
 		varianceStatPage.viewActivityButtn(samplewRINID1).click();
 		wait.until(ExpectedConditions.visibilityOf(varianceStatPage.VarianceStatRawItemActivity_Label));
-		varianceStatPage.clickOnDateGroup(createDate);
 		if(varianceStatPage.verifyInventoryOnHandCountMatchedForSelectedDate(createDate, itemTotal, uom)){
 			Reporter.reportPassResult(
 					browser,
@@ -145,15 +125,15 @@ public class US970_Part2StatVariance extends AbstractTest{
 		Thread.sleep(5000);
 		varianceStatPage.viewActivityButtn(samplewRINID1).click();
 		wait.until(ExpectedConditions.visibilityOf(varianceStatPage.VarianceStatRawItemActivity_Label));
-		if(varianceStatPage.verifySelectedDateIsCollapsed(createDate)){
+		if(varianceStatPage.verifySelectedDateIsExpanded(createDate)){
 			Reporter.reportPassResult(
 					browser,
-					"User should be able to view the information in collapsed state >",
+					"User should be able to view the information in expanded state for current date ",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(
 					browser,
-					"User should be able to view the information in collapsed state >",
+					"User should be able to view the information in expanded state for current date",
 					"Fail");
 			AbstractTest.takeSnapShot();
 		}
@@ -170,26 +150,23 @@ public class US970_Part2StatVariance extends AbstractTest{
 		String storeId = LoginTestData.level1StoreId;
 		String samplewRINID1 = GlobalVariable.dailyInventoryWrin_YieldValue;
 		String samplewRINID1_description = GlobalVariable.dailyInventoryWrinDescription_YieldValue;
-		String stratDate=GlobalVariable.startDate;
 		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
+		String quantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PhysicalInventoryPage physicalInventoryPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToPhysicalInventoryPage();
-		physicalInventoryPage.selectStartDate(stratDate);
+		GenericMethods.clickOnElement(physicalInventoryPage.DailyInventory_BT, "DailyInventory_BT");
+		wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.DailyInventoryPopUp_Title));
+		physicalInventoryPage.verifyAndAddWrinInTable(samplewRINID1, quantity, quantity, quantity);
+		Thread.sleep(2000);
+		String inventoryTime = Base.getCurrentTimeForStore(storeId);
+		GenericMethods.clickOnElement(physicalInventoryPage.DailyInventoryPopUp_Submit_BT, "DailyInventoryPopUp_Submit_BT");
+		if(Base.isElementDisplayed(physicalInventoryPage.ConfirmationPopUp_YES_BT)){
+			GenericMethods.clickOnElement(physicalInventoryPage.ConfirmationPopUp_YES_BT, "ConfirmationPopUp_YES_BT");
+		}
+		wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.DailyInventorySubmitted_Confirmation_MSG));
 		Thread.sleep(5000);
-		String inventoryTime = physicalInventoryPage.getTimeForNewInventory(createDate, time);
-		System.out.println("inventoryTime "+inventoryTime);
-		GenericMethods.clickOnElement(physicalInventoryPage.CreateDailyInventory_BT,"CreateDailyInventory_BT");
-		wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.DailyInventoryList_Title));
-		Thread.sleep(5000);
-		physicalInventoryPage.selectADateForPhysicalInventory(createDate).selectTimeForPhysicalInventory(inventoryTime);
-		physicalInventoryPage.searchRawItemInInventoryList(samplewRINID1);
-		GenericMethods.clearValueOfElement(physicalInventoryPage.OuterPackQty_TB,"OuterPackQty_TB");
-		GenericMethods.enterValueInElement(physicalInventoryPage.OuterPackQty_TB,"OuterPackQty_TB","10");
-		GenericMethods.clickOnElement(physicalInventoryPage.CreateInventoryPopUp_Submit_BT,"CreateInventoryPopUp_Submit_BT");
-		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.Confirmation_PopUp_YES_BT)),"Confirmation_PopUp_YES_BT");
 		VarianceStatPage varianceStatPage = homePage.goToVarianceStatPage();
 		varianceStatPage.selectVarianceStatType("Daily").selectDateForDailyStat(GlobalVariable.createDate);
 		Thread.sleep(5000);
@@ -304,7 +281,6 @@ public class US970_Part2StatVariance extends AbstractTest{
 		System.out.println("difffffff  "+ diffInStatPage);
 		varianceStatPage.viewActivityButtn(samplewRINID1).click();
 		wait.until(ExpectedConditions.visibilityOf(varianceStatPage.VarianceStatRawItemActivity_Label));
-		varianceStatPage.clickOnDateGroup(createDate);
 		String diffInStatPageActivity = varianceStatPage.calculateDifferenceForARawItem(createDate);
 		System.out.println("Difference  "+diffInStatPageActivity);
 		if(diffInStatPage.equals(diffInStatPageActivity)){
@@ -331,27 +307,13 @@ public class US970_Part2StatVariance extends AbstractTest{
 		String userId = LoginTestData.level1_SSO_UserId;
 		String storeId = LoginTestData.level1StoreId;
 		String samplewRINID1 = GlobalVariable.createDailyInventoryWrin3;
-		String stratDate=GlobalVariable.startDate;
 		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
+		String quantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PhysicalInventoryPage physicalInventoryPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToPhysicalInventoryPage();
-		physicalInventoryPage.selectStartDate(stratDate);
-		Thread.sleep(5000);
-		String inventoryTime = physicalInventoryPage.getTimeForNewInventory(createDate, time);
-		System.out.println("inventoryTime "+inventoryTime);
-		GenericMethods.clickOnElement(physicalInventoryPage.CreateDailyInventory_BT,"CreateDailyInventory_BT");
-		wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.DailyInventoryList_Title));
-		Thread.sleep(5000);
-		physicalInventoryPage.selectADateForPhysicalInventory(createDate).selectTimeForPhysicalInventory(inventoryTime);;
-		physicalInventoryPage.searchRawItemInInventoryList(samplewRINID1);
-		GenericMethods.clearValueOfElement(physicalInventoryPage.OuterPackQty_TB,"OuterPackQty_TB");
-		GenericMethods.enterValueInElement(physicalInventoryPage.OuterPackQty_TB,"OuterPackQty_TB","12");
-		GenericMethods.clickOnElement(physicalInventoryPage.CreateInventoryPopUp_Submit_BT,"CreateInventoryPopUp_Submit_BT");
-		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.Confirmation_PopUp_YES_BT)),"Confirmation_PopUp_YES_BT");
-		wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.DailyInventorySaved_Confirmation_MSG));
+		physicalInventoryPage.submitDailyInventoryForAWrin(samplewRINID1, quantity, quantity, quantity);
 		VarianceStatPage varianceStatPage = homePage.goToVarianceStatPage();
 		varianceStatPage.selectVarianceStatType("Daily").selectDateForDailyStat(GlobalVariable.createDate);
 		Thread.sleep(5000);
@@ -359,7 +321,6 @@ public class US970_Part2StatVariance extends AbstractTest{
 		System.out.println("difffffff  "+ diffInStatPage);
 		varianceStatPage.viewActivityButtn(samplewRINID1).click();
 		wait.until(ExpectedConditions.visibilityOf(varianceStatPage.VarianceStatRawItemActivity_Label));
-		varianceStatPage.clickOnDateGroup(createDate);
 		String diffInStatPageActivity = varianceStatPage.calculateDifferenceForARawItem(createDate);
 		System.out.println("Difference  "+diffInStatPageActivity);
 		if(diffInStatPage.equals(diffInStatPageActivity)){

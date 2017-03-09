@@ -80,8 +80,8 @@ public class HomePage extends AbstractPage
 	@FindBy(xpath="//a[text()='Audit']") 
 	public WebElement Audit_BT; 
 	
-	@FindBy(xpath="//li[@id='store-settings']/a") 
-	public WebElement StoreSetting_BT;
+	@FindBy(xpath="//a[text()='Store Settings']") 
+    public WebElement StoreSetting_BT;
 	
 	@FindBy(xpath="//input[@id='ctl00_ContentPlaceHolder1_UsernameRegular']")
 	public WebElement SSOUserName_TB;
@@ -131,13 +131,11 @@ public class HomePage extends AbstractPage
 		GenericMethods.enterValueInElement(SSOUserName_TB,"SSOUserName_TB", userName);
 		GenericMethods.enterValueInElement(SSOPassword_TB,"SSOPassword_TB", password);
 		GenericMethods.clickOnElement(SSOLogin_BT,"SSOLogin_BT");
-		Thread.sleep(4000);
 		if(Base.isElementDisplayed(By.xpath("//input[@value='No']"))){
 			driver.findElement(By.xpath("//input[@value='No']")).click();
 		}
 		driver.switchTo().defaultContent();
 		wait.until(ExpectedConditions.visibilityOf(HomePage_Title));
-		Thread.sleep(5000);
 		Reporter.log("Successfully redirected to the Home Page");
 		return PageFactory.initElements(driver, HomePage.class);
 		

@@ -175,6 +175,9 @@ public class RawItemActivityPage extends AbstractPage
 	@FindBy(xpath = "//div[@id='dlgContent']/p[contains(text(),'All entered information will be lost.')]/following-sibling::p[contains(text(),'Are you sure you want to cancel?')]")
 	public WebElement RawItemInformation_CancelChanges_Warning_MSG;
 	
+	 @FindBy(xpath = "//select[@id='select_list_type']/../../preceding-sibling::div/span[text()='Frequency']")
+	 public WebElement RawItemInformation_popUp_Frequency_Lebel;
+	
 	// This method will take WRIN Id as argument and search the the WRIN Id in Raw Item Activity Page
 	public RawItemActivityPage searchAndSelectWRINID(String samplewRINID)
 			throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException {
@@ -475,6 +478,17 @@ public class RawItemActivityPage extends AbstractPage
         default: 
         	return "";
 		}
+	}
+	
+	public String getInventoryCountForADate(String date){
+		String formattedDate = Base.getFormattedDate1(date);
+		String inventoryCount = "";
+		if(Base.isElementDisplayed(By.xpath("(//tr[contains(@class,'"+formattedDate+"')]/td/span/strong[contains(text(),'INVENTORY')])[1]/../../following-sibling::td[2]/span/strong"))){
+			inventoryCount = driver.findElement(By.xpath("(//tr[contains(@class,'"+formattedDate+"')]/td/span/strong[contains(text(),'INVENTORY')])[1]/../../following-sibling::td[2]/span/strong")).getText();
+		}else{
+			inventoryCount = driver.findElement(By.xpath("(//tr[contains(@class,'"+formattedDate+"')]/td/span/strong[contains(text(),'POS OPEN')])[1]/../../following-sibling::td[2]/span/strong")).getText();
+		}
+		return inventoryCount;
 	}
 	
 	

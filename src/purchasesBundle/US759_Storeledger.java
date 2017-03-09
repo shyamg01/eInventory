@@ -32,9 +32,9 @@ public class US759_Storeledger extends AbstractTest
 		/** Variable Section : **/
 //		String userId = LoginTestData.operatorUserId;
 		AbstractTest.tcName="purchaseBundle_US759_TC1549";
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String wrin=GlobalVariable.createPurchaseWrin;
 		String date=GlobalVariable.approveDate;
@@ -78,9 +78,9 @@ public class US759_Storeledger extends AbstractTest
 		/**Variable Section :**/
 //		String userId = LoginTestData.operatorUserId;
 		AbstractTest.tcName="purchaseBundle_US759_TC3469";
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType1 = GlobalVariable.transferTypeIn;
 		String transferType2 = GlobalVariable.transferTypeOut;

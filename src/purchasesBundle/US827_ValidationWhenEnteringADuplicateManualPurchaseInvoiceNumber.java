@@ -29,9 +29,9 @@ public class US827_ValidationWhenEnteringADuplicateManualPurchaseInvoiceNumber e
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchaseBundle_US827_TC1555";
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String vendor = GlobalVariable.vendorName;
 		String quantity = "1";
@@ -90,9 +90,9 @@ public class US827_ValidationWhenEnteringADuplicateManualPurchaseInvoiceNumber e
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchaseBundle_US827_TC1557";
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String vendorName1=GlobalVariable.vendorName1;
 		String wrin1=GlobalVariable.createPurchaseWrinForVendor1;
@@ -146,9 +146,9 @@ public class US827_ValidationWhenEnteringADuplicateManualPurchaseInvoiceNumber e
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchaseBundle_US827_TC2842";
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin;
 		String vendor = GlobalVariable.vendorName;
 		String quantity = "1";
@@ -217,9 +217,9 @@ public class US827_ValidationWhenEnteringADuplicateManualPurchaseInvoiceNumber e
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName = "purchaseBundle_US827_TC3512";
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String vendor = GlobalVariable.vendorName;
 		String quantity = "1";

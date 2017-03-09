@@ -34,9 +34,9 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 		/** Variable Section : **/
 //		String userId = LoginTestData.supervisorUserId;
 		AbstractTest.tcName="purchaseBundle_US579_TC1243";
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String wrin=GlobalVariable.createPurchaseWrin;	
 		String pricePerUnit="10";
@@ -84,9 +84,9 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchaseBundle_US579_TC1244";
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String wrin=GlobalVariable.createPurchaseWrin;	
 		String wrongPricePerUnit="10.12345";
@@ -135,9 +135,9 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 		/** Variable Section : **/
 //		String userId = LoginTestData.supervisorUserId;
 		AbstractTest.tcName="purchaseBundle_US579_TC1277";
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String wrin=GlobalVariable.createPurchaseWrin1;	
 	/****************************/
@@ -248,9 +248,9 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchaseBundle_US579_TC1279";
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 
 	/****************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -304,9 +304,9 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 				BiffException, WriteException, IOException, InterruptedException {
 			/** Variable Section : **/
 			AbstractTest.tcName="purchaseBundle_US579_TC3506";
-			String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-			String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-			String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+			String userId = LoginTestData.userId;
+			String password = LoginTestData.password;
+			String storeId = LoginTestData.StoreId;
 			String vendorName=GlobalVariable.vendorName;
 			String wrin=GlobalVariable.createPurchaseWrin;	
 			String pricePerUnit="10";
@@ -358,9 +358,9 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 			/** Variable Section : **/
 //			String userId = LoginTestData.supervisorUserId;
 			AbstractTest.tcName="purchaseBundle_US579_TC3588";
-			String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-			String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-			String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+			String userId = LoginTestData.userId;
+			String password = LoginTestData.password;
+			String storeId = LoginTestData.StoreId;
 			String vendorName=GlobalVariable.vendorName;
 			String wrin=GlobalVariable.createPurchaseWrin;
 		
@@ -434,9 +434,9 @@ public class US579_UpdateCasePriceForManualPurchaseRawItemsOnTheManualPurchasePa
 				BiffException, WriteException, IOException, InterruptedException {
 			/** Variable Section : **/
 			AbstractTest.tcName="purchaseBundle_US579_TC1309";
-			String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-			String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-			String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+			String userId = LoginTestData.userId;
+			String password = LoginTestData.password;
+			String storeId = LoginTestData.StoreId;
 			String vendorName=GlobalVariable.vendorName;
 			String wrin=GlobalVariable.createPurchaseWrin1;	
 		/****************************/

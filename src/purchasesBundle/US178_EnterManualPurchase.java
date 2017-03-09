@@ -32,9 +32,9 @@ public class US178_EnterManualPurchase extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US178_TC393";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
@@ -63,9 +63,9 @@ public class US178_EnterManualPurchase extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US178_TC394";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String userId2 = LoginTestData.level1_11089_userId;
 		String storeId2 = LoginTestData.level1StoreId2;
 		String vendorName = GlobalVariable.vendorName1;
@@ -135,9 +135,9 @@ public class US178_EnterManualPurchase extends AbstractTest{
 			ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US178_TC396";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
@@ -198,9 +198,9 @@ public class US178_EnterManualPurchase extends AbstractTest{
 			ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US178_TC397";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String invoiceNumber = Base.randomNumberFiveDigit();
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -238,9 +238,9 @@ public class US178_EnterManualPurchase extends AbstractTest{
 			ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US178_TC398";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String invoiceNumber = Base.randomNumberFiveDigit();
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String vendor = GlobalVariable.vendorName;
@@ -284,9 +284,9 @@ public class US178_EnterManualPurchase extends AbstractTest{
 			ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US178_TC399";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String vendor = GlobalVariable.vendorName;
 		/***********************************/
@@ -326,9 +326,9 @@ public class US178_EnterManualPurchase extends AbstractTest{
 			ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US178_TC400";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String vendor = GlobalVariable.vendorName;
 		String specialCharInQuantity = "@";
@@ -421,9 +421,9 @@ public class US178_EnterManualPurchase extends AbstractTest{
 			ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US178_TC401";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String wrinId2 = GlobalVariable.createPurchaseWrin;
 		String vendor = GlobalVariable.vendorName;
@@ -472,9 +472,9 @@ public class US178_EnterManualPurchase extends AbstractTest{
 			ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US178_TC402";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String vendor = GlobalVariable.vendorName;
 		String quantity = "1";
@@ -533,9 +533,9 @@ public class US178_EnterManualPurchase extends AbstractTest{
 			ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US178_TC403";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String vendor = GlobalVariable.vendorName;
 		String quantity = "1";
@@ -633,9 +633,9 @@ public class US178_EnterManualPurchase extends AbstractTest{
 			ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US178_TC2844";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String vendor = GlobalVariable.vendorName;
 		String quantity = "1";
@@ -690,9 +690,9 @@ public class US178_EnterManualPurchase extends AbstractTest{
 			ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US178_TC3384";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
@@ -728,9 +728,9 @@ public class US178_EnterManualPurchase extends AbstractTest{
 			ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US178_TC3615";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String vendor = GlobalVariable.vendorName;
 		/***********************************/
@@ -798,9 +798,9 @@ public class US178_EnterManualPurchase extends AbstractTest{
 			ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US178_TC3616";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String vendor = GlobalVariable.vendorName;
 		String quantity = "1";

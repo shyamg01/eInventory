@@ -32,9 +32,9 @@ public class US461_ShowProductCategoryOnElectronicAndManualInvoicePage extends A
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US461_TC1267";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		HSSFSheet purchasesPageSheet = ReadTestData.getTestDataSheet("purchasesBundle_US758_TC1356", "Object1");
 		String wrinId1 = ReadTestData.getTestData(purchasesPageSheet,"WrinId1");
 		String wrinId2 = ReadTestData.getTestData(purchasesPageSheet,"WrinId2");
@@ -73,9 +73,9 @@ public class US461_ShowProductCategoryOnElectronicAndManualInvoicePage extends A
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US461_TC1269";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinId1 = GlobalVariable.wrinID_Food;
 		String productCategory1 = GlobalVariable.productCategoryFood;
 		String wrinId2 = GlobalVariable.wrinID_Paper;
@@ -124,9 +124,9 @@ public class US461_ShowProductCategoryOnElectronicAndManualInvoicePage extends A
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US461_TC1270";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		HSSFSheet purchasesPageSheet = ReadTestData.getTestDataSheet("purchasesBundle_US461_TC1270", "Object1");
 		String wrinId1 = ReadTestData.getTestData(purchasesPageSheet,"WrinId1");
 		String wrinId2 = ReadTestData.getTestData(purchasesPageSheet,"WrinId2");
@@ -185,9 +185,9 @@ public class US461_ShowProductCategoryOnElectronicAndManualInvoicePage extends A
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US461_TC3507";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		HSSFSheet purchasesPageSheet = ReadTestData.getTestDataSheet("purchasesBundle_US461_TC3507", "Object1");
 		String electronicInvoiceId =ReadTestData.getTestData(purchasesPageSheet,"Electronic Invoice Id");
 		String productCategory = ReadTestData.getTestData(purchasesPageSheet,"WrinId1Category");
@@ -222,9 +222,9 @@ public class US461_ShowProductCategoryOnElectronicAndManualInvoicePage extends A
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US461_TC1271";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		HSSFSheet purchasesPageSheet = ReadTestData.getTestDataSheet("purchasesBundle_US461_TC1271", "Object1");
 		String wrinId1 = ReadTestData.getTestData(purchasesPageSheet,"WrinId1");
 		String wrinId2 = ReadTestData.getTestData(purchasesPageSheet,"WrinId2");

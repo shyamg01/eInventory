@@ -32,9 +32,9 @@ public class US477_Part2ManualPurchase extends AbstractTest
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchaseBundle_US477_TC1214";
-		String userId = LoginTestData.level4_SSO_UserId;
-		String password = LoginTestData.level4_SSO_Password;
-		String storeId = LoginTestData.level4StoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String foodWrin=GlobalVariable.wrinID_Food;
 		String linensWrin=GlobalVariable.wrinID_Linens;
@@ -134,9 +134,9 @@ public class US477_Part2ManualPurchase extends AbstractTest
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchaseBundle_US477_TC1262";
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		/***********************/			
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -175,9 +175,9 @@ public class US477_Part2ManualPurchase extends AbstractTest
 	BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchaseBundle_US477_TC1219";
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin;
 		String vendor = GlobalVariable.vendorName;
 		String quantity = "1";
@@ -223,9 +223,9 @@ public class US477_Part2ManualPurchase extends AbstractTest
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchaseBundle_US477_TC1264";
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String invoiceDate=GlobalVariable.createDate;
 		/***********************/			
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -259,9 +259,9 @@ public class US477_Part2ManualPurchase extends AbstractTest
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchaseBundle_US477_TC1266";
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String wrin=GlobalVariable.createPurchaseWrin;
 		String invoiceNumber=Integer.toString(Base.generateNdigitRandomNumber(4));			
@@ -295,9 +295,9 @@ public class US477_Part2ManualPurchase extends AbstractTest
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchaseBundle_US477_TC1281";
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = PageFactory.initElements(driver, PurchasesPage.class);
 		ManualInvoiceNewPage manualInvoiceNewPage = PageFactory.initElements(driver, ManualInvoiceNewPage.class);
@@ -331,9 +331,9 @@ public class US477_Part2ManualPurchase extends AbstractTest
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchaseBundle_US477_TC1312";
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String wrin=GlobalVariable.createPurchaseWrin;
 		String approveDate=GlobalVariable.approveDate;
@@ -364,9 +364,9 @@ public class US477_Part2ManualPurchase extends AbstractTest
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchaseBundle_US477_TC1331";
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String wrin=GlobalVariable.createPurchaseWrin;
 		String approveDate=GlobalVariable.createDate;

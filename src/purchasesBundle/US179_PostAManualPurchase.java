@@ -34,9 +34,9 @@ public class US179_PostAManualPurchase extends AbstractTest
 		/** Variable Section : **/
 		AbstractTest.tcName="purchaseBundle_US179_TC452";
 //		String userId = LoginTestData.supervisorUserId;
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String wrin=GlobalVariable.createPurchaseWrin;
 		String invoiceNumber=Integer.toString(Base.generateNdigitRandomNumber(4));
@@ -85,9 +85,9 @@ public class US179_PostAManualPurchase extends AbstractTest
 		/** Variable Section : **/
 		AbstractTest.tcName="purchaseBundle_US179_TC453";
 //		String userId = LoginTestData.supervisorUserId;
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String wrin=GlobalVariable.createPurchaseWrin;
 		String invoiceNumber=Integer.toString(Base.generateNdigitRandomNumber(4));
@@ -130,9 +130,9 @@ public class US179_PostAManualPurchase extends AbstractTest
 		/** Variable Section : **/
 		AbstractTest.tcName="purchaseBundle_US179_TC3531";
 //		String userId = LoginTestData.supervisorUserId;
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String wrin=GlobalVariable.createPurchaseWrin;
 		String startDate=GlobalVariable.startDate;
@@ -177,9 +177,9 @@ public class US179_PostAManualPurchase extends AbstractTest
 		/** Variable Section : **/
 		AbstractTest.tcName="purchaseBundle_US179_TC3533";
 //		String userId = LoginTestData.supervisorUserId;
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String wrin=GlobalVariable.rawItemActivityWrin;
 	

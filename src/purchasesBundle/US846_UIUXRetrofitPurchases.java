@@ -38,9 +38,9 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 		
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3352";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		ApproveAdjustmentsPage approveAdjustmentsPage = PageFactory.initElements(driver, ApproveAdjustmentsPage.class);
@@ -164,9 +164,9 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3353";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
@@ -194,9 +194,9 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3354";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
@@ -402,9 +402,9 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3355";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
@@ -426,347 +426,6 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 		}
 	}
 	
-	//TC3358 : UI/UX Retrofit - Purchases - Approve Pending: Approve Invoice (Electronic)
-	@Test(enabled=false)
-	public void purchasesBundle_US846_TC3358() throws RowsExceededException,
-			BiffException, WriteException, IOException, InterruptedException, ParseException {
-		/** Variable Section : **/
-		AbstractTest.tcName="purchasesBundle_US846_TC3358";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
-		String productCategory = "";//GlobalVariable.pendingInvoiceId1_ProductCategory;
-		String invoiceId = "";//GlobalVariable.pendingElectronicInvoiceId1;
-		String date = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
-		String backTime = "23:45";
-		/***********************************/
-		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
-		PurchasesPage purchasesPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.goToPurchaseLandingPage();
-		wait.until(ExpectedConditions.visibilityOf(purchasesPage.Purchases_Label));
-		
-		purchasesPage.clickOnApproveButtonForElectronicPurchase(invoiceId);
-		wait.until(ExpectedConditions.visibilityOf(purchasesPage.ApproveElectronicInvoice_PopUp_Lable));
-		System.out.println(purchasesPage.ApproveManualInvoice_Approve_BT.getAttribute("disabled"));
-		if(purchasesPage.ApproveManualInvoice_Approve_BT.getAttribute("disabled").equals("true")
-				& purchasesPage.verifyBackTimeIsSelected(backTime)){
-			Reporter.reportPassResult(
-					browser,
-					"'Approve' is inactive until required fields are complete and time control allows user to arrow down to set the hour and minute.", "Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"'Approve' is inactive until required fields are complete and time control allows user to arrow down to set the hour and minute.", "Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		
-		purchasesPage.selectDateForApproveElectronicInvoice(date).selectTimeInApproveElectronicInvoiceForm(time);
-		if(purchasesPage.ApproveManualInvoice_Approve_BT.getAttribute("disabled")== null){
-			Reporter.reportPassResult(
-					browser,
-					"time control allows user to arrow down to set the hour and minute, User is able to select the date "
-					+ "and 'Approve' is activates when time is selected", "Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"time control allows user to arrow down to set the hour and minute, User is able to select the date "
-					+ "and 'Approve' is activates when time is selected", "Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		purchasesPage.ManualInvoiceApprove_SliderToggle_BT.click();
-		Thread.sleep(2000);
-		boolean formIsCollapsed = purchasesPage.ManualInvoiceApproveForm_Container.getAttribute("class").contains("modalCollapsedView");
-		purchasesPage.ManualInvoiceApprove_SliderToggle_BT.click();
-		boolean formIsExpanded = purchasesPage.ManualInvoiceApproveForm_Container.getAttribute("class").contains("modalExpandedView");
-		if (formIsCollapsed & formIsExpanded) {
-			Reporter.reportPassResult(
-					browser,
-					"Model is collapsible and can be re-opened",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"Model is collapsible and can be re-opened",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		
-		if (Base.isElementDisplayed(purchasesPage.ApproveInvoiceForm_InvoiceDate_Label)
-				& Base.isElementDisplayed(purchasesPage.ApproveInvoiceForm_Invoice_Label)
-				& Base.isElementDisplayed(purchasesPage.ApproveInvoiceForm_Vendor_Label)
-				& !purchasesPage.ApproveInvoiceForm_InvoiceDate_Value.getText().isEmpty()
-				& !purchasesPage.ApproveInvoiceForm_Invoice_Value.getText().isEmpty()
-				& !purchasesPage.ApproveInvoiceForm_Vendor_Value.getText().isEmpty()) {
-			Reporter.reportPassResult(
-					browser,
-					"Verify 'Invoice Date', 'Invoice', and 'Vendor' labels w/data are included",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"Verify 'Invoice Date', 'Invoice', and 'Vendor' labels w/data are included",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		if (Base.isElementDisplayed(purchasesPage.ApproveElectronicInvoice_WRIN_Label)
-				& Base.isElementDisplayed(purchasesPage.ApproveElectronicInvoice_Description_Label)
-				& Base.isElementDisplayed(purchasesPage.ApproveElectronicInvoice_CasePurchased_Label)
-				& Base.isElementDisplayed(purchasesPage.ApproveElectronicInvoice_PricePerCase_Label)
-				& Base.isElementDisplayed(purchasesPage.ApproveElectronicInvoice_SubTotal_Label)) {
-			Reporter.reportPassResult(
-					browser,
-					"Verify form includes table w/headings:  WRIN, Description, Cases Purchased, Price Per Case, Subtotal (read-only)",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"Verify form includes table w/headings:  WRIN, Description, Cases Purchased, Price Per Case, Subtotal (read-only)",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		
-		if (Base.isElementDisplayed(purchasesPage.ApproveInvoiceForm_GrandTotal_Label)
-				& !purchasesPage.ApproveInvoiceForm_GrandTotal_Value.getText().isEmpty()) {
-			Reporter.reportPassResult(
-					browser,
-					"Verify 'Grand Total' is included at end of table",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"Verify 'Grand Total' is included at end of table",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		
-		if (Base.isElementDisplayed(purchasesPage.ManualInvoiceApprove_BreakDownByCostType_Label)
-				& !purchasesPage.getBreakDownCostForElectronicInvoice(productCategory).isEmpty()) {
-			Reporter.reportPassResult(
-					browser,
-					"totals by type are included below the table",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"totals by type are included below the table",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		
-		purchasesPage.ApproveManualInvoice_Approve_BT.click();
-		if (Base.isElementDisplayed(purchasesPage.ManualInvoiceApproveForm_ConfirmApprove_Message)
-				& Base.isElementDisplayed(purchasesPage.ApproveManualInvoice_PopUp_ConfirmationMessage_Yes_BT)
-				& Base.isElementDisplayed(purchasesPage.ManualInvoiceApprove_ConfirmationPopUp_No_BT)) {
-			Reporter.reportPassResult(
-					browser,
-					"Verify popup includes No and Yes buttons",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"Verify popup includes No and Yes buttons",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		purchasesPage.ManualInvoiceApprove_ConfirmationPopUp_No_BT.click();
-		if (!Base.isElementDisplayed(purchasesPage.ApproveManualInvoice_PopUp_ConfirmationMessage_Yes_BT)
-				& Base.isElementDisplayed(purchasesPage.ApproveManualInvoice_Approve_BT)) {
-			Reporter.reportPassResult(
-					browser,
-					"Verify user returns to modal on clicking No Button",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"Verify user returns to modal on clicking No Button",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		purchasesPage.ApproveManualInvoice_Approve_BT.click();
-		wait.until(ExpectedConditions.visibilityOf(purchasesPage.ApproveManualInvoice_PopUp_ConfirmationMessage_Yes_BT)).click();
-		if (Base.isElementDisplayed(purchasesPage.ApproveElectronicInvoice_PopUp_InvoiceApprove_Confirmation_MSG)) {
-			Reporter.reportPassResult(
-					browser,
-					"Verify confirmation message displays anchored to bottom of browser",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"Verify confirmation message displays anchored to bottom of browser",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-	}
-	
-	//TC3359 : UI/UX Retrofit - Purchases - View History: View Approved Invoice (Electronic)
-	@Test(enabled=false)
-	public void purchasesBundle_US846_TC3359() throws RowsExceededException,
-			BiffException, WriteException, IOException, InterruptedException, ParseException {
-		/** Variable Section : **/
-		AbstractTest.tcName="purchasesBundle_US846_TC3359";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
-		String productCategory = "";//GlobalVariable.approvedInvoiceId1_ProductCategory;
-		String invoiceId = "";///GlobalVariable.approvedElectronicInvoiceId1;
-		/*String date = GlobalVariable.createDate;*/
-		String startDate = GlobalVariable.startDate;
-		String endDate = GlobalVariable.endDate;
-		/***********************************/
-		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
-		PurchasesPage purchasesPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.goToPurchaseLandingPage();
-		wait.until(ExpectedConditions.visibilityOf(purchasesPage.Purchases_Label));
-		purchasesPage.ViewHistory_BT.click();
-		Thread.sleep(2000);
-		ViewPurchaseHistoryPage viewPurchaseHistoryPage = PageFactory.initElements(driver, ViewPurchaseHistoryPage.class);
-		viewPurchaseHistoryPage.selectStartDateToViewHistory(startDate).selectEndDateToViewHistory(endDate).ViewHistory_Vendor_DD.click();
-		viewPurchaseHistoryPage.ViewHistory_ShowResults_BT.click();
-		Thread.sleep(5000);
-		viewPurchaseHistoryPage.clickOnPostedPurchaseRecord(invoiceId);
-		if (Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_ElectronicSource_Label)
-				& viewPurchaseHistoryPage.ViewInvoiceForm_CreatedBy_Label.getText().contains("Created By: System")) {
-			Reporter.reportPassResult(
-					browser,
-					"Verify form header includes: Title 'View Invoice', 'Source: Electronic', 'Created By: System'",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"Verify form header includes: Title 'View Invoice', 'Source: Electronic', 'Created By: System",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		
-		viewPurchaseHistoryPage.ViewInvoiceForm_SliderToggle_BT.click();
-		Thread.sleep(2000);
-		boolean formIsCollapsed = viewPurchaseHistoryPage.ViewInvoiceForm_Container.getAttribute("class").contains("modalCollapsedView");
-		viewPurchaseHistoryPage.ViewInvoiceForm_SliderToggle_BT.click();
-		boolean formIsExpanded = viewPurchaseHistoryPage.ViewInvoiceForm_Container.getAttribute("class").contains("modalExpandedView");
-		if (formIsCollapsed & formIsExpanded) {
-			Reporter.reportPassResult(
-					browser,
-					"Model is collapsible and can be re-opened",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"Model is collapsible and can be re-opened",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		
-		if (Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_InvoiceDate_Label)
-				& Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_Invoice_Label)
-				& Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_Vendor_Label)
-				& !viewPurchaseHistoryPage.ViewInvoiceForm_InvoiceDate_Value.getText().isEmpty()
-				& !viewPurchaseHistoryPage.ViewInvoiceForm_Invoice_Value.getText().isEmpty()
-				& !viewPurchaseHistoryPage.ViewInvoiceForm_Vendor_Value.getText().isEmpty()) {
-			Reporter.reportPassResult(
-					browser,
-					"Verify 'Invoice Date', 'Invoice', and 'Vendor' labels w/data are included",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"Verify 'Invoice Date', 'Invoice', and 'Vendor' labels w/data are included",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		if (Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_WRIN_Header)
-				& Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_Description_Header)
-				& Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_CasesPurchased_Header)
-				& Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_PricePerCase_Header)
-				& Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_SubTotal_Header)) {
-			Reporter.reportPassResult(
-					browser,
-					"Verify form includes table w/headings:  WRIN, Description, Cases Purchased, Price Per Case, Subtotal (read-only)",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"Verify form includes table w/headings:  WRIN, Description, Cases Purchased, Price Per Case, Subtotal (read-only)",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		
-		if (Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_GrandTotal_Label)
-				& !viewPurchaseHistoryPage.ViewInvoiceForm_GrandTotal_Value.getText().isEmpty()) {
-			Reporter.reportPassResult(
-					browser,
-					"Verify 'Grand Total' is included at end of table",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"Verify 'Grand Total' is included at end of table",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		
-		//Add BreakDown Cost Type Verification
-		if (Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_BreakDownByCostType_Label)
-				& !viewPurchaseHistoryPage.getBreakDownCostForEachCategory(productCategory).isEmpty()) {
-			Reporter.reportPassResult(
-					browser,
-					"totals by type are included below the table",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"totals by type are included below the table",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		if (Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_Cross_BT)
-				& Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_Close_BT)) {
-			Reporter.reportPassResult(
-					browser,
-					"Verify 'X' and 'Close' buttons exist only",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"Verify 'X' and 'Close' buttons exist only",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-	}
 	
 	//TC3360 : UI/UX Retrofit - Purchases - Approve Pending: Approve Invoice (Manual)
 	@Test()
@@ -774,9 +433,9 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3360";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin;
 		String vendor = GlobalVariable.vendorName;
 		String quantity = "1";
@@ -940,9 +599,9 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3361";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.wrinID_Food;
 		String productCategory = GlobalVariable.productCategoryFood;
 		String vendor = GlobalVariable.vendorName;
@@ -1092,148 +751,6 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 		}
 	}
 	
-	//TC3362 : UI/UX Retrofit - Purchases - Approve Pending: View Pending Invoice w/Variance (Electronic)
-	@Test(enabled=false)
-	public void purchasesBundle_US846_TC3362() throws RowsExceededException,
-			BiffException, WriteException, IOException, InterruptedException, ParseException {
-		/** Variable Section : **/
-		AbstractTest.tcName="purchasesBundle_US846_TC3362";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
-		String productCategory = "";//GlobalVariable.pendingInvoiceId2_ProductCategory;
-		String invoiceId = "";//GlobalVariable.pendingElectronicInvoiceIdWithVarience;
-		/***********************************/
-		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
-		PurchasesPage purchasesPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.goToPurchaseLandingPage();
-		wait.until(ExpectedConditions.visibilityOf(purchasesPage.Purchases_Label));
-		ViewPurchaseHistoryPage viewPurchaseHistoryPage = purchasesPage.clickOnViewButtonForElectronicPurchase(invoiceId);
-		
-		if (Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_ElectronicSource_Label)
-				& viewPurchaseHistoryPage.ViewInvoiceForm_CreatedBy_Label.getText().contains("Created By: System")) {
-			Reporter.reportPassResult(
-					browser,
-					"Verify form header includes: Title 'View Invoice', 'Source: Electronic', 'Created By: System'",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"Verify form header includes: Title 'View Invoice', 'Source: Electronic', 'Created By: System",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		
-		viewPurchaseHistoryPage.ViewInvoiceForm_SliderToggle_BT.click();
-		Thread.sleep(2000);
-		boolean formIsCollapsed = viewPurchaseHistoryPage.ViewInvoiceForm_Container.getAttribute("class").contains("modalCollapsedView");
-		viewPurchaseHistoryPage.ViewInvoiceForm_SliderToggle_BT.click();
-		boolean formIsExpanded = viewPurchaseHistoryPage.ViewInvoiceForm_Container.getAttribute("class").contains("modalExpandedView");
-		if (formIsCollapsed & formIsExpanded) {
-			Reporter.reportPassResult(
-					browser,
-					"Model is collapsible and can be re-opened",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"Model is collapsible and can be re-opened",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		
-		if (Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_InvoiceDate_Label)
-				& Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_Invoice_Label)
-				& Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_Vendor_Label)
-				& !viewPurchaseHistoryPage.ViewInvoiceForm_InvoiceDate_Value.getText().isEmpty()
-				& !viewPurchaseHistoryPage.ViewInvoiceForm_Invoice_Value.getText().isEmpty()
-				& !viewPurchaseHistoryPage.ViewInvoiceForm_Vendor_Value.getText().isEmpty()) {
-			Reporter.reportPassResult(
-					browser,
-					"Verify 'Invoice Date', 'Invoice', and 'Vendor' labels w/data are included",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"Verify 'Invoice Date', 'Invoice', and 'Vendor' labels w/data are included",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		if (Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_WRIN_Header)
-				& Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_Description_Header)
-				& Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_CasesPurchased_Header)
-				& Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_PricePerCase_Header)
-				& Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_SubTotal_Header)
-				& viewPurchaseHistoryPage.ViewInvoiceForm_purchaseDetail_List.size()>0) {
-			Reporter.reportPassResult(
-					browser,
-					"Verify form includes table w/headings:  WRIN, Description, Cases Purchased, Price Per Case, Subtotal (read-only)",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"Verify form includes table w/headings:  WRIN, Description, Cases Purchased, Price Per Case, Subtotal (read-only)",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		
-		if (Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_GrandTotal_Label)
-				& !viewPurchaseHistoryPage.ViewInvoiceForm_GrandTotal_Value.getText().isEmpty()) {
-			Reporter.reportPassResult(
-					browser,
-					"Verify 'Grand Total' is included at end of table",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"Verify 'Grand Total' is included at end of table",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		
-		//Add BreakDown Cost Type Verification
-		if (Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_BreakDownByCostType_Label)
-				& !viewPurchaseHistoryPage.getBreakDownCostForEachCategory(productCategory).isEmpty()) {
-			Reporter.reportPassResult(
-					browser,
-					"totals by type are included below the table",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"totals by type are included below the table",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		
-		if (Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_Cross_BT)
-				& Base.isElementDisplayed(viewPurchaseHistoryPage.ViewInvoiceForm_Close_BT)) {
-			Reporter.reportPassResult(
-					browser,
-					"Verify 'X' and 'Close' buttons exist only",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"Verify 'X' and 'Close' buttons exist only",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-	}
 	
 	//TC3363 : UI/UX Retrofit - Purchases - Approve Pending: Restore Deleted Invoices (Access): NO Deleted Invoice
 	@Test()
@@ -1241,7 +758,7 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3363_NoDeletedInvoice";
-		String password = LoginTestData.operator_SSO_Password;
+		String password = LoginTestData.level1_SSO_Password;
 		String userId = LoginTestData.level1_11078_userId;
 		String storeId2 = "11078";
 		/***********************************/
@@ -1292,9 +809,9 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3363";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String vendor = GlobalVariable.vendorName;
 		String quantity = "1";
@@ -1432,7 +949,7 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3365";
-		String password = LoginTestData.operator_SSO_Password;
+		String password = LoginTestData.level1_SSO_Password;
 		String userId = LoginTestData.level1_11089_userId;
 		String storeId2 = "11089";
 		/***********************************/
@@ -1478,115 +995,7 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 		}
 	}
 	
-	//TC3367 : UI/UX Retrofit - Purchases - Approve Adjustments: View
-	@Test(enabled = false)
-	public void purchasesBundle_US846_TC3367() throws RowsExceededException,
-			BiffException, WriteException, IOException, InterruptedException, ParseException {
-		/** Variable Section : **/
-		AbstractTest.tcName="purchasesBundle_US846_TC3367";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
-		/***********************************/
-		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
-		ApproveAdjustmentsPage approveAdjustmentsPage = PageFactory.initElements(driver, ApproveAdjustmentsPage.class);
-		
-		PurchasesPage purchasesPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.goToPurchaseLandingPage();
-		wait.until(ExpectedConditions.visibilityOf(purchasesPage.Purchases_Label));
-		purchasesPage.ApproveAdjustments_BT.click();
-		int pendingAdjustmentsCount = purchasesPage.PendingAdjustments_List.size();
-		String countInApproveAdjustmentsTab = approveAdjustmentsPage.ApproveAdjustmentsTab_Count.getText();
-		
-		if (Base.isElementDisplayed(purchasesPage.CreateManualInvoice_BT)
-				& countInApproveAdjustmentsTab.equals(String.valueOf(pendingAdjustmentsCount))) {
-			Reporter.reportPassResult(
-					browser,
-					"'Create Manual Invoice' button exists on page header and 'Approve Adjustments' tabs include the number of pending invoices",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"'Create Manual Invoice' button exists on page header and 'Approve Adjustments' tabs include the number of pending invoices",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		
-		if (Base.isElementDisplayed(approveAdjustmentsPage.ApproveAdjustmentsTable_DeliveryDate_header)
-				& Base.isElementDisplayed(approveAdjustmentsPage.ApproveAdjustmentsTable_Status_header)
-				& Base.isElementDisplayed(approveAdjustmentsPage.ApproveAdjustmentsTable_Vendor_header)
-				& Base.isElementDisplayed(approveAdjustmentsPage.ApproveAdjustmentsTable_Invoice_header)
-				& Base.isElementDisplayed(approveAdjustmentsPage.ApproveAdjustmentsTable_WRIN_header)
-				& Base.isElementDisplayed(approveAdjustmentsPage.ApproveAdjustmentsTable_Description_header)
-				& Base.isElementDisplayed(approveAdjustmentsPage.ApproveAdjustmentsTable_Purchased_header)
-				& Base.isElementDisplayed(approveAdjustmentsPage.ApproveAdjustmentsTable_Adjusted_header)) {
-			Reporter.reportPassResult(
-					browser,
-					"table columns include:  Delivery Date, Status, Vendor, Invoice, WRIN, Description, Cases Purchased, Cases Credit",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"table columns include:  Delivery Date, Status, Vendor, Invoice, WRIN, Description, Cases Purchased, Cases Credit",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		
-		if (Base.isElementDisplayed(purchasesPage.ApprovePending_BT)
-				& Base.isElementDisplayed(purchasesPage.ApproveAdjustments_BT)
-				& Base.isElementDisplayed(purchasesPage.ViewHistory_BT)
-				& Base.isElementDisplayed(purchasesPage.ViewLedger_BT)) {
-			Reporter.reportPassResult(
-					browser,
-					"Verify 4 tabs exist: Approve Pending, Approve Adjustments, View History, View Ledger",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"Verify 4 tabs exist: Approve Pending, Approve Adjustments, View History, View Ledger",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		
-		if (approveAdjustmentsPage.verifyApproveButtonDisplayedForRecordsWithNeedsApprovalStatus()) {
-			Reporter.reportPassResult(
-					browser,
-					"Verify each listing with Status = 'Needs Approval' has an 'Approve' button",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"Verify each listing with Status = 'Needs Approval' has an 'Approve' button",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		
-		if (Base.isElementDisplayed(purchasesPage.RestorePurchases_Msg)
-				& Base.isElementDisplayed(purchasesPage.RestorePurchases_BT)
-				& Base.isElementDisplayed(purchasesPage.MissingInvoice_Msg)) {
-			Reporter.reportPassResult(
-					browser,
-					"Restore deleted invoice message 'Oops, accidentally deleted a manual invoice?' displays with 'Restore Invoice' button",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"Restore deleted invoice message 'Oops, accidentally deleted a manual invoice?' displays with 'Restore Invoice",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
-		
-	}
+
 	
 	//TC3420 : UI/UX Retrofit - Purchases - Create Manual Invoice
 	@Test()
@@ -1594,9 +1003,9 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3420_Validation1";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId2 = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId2 = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		/*ApproveAdjustmentsPage approveAdjustmentsPage = PageFactory.initElements(driver, ApproveAdjustmentsPage.class);*/
@@ -1653,9 +1062,9 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3420_Validation2";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId2 = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId2 = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId2)
@@ -1710,9 +1119,9 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3420_Validation3";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId2 = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId2 = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String vendor = GlobalVariable.vendorName;
 		/*String date = GlobalVariable.createDate;*/
@@ -1777,9 +1186,9 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3420_Validation4";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId2 = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId2 = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String vendor = GlobalVariable.vendorName;
 		String invoiceId = Base.randomNumberFiveDigit();
@@ -1815,9 +1224,9 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3422";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId2 = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId2 = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		ViewPurchaseHistoryPage viewPurchaseHistoryPage = PageFactory.initElements(driver, ViewPurchaseHistoryPage.class);
@@ -1874,9 +1283,9 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3423";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId2 = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId2 = LoginTestData.StoreId;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		/***********************************/
@@ -1966,9 +1375,9 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3424";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		ViewPurchaseHistoryPage viewPurchaseHistoryPage = PageFactory.initElements(driver, ViewPurchaseHistoryPage.class);
@@ -1999,9 +1408,9 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3425";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		ViewPurchaseHistoryPage viewPurchaseHistoryPage = PageFactory.initElements(driver, ViewPurchaseHistoryPage.class);
@@ -2179,9 +1588,9 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3429";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
@@ -2213,9 +1622,9 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3432";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		StoreLedgerDetailPage storeLedgerDetailPage = PageFactory.initElements(driver, StoreLedgerDetailPage.class);
@@ -2264,9 +1673,9 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3433";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String vendorName = GlobalVariable.vendorName;
 		String date = GlobalVariable.createDate;
 		/***********************************/
@@ -2387,9 +1796,9 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3434";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String vendorName = GlobalVariable.vendorName;
 		String date = GlobalVariable.createDate;
 		/***********************************/
@@ -2424,9 +1833,9 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3435";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String createDate = GlobalVariable.createDate;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -2474,9 +1883,9 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3437";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		StoreLedgerDetailPage storeLedgerDetailPage = PageFactory.initElements(driver, StoreLedgerDetailPage.class);
@@ -2609,9 +2018,9 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException,ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC4008";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String vendor = GlobalVariable.vendorName;
 		String quantity = "1";

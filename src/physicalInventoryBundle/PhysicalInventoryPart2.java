@@ -25,69 +25,6 @@ import jxl.write.biff.RowsExceededException;
 
 public class PhysicalInventoryPart2  extends AbstractTest
 {
-	
-	
-	//TC_PI_23 : Range indicator color is  getting changed when numeric value is removed from the field
-	
-	@Test()
-	public void physicalInventory_23() throws RowsExceededException,
-			BiffException, WriteException, IOException, InterruptedException {
-		/** Variable Section : **/
-		AbstractTest.tcName="physicalInventory_23";
-		String password = LoginTestData.password;
-		String userId = LoginTestData.userId;
-		String storeId = LoginTestData.StoreId;
-
-		/***********************************/
-		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
-		PhysicalInventoryPage physicalInventoryPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.goToPhysicalInventoryPage();
-		physicalInventoryPage.DailyInventory_BT.click();
-		wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.DailyInventory_PopUp_Title));
-		//Enter some value in first loose Unit field
-		GenericMethods.enterValueInElement(physicalInventoryPage.DailyInventory_PopUp_Loose_TB.get(0), "First Loose Unit Text Box", "2");
-		if(physicalInventoryPage.DailyInventory_PopUp_RangeIndicator_RB.get(0).getAttribute("class").equalsIgnoreCase("badge invBadgeRed"))
-		{
-			Reporter.reportPassResult(
-					browser,
-					"Color should be changed to the red of range Indicator check box",
-					"Pass");
-		}
-		else
-		{
-			Reporter.reportTestFailure(
-					browser,
-					"Color should be changed to the red of range Indicator check box",
-					"Fail");
-			AbstractTest.takeSnapShot();
-		}
-		Thread.sleep(1500);
-		//Now remove the entered value
-		GenericMethods.clearValueOfElement(physicalInventoryPage.DailyInventory_PopUp_Loose_TB.get(0), "First Loose Unit Text Box");
-		Thread.sleep(1500);
-		if(physicalInventoryPage.DailyInventory_PopUp_RangeIndicator_RB.get(0).getAttribute("class").equalsIgnoreCase("badge invBadgeOutline"))
-		{
-			Reporter.reportPassResult(
-					browser,
-					"User should not find  any color for range indoicator",
-					"Pass");
-		}
-		else
-		{
-			Reporter.reportTestFailure(
-					browser,
-					"User should not find  any color for range indoicator",
-					"Fail");
-			AbstractTest.takeSnapShot();
-		}
-		
-		
-		
-		
-	}
-	
-	
-	
 	//TC_PI_24 : Range indicator color is  getting changed when non-numeric value entered
 	
 	@Test()

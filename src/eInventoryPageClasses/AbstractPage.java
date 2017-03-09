@@ -78,15 +78,17 @@ public class AbstractPage
 	}
 	//Method Reporter
 	//This method will select a store from locations dropdown	 
-	public HomePage selectLocation(String storeId) throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException {
-		HomePage homePage = new HomePage(driver);
-		wait.until(ExpectedConditions.visibilityOf(homePage.Locations_DD_BT));
-		GenericMethods.clickOnElement(homePage.Locations_DD_BT,"homePage.Locations_DD_BT");
-		wait.until(ExpectedConditions.visibilityOf(homePage.Locations_DD));
-		GenericMethods.clickOnElement(driver.findElement(By.xpath("//div[@id='store-locations-dropdown']/li/a[contains(text(),'"+storeId+"')]")), "Store ID");
-		Thread.sleep(10000);
-		return PageFactory.initElements(driver, HomePage.class);
-	}
+    public HomePage selectLocation(String storeId) throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException {
+        HomePage homePage = new HomePage(driver);
+        wait.until(ExpectedConditions.visibilityOf(homePage.Locations_DD_BT));
+        GenericMethods.clickOnElement(homePage.Locations_DD_BT,"homePage.Locations_DD_BT");
+        wait.until(ExpectedConditions.visibilityOf(homePage.Locations_DD));
+        GenericMethods.clickOnElement(driver.findElement(By.xpath("//div[@id='store-locations-dropdown']/li/a[contains(text(),'"+storeId+"')]")), "Store ID");
+        Thread.sleep(5000);
+        wait.until(ExpectedConditions.visibilityOf(homePage.HomePage_MonthToDatePerformance_Label));
+        Thread.sleep(2000);
+        return PageFactory.initElements(driver, HomePage.class);
+    }
 	
 /*	//This method will select a store from locations dropdown	 
 	public HomePage selectLocation(String storeId) throws InterruptedException {
@@ -195,15 +197,17 @@ public class AbstractPage
 		 return  PageFactory.initElements(driver, TransferLandingPage.class);
 	 }
 
-	 // go to Store Control Settings Page
-	 public StoreControlSettingsPage goToStoreControlSettingsPage()
-	 {
-		 HomePage homePage=new HomePage(driver);
-		 homePage.StoreSetting_BT.click();
-		 StoreControlSettingsPage storeControlSettingsPage=new StoreControlSettingsPage(driver);
-		 wait.until(ExpectedConditions.visibilityOf(storeControlSettingsPage.InventorySetting_BT));
-		 return PageFactory.initElements(driver, StoreControlSettingsPage.class);
-	 }
+	// go to Store Control Settings Page
+     public StoreControlSettingsPage goToStoreSettingsPage() throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException
+     {
+         HomePage homePage=new HomePage(driver);
+         GenericMethods.clickOnElement(wait.until(ExpectedConditions.elementToBeClickable(homePage.Menu_DD_BT)), "homePage.Menu_DD_BT");
+         Thread.sleep(3000);
+         GenericMethods.clickOnElement(homePage.StoreSetting_BT,"StoreSetting_BT");
+         StoreControlSettingsPage storeControlSettingsPage=new StoreControlSettingsPage(driver);
+         wait.until(ExpectedConditions.visibilityOf(storeControlSettingsPage.InventorySetting_BT));
+         return PageFactory.initElements(driver, StoreControlSettingsPage.class);
+     }
 	 
 	// go to Raw Item Information Page(Created by Akash)
 	public VarianceStatPage goToVarianceStatPage() throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException {

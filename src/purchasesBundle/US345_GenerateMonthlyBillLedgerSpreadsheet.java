@@ -32,9 +32,9 @@ public class US345_GenerateMonthlyBillLedgerSpreadsheet  extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US345_TC532";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
@@ -62,9 +62,9 @@ public class US345_GenerateMonthlyBillLedgerSpreadsheet  extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US345_TC533";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
@@ -93,9 +93,9 @@ public class US345_GenerateMonthlyBillLedgerSpreadsheet  extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException,ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US345_TC534";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = homePage.selectUserWithSSOLogin(userId, password)
@@ -131,9 +131,9 @@ public class US345_GenerateMonthlyBillLedgerSpreadsheet  extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException,ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US345_TC535";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String date = GlobalVariable.createDate;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -181,9 +181,9 @@ public class US345_GenerateMonthlyBillLedgerSpreadsheet  extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException,ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US345_TC536";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 	
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -222,9 +222,9 @@ public class US345_GenerateMonthlyBillLedgerSpreadsheet  extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException,ParseException {
 		*//** Variable Section : **//*
 		AbstractTest.tcName="purchasesBundle_US345_TC3511";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		*//***********************************//*
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = homePage.selectUserWithSSOLogin(userId, password)

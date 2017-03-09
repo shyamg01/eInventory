@@ -35,9 +35,9 @@ public class US758_ManualPurchasePart3 extends AbstractTest{
 		
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US758_TC1356";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		HSSFSheet purchasesPageSheet = ReadTestData.getTestDataSheet("purchasesBundle_US758_TC1356", "Object1");
 		String wrinId1 = ReadTestData.getTestData(purchasesPageSheet,"WrinId1");
 		String wrinId2 = ReadTestData.getTestData(purchasesPageSheet,"WrinId2");
@@ -104,9 +104,9 @@ public class US758_ManualPurchasePart3 extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US758_TC1367";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String vendor = GlobalVariable.vendorName;
 		String quantity = "1";
@@ -152,9 +152,9 @@ public class US758_ManualPurchasePart3 extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US758_TC1369";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String vendor = GlobalVariable.vendorName;
 		String quantity = "1";
@@ -239,9 +239,9 @@ public class US758_ManualPurchasePart3 extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US758_TC1370";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String vendor = GlobalVariable.vendorName;
 		String quantity = "1";
@@ -344,9 +344,9 @@ public class US758_ManualPurchasePart3 extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US758_TC1483";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String vendor = GlobalVariable.vendorName;
 		String pricePerCase = "25.00";
@@ -386,9 +386,9 @@ public class US758_ManualPurchasePart3 extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException, ParseException {
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US758_TC3467";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String vendor = GlobalVariable.vendorName;
 		String pricePerCase = "25.00";

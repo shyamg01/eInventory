@@ -32,9 +32,9 @@ public class US909_InvoiceNumbersOnThePendingPurchaseAndPurchaseHistorylist exte
 		
 		/** Variable Section : **/
 		AbstractTest.tcName="purchaseBundle_US909_TC1657";
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String wrin=GlobalVariable.createPurchaseWrin;
 		String invoiceNumber=Integer.toString(Base.generateNdigitRandomNumber(4));			
@@ -74,9 +74,9 @@ public class US909_InvoiceNumbersOnThePendingPurchaseAndPurchaseHistorylist exte
 		/** Variable Section : **/
 		AbstractTest.tcName="purchaseBundle_US909_TC1660";
 //		String userId = LoginTestData.supervisorUserId;
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String wrin=GlobalVariable.createPurchaseWrin;
 		String startDate=GlobalVariable.startDate;
@@ -117,9 +117,9 @@ public class US909_InvoiceNumbersOnThePendingPurchaseAndPurchaseHistorylist exte
 		*//** Variable Section : **//*
 		AbstractTest.tcName="purchaseBundle_US909_TC3498";
 //		String userId = LoginTestData.supervisorUserId;
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String wrin=GlobalVariable.createPurchaseWrin;
 		String approveDate=GlobalVariable.approveDate;
@@ -196,9 +196,9 @@ public class US909_InvoiceNumbersOnThePendingPurchaseAndPurchaseHistorylist exte
 		/** Variable Section : **/
 		AbstractTest.tcName="purchaseBundle_US909_TC3527";
 //		String userId = LoginTestData.supervisorUserId;
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String wrin=GlobalVariable.createPurchaseWrin;
 		String todayDate=Base.returnTodayDate();

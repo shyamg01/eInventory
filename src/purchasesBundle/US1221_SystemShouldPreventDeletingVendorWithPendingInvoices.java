@@ -34,9 +34,9 @@ public class US1221_SystemShouldPreventDeletingVendorWithPendingInvoices extends
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName = "purchaseBundle_US1221_TC1995";
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String vendorName = GlobalVariable.vendorName;
 		String wrin = GlobalVariable.createPurchaseWrin;
 		String invoiceNumber = Integer.toString(Base.generateNdigitRandomNumber(4));
@@ -96,9 +96,9 @@ public class US1221_SystemShouldPreventDeletingVendorWithPendingInvoices extends
 					BiffException, WriteException, IOException, InterruptedException {
 				/** Variable Section : **/
 				AbstractTest.tcName="purchaseBundle_US1221_TC1996";
-				String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-				String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-				String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+				String userId = LoginTestData.userId;
+				String password = LoginTestData.password;
+				String storeId = LoginTestData.StoreId;
 				String wrin=GlobalVariable.wrinIdForNewVendor;
 				String vendorName = "Radio" + Base.generateNdigitRandomNumber(4);
 				String manualNumber=Integer.toString(Base.generateNdigitRandomNumber(3));	

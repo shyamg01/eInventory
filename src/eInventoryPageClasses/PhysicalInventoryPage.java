@@ -159,24 +159,26 @@ public class PhysicalInventoryPage  extends AbstractPage{
 		return PageFactory.initElements(driver, PhysicalInventoryPage.class);
 	}
 	
-	public PhysicalInventoryPage enterQuantityForNewAddedWrin(String wrinId, String caseQty, String innerPackQty, String looseQty) throws RowsExceededException, BiffException, WriteException, IOException{
-		WebElement outerPack = driver.findElement(By.xpath("//table[@id='dailyInventoryTable']/tbody/tr/td[contains(.,'"+wrinId+"')]/following-sibling::td/eb-validated-input[@class='case_count_input']/div//div/input"));
-		GenericMethods.clearValueOfElement(outerPack, "outerPack");
-		GenericMethods.enterValueInElement(outerPack, "outerPack", caseQty);
-		try
-		{
-			WebElement innerPack = driver.findElement(By.xpath("//table[@id='dailyInventoryTable']/tbody/tr/td[contains(.,'"+wrinId+"')]/following-sibling::td/eb-validated-input[@class='inner_count_input']/div//div/input"));
-			GenericMethods.clearValueOfElement(innerPack, "innerPack");
-			GenericMethods.enterValueInElement(innerPack, "innerPack", caseQty);
-		} catch (Exception e) 
-		{
-			
-		}
-		WebElement looseUnitsPack = driver.findElement(By.xpath("//table[@id='dailyInventoryTable']/tbody/tr/td[contains(.,'"+wrinId+"')]/following-sibling::td/eb-validated-input[@class='loose_count_input']/div//div/input"));
-		GenericMethods.clearValueOfElement(looseUnitsPack, "looseUnitsPack");
-		GenericMethods.enterValueInElement(looseUnitsPack, "looseUnitsPack", looseQty);
-		return PageFactory.initElements(driver, PhysicalInventoryPage.class);
-	}
+	 public PhysicalInventoryPage enterQuantityForNewAddedWrin(String wrinId, String caseQty, String innerPackQty, String looseQty) throws RowsExceededException, BiffException, WriteException, IOException{
+	        WebElement outerPack = driver.findElement(By.xpath("//table[@id='dailyInventoryTable']/tbody/tr/td[contains(.,'"+wrinId+"')]/following-sibling::td/eb-validated-input[@class='case_count_input']/div//div/input"));
+	        GenericMethods.clearValueOfElement(outerPack, "outerPack");
+	        GenericMethods.enterValueInElement(outerPack, "outerPack", caseQty);
+	        try
+	        {
+	            WebElement innerPack = driver.findElement(By.xpath("//table[@id='dailyInventoryTable']/tbody/tr/td[contains(.,'"+wrinId+"')]/following-sibling::td/eb-validated-input[@class='inner_count_input']/div//div/input"));
+	            GenericMethods.clearValueOfElement(innerPack, "innerPack");
+	            GenericMethods.enterValueInElement(innerPack, "innerPack", caseQty);
+	        } catch (Exception e) 
+	        {
+	            
+	        }
+	        WebElement looseUnitsPack = driver.findElement(By.xpath("//table[@id='dailyInventoryTable']/tbody/tr/td[contains(.,'"+wrinId+"')]/following-sibling::td/eb-validated-input[@class='loose_count_input']/div//div/input"));
+	        //GenericMethods.clearValueOfElement(looseUnitsPack, "looseUnitsPack");
+	        looseUnitsPack.sendKeys(Keys.chord(Keys.CONTROL,"a"));
+	        looseUnitsPack.sendKeys(Keys.DELETE);
+	        GenericMethods.enterValueInElement(looseUnitsPack, "looseUnitsPack", looseQty);
+	        return PageFactory.initElements(driver, PhysicalInventoryPage.class);
+	    }
 	
 	public PhysicalInventoryPage enterQuantityForWrin(String wrinId, String caseQty, String innerPackQty, String looseQty) throws RowsExceededException, BiffException, WriteException, IOException{
 		WebElement outerPack = driver.findElement(By.xpath("//table[@id='dailyInventoryTable']/tbody/tr/td/span[contains(.,'"+wrinId+"')]/../following-sibling::td/eb-validated-input[@class='case_count_input']/div//div/input"));
@@ -189,7 +191,9 @@ public class PhysicalInventoryPage  extends AbstractPage{
 		} catch (Exception e) {
 		}
 		WebElement looseUnitsPack = driver.findElement(By.xpath("//table[@id='dailyInventoryTable']/tbody/tr/td/span[contains(.,'"+wrinId+"')]/../following-sibling::td/eb-validated-input[@class='loose_count_input']/div//div/input"));
-		GenericMethods.clearValueOfElement(looseUnitsPack, "looseUnitsPack");
+		//GenericMethods.clearValueOfElement(looseUnitsPack, "looseUnitsPack");
+        looseUnitsPack.sendKeys(Keys.chord(Keys.CONTROL,"a"));
+        looseUnitsPack.sendKeys(Keys.DELETE);
 		GenericMethods.enterValueInElement(looseUnitsPack, "looseUnitsPack", looseQty);
 		return PageFactory.initElements(driver, PhysicalInventoryPage.class);
 	}
@@ -305,7 +309,12 @@ public class PhysicalInventoryPage  extends AbstractPage{
 	}
 	
 	public String getRangeIndicatorForAWrin(String wrinId){
-		WebElement range = driver.findElement(By.xpath("//table[@id='dailyInventoryTable']/tbody/tr/td/span[text()='"+wrinId+"']/../following-sibling::td/span[contains(@class,'badge')]"));
+        WebElement range;
+        try{
+            range = driver.findElement(By.xpath("//table[@id='dailyInventoryTable']/tbody/tr/td/span[text()='"+wrinId+"']/../following-sibling::td/span[contains(@class,'badge')]"));
+        }catch(Exception ex){
+            range = driver.findElement(By.xpath("//table[@id='dailyInventoryTable']/tbody/tr/td[text()='"+wrinId+"']/following-sibling::td/span[contains(@class,'badge')]"));
+        }		
 		String rangeClass = range.getAttribute("class");
 		if(rangeClass.contains("Red")){
 			return "Red";

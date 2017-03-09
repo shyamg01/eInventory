@@ -29,9 +29,9 @@ public class US478_Part2BillLedger extends AbstractTest
 				BiffException, WriteException, IOException, InterruptedException {
 			/**Variable Section :**/
 			AbstractTest.tcName="purchaseBundle_US478_TC1242";
-			String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-			String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-			String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+			String userId = LoginTestData.userId;
+			String password = LoginTestData.password;
+			String storeId = LoginTestData.StoreId;
 			
 			String wrinIDFood = GlobalVariable.wrinID_Food;
 			String wrinIDLinens = GlobalVariable.wrinID_Linens;
@@ -325,9 +325,9 @@ public class US478_Part2BillLedger extends AbstractTest
 			BiffException, WriteException, IOException, InterruptedException {
 		/**Variable Section :**/
 		AbstractTest.tcName="purchaseBundle_US478_TC1274";
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType2 = GlobalVariable.transferTypeOut;
 		String transferStoreNumber = GlobalVariable.nationalStore1;

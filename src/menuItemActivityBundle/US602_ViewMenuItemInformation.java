@@ -31,9 +31,9 @@ public class US602_ViewMenuItemInformation extends AbstractTest
 		/** Variable Section : **/
 		AbstractTest.tcName="menuItemActivity_US602_TC1349";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String password = LoginTestData.operator_SSO_Password;
-		String storeId = LoginTestData.operatorStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItem = GlobalVariable.menuItem2;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
@@ -86,9 +86,9 @@ public class US602_ViewMenuItemInformation extends AbstractTest
 		/** Variable Section : **/
 		AbstractTest.tcName="menuItemActivity_US602_TC1350";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String password = LoginTestData.operator_SSO_Password;
-		String storeId = LoginTestData.operatorStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItem = GlobalVariable.menuItem2;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
@@ -174,9 +174,9 @@ public class US602_ViewMenuItemInformation extends AbstractTest
 		/** Variable Section : **/
 		AbstractTest.tcName="menuItemActivity_US602_TC1351";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String password = LoginTestData.operator_SSO_Password;
-		String storeId = LoginTestData.operatorStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItem = GlobalVariable.menuItem2;
 	
 		/***********************************/
@@ -223,9 +223,9 @@ public class US602_ViewMenuItemInformation extends AbstractTest
 		/** Variable Section : **/
 		AbstractTest.tcName="menuItemActivity_US602_TC1373";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String password = LoginTestData.operator_SSO_Password;
-		String storeId = LoginTestData.operatorStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItem = GlobalVariable.menuItem2;
 	
 		/***********************************/
@@ -268,9 +268,9 @@ public class US602_ViewMenuItemInformation extends AbstractTest
 		/** Variable Section : **/
 		AbstractTest.tcName="menuItemActivity_US602_TC1458";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String password = LoginTestData.operator_SSO_Password;
-		String storeId = LoginTestData.operatorStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItem = GlobalVariable.menuItem2;	
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);

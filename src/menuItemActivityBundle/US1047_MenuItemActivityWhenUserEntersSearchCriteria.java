@@ -27,9 +27,9 @@ public class US1047_MenuItemActivityWhenUserEntersSearchCriteria extends Abstrac
 		/** Variable Section : **/
 		AbstractTest.tcName="menuItemActivity_US1047_TC1732";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItem = GlobalVariable.menuItem2;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
@@ -65,9 +65,9 @@ public class US1047_MenuItemActivityWhenUserEntersSearchCriteria extends Abstrac
 		/** Variable Section : **/
 		AbstractTest.tcName="menuItemActivity_US1047_TC1733";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItem = GlobalVariable.menuItem2;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;

@@ -30,9 +30,9 @@ public class US1374_UIUXRetrofitMenuItemActivityInfo extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="menuItemActivity_US1374_TC3795";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItem = GlobalVariable.menuItem;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
@@ -115,9 +115,9 @@ public class US1374_UIUXRetrofitMenuItemActivityInfo extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="menuItemActivity_US1374_TC3796";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItem = GlobalVariable.menuItem;
 		String description = GlobalVariable.menuItemDescription;
 		String startDate = GlobalVariable.startDate;
@@ -181,9 +181,9 @@ public class US1374_UIUXRetrofitMenuItemActivityInfo extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="menuItemActivity_US1374_TC3797";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItem = GlobalVariable.menuItem;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
@@ -273,9 +273,9 @@ public class US1374_UIUXRetrofitMenuItemActivityInfo extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="menuItemActivity_US1374_TC3798";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItem = GlobalVariable.menuItem;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
@@ -391,9 +391,9 @@ public class US1374_UIUXRetrofitMenuItemActivityInfo extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="menuItemActivity_US1374_TC3799";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page

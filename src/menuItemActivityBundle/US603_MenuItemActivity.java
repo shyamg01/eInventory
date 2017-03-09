@@ -29,9 +29,9 @@ public class US603_MenuItemActivity extends AbstractTest {
 		/**Variable Section :**/
 		AbstractTest.tcName="menuItemActivity_US603_TC1596";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.password;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemNumber = GlobalVariable.menuItem;
 		String menuItemDescription = GlobalVariable.menuItemDescription;
 		/***********************************/
@@ -87,9 +87,9 @@ public class US603_MenuItemActivity extends AbstractTest {
 			BiffException, WriteException, IOException, InterruptedException {
 		/**Variable Section :**/
 		AbstractTest.tcName="menuItemActivity_US603_TC1599";
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.password;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		MenuItemActivityAndInformationPage menuItemActivityPage;
 		String menuItemNumber = GlobalVariable.menuItem;
 		/***********************************/
@@ -171,9 +171,9 @@ public class US603_MenuItemActivity extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="menuItemActivity_US603_TC1605";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.password;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemNumber = GlobalVariable.menuItem;
 		//String defaultStartTime = GlobalVariable.defaultStartTime;
 		/***********************************/
@@ -227,9 +227,9 @@ public class US603_MenuItemActivity extends AbstractTest {
 		/**Variable Section :**/
 		AbstractTest.tcName="menuItemActivity_US603_TC1606";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.password;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemNumber = GlobalVariable.menuItem2;
 		//String defaultStartTime = GlobalVariable.defaultStartTime;
 		/***********************************/
@@ -311,9 +311,9 @@ public class US603_MenuItemActivity extends AbstractTest {
 		/**Variable Section :**/
 		AbstractTest.tcName="menuItemActivity_US603_TC1607";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.password;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemNumber = GlobalVariable.menuItem2;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
@@ -362,9 +362,9 @@ public class US603_MenuItemActivity extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="menuItemActivity_US603_TC1608";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.password;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
@@ -391,9 +391,9 @@ public class US603_MenuItemActivity extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="menuItemActivity_US603_TC1614";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.password;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItem = GlobalVariable.menuItem;
 		String description = GlobalVariable.menuItemDescription;
 		/***********************************/
@@ -441,9 +441,9 @@ public class US603_MenuItemActivity extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="menuItemActivity_US603_TC1624";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.password;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemNumber = GlobalVariable.menuItem2;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
@@ -492,9 +492,9 @@ public class US603_MenuItemActivity extends AbstractTest {
 		/**Variable Section :**/
 		AbstractTest.tcName="menuItemActivity_US603_TC1632";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.password;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemNumber = GlobalVariable.menuItem2;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
@@ -539,9 +539,9 @@ public class US603_MenuItemActivity extends AbstractTest {
 		/**Variable Section :**/
 		AbstractTest.tcName="menuItemActivity_US603_TC1634";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.password;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemNumber = GlobalVariable.menuItem2;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
@@ -587,9 +587,9 @@ public class US603_MenuItemActivity extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="menuItemActivity_US603_TC1643";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.password;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemNumber = GlobalVariable.menuItem2;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
@@ -635,9 +635,9 @@ public class US603_MenuItemActivity extends AbstractTest {
 		/**Variable Section :**/
 		AbstractTest.tcName="menuItemActivity_US603_TC1645";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.password;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemNumber = GlobalVariable.menuItem2;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
@@ -685,9 +685,9 @@ public class US603_MenuItemActivity extends AbstractTest {
 		/**Variable Section :**/
 		AbstractTest.tcName="menuItemActivity_US603_TC1646";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.password;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemNumber = GlobalVariable.menuItem2;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
@@ -738,9 +738,9 @@ public class US603_MenuItemActivity extends AbstractTest {
 		/**Variable Section :**/
 		AbstractTest.tcName="menuItemActivity_US603_TC1647";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.password;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemNumber = GlobalVariable.menuItem2;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
@@ -789,9 +789,9 @@ public class US603_MenuItemActivity extends AbstractTest {
 		/**Variable Section :**/
 		AbstractTest.tcName="menuItemActivity_US603_TC1648";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.password;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemNumber = GlobalVariable.menuItem2;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;

@@ -30,9 +30,9 @@ public class US898_MenuItemInformationRefinePageAndAttribute extends AbstractTes
 		/** Variable Section : **/
 		AbstractTest.tcName="menuItemActivity_US898_TC1535";
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
+		String userId = LoginTestData.userId;
 		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String storeId = LoginTestData.StoreId;
 		String menuItem = GlobalVariable.menuItem;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);

@@ -28,9 +28,9 @@ public class US825_ManualPurchaseVendorsRestrictAbilityToAddOrEditDuplicateVendo
 		/**Variable Section :**/
 		AbstractTest.tcName="manualVendor_US825_TC1566";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String vendorName="abcd"+Base.generateNdigitRandomNumber(3);
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -102,9 +102,9 @@ public class US825_ManualPurchaseVendorsRestrictAbilityToAddOrEditDuplicateVendo
 		/**Variable Section :**/
 		AbstractTest.tcName="manualVendor_US825_TC1567";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String vendorNumber=Integer.toString(Base.generateNdigitRandomNumber(4));
 		/***********************************/
 		String vendorName = "TestAuto"+Base.generateNdigitRandomNumber(4);
@@ -167,9 +167,9 @@ public class US825_ManualPurchaseVendorsRestrictAbilityToAddOrEditDuplicateVendo
 		/**Variable Section :**/
 		AbstractTest.tcName="manualVendor_US825_TC1568";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String vendorNumber=Integer.toString(Base.generateNdigitRandomNumber(4));
 		String vendorName = "TestAuto"+Base.generateNdigitRandomNumber(4);
 
@@ -240,9 +240,9 @@ public class US825_ManualPurchaseVendorsRestrictAbilityToAddOrEditDuplicateVendo
 		/**Variable Section :**/
 		AbstractTest.tcName="manualVendor_US825_TC1569";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String vendorNumber=Integer.toString(Base.generateNdigitRandomNumber(4));
 		String vendorName = "TestAuto"+Base.generateNdigitRandomNumber(4);
 		/***********************************/
@@ -321,9 +321,9 @@ public class US825_ManualPurchaseVendorsRestrictAbilityToAddOrEditDuplicateVendo
 		/**Variable Section :**/
 		AbstractTest.tcName="manualVendor_US825_TC1577";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String vendorNumber=Integer.toString(Base.generateNdigitRandomNumber(4));
 		String vendorName = "TestAuto"+Base.generateNdigitRandomNumber(4);
 		String vendorNumber_1=Integer.toString(Base.generateNdigitRandomNumber(4));
@@ -428,9 +428,9 @@ public class US825_ManualPurchaseVendorsRestrictAbilityToAddOrEditDuplicateVendo
 		/**Variable Section :**/
 		AbstractTest.tcName="manualVendor_US825_TC2845";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String vendorNumber=Integer.toString(Base.generateNdigitRandomNumber(4));
 		String vendorName = "TestAuto"+Base.generateNdigitRandomNumber(4);
 		/***********************************/
@@ -505,9 +505,9 @@ public class US825_ManualPurchaseVendorsRestrictAbilityToAddOrEditDuplicateVendo
 		/**Variable Section :**/
 		AbstractTest.tcName="manualVendor_US825_TC3912";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String vendorNumber1=Integer.toString(Base.generateNdigitRandomNumber(4));
 		String vendorName1 = "TestAuto"+Base.generateNdigitRandomNumber(4);
 		String vendorName2 = "TestAuto"+Base.generateNdigitRandomNumber(4);

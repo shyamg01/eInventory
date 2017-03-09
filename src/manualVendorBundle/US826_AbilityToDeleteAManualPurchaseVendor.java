@@ -36,9 +36,9 @@ public class US826_AbilityToDeleteAManualPurchaseVendor extends AbstractTest
 			/**Variable Section :**/
 			AbstractTest.tcName="manualVendor_US826_TC1553";
 			ManualVendorsPage manualVendorsPage;
-			String password = LoginTestData.operator_SSO_Password;
-			String userId = LoginTestData.operator_SSO_UserId;
-			String storeId = LoginTestData.operatorStoreId;
+			String password = LoginTestData.password;
+			String userId = LoginTestData.userId;
+			String storeId = LoginTestData.StoreId;
 			String randomNum = String.valueOf(Base.generateNdigitRandomNumber(4));
 			String newVendorName = "Testauto" + randomNum;
 			/***********************************/
@@ -79,9 +79,9 @@ public class US826_AbilityToDeleteAManualPurchaseVendor extends AbstractTest
 			/**Variable Section :**/
 			AbstractTest.tcName="manualVendor_US826_TC1552";
 			ManualVendorsPage manualVendorsPage;
-			String password = LoginTestData.operator_SSO_Password;
-			String userId = LoginTestData.operator_SSO_UserId;
-			String storeId = LoginTestData.operatorStoreId;
+			String password = LoginTestData.password;
+			String userId = LoginTestData.userId;
+			String storeId = LoginTestData.StoreId;
 			String vendorName = "Testauto" + Base.generateNdigitRandomNumber(4);
 			String manualNumber=Integer.toString(Base.generateNdigitRandomNumber(3));
 			/***********************************/
@@ -128,9 +128,9 @@ public class US826_AbilityToDeleteAManualPurchaseVendor extends AbstractTest
 			/**Variable Section :**/
 			AbstractTest.tcName="manualVendor_US826_TC2841";
 			ManualVendorsPage manualVendorsPage;
-			String password = LoginTestData.operator_SSO_Password;
-			String userId = LoginTestData.operator_SSO_UserId;
-			String storeId = LoginTestData.operatorStoreId;
+			String password = LoginTestData.password;
+			String userId = LoginTestData.userId;
+			String storeId = LoginTestData.StoreId;
 			String vendorName = "Testauto" + Base.generateNdigitRandomNumber(4);
 			String manualNumber=Integer.toString(Base.generateNdigitRandomNumber(3));
 			/***********************************/
@@ -177,9 +177,9 @@ public class US826_AbilityToDeleteAManualPurchaseVendor extends AbstractTest
 			/**Variable Section :**/
 			AbstractTest.tcName="manualVendor_US826_TC1554";
 			ManualVendorsPage manualVendorsPage;
-			String password = LoginTestData.operator_SSO_Password;
-			String userId = LoginTestData.operator_SSO_UserId;
-			String storeId = LoginTestData.operatorStoreId;
+			String password = LoginTestData.password;
+			String userId = LoginTestData.userId;
+			String storeId = LoginTestData.StoreId;
 			String randomNum = String.valueOf(Base.generateNdigitRandomNumber(4));
 			String newVendorName = "Testauto" + randomNum;
 			/***********************************/
@@ -237,9 +237,9 @@ public class US826_AbilityToDeleteAManualPurchaseVendor extends AbstractTest
 			/**Variable Section :**/
 			AbstractTest.tcName="manualVendor_US826_TC1556";
 			ManualVendorsPage manualVendorsPage;
-			String password = LoginTestData.operator_SSO_Password;
-			String userId = LoginTestData.operator_SSO_UserId;
-			String storeId = LoginTestData.operatorStoreId;
+			String password = LoginTestData.password;
+			String userId = LoginTestData.userId;
+			String storeId = LoginTestData.StoreId;
 			String wrinIDForNewVendor = GlobalVariable.wrinIdForNewVendor;
 			String itemQty="1";
 			String newVendorName = "Testauto" + Base.generateNdigitRandomNumber(4);
@@ -310,9 +310,9 @@ public class US826_AbilityToDeleteAManualPurchaseVendor extends AbstractTest
 			/**Variable Section :**/
 			AbstractTest.tcName="manualVendor_US826_TC1561";
 			ManualVendorsPage manualVendorsPage;
-			String password = LoginTestData.operator_SSO_Password;
-			String userId = LoginTestData.operator_SSO_UserId;
-			String storeId = LoginTestData.operatorStoreId;
+			String password = LoginTestData.password;
+			String userId = LoginTestData.userId;
+			String storeId = LoginTestData.StoreId;
 			String wrinIDForNewVendor = GlobalVariable.wrinIdForNewVendor;
 			String newVendorName = "Testauto" + Base.generateNdigitRandomNumber(4);
 			String newVendorNumber = String.valueOf(Base.generateNdigitRandomNumber(4));
@@ -364,9 +364,9 @@ public class US826_AbilityToDeleteAManualPurchaseVendor extends AbstractTest
 			/**Variable Section :**/
 			AbstractTest.tcName="manualVendor_US826_TC1562";
 			ManualVendorsPage manualVendorsPage;
-			String password = LoginTestData.operator_SSO_Password;
-			String userId = LoginTestData.operator_SSO_UserId;
-			String storeId = LoginTestData.operatorStoreId;
+			String password = LoginTestData.password;
+			String userId = LoginTestData.userId;
+			String storeId = LoginTestData.StoreId;
 			String newVendorName = "Testauto" + Base.generateNdigitRandomNumber(4);
 			String newVendorNumber = String.valueOf(Base.generateNdigitRandomNumber(4));
 			/***********************************/
@@ -415,9 +415,9 @@ public class US826_AbilityToDeleteAManualPurchaseVendor extends AbstractTest
 			/**Variable Section :**/
 			AbstractTest.tcName="manualVendor_US826_TC1697";
 			ManualVendorsPage manualVendorsPage;
-			String password = LoginTestData.operator_SSO_Password;
-			String userId = LoginTestData.operator_SSO_UserId;
-			String storeId = LoginTestData.operatorStoreId;
+			String password = LoginTestData.password;
+			String userId = LoginTestData.userId;
+			String storeId = LoginTestData.StoreId;
 			String wrinIDForNewVendor = GlobalVariable.wrinIdForNewVendor;
 			String itemQty="1";
 			String newVendorName = "Testauto" + Base.generateNdigitRandomNumber(4);
@@ -482,9 +482,9 @@ public class US826_AbilityToDeleteAManualPurchaseVendor extends AbstractTest
 			/**Variable Section :**/
 			AbstractTest.tcName="manualVendor_US826_TC2843";
 			ManualVendorsPage manualVendorsPage;
-			String password = LoginTestData.operator_SSO_Password;
-			String userId = LoginTestData.operator_SSO_UserId;
-			String storeId = LoginTestData.operatorStoreId;
+			String password = LoginTestData.password;
+			String userId = LoginTestData.userId;
+			String storeId = LoginTestData.StoreId;
 			String wrinIDForNewVendor = GlobalVariable.wrinIdForNewVendor;
 			String itemQty="1";
 			String newVendorName = "Testauto" + Base.generateNdigitRandomNumber(4);

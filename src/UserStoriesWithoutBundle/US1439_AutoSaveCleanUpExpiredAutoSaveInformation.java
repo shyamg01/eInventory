@@ -34,9 +34,9 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US1439_TC3235_RawPromo";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String caseQuantity = "4";
 		String innerPackQuantity = "2";
 		String looseUnitQuantity = "3";
@@ -80,9 +80,9 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US1439_TC3235_ManualVendor";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.supervisor_SSO_Password;
-		String userId = LoginTestData.supervisor_SSO_UserId;
-		String storeId = LoginTestData.supervisorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String supervisorVendorName = "supervisor" + Base.generateNdigitRandomNumber(4);
 		String supervisorManualNumber="supervisor"+Integer.toString(Base.generateNdigitRandomNumber(3));
 		/***********************************/
@@ -118,9 +118,9 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US1439_TC3235_Transfer";
-		String password = LoginTestData.supervisor_SSO_Password;
-		String userId = LoginTestData.supervisor_SSO_UserId;
-		String storeId = LoginTestData.supervisorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeIn;
 		String transferStoreNumber = GlobalVariable.nationalStore1;
@@ -166,9 +166,9 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US1439_TC3235_Purchases";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String vendor = GlobalVariable.vendorName;
 		String quantity = "1";
@@ -204,9 +204,9 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US1439_TC3236_RawPromo";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String caseQuantity = "4";
 		String innerPackQuantity = "2";
 		String looseUnitQuantity = "3";
@@ -249,9 +249,9 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US1439_TC3236_ManualVendor";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.supervisor_SSO_Password;
-		String userId = LoginTestData.supervisor_SSO_UserId;
-		String storeId = LoginTestData.supervisorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String supervisorVendorName = "Test Auto" + Base.generateNdigitRandomNumber(4);
 		String supervisorManualNumber="Test Auto"+Integer.toString(Base.generateNdigitRandomNumber(3));
 		/***********************************/
@@ -298,9 +298,9 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US1439_TC3236_Transfer";
-		String password = LoginTestData.supervisor_SSO_Password;
-		String userId = LoginTestData.supervisor_SSO_UserId;
-		String storeId = LoginTestData.supervisorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeIn;
 		String transferStoreNumber = GlobalVariable.nationalStore1;
@@ -345,9 +345,9 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US1439_TC3236_Purchases";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String vendor = GlobalVariable.vendorName;
 		String quantity = "1";
@@ -400,9 +400,9 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US1439_TC4403_RawPromo";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String caseQuantity = "4";
 		String innerPackQuantity = "2";
 		String looseUnitQuantity = "3";
@@ -447,9 +447,9 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US1439_TC4403_Purchases";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.createPurchaseWrin1;
 		String vendor = GlobalVariable.vendorName;
 		String quantity = "1";
@@ -505,9 +505,9 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US1439_TC4403_Transfer";
-		String password = LoginTestData.supervisor_SSO_Password;
-		String userId = LoginTestData.supervisor_SSO_UserId;
-		String storeId = LoginTestData.supervisorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeIn;
 		String transferStoreNumber = GlobalVariable.nationalStore1;
@@ -553,9 +553,9 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US1439_TC4403_ManualVendor";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.supervisor_SSO_Password;
-		String userId = LoginTestData.supervisor_SSO_UserId;
-		String storeId = LoginTestData.supervisorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String supervisorVendorName = "supervisor" + Base.generateNdigitRandomNumber(4);
 		String supervisorManualNumber="supervisor"+Integer.toString(Base.generateNdigitRandomNumber(3));
 		/***********************************/

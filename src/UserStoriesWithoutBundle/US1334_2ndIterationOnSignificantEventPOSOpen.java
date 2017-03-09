@@ -35,9 +35,9 @@ public class US1334_2ndIterationOnSignificantEventPOSOpen extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US1334_TC4428";
 		FoodOverBasePage foodOverBasePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -66,9 +66,9 @@ public class US1334_2ndIterationOnSignificantEventPOSOpen extends AbstractTest{
 		/** Variable Section : **/
 		FoodOverBasePage foodOverBasePage;
 		AbstractTest.tcName="UserStoriesWithoutBundle_US1334_TC4429";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String currentMonthcomments = "TestAuto_"+Base.generateNdigitRandomNumber(3);
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -180,9 +180,9 @@ public class US1334_2ndIterationOnSignificantEventPOSOpen extends AbstractTest{
 		/** Variable Section : **/
 		FoodOverBasePage foodOverBasePage;
 		AbstractTest.tcName="UserStoriesWithoutBundle_US1334_TC4430";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String projectionscomments = "TestAuto_"+Base.generateNdigitRandomNumber(3);
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -389,9 +389,9 @@ public class US1334_2ndIterationOnSignificantEventPOSOpen extends AbstractTest{
 			/** Variable Section : **/
 			FoodOverBasePage foodOverBasePage;
 			AbstractTest.tcName="UserStoriesWithoutBundle_US1334_TC4431";
-			String password = LoginTestData.operator_SSO_Password;
-			String userId = LoginTestData.operator_SSO_UserId;
-			String storeId = LoginTestData.operatorStoreId;
+			String password = LoginTestData.password;
+			String userId = LoginTestData.userId;
+			String storeId = LoginTestData.StoreId;
 			/***********************************/
 			HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 			// Navigate to Food over base page

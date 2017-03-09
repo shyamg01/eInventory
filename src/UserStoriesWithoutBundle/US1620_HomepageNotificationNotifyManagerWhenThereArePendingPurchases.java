@@ -30,9 +30,9 @@ public class US1620_HomepageNotificationNotifyManagerWhenThereArePendingPurchase
 	{
 		/**Variable Section :**/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US1620_TC4531";
-		String userId = LoginTestData.operator_SSO_UserId;
-		String password = LoginTestData.operator_SSO_Password;
-		String storeId = LoginTestData.operatorStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String wrin=GlobalVariable.createPurchaseWrin;
 		String invoiceNumber=Integer.toString(Base.generateNdigitRandomNumber(4));
@@ -79,9 +79,9 @@ public class US1620_HomepageNotificationNotifyManagerWhenThereArePendingPurchase
 	{
 		/**Variable Section :**/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US1620_TC4533";
-		String userId = LoginTestData.operator_SSO_UserId;
-		String password = LoginTestData.operator_SSO_Password;
-		String storeId = LoginTestData.operatorStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String wrin=GlobalVariable.createPurchaseWrin;
 		String invoiceNumber=Integer.toString(Base.generateNdigitRandomNumber(4));

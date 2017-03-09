@@ -37,9 +37,9 @@ public class US911_ViewMasterChangeSummary extends AbstractTest{
 		AbstractTest.tcName="UserStoriesWithoutBundle_US911_TC4547";
 		ManualVendorsPage manualVendorsPage;
 		AuditPage auditPage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String vendorNumber = Integer.toString(Base.generateNdigitRandomNumber(4));
 		String vendorName = "TestAuto"+Base.generateNdigitRandomNumber(4);
 		String newVendorName = "TTestAuto"+Base.generateNdigitRandomNumber(4);
@@ -106,9 +106,9 @@ public class US911_ViewMasterChangeSummary extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US911_TC4548";
 		AuditPage auditPage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String samplewRINID = GlobalVariable.rawItemActvityAuditWrin1;
 		String date = GlobalVariable.createDate;
 		String casePrice = "25.00";
@@ -222,9 +222,9 @@ public class US911_ViewMasterChangeSummary extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US911_TC4549";
 		AuditPage auditPage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String currentMonthcomments = "TestAuto_"+Base.generateNdigitRandomNumber(3);
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);

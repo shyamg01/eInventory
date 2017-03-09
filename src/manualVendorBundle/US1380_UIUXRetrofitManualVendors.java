@@ -32,9 +32,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2856";
 		ManualVendorsPage manualVendorsPage;
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -68,9 +68,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2857";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -101,9 +101,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2858";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -134,9 +134,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2859";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String vendorNumber = String.valueOf(Base.generateNdigitRandomNumber(4));
 		String alphanumericVendorName = "Testauto" + vendorNumber;
 		String LeadingSpecialCharacterVendorName = "#";
@@ -230,9 +230,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2860";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -262,9 +262,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2861";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -294,9 +294,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2862";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -348,9 +348,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2863";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -401,9 +401,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2864";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -449,9 +449,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2865";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -497,9 +497,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2866";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -545,9 +545,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2867";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String randomNum = String.valueOf(Base.generateNdigitRandomNumber(4));
 		String newVendorName = "Testauto" + randomNum;
 		/***********************************/
@@ -584,9 +584,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2868";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -646,9 +646,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2870";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String randomNum = String.valueOf(Base.generateNdigitRandomNumber(4));
 		String newVendorName = "Testauto" + randomNum;
 		/***********************************/
@@ -745,9 +745,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2871";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -792,9 +792,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2872";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -841,9 +841,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2873";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -885,9 +885,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2874";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String randomNum = String.valueOf(Base.generateNdigitRandomNumber(4));
 		String newVendorName = "Testauto" + randomNum;
 		/***********************************/
@@ -930,9 +930,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2875";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String vendor = GlobalVariable.purchaseVendorName;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -975,9 +975,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2876";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String randomNum = String.valueOf(Base.generateNdigitRandomNumber(4));
 		String newVendorName = "Testauto" + randomNum;
 		/***********************************/
@@ -1027,9 +1027,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2877";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String randomNum = String.valueOf(Base.generateNdigitRandomNumber(4));
 		String newVendorName = "Testauto" + randomNum;
 		/***********************************/
@@ -1080,9 +1080,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2878";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String randomNum = String.valueOf(Base.generateNdigitRandomNumber(4));
 		String newVendorName = "Testauto" + randomNum;
 		/***********************************/
@@ -1137,9 +1137,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2879";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -1172,9 +1172,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2880";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -1207,9 +1207,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2881";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -1268,9 +1268,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2883";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -1318,9 +1318,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2885";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -1365,9 +1365,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2886";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String vendorName = "Testauto" + Base.generateNdigitRandomNumber(4);
 		String manualNumber=Integer.toString(Base.generateNdigitRandomNumber(3));
 		/***********************************/
@@ -1414,9 +1414,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2887";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -1453,9 +1453,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2888";
 		ManualVendorsPage manualVendorsPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -1485,9 +1485,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2889";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -1520,9 +1520,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2891";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -1558,9 +1558,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2892";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -1610,9 +1610,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2894";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -1649,9 +1649,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC2898";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -1705,9 +1705,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1380_TC3057";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String randomNum = String.valueOf(Base.generateNdigitRandomNumber(4));
 		String newVendorName = "Testauto" + randomNum;
 		/***********************************/
@@ -1770,9 +1770,9 @@ public class US1380_UIUXRetrofitManualVendors extends AbstractTest{
 		/**Variable Section :**/
 		AbstractTest.tcName="manualVendor_US1380_TC4434";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String vendorNumber1=Integer.toString(Base.generateNdigitRandomNumber(4));
 		String vendorNumber2=Integer.toString(Base.generateNdigitRandomNumber(4));
 		/***********************************/

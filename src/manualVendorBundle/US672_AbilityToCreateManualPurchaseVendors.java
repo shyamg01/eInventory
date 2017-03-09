@@ -32,9 +32,9 @@ public class US672_AbilityToCreateManualPurchaseVendors extends AbstractTest {
 	public void manualVendor_US672_TC1212() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		AbstractTest.tcName="manualVendor_US672_TC1212";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Go to purchase landing page and verify that it is redirected
 		ManualVendorsPage manualVendorsPage= homePage.selectUserWithSSOLogin(userId, password)
@@ -57,9 +57,9 @@ public class US672_AbilityToCreateManualPurchaseVendors extends AbstractTest {
 	public void manualVendor_US672_TC1213() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		AbstractTest.tcName="manualVendor_US672_TC1213";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String randomNum = String.valueOf(Base.generateNdigitRandomNumber(4));
 		String newVendorName = "Testauto" + randomNum;
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -89,9 +89,9 @@ public class US672_AbilityToCreateManualPurchaseVendors extends AbstractTest {
 			BiffException, WriteException, IOException, InterruptedException {
 		AbstractTest.tcName="manualVendor_US672_TC1220";
 		String vendorName = null;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = PageFactory.initElements(driver,PurchasesPage.class);
 		ManualInvoiceNewPage manualInvoiceNewPage = PageFactory.initElements(driver, ManualInvoiceNewPage.class);
@@ -132,9 +132,9 @@ public class US672_AbilityToCreateManualPurchaseVendors extends AbstractTest {
 		/**Variable Section :**/
 		AbstractTest.tcName="manualVendor_US672_TC1282";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinIDForNewVendor = GlobalVariable.wrinIdForNewVendor;
 		String newVendorName = "Testauto" + Base.generateNdigitRandomNumber(4);
 		String newVendorNumber = String.valueOf(Base.generateNdigitRandomNumber(4));
@@ -170,9 +170,9 @@ public class US672_AbilityToCreateManualPurchaseVendors extends AbstractTest {
 		/**Variable Section :**/
 		AbstractTest.tcName="manualVendor_US672_TC1297";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinIDForNewVendor = GlobalVariable.wrinIdForNewVendor;
 		String newVendorName = "Testauto" + Base.generateNdigitRandomNumber(4);
 		String newVendorNumber = String.valueOf(Base.generateNdigitRandomNumber(4));
@@ -227,9 +227,9 @@ public class US672_AbilityToCreateManualPurchaseVendors extends AbstractTest {
 		/**Variable Section :**/
 		AbstractTest.tcName="manualVendor_US672_TC2840";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String wrinIDForNewVendor = GlobalVariable.wrinIdForNewVendor;
 		String itemQty="1";
 		String newVendorName = "Testauto" + Base.generateNdigitRandomNumber(4);
@@ -276,9 +276,9 @@ public class US672_AbilityToCreateManualPurchaseVendors extends AbstractTest {
 	public void manualVendor_US672_TC4058() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		AbstractTest.tcName="manualVendor_US672_TC4058";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String randomNum = String.valueOf(Base.generateNdigitRandomNumber(4));
 		String newVendorName1 = "x#@$%" + randomNum;
 		String newVendorName2 = "a@!~ak9" + randomNum;

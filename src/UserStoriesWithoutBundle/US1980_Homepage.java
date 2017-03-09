@@ -28,9 +28,9 @@ public class US1980_Homepage extends AbstractTest
 		/**Variable Section :**/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US1980_TC4543";
 //		String userId = LoginTestData.operatorUserId;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String password = LoginTestData.operator_SSO_Password;
-		String storeId = LoginTestData.operatorStoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -70,9 +70,9 @@ public class US1980_Homepage extends AbstractTest
 		{
 			/**Variable Section :**/
 			AbstractTest.tcName="UserStoriesWithoutBundle_US1980_TC4544";
-			String userId = LoginTestData.operator_SSO_UserId;
-			String password = LoginTestData.operator_SSO_Password;
-			String storeId = LoginTestData.operatorStoreId;
+			String userId = LoginTestData.userId;
+			String password = LoginTestData.password;
+			String storeId = LoginTestData.StoreId;
 			
 			/***********************************/
 			HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -114,9 +114,9 @@ public class US1980_Homepage extends AbstractTest
 					/**Variable Section :**/
 					AbstractTest.tcName="UserStoriesWithoutBundle_US1980_TC4545";
 //					String userId = LoginTestData.operatorUserId;
-					String userId = LoginTestData.operator_SSO_UserId;
-					String password = LoginTestData.operator_SSO_Password;
-					String storeId = LoginTestData.operatorStoreId;
+					String userId = LoginTestData.userId;
+					String password = LoginTestData.password;
+					String storeId = LoginTestData.StoreId;
 					
 					/***********************************/
 					HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -158,9 +158,9 @@ public class US1980_Homepage extends AbstractTest
 					/**Variable Section :**/
 					AbstractTest.tcName="UserStoriesWithoutBundle_US1980_TC4546";
 //					String userId = LoginTestData.operatorUserId;
-					String userId = LoginTestData.operator_SSO_UserId;
-					String password = LoginTestData.operator_SSO_Password;
-					String storeId = LoginTestData.operatorStoreId;
+					String userId = LoginTestData.userId;
+					String password = LoginTestData.password;
+					String storeId = LoginTestData.StoreId;
 					
 					/***********************************/
 					HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -200,9 +200,9 @@ public class US1980_Homepage extends AbstractTest
 					/**Variable Section :**/
 					AbstractTest.tcName="UserStoriesWithoutBundle_US1980_TC4551";
 //					String userId = LoginTestData.operatorUserId;
-					String userId = LoginTestData.operator_SSO_UserId;
-					String password = LoginTestData.operator_SSO_Password;
-					String storeId = LoginTestData.operatorStoreId;
+					String userId = LoginTestData.userId;
+					String password = LoginTestData.password;
+					String storeId = LoginTestData.StoreId;
 					
 					/***********************************/
 					HomePage homePage = PageFactory.initElements(driver, HomePage.class);

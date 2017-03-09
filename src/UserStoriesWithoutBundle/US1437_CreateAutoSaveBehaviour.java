@@ -33,9 +33,9 @@ public class US1437_CreateAutoSaveBehaviour extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US1437_TC3227_RawPromo";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String caseQuantity = "4";
 		String innerPackQuantity = "2";
 		String looseUnitQuantity = "3";
@@ -84,9 +84,9 @@ public class US1437_CreateAutoSaveBehaviour extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US1437_TC3227_CompletedWaste";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		String quantity = "4";
 		String createDate = GlobalVariable.createDate;
@@ -132,9 +132,9 @@ public class US1437_CreateAutoSaveBehaviour extends AbstractTest{
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US1437_TC4390";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String wrin = GlobalVariable.createPurchaseWrin;
 		String invoiceNumber=Integer.toString(Base.generateNdigitRandomNumber(4));	

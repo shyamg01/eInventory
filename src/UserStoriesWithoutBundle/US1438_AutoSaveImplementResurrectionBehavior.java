@@ -32,9 +32,9 @@ public class US1438_AutoSaveImplementResurrectionBehavior extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US1438_TC3232";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String caseQuantity = "4";
 		String innerPackQuantity = "2";
 		String looseUnitQuantity = "3";
@@ -79,9 +79,9 @@ public class US1438_AutoSaveImplementResurrectionBehavior extends AbstractTest{
 			IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName = "UserStoriesWithoutBundle_US1438_TC4393";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String samplewRINID1 = GlobalVariable.createDailyInventoryWrin1;
 		String quantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		/***********************************/

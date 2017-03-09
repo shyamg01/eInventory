@@ -30,9 +30,9 @@ public class US1046_AbilityToRestoreDeletedInvoicesManualVendorsAndCustomLists
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1046_TC1798";
 		ManualVendorsPage manualVendorsPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -65,9 +65,9 @@ public class US1046_AbilityToRestoreDeletedInvoicesManualVendorsAndCustomLists
 		/** Variable Section : **/
 		AbstractTest.tcName="manualVendor_US1046_TC1797";
 		PurchasesPage purchasesPage;
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Purchases page

@@ -8,6 +8,7 @@ import jxl.write.biff.RowsExceededException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 import common.Base;
@@ -17,6 +18,7 @@ import common.Reporter;
 import eInventoryPageClasses.AbstractTest;
 import eInventoryPageClasses.HomePage;
 import eInventoryPageClasses.PromotionsAndWastePage;
+import eInventoryPageClasses.RawItemWastePage;
 
 public class US1048_WhenUserOpensPageAllDayRollUpsWillStartCollapsed extends AbstractTest
 {
@@ -65,42 +67,35 @@ public class US1048_WhenUserOpensPageAllDayRollUpsWillStartCollapsed extends Abs
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		String date = GlobalVariable.createDate;
+		String wrinId1 = GlobalVariable.rawItemWastewrin2;
+		String caseQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
+		String innerPackQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
+		String looseUnitQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		//String eDate=GlobalVariable.eDate_7320;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
+		RawItemWastePage rawItemWastePage = PageFactory.initElements(driver,RawItemWastePage.class);
 		// Navigate to Promotion and waste page
 		PromotionsAndWastePage promotionsAndWastePage=homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToPromotionsAndWastePage();
+		promotionsAndWastePage.RawWaste_BT.click();
+		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.RawWaste_Title));
+		rawItemWastePage.removeAllWrinIdFromRawWastePage();
+		//rawItemWastePage.selectDateForRawWaste(createDate).selectTimeInRawWasteForm(time);
+		//Thread.sleep(2000);
+		//Create a raw waste entry
+		rawItemWastePage.searchAndSelectRawItemWasted(wrinId1);
+		//rawItemWastePage.RawWasteForm_ItemAdded_Message.click();
+		rawItemWastePage.addQuantitiesForMultipleWrin(wrinId1, innerPackQuantity, caseQuantity, looseUnitQuantity);
+		rawItemWastePage.Submit_BT.click();
+		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.SubmitRawWaste_PopUp_YES_BT)).click();
+		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.WasteEntrySaved_Confirmation_MSG));
+		Thread.sleep(5000);
 		promotionsAndWastePage.selectStartDate(startDate);
 		promotionsAndWastePage.selectEndDate(endDate);
 		promotionsAndWastePage.ShowResults_BT.click();
 		Thread.sleep(5000);
-	/*	Thread.sleep(5000);
-		promotionsAndWastePage.selectStartDate(stratDate);
-		Thread.sleep(2000);
-		promotionsAndWastePage.ShowResults_BT.click();
-		Thread.sleep(10000);*/
-		/*Thread.sleep(5000);
-		//Expend the date icon
-		
-			System.out.println("Doing scroll down");
-			JavascriptExecutor jse = (JavascriptExecutor)driver;
-			jse.executeScript("window.scrollBy(0,250)", "");*/
-		
-		/*Thread.sleep(3000);
-		try
-		{
-		driver.findElement(By.xpath("//table[@id='waste_history_table']/tbody/tr/th[1][contains(.,'"+eDate+"')]/span")).click();
-		}catch (Exception e)
-		{
-			jse.executeScript("window.scrollBy(0,250)", "");
-			driver.findElement(By.xpath("//table[@id='waste_history_table']/tbody/tr/th[1][contains(.,'"+eDate+"')]/span")).click();
-
-		}
-		Thread.sleep(3000);*/
 		promotionsAndWastePage.clickOnDateGroup(date);
-
-
 		//Click on Promotion and waste page
 		try
 		{

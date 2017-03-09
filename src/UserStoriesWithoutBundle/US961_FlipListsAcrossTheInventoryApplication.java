@@ -31,9 +31,9 @@ public class US961_FlipListsAcrossTheInventoryApplication extends AbstractTest{
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US961_TC1675_PhysicalInventory";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PhysicalInventoryPage physicalInventoryPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
@@ -60,9 +60,9 @@ public class US961_FlipListsAcrossTheInventoryApplication extends AbstractTest{
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US961_TC1675_Purchasse";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
@@ -88,9 +88,9 @@ public class US961_FlipListsAcrossTheInventoryApplication extends AbstractTest{
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US961_TC1675_ViewHistory";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		ViewPurchaseHistoryPage viewPurchaseHistoryPage = PageFactory.initElements(driver, ViewPurchaseHistoryPage.class);
@@ -119,9 +119,9 @@ public class US961_FlipListsAcrossTheInventoryApplication extends AbstractTest{
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US961_TC1675_StoreLedger";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String vendorName = GlobalVariable.vendorName;
 		String date = GlobalVariable.createDate;
 		/***********************************/
@@ -154,9 +154,9 @@ public class US961_FlipListsAcrossTheInventoryApplication extends AbstractTest{
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US961_TC1675_PromotionWaste";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String vendorName = GlobalVariable.vendorName;
 		String date = GlobalVariable.createDate;
 		/***********************************/
@@ -169,9 +169,9 @@ public class US961_FlipListsAcrossTheInventoryApplication extends AbstractTest{
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US961_TC1675_Transfer";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
@@ -199,9 +199,9 @@ public class US961_FlipListsAcrossTheInventoryApplication extends AbstractTest{
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="UserStoriesWithoutBundle_US961_TC1675_RawItemActivity";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 	}
 

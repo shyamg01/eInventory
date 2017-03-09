@@ -1242,8 +1242,8 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3363_NoDeletedInvoice";
 		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.level1_11089_userId;
-		String storeId2 = "11089";
+		String userId = LoginTestData.level1_11078_userId;
+		String storeId2 = "11078";
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId2)
@@ -1433,8 +1433,8 @@ public class US846_UIUXRetrofitPurchases extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="purchasesBundle_US846_TC3365";
 		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.level1_11078_userId;
-		String storeId2 = "11078";
+		String userId = LoginTestData.level1_11089_userId;
+		String storeId2 = "11089";
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId2)

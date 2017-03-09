@@ -91,8 +91,8 @@ public class US1221_SystemShouldPreventDeletingVendorWithPendingInvoices extends
 	}
 	
 	//TC1996 : Verify the user is allowed to delete a manual vendor if it has no existing pending manual purchases tied to it
-			@Test()
-			public void purchaseBundle_US1221_TC1996() throws RowsExceededException,
+	@Test()
+	public void purchaseBundle_US1221_TC1996() throws RowsExceededException,
 					BiffException, WriteException, IOException, InterruptedException {
 				/** Variable Section : **/
 				AbstractTest.tcName="purchaseBundle_US1221_TC1996";

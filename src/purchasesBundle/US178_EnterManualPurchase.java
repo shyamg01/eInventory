@@ -819,8 +819,7 @@ public class US178_EnterManualPurchase extends AbstractTest{
 		if (GenericMethods.isElementDisplayed(purchasesPage.ManualInvoiceApprove_ManualSource_Label, "purchasesPage.ManualInvoiceApprove_ManualSource_Label")
 				&& GenericMethods.isElementDisplayed(purchasesPage.ManualInvoiceApprove_CreatedBy_Label, "purchasesPage.ManualInvoiceApprove_CreatedBy_Label")
 				&& GenericMethods.isElementDisplayed(purchasesPage.ManualInvoiceApprove_Vendor_Label, "purchasesPage.ManualInvoiceApprove_Vendor_Label") 
-				&& GenericMethods.isElementDisplayed(purchasesPage.ManualInvoiceApprove_InvoiceNumber_Label, "purchasesPage.ManualInvoiceApprove_InvoiceNumber_Label") 
-				&& GenericMethods.isElementDisplayed(purchasesPage.ManualInvoiceApprove_Date_Label, "purchasesPage.ManualInvoiceApprove_Date_Label")) 
+				&& GenericMethods.isElementDisplayed(purchasesPage.ManualInvoiceApprove_InvoiceNumber_Label, "purchasesPage.ManualInvoiceApprove_InvoiceNumber_Label")) 
 		{
 			Reporter.reportPassResult(
 					browser,

@@ -10,8 +10,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.ParseException;
 
 import common.Base;
 import common.GenericMethods;
@@ -37,11 +38,8 @@ public class PhysicalInventoryPage  extends AbstractPage{
 	@FindBy(xpath ="//button[@id='htmlButton' and @value='Daily Inventory']")
 	public WebElement DailyInventory_BT;
 	
-
-	
 	@FindBy(xpath ="//input[@id='validatedInput' and @colname='loose_count_input']")
 	public List <WebElement> DailyInventory_PopUp_Loose_TB;
-	
 	
 	@FindBy(xpath ="//table[@id='dailyInventoryTable']/tbody/tr/td[1]/span")
 	public List <WebElement> DailyInventory_PopUp_WRIN_Value;
@@ -54,7 +52,6 @@ public class PhysicalInventoryPage  extends AbstractPage{
 	
 	@FindBy(xpath = "//input[@id='daily_inventory_autocomplete' and @placeholder='Enter WRIN or Description']")
 	public WebElement EnterRawOrDescription_TB;
-
 	
 	@FindBy(xpath = "//a[text()='Items to Inventory']")
 	public WebElement ItemsToInventory_BT;
@@ -62,12 +59,12 @@ public class PhysicalInventoryPage  extends AbstractPage{
 	@FindBy(xpath = "//a[text()='Inventory History']")
 	public WebElement InventoryHistory_BT;
 	
-	
 	@FindBy(xpath = "//input[@id='autosearchHisInput']")
 	public WebElement InventoryHistory_Search_TB;
 	
 	@FindBy(xpath = "//h3[text()='Inventory History']")
 	public WebElement InventoryHistory_Title;
+	
 	@FindBy(xpath = "//h2[text()='Daily Inventory']")
 	public WebElement DailyInventoryPopUp_Title;
 	
@@ -79,8 +76,6 @@ public class PhysicalInventoryPage  extends AbstractPage{
 	
 	@FindBy(xpath = "//input[@colname='case_count_input']")
 	public List<WebElement> DailyInventoryPopUp_CaseQty_TB_List;
-	
-
 	
 	@FindBy(xpath = "//input[@colname='pack_count_input']")
 	public List<WebElement> DailyInventoryPopUp_InnerPackQty_TB_List;
@@ -144,6 +139,9 @@ public class PhysicalInventoryPage  extends AbstractPage{
 	
 	@FindBy(xpath = "//input[@id='inventoryItemSaveButton']")
 	public WebElement WrinPreview_PopUP_Save_BT;
+	
+	@FindBy(xpath = "//table[@id='historyInventoryTable']/tbody/tr/td[3]/span")
+	public List<WebElement> InventoryHistory_Date_List;
 	
 	public PhysicalInventoryPage enterQuantityForAllWrin(String caseQty, String innerPackQty, String looseQty) throws RowsExceededException, BiffException, WriteException, IOException{
 		for(WebElement caseTB : DailyInventoryPopUp_CaseQty_TB_List){
@@ -224,53 +222,40 @@ public class PhysicalInventoryPage  extends AbstractPage{
 	}
 	
 	
-	
 	public boolean verifyInventorySubmittedForItem(String wrinId,String date, String itemTotal){
 		return Base.isElementDisplayed(By.xpath("//table[@id='historyInventoryTable']//tr/td/span[text()='"+wrinId+"']/../following-sibling::td/span[contains(text(),'"+date+"')]/../following-sibling::td/span[text()='"+itemTotal+"']"));
 	}
 	
 	public String getItemTotalForAWrin(String wrinId){
-		return driver.findElement(By.xpath("//table[@id='dailyInventoryTable']/tbody/tr/td/span[text()='"+wrinId+"']/../following-sibling::td/span[@class='dailyTotal']")).getText();
+		try{
+			return driver.findElement(By.xpath("//table[@id='dailyInventoryTable']/tbody/tr/td/span[text()='"+wrinId+"']/../following-sibling::td/span[@class='dailyTotal']")).getText();
+		}catch(Exception ex){
+			return driver.findElement(By.xpath("//table[@id='dailyInventoryTable']/tbody/tr/td[text()='"+wrinId+"']/following-sibling::td/span[@class='dailyTotal']")).getText();
+		}
 	}
 	
-	
 	public PhysicalInventoryPage seacrhAndSelectRawItem(String samplewRINID)throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException {
-//		CreateManualInvoice_EnterRawItemNumberOrDescription_TB.click();
 		GenericMethods.clickOnElement(EnterRawOrDescription_TB, "EnterRawOrDescription_TB");
 		GenericMethods.clearValueOfElement(EnterRawOrDescription_TB, "EnterRawOrDescription_TB");
-//		CreateManualInvoice_EnterRawItemNumberOrDescription_TB.clear();
 		GenericMethods.enterValueInElement(EnterRawOrDescription_TB, "CreateManualInvoice_EnterRawItemNumberOrDescription_TB", samplewRINID);
-//		CreateManualInvoice_EnterRawItemNumberOrDescription_TB.sendKeys(samplewRINID);
 		action.sendKeys(Keys.SPACE).build().perform(); 
 		Thread.sleep(1500); 
 		action.sendKeys(Keys.BACK_SPACE).build().perform();
 		GenericMethods.clickOnElement(driver.findElement(By.xpath("(//strong[text()='"+samplewRINID+"'])[1]")), "WRIN ID");
-//		driver.findElement(By.xpath("(//strong[text()='"+samplewRINID+"'])[1]")).click();
 		Thread.sleep(2000);
 		return PageFactory.initElements(driver, PhysicalInventoryPage.class);
 	}
 
-
-	
-	PhysicalInventoryPage verifyAndAddWrinInTable(String wrinID,String caseQty, String innerPackQty, String looseQty) throws RowsExceededException, BiffException, WriteException, InterruptedException, IOException
-	{
-		
-		if(Base.isElementDisplayed(By.xpath("//table[@id='dailyInventoryTable']/tbody/tr/td/span[contains(.,'"+wrinID+"')]")
-				))
-		{
-			enterQuantityForWrin(wrinID, caseQty,  innerPackQty,  looseQty);
-			
-		}
-		else
-		{
+	public PhysicalInventoryPage verifyAndAddWrinInTable(String wrinID,String caseQty, String innerPackQty, String looseQty)
+			throws RowsExceededException, BiffException, WriteException,InterruptedException, IOException {
+		if (Base.isElementDisplayed(By.xpath("//table[@id='dailyInventoryTable']/tbody/tr/td/span[contains(.,'"+ wrinID + "')]"))) {
+			enterQuantityForWrin(wrinID, caseQty, innerPackQty, looseQty);
+		} else {
 			seacrhAndSelectRawItem(wrinID);
 			Thread.sleep(2000);
-			enterQuantityForNewAddedWrin(wrinID, caseQty,  innerPackQty,  looseQty);
-			
+			enterQuantityForNewAddedWrin(wrinID, caseQty, innerPackQty,looseQty);
 		}
-		
 		return PageFactory.initElements(driver, PhysicalInventoryPage.class);
-		
 	}
 	
 	
@@ -305,8 +290,19 @@ public class PhysicalInventoryPage  extends AbstractPage{
 		return Base.isElementDisplayed(By.xpath("//table[@id='historyInventoryTable']//tr/td/span[text()='"+wrinID+"']"));
 	}
 	
-	
-	
+	public String calculateRangeIndicator(String perpetualInventoryCount, String unitCount){
+		BigDecimal diff = new BigDecimal(perpetualInventoryCount).subtract(new BigDecimal(unitCount));
+		BigDecimal percent = diff.divide(new BigDecimal(perpetualInventoryCount),4,RoundingMode.FLOOR).multiply(new BigDecimal("100"));
+		if(percent.compareTo(new BigDecimal("19")) >0){
+			return "Red";
+		}else if (percent.compareTo(new BigDecimal("5")) >0 && percent.compareTo(new BigDecimal("19")) <0){
+			return "Yellow";
+		}else if (percent.compareTo(new BigDecimal("0")) >0 && percent.compareTo(new BigDecimal("5")) <0){
+			return "Green";
+		}else{
+			return "N/A";
+		}
+	}
 	
 	public String getRangeIndicatorForAWrin(String wrinId){
 		WebElement range = driver.findElement(By.xpath("//table[@id='dailyInventoryTable']/tbody/tr/td/span[text()='"+wrinId+"']/../following-sibling::td/span[contains(@class,'badge')]"));
@@ -322,12 +318,32 @@ public class PhysicalInventoryPage  extends AbstractPage{
 		}
 	}
 	
+	public String getLooseUnitsForGreenIndicator(String perpectualCount){
+		BigDecimal temp1 = new BigDecimal(3).multiply(new BigDecimal(perpectualCount)).divide(new BigDecimal(100));
+		BigDecimal temp2 = new BigDecimal(perpectualCount).subtract(temp1);
+		BigDecimal looseUnit = temp2.setScale(0,BigDecimal.ROUND_DOWN);
+		return looseUnit.toString();
+		
+	}
 	
+	public String getLooseUnitsForYellowIndicator(String perpectualCount){
+		BigDecimal temp1 = new BigDecimal(6).multiply(new BigDecimal(perpectualCount)).divide(new BigDecimal(100));
+		BigDecimal temp2 = new BigDecimal(perpectualCount).subtract(temp1);
+		BigDecimal looseUnit = temp2.setScale(0,BigDecimal.ROUND_DOWN);
+		return looseUnit.toString();
+	}
 	
+	public String getLooseUnitsForRedIndicator(String perpectualCount){
+		BigDecimal temp1 = new BigDecimal(20).multiply(new BigDecimal(perpectualCount)).divide(new BigDecimal(100));
+		BigDecimal temp2 = new BigDecimal(perpectualCount).subtract(temp1);
+		BigDecimal looseUnit = temp2.setScale(0,BigDecimal.ROUND_DOWN);
+		return looseUnit.toString();
+	}
 	
-	
-	
-	
-	
+	public boolean verifyInventoryDateInDescendingOrder() throws ParseException
+	{
+		List<String>dateValueList = Base.getTextListFromWebElements(InventoryHistory_Date_List);
+		return Base.verifyDateInDescendingOrder(dateValueList);
+	}
 
 }

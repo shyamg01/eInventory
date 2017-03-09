@@ -119,7 +119,7 @@ public class US1912_PurchasesStoreLedgerBundleUserRoleAccess extends AbstractTes
 		}
 	}			
 
-	@Test(enabled=false)
+	@Test()
 	public void purchaseBundle_US1912_TC3326_level4()
 			throws RowsExceededException, BiffException, WriteException,IOException, InterruptedException {
 		/** Variable Section : **/
@@ -144,7 +144,7 @@ public class US1912_PurchasesStoreLedgerBundleUserRoleAccess extends AbstractTes
 	}
 		
 	// TC3334 : Verify that Supervisor, Supervisor w/ Role Assignment, Org Admin, Operator and Level 1 users are able to restore deleted invoices
-	@Test(groups = { "Smoke" })
+	@Test(groups = { "Smoke" },enabled=false)
 	public void purchaseBundle_US1912_TC3334_Supervisor()
 			throws RowsExceededException, BiffException, WriteException,IOException, InterruptedException {
 		/** Variable Section : **/
@@ -506,7 +506,7 @@ public class US1912_PurchasesStoreLedgerBundleUserRoleAccess extends AbstractTes
 		}
 	}		
 		
-		@Test(enabled=false)
+		@Test()
 		public void purchaseBundle_US1912_TC3341_level4() throws RowsExceededException,
 				BiffException, WriteException, IOException, InterruptedException {
 			/** Variable Section : **/
@@ -744,7 +744,7 @@ public class US1912_PurchasesStoreLedgerBundleUserRoleAccess extends AbstractTes
 		}
 	}	
 
-		@Test(enabled=false)
+		@Test()
 		public void purchaseBundle_US1912_TC3342_level4() throws RowsExceededException,
 				BiffException, WriteException, IOException, InterruptedException {
 			/** Variable Section : **/
@@ -978,7 +978,7 @@ public class US1912_PurchasesStoreLedgerBundleUserRoleAccess extends AbstractTes
 		}
 	}			
 		
-		@Test(enabled=false)
+		@Test()
 		public void purchaseBundle_US1912_TC3343_level4() throws RowsExceededException,
 				BiffException, WriteException, IOException, InterruptedException {
 			/** Variable Section : **/
@@ -1252,7 +1252,7 @@ public class US1912_PurchasesStoreLedgerBundleUserRoleAccess extends AbstractTes
 		}
 	}			
 		
-		@Test(enabled=false)
+		@Test()
 		public void purchaseBundle_US1912_TC3375_level4() throws RowsExceededException,
 				BiffException, WriteException, IOException, InterruptedException {
 			/** Variable Section : **/
@@ -1556,7 +1556,7 @@ public class US1912_PurchasesStoreLedgerBundleUserRoleAccess extends AbstractTes
 		}
 	}		
 
-		@Test(enabled=false)
+		@Test()
 		public void purchaseBundle_US1912_TC3415_level4() throws RowsExceededException,
 				BiffException, WriteException, IOException, InterruptedException {
 			/** Variable Section : **/

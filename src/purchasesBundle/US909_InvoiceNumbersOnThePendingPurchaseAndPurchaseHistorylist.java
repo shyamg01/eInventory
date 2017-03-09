@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 import common.Base;
+import common.GenericMethods;
 import common.GlobalVariable;
 import common.LoginTestData;
 import common.Reporter;
@@ -232,8 +233,9 @@ public class US909_InvoiceNumbersOnThePendingPurchaseAndPurchaseHistorylist exte
 		System.out.println("todayDate"+todayDate);
 		System.out.println("amount"+amount);
 		manualInvoiceNewPage.Submit_BT.click();
+		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(manualInvoiceNewPage.CreateManualInvoice_ConfirmationPopUp_Yes_BT)), "CreateManualInvoice_ConfirmationPopUp_Yes_BT");
 		wait.until(ExpectedConditions.visibilityOf(manualInvoiceNewPage.InvoiceSaved_Confirmation_MSG));
-		Thread.sleep(8000);
+		Thread.sleep(5000);
 		System.out.println("todayDate"+todayDate);
 		
 		if(driver.findElement(By.xpath("//table[@id='eb_purchase_table']/tbody/tr/td[4][preceding-sibling::td/span[text()='"+todayDate+"'] and following-sibling::td[text()='$"+amount+"']]/span")).getText().equalsIgnoreCase(""))

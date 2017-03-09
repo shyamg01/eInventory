@@ -23,18 +23,16 @@ import eInventoryPageClasses.RawItemWastePage;
 public class US1345_RuleCalculationCurrentCostPerUnit extends AbstractTest
 {
 	
-	
 	//TC4497 : View the cost of wrin on raw waste and raw promo page
-	
 	@Test()
 	public void pramotionWaste_US1345_TC4497() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		
 		/** Variable Section : **/
 		AbstractTest.tcName="pramotionWaste_US1345_TC4497";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String samplewRINID = GlobalVariable.rawItemWatsewrin1;
 		/*String createDate=GlobalVariable.createDate;
 		String stratDate=GlobalVariable.promotionAndWastePage_StartDate;

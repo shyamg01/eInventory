@@ -23,7 +23,6 @@ import eInventoryPageClasses.HomePage;
 public class US1565_CalculateAndDisplayUnexplainedDollerAndPercentage extends AbstractTest
 {
 	
-	
 	//TC2743 : Calculate and Display Unexplained Difference $ and %
 	
 	@Test()
@@ -32,9 +31,9 @@ public class US1565_CalculateAndDisplayUnexplainedDollerAndPercentage extends Ab
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US1565_TC2743";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		FoodOverBasePage foodOverBasePage = PageFactory.initElements(driver,FoodOverBasePage.class);
@@ -65,8 +64,6 @@ public class US1565_CalculateAndDisplayUnexplainedDollerAndPercentage extends Ab
 	
 }
 
-	
-
 	//TC2744 : Verify the calculation of Total QCR Food Cost $ .(There is nothing to verify in this test case)
 	
 	@Test()
@@ -75,9 +72,9 @@ public class US1565_CalculateAndDisplayUnexplainedDollerAndPercentage extends Ab
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US1565_TC2744";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food Over Base page
@@ -104,9 +101,9 @@ public class US1565_CalculateAndDisplayUnexplainedDollerAndPercentage extends Ab
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US1565_TC2745";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		FoodOverBasePage foodOverBasePage = PageFactory.initElements(driver,FoodOverBasePage.class);
@@ -120,13 +117,13 @@ public class US1565_CalculateAndDisplayUnexplainedDollerAndPercentage extends Ab
 		BigDecimal totalPLFoodCost=new BigDecimal(foodOverBasePage.MonthEnd_PlFoodCost_Total_Value.getText().replace("$", ""));
 		System.out.println("totalPLFoodCost"+totalPLFoodCost);
 		//Fetch the base value for all the WRIN IDs
-		String baseFood$=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_center']/tbody/tr/td[text()='Base Food']/following-sibling::td[2]")), "Base Food $").replace("$", "");
-		String completedWaste$=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_left']/tbody/tr/td[text()='Completed Waste']/following-sibling::td[5]")), "Completed Waste $").replace("$", "");
-		String rawWaste$=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_left']/tbody/tr/td[text()='Raw Waste']/following-sibling::td[5]")), "Raw Waste $").replace("$", "");
-		String condiments$=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_left']/tbody/tr/td[text()='Condiments']/following-sibling::td[5]")), "Condiments $").replace("$", "");
-		String empMgrMeals$=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_left']/tbody/tr/td[text()='Emp/Mgr Meals']/following-sibling::td[5]")), "Emp/Mgr Meals $").replace("$", "");
-		String discountCoupons$=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_left']/tbody/tr/td[text()='Discount/Coupons']/following-sibling::td[5]")), "Discount/Coupons $").replace("$", "");
-		String statVariance$=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_left']/tbody/tr/td[text()='Stat Variance']/following-sibling::td[5]")), "StatVariance $").replace("$", "");
+		String baseFood$=GenericMethods.getText(driver.findElement(By.xpath("(//table[@id='current_month_food_cost'])[2]/tbody/tr/td[text()='Base Food']/following-sibling::td[2]")), "Base Food $").replace("$", "");
+		String completedWaste$=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_contributors']/tbody/tr/td[text()='Completed Waste']/following-sibling::td[5]")), "Completed Waste $").replace("$", "");
+		String rawWaste$=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_contributors']/tbody/tr/td[text()='Raw Waste']/following-sibling::td[5]")), "Raw Waste $").replace("$", "");
+		String condiments$=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_contributors']/tbody/tr/td[text()='Condiments']/following-sibling::td[5]")), "Condiments $").replace("$", "");
+		String empMgrMeals$=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_contributors']/tbody/tr/td[text()='Emp/Mgr Meals']/following-sibling::td[5]")), "Emp/Mgr Meals $").replace("$", "");
+		String discountCoupons$=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_contributors']/tbody/tr/td[text()='Discounts/Coupons']/following-sibling::td[5]")), "Discount/Coupons $").replace("$", "");
+		String statVariance$=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_contributors']/tbody/tr/td[text()='Stat Variance']/following-sibling::td[5]")), "StatVariance $").replace("$", "");
 		System.out.println("baseFood$"+baseFood$);
 		System.out.println("completedWaste$"+completedWaste$);
 		System.out.println("rawWaste$"+rawWaste$);
@@ -138,7 +135,7 @@ public class US1565_CalculateAndDisplayUnexplainedDollerAndPercentage extends Ab
 		BigDecimal totalQSRFoodCost=new BigDecimal(baseFood$).add(new BigDecimal(completedWaste$)).add(new BigDecimal(rawWaste$)).add(new BigDecimal(condiments$)).add(new BigDecimal(empMgrMeals$)).add(new BigDecimal(discountCoupons$)).add(new BigDecimal(statVariance$));
 		System.out.println("totalQSRFoodCost"+totalQSRFoodCost);
 		//Find the unexplained difference $ Value
-		BigDecimal unexplainedDifference$=new BigDecimal(GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_left']/tbody/tr/td[text()='Unexplained']/following-sibling::td[5]")), "Unexplained Difference $").replace("$", ""));
+		BigDecimal unexplainedDifference$=new BigDecimal(GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_contributors']/tbody/tr/td[text()='Unexplained']/following-sibling::td[5]")), "Unexplained Difference $").replace("$", ""));
 		System.out.println("unexplainedDifference$"+unexplainedDifference$);
 		System.out.println("totalPLFoodCost.subtract(totalQSRFoodCost)"+totalPLFoodCost.subtract(totalQSRFoodCost));
 		/*Verify Unexplained Difference $ is calculated as:
@@ -172,9 +169,9 @@ public class US1565_CalculateAndDisplayUnexplainedDollerAndPercentage extends Ab
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US1565_TC2748";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		FoodOverBasePage foodOverBasePage = PageFactory.initElements(driver,FoodOverBasePage.class);
@@ -184,13 +181,13 @@ public class US1565_CalculateAndDisplayUnexplainedDollerAndPercentage extends Ab
 		GenericMethods.clickOnElement(foodOverBasePage.MonthEnd_BT, "foodOverBasePage.MonthEnd_BT");
 		wait.until(ExpectedConditions.visibilityOf(foodOverBasePage.MonthEnd_Actual_Column_Label));
 		//Find the unexplained difference $ Value
-		BigDecimal unexplainedDifference$=new BigDecimal(GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_left']/tbody/tr/td[text()='Unexplained']/following-sibling::td[5]")), "Unexplained Difference $").replace("$", ""));
+		BigDecimal unexplainedDifference$=new BigDecimal(GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_contributors']/tbody/tr/td[text()='Unexplained']/following-sibling::td[5]")), "Unexplained Difference $").replace("$", ""));
 		System.out.println("unexplainedDifference$"+unexplainedDifference$);
 		//Product Net Sales
-		BigDecimal productNetSales$=new BigDecimal(GenericMethods.getText(driver.findElement(By.xpath("//div[text()='Product Net Sales:']/following-sibling::div")), "Product Net Sales $").replace("$", ""));
+		BigDecimal productNetSales$=new BigDecimal(GenericMethods.getText(foodOverBasePage.MonthEnd_NetSales_Value, "Product Net Sales $").replace("$", ""));
 		System.out.println("productNetSales$"+productNetSales$);
 		//Unexplained Difference %
-		BigDecimal unexplainedDifferencePercentage=new BigDecimal(GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_left']/tbody/tr/td[text()='Unexplained']/following-sibling::td[3]")), "Unexplained Difference %").replace("%", ""));
+		BigDecimal unexplainedDifferencePercentage=new BigDecimal(GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_contributors']/tbody/tr/td[text()='Unexplained']/following-sibling::td[3]")), "Unexplained Difference %").replace("%", ""));
 		System.out.println("unexplainedDifferencePercentage"+unexplainedDifferencePercentage);
 		System.out.println("unexplainedDifferencePercentage.floatValue()"+unexplainedDifferencePercentage.floatValue());
 //		System.out.println("(unexplainedDifference$.divide(productNetSales$)).divide(new BigDecimal(100)))"+unexplainedDifference$.divide(productNetSales$).floatValue());
@@ -214,9 +211,6 @@ public class US1565_CalculateAndDisplayUnexplainedDollerAndPercentage extends Ab
 
 }
 	
-	
-		
-	
 	//TC2756 : Verify the calculation of Unexplained Difference field under Projection Percentage% column for Projection month
 	
 	@Test()
@@ -225,9 +219,9 @@ public class US1565_CalculateAndDisplayUnexplainedDollerAndPercentage extends Ab
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US1565_TC2756";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		FoodOverBasePage foodOverBasePage = PageFactory.initElements(driver,FoodOverBasePage.class);

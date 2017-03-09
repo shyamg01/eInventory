@@ -37,9 +37,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3219";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = PageFactory.initElements(driver, PurchasesPage.class);
@@ -79,9 +79,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3222";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
@@ -331,9 +331,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3224";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
@@ -448,9 +448,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3225";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		String createdate = GlobalVariable.createDate;
@@ -593,9 +593,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3233";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level2_SSO_UserId;
-		String password = LoginTestData.level2_SSO_Password;
-		String storeId = LoginTestData.level2StoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
@@ -643,9 +643,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3238";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level2_SSO_UserId;
-		String password = LoginTestData.level2_SSO_Password;
-		String storeId = LoginTestData.level2StoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		RawItemWastePage rawItemWastePage = PageFactory.initElements(driver,RawItemWastePage.class);
@@ -684,9 +684,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3239";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		RawItemPromoPage rawItemPromoPage = PageFactory.initElements(driver,RawItemPromoPage.class);
@@ -725,9 +725,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3240";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		CompletedWastePage completedWastePage = PageFactory.initElements(driver,CompletedWastePage.class);
@@ -766,9 +766,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3248";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.rawItemWastewrin4;
 		String caseQuantity = "4";
 		String innerPackQuantity = "";
@@ -901,9 +901,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3250";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String wrinId1 = GlobalVariable.rawItemWastewrin2;
 		String wrinId1Description = GlobalVariable.rawItemWastewrin2Description;
 		String wrinId2 = GlobalVariable.rawItemWatsewrin1;
@@ -981,9 +981,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3251";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String wrinId1 = GlobalVariable.rawItemWatsewrin1;
 		String wrinId2 = GlobalVariable.rawItemWastewrin2;
 		String caseQuantity = "2";
@@ -1047,9 +1047,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3252";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String wrinId1 = GlobalVariable.rawItemWatsewrin1;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -1121,9 +1121,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3253";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String wrinId1 = GlobalVariable.rawItemWatsewrin1;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -1223,9 +1223,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3254";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String wrinId1 = GlobalVariable.rawItemWatsewrin1;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -1327,9 +1327,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3256";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String wrinId1 = GlobalVariable.rawItemWatsewrin1;
 		String caseQuantity = "2";
 		String innerPackQuantity = "2";
@@ -1390,9 +1390,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3258";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String wrinId1 = GlobalVariable.rawItemWatsewrin1;
 		String wrinId2 = GlobalVariable.rawItemWastewrin2;
 		String wrinId3 = GlobalVariable.rawItemWastewrin3;
@@ -1469,9 +1469,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3261";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemId = GlobalVariable.completedWasteWrin1;
 		String quantity = "2";
 		String createDate = GlobalVariable.createDate;
@@ -1567,9 +1567,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3262";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemId1 = GlobalVariable.completedWasteWrin3;
 		String menuItem1Description = GlobalVariable.completedWasteWrin3Description;
 		String menuItemId2 = GlobalVariable.completedWasteWrin2;
@@ -1632,9 +1632,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3263";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		String menuItemId2 = GlobalVariable.completedWasteWrin2;
 		String quantity = "2";
@@ -1700,9 +1700,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3264";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -1779,9 +1779,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3265";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -1874,9 +1874,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3266";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -1965,9 +1965,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3267";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		String time=GlobalVariable.time;
 		String quantity = "2";
@@ -2031,9 +2031,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3268";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		String menuItemId2 = GlobalVariable.completedWasteWrin2;
 		String menuItemId3 = GlobalVariable.completedWasteWrin3;
@@ -2113,9 +2113,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3270";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String wrinId1 = GlobalVariable.rawItemWatsewrin1;
 		String caseQuantity = "7";
 		String innerPackQuantity = "2";
@@ -2198,9 +2198,9 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US855_TC3271";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		String createdate = GlobalVariable.createDate;

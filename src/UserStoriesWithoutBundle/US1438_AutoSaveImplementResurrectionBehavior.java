@@ -11,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
+import common.Base;
 import common.GenericMethods;
 import common.GlobalVariable;
 import common.LoginTestData;
@@ -37,8 +38,6 @@ public class US1438_AutoSaveImplementResurrectionBehavior extends AbstractTest{
 		String caseQuantity = "4";
 		String innerPackQuantity = "2";
 		String looseUnitQuantity = "3";
-		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
 		String wrinId1 = GlobalVariable.rawItemWatsewrin1;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -49,7 +48,6 @@ public class US1438_AutoSaveImplementResurrectionBehavior extends AbstractTest{
 		promotionsAndWastePage.RawPromo_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(rawItemPromoPage.RawPromo_Title));
 		rawItemPromoPage.removeAllWrinIdFromRawPromoPage();
-		rawItemPromoPage.selectDateForRawPromo(createDate).selectTimeInRawPromoForm(time);
 		//Create a raw waste entry
 		rawItemPromoPage.searchAndSelectRawPromoItem(wrinId1);
 		rawItemPromoPage.addQuantitiesForMultipleWrin(wrinId1, innerPackQuantity, caseQuantity, looseUnitQuantity);
@@ -85,46 +83,27 @@ public class US1438_AutoSaveImplementResurrectionBehavior extends AbstractTest{
 		String userId = LoginTestData.level1_SSO_UserId;
 		String storeId = LoginTestData.level1StoreId;
 		String samplewRINID1 = GlobalVariable.createDailyInventoryWrin1;
-		String stratDate = GlobalVariable.startDate;
-		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
+		String quantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PhysicalInventoryPage physicalInventoryPage = homePage.selectUserWithSSOLogin(userId, password)
 				.selectLocation(storeId).goToPhysicalInventoryPage();
-		physicalInventoryPage.selectStartDate(stratDate);
-		Thread.sleep(5000);
-		String inventoryTime = physicalInventoryPage.getTimeForNewInventory(createDate, time);
-		System.out.println("inventoryTime " + inventoryTime);
-		GenericMethods.clickOnElement(physicalInventoryPage.CreateDailyInventory_BT,"CreateDailyInventory_BT");
-		Thread.sleep(5000);
-		wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.DailyInventoryList_Title));
-		Thread.sleep(3000);
-		physicalInventoryPage.selectADateForPhysicalInventory(createDate).selectTimeForPhysicalInventory(inventoryTime);
-		physicalInventoryPage.searchRawItemInInventoryList(samplewRINID1);
-		GenericMethods.clearValueOfElement(physicalInventoryPage.OuterPackQty_TB, "OuterPackQty_TB");
-		GenericMethods.enterValueInElement(physicalInventoryPage.OuterPackQty_TB, "OuterPackQty_TB", "10");
-		GenericMethods.clearValueOfElement(physicalInventoryPage.LooseCountQty_TB, "LooseCountQty_TB");
-		GenericMethods.enterValueInElement(physicalInventoryPage.LooseCountQty_TB, "LooseCountQty_TB", "20");
-		GenericMethods.clickOnElement(physicalInventoryPage.CreateInventory_SliderToggle_BT, "CreateInventory_SliderToggle_BT");
+		GenericMethods.clickOnElement(physicalInventoryPage.DailyInventory_BT, "DailyInventory_BT");
+		wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.DailyInventoryPopUp_Title));
+		physicalInventoryPage.verifyAndAddWrinInTable(samplewRINID1, quantity,  quantity,  quantity);
+		String itemTotal = physicalInventoryPage.getItemTotalForAWrin(samplewRINID1);
+		System.out.println("itemTotal "+ itemTotal);
 		physicalInventoryPage.goToPromotionsAndWastePage();
     	physicalInventoryPage.goToPhysicalInventoryPage();
     	Thread.sleep(6000);
-    	GenericMethods.clickOnElement(physicalInventoryPage.CreateDailyInventory_BT,"CreateDailyInventory_BT");
+    	GenericMethods.clickOnElement(physicalInventoryPage.DailyInventory_BT, "DailyInventory_BT");
 		Thread.sleep(5000);
-		wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.DailyInventoryList_Title));
-		physicalInventoryPage.searchRawItemInInventoryList(samplewRINID1);
-		System.out.println("outer "+physicalInventoryPage.OuterPackQty_TB.getAttribute("value") );
-		System.out.println("outer "+physicalInventoryPage.LooseCountQty_TB.getAttribute("value") );
-		System.out.println("outer "+physicalInventoryPage.CreateInventoryPopUp_Date_TB.getAttribute("value") );
-		System.out.println("outer "+physicalInventoryPage.SelectTime_TB.getText());
-		if(physicalInventoryPage.OuterPackQty_TB.getAttribute("value").equals("10")
-				& physicalInventoryPage.LooseCountQty_TB.getAttribute("value").equals("20")
-				& physicalInventoryPage.CreateInventoryPopUp_Date_TB.getAttribute("value").equals(createDate)
-				& physicalInventoryPage.SelectTime_TB.getText().equals(inventoryTime)){
+		wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.DailyInventoryPopUp_Title));
+		String savedItemTotal = physicalInventoryPage.getItemTotalForAWrin(samplewRINID1);
+		if(itemTotal.equals(savedItemTotal)){
 			Reporter.reportPassResult(
 					browser,
-					" User should be able to view the previously entered data for daily inventory in Physical Inventory Page",
+					"User should be able to view the previously entered data for daily inventory in Physical Inventory Page",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(

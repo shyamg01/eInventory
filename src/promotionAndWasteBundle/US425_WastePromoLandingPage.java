@@ -31,9 +31,9 @@ public class US425_WastePromoLandingPage extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US425_TC1739";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		/***********************************/
@@ -71,9 +71,9 @@ public class US425_WastePromoLandingPage extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US425_TC1741";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		String createdate = GlobalVariable.createDate;
@@ -137,9 +137,9 @@ public class US425_WastePromoLandingPage extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US425_TC3241";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
@@ -184,9 +184,9 @@ public class US425_WastePromoLandingPage extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US425_TC3242";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		String createdate = GlobalVariable.createDate;
@@ -229,9 +229,9 @@ public class US425_WastePromoLandingPage extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US425_TC3243";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
@@ -276,9 +276,9 @@ public class US425_WastePromoLandingPage extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US425_TC3244";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
@@ -334,9 +334,9 @@ public class US425_WastePromoLandingPage extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US425_TC4495";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String createdate = GlobalVariable.createDate;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);

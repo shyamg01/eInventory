@@ -38,9 +38,9 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US1317_TC2301";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
@@ -69,9 +69,9 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US1317_TC2302";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String createDate = GlobalVariable.createDate;
 		String time = GlobalVariable.time;
 		/***********************************/
@@ -106,9 +106,9 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US1317_TC2303";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		//String createDate = GlobalVariable.createDate;
 		/*String time = GlobalVariable.time;*/
 		String menuItemId1 = GlobalVariable.completedWasteWrin3;
@@ -152,9 +152,9 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US1317_TC2308";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String createDate = GlobalVariable.createDate;
 	/*	String time = GlobalVariable.time;*/
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
@@ -234,9 +234,9 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US1317_TC2313";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String createDate = GlobalVariable.createDate;
 		String time = GlobalVariable.time;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
@@ -303,9 +303,9 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US1317_TC2320";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String createDate = GlobalVariable.createDate;
 		/*String time = GlobalVariable.time;*/
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
@@ -348,9 +348,9 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US1317_TC2322";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String createDate = GlobalVariable.createDate;
 		String time = GlobalVariable.time;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
@@ -391,9 +391,9 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US1317_TC2323";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String createDate = GlobalVariable.createDate;
 		String time = GlobalVariable.time;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
@@ -456,9 +456,9 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US1317_TC2324";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		String quantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		/***********************************/
@@ -517,9 +517,9 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US1317_TC2325";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -562,9 +562,9 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		AbstractTest.tcName="promotionWaste_US1317_TC2326";
 		PromotionsAndWastePage promotionsAndWastePage;
 		MenuItemActivityAndInformationPage menuItemActivityAndInformationPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		String quantity = String.valueOf(Base.generateNdigitRandomNumber(2));
 		String startDate = GlobalVariable.startDate;
@@ -678,9 +678,9 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		PromotionsAndWastePage promotionsAndWastePage;
 		RawItemActivityPage rawItemActivityPage;
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		String receipeWrinItemId= GlobalVariable.receipeWrinForCompletedWasteWrin1;
 		String quantity = String.valueOf(Base.generateNdigitRandomNumber(2));
@@ -696,7 +696,6 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		rawItemActivityPage.selectStartDate(startDate).selectEndDate(endDate);
 		rawItemActivityPage.searchAndSelectWRINID(receipeWrinItemId);
 		Thread.sleep(2000);
-		rawItemActivityPage.clickOnDateGroup(createDate);
 		int noOfWasteActivities = rawItemActivityPage.getNumberOfCompletedWasteActivities(createDate);
 		System.out.println("noOfWasteActivities "+noOfWasteActivities);
 		//Get Middle Range Yield from Raw item activity page
@@ -750,7 +749,6 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		rawItemActivityPage.selectStartDate(startDate).selectEndDate(endDate);
 		rawItemActivityPage.searchAndSelectWRINID(receipeWrinItemId);
 		Thread.sleep(2000);
-		rawItemActivityPage.clickOnDateGroup(createDate);
 		System.out.println(rawItemActivityPage.getNumberOfCompletedWasteActivities(createDate));
 		if(rawItemActivityPage.getNumberOfCompletedWasteActivities(createDate) == noOfWasteActivities +1
 				& (rawItemActivityPage.verifyCompletedWasteEventCountMatchedForSelectedDate(createDate, String.valueOf(expectedCompletedWasteCount1)) || rawItemActivityPage.verifyCompletedWasteEventCountMatchedForSelectedDate(createDate, String.valueOf(expectedCompletedWasteCount2)))){
@@ -775,9 +773,9 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US1317_TC2565";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String valueMeal = GlobalVariable.valueMealDescription;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -815,9 +813,9 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US1317_TC3229";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemId =GlobalVariable.completedWasteWrin1;
 		/*String receipeWrinItemId= GlobalVariable.receipeWrinForCompletedWasteWrin1;
 		String receipeItemUomPerCase = GlobalVariable.receipeWrinForCompletedWasteWrin1_UOMPerCase;
@@ -881,9 +879,9 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US1317_TC2328";
 		RawItemActivityPage rawItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String wrinId1 = GlobalVariable.rawItemWastewrin2;
 		String caseQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		String innerPackQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
@@ -901,7 +899,6 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		rawItemActivityPage.selectStartDate(startDate).selectEndDate(endDate);
 		rawItemActivityPage.searchAndSelectWRINID(wrinId1);
 		Thread.sleep(5000);
-		rawItemActivityPage.clickOnDateGroup(createDate);
 		int noOfWasteActivities = rawItemActivityPage.getNumberOfWasteActivities(createDate);
 		//homePage.Menu_DD_BT.click();
 		//wait.until(ExpectedConditions.elementToBeClickable(homePage.Menu_Back_BT)).click();
@@ -926,7 +923,6 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		rawItemActivityPage.selectStartDate(startDate).selectEndDate(endDate);
 		rawItemActivityPage.searchAndSelectWRINID(wrinId1);
 		Thread.sleep(5000);
-		rawItemActivityPage.clickOnDateGroup(createDate);
 		if(rawItemActivityPage.getNumberOfWasteActivities(createDate) == noOfWasteActivities +1
 				& rawItemActivityPage.verifyRawWasteEventCountMatchedForSelectedDate(createDate, expectedCount)){
 			Reporter.reportPassResult(
@@ -949,9 +945,9 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US1317_TC2329";
 		RawItemActivityPage rawItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String wrinId1 = GlobalVariable.rawItemPromowrin2;
 		String caseQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		String innerPackQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
@@ -969,7 +965,6 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		rawItemActivityPage.selectStartDate(startDate).selectEndDate(endDate);
 		rawItemActivityPage.searchAndSelectWRINID(wrinId1);
 		Thread.sleep(5000);
-		rawItemActivityPage.clickOnDateGroup(createDate);
 		int noOfPromoActivities = rawItemActivityPage.getNoumberOfPromoActivities(createDate);
 		/*homePage.Menu_DD_BT.click();
 		wait.until(ExpectedConditions.elementToBeClickable(homePage.Menu_Back_BT)).click();*/
@@ -993,7 +988,6 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		rawItemActivityPage.selectStartDate(startDate).selectEndDate(endDate);
 		rawItemActivityPage.searchAndSelectWRINID(wrinId1);
 		Thread.sleep(5000);
-		rawItemActivityPage.clickOnDateGroup(createDate);
 		if(rawItemActivityPage.getNoumberOfPromoActivities(createDate) == noOfPromoActivities +1
 				& rawItemActivityPage.verifyRawPromoEventCountMatchedForSelectedDate(createDate, expectedCount)){
 			Reporter.reportPassResult(
@@ -1018,9 +1012,9 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		PromotionsAndWastePage promotionsAndWastePage;
 		RawItemActivityPage rawItemActivityPage;
 		MenuItemActivityAndInformationPage menuItemActivityPage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		String receipeWrinItemId= GlobalVariable.receipeWrinForCompletedWasteWrin1;
 		String quantity = String.valueOf(Base.generateNdigitRandomNumber(1));
@@ -1041,7 +1035,6 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		rawItemActivityPage.selectStartDate(startDate).selectEndDate(endDate);
 		rawItemActivityPage.searchAndSelectWRINID(receipeWrinItemId);
 		Thread.sleep(2000);
-		rawItemActivityPage.clickOnDateGroup(createDate);
 		int noOfCompletedWasteActivities = rawItemActivityPage.getNumberOfCompletedWasteActivities(createDate);
 		int noOfPromoActivities = rawItemActivityPage.getNoumberOfPromoActivities(createDate);
 		int noOfWasteActivities = rawItemActivityPage.getNumberOfWasteActivities(createDate);
@@ -1118,7 +1111,6 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		rawItemActivityPage.selectStartDate(startDate).selectEndDate(endDate);
 		rawItemActivityPage.searchAndSelectWRINID(receipeWrinItemId);
 		Thread.sleep(2000);
-		rawItemActivityPage.clickOnDateGroup(createDate);
 		System.out.println(rawItemActivityPage.getNumberOfCompletedWasteActivities(createDate));
 		if(rawItemActivityPage.getNumberOfCompletedWasteActivities(createDate) == noOfCompletedWasteActivities +1
 				& rawItemActivityPage.verifyCompletedWasteEventCountMatchedForSelectedDate(createDate, String.valueOf(expectedCompletedWasteCount))){
@@ -1171,9 +1163,9 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 			AbstractTest.tcName="promotionWaste_US1317_TC3228";
 			PromotionsAndWastePage promotionsAndWastePage;
 			FoodOverBasePage foodOverBasePage;
-			String userId = LoginTestData.level1_SSO_UserId;
-			String password = LoginTestData.level1_SSO_Password;
-			String storeId = LoginTestData.level1StoreId;
+			String userId =  LoginTestData.userId;
+			String password = LoginTestData.password;
+			String storeId = LoginTestData.StoreId;
 			String menuItemId1 = GlobalVariable.completedWasteWrin_YWasteIndicator;
 			String quantity = String.valueOf(Base.generateNdigitRandomNumber(2));
 			String createDate = GlobalVariable.createDate;
@@ -1242,9 +1234,9 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 			/** Variable Section : **/
 			AbstractTest.tcName="promotionWaste_US1317_TC4426";
 			PromotionsAndWastePage promotionsAndWastePage;
-			String userId = LoginTestData.level1_SSO_UserId;
-			String password = LoginTestData.level1_SSO_Password;
-			String storeId = LoginTestData.level1StoreId;
+			String userId =  LoginTestData.userId;
+			String password = LoginTestData.password;
+			String storeId = LoginTestData.StoreId;
 			String createDate = GlobalVariable.createDate;
 			String menuItemId1 = GlobalVariable.completedWasteWrin1;
 			String quantity = String.valueOf(Base.generateNdigitRandomNumber(1));

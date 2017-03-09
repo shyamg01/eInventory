@@ -5,6 +5,8 @@ import java.io.IOException;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
@@ -38,8 +40,6 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 		String caseQuantity = "4";
 		String innerPackQuantity = "2";
 		String looseUnitQuantity = "3";
-		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
 		String wrinId1 = GlobalVariable.rawItemWatsewrin1;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -50,7 +50,6 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 		promotionsAndWastePage.RawPromo_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(rawItemPromoPage.RawPromo_Title));
 		rawItemPromoPage.removeAllWrinIdFromRawPromoPage();
-		rawItemPromoPage.selectDateForRawPromo(createDate).selectTimeInRawPromoForm(time);
 		//Create a raw waste entry
 		rawItemPromoPage.searchAndSelectRawPromoItem(wrinId1);
 		rawItemPromoPage.addQuantitiesForMultipleWrin(wrinId1, innerPackQuantity, caseQuantity, looseUnitQuantity);
@@ -128,8 +127,6 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 		String caseQuantity = "3";
 		String innerPackQuantity ="1";
 		String looseUnitQuantity ="4";
-		String date = GlobalVariable.createDate;
-		String transferTime = GlobalVariable.transferTime;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
@@ -138,7 +135,6 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.CreateNewTransfers_BT)).click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 		//Select date and time
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
 		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
 		transferLandingPage.selectTransferType(transferType).selectLocationToTransfer(transferStoreNumber)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
@@ -214,8 +210,6 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 		String caseQuantity = "4";
 		String innerPackQuantity = "2";
 		String looseUnitQuantity = "3";
-		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
 		String wrinId1 = GlobalVariable.rawItemWatsewrin1;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -226,7 +220,6 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 		promotionsAndWastePage.RawPromo_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(rawItemPromoPage.RawPromo_Title));
 		rawItemPromoPage.removeAllWrinIdFromRawPromoPage();
-		rawItemPromoPage.selectDateForRawPromo(createDate).selectTimeInRawPromoForm(time);
 		//Create a raw waste entry
 		rawItemPromoPage.searchAndSelectRawPromoItem(wrinId1);
 		rawItemPromoPage.addQuantitiesForMultipleWrin(wrinId1, innerPackQuantity, caseQuantity, looseUnitQuantity);
@@ -314,8 +307,6 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 		String caseQuantity = "3";
 		String innerPackQuantity ="1";
 		String looseUnitQuantity ="4";
-		String date = GlobalVariable.createDate;
-		String transferTime = GlobalVariable.transferTime;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
@@ -323,8 +314,6 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 				.goToTransferLandingPage();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.CreateNewTransfers_BT)).click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
-		//Select date and time
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
 		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
 		transferLandingPage.selectTransferType(transferType).selectLocationToTransfer(transferStoreNumber)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
@@ -409,7 +398,7 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 			BiffException, WriteException, IOException, InterruptedException 
 	{
 		/** Variable Section : **/
-		AbstractTest.tcName="UserStoriesWithoutBundle_US1439_TC4403";
+		AbstractTest.tcName="UserStoriesWithoutBundle_US1439_TC4403_RawPromo";
 		PromotionsAndWastePage promotionsAndWastePage;
 		String password = LoginTestData.level1_SSO_Password;
 		String userId = LoginTestData.level1_SSO_UserId;
@@ -417,8 +406,6 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 		String caseQuantity = "4";
 		String innerPackQuantity = "2";
 		String looseUnitQuantity = "3";
-		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
 		String wrinId1 = GlobalVariable.rawItemWatsewrin1;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -429,7 +416,6 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 		promotionsAndWastePage.RawPromo_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(rawItemPromoPage.RawPromo_Title));
 		rawItemPromoPage.removeAllWrinIdFromRawPromoPage();
-		rawItemPromoPage.selectDateForRawPromo(createDate).selectTimeInRawPromoForm(time);
 		//Create a raw waste entry
 		rawItemPromoPage.searchAndSelectRawPromoItem(wrinId1);
 		rawItemPromoPage.addQuantitiesForMultipleWrin(wrinId1, innerPackQuantity, caseQuantity, looseUnitQuantity);
@@ -528,8 +514,6 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 		String caseQuantity = "3";
 		String innerPackQuantity ="1";
 		String looseUnitQuantity ="4";
-		String date = GlobalVariable.createDate;
-		String transferTime = GlobalVariable.transferTime;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		//Navigate to Transfer Landing page and click on create new transfer button
@@ -537,8 +521,6 @@ public class US1439_AutoSaveCleanUpExpiredAutoSaveInformation extends AbstractTe
 				.goToTransferLandingPage();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.CreateNewTransfers_BT)).click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
-		//Select date and time
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(transferTime);
 		//Select the transfer type as "in" and select the store from dropdown an add the transfer details
 		transferLandingPage.selectTransferType(transferType).selectLocationToTransfer(transferStoreNumber)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);

@@ -11,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
+import common.GenericMethods;
 import common.GlobalVariable;
 import common.LoginTestData;
 import common.Reporter;
@@ -33,13 +34,12 @@ public class US961_FlipListsAcrossTheInventoryApplication extends AbstractTest{
 		String password = LoginTestData.level1_SSO_Password;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String storeId = LoginTestData.level1StoreId;
-		String stratDate=GlobalVariable.startDate;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PhysicalInventoryPage physicalInventoryPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToPhysicalInventoryPage();
-		physicalInventoryPage.selectStartDate(stratDate);
 		Thread.sleep(5000);
+		GenericMethods.clickOnElement(physicalInventoryPage.InventoryHistory_BT, "InventoryHistory_BT");
 		if (physicalInventoryPage.verifyInventoryDateInDescendingOrder()) {
 			Reporter.reportPassResult(
 					browser,

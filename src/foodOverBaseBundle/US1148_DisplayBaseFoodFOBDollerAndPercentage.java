@@ -31,9 +31,9 @@ public class US1148_DisplayBaseFoodFOBDollerAndPercentage extends AbstractTest
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US1148_TC2470";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String pattern=("(.*)(%)");
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -44,7 +44,7 @@ public class US1148_DisplayBaseFoodFOBDollerAndPercentage extends AbstractTest
 		GenericMethods.clickOnElement(foodOverBasePage.CurrentMonth_BT, "foodOverBasePage.CurrentMonth_BT");
 		wait.until(ExpectedConditions.visibilityOf(foodOverBasePage.CurrentMonth_BaseFood_Label));
 		//User should be able to view the aggregated month to date Base Food % in the Month to Date (actual) % column.
-		String baseFoodPercentage=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='current_month_right']/tbody/tr/td[text()='Base Food:']/following-sibling::td[1]")), "Base Foor Month To Date % Value");
+		String baseFoodPercentage=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='current_month_food_cost']/tbody/tr/td[text()='Base Food']/following-sibling::td[1]")), "Base Foor Month To Date % Value");
 		System.out.println("baseFoodPercentage"+baseFoodPercentage);
 		System.out.println("Pattern.compile(pattern)"+Pattern.compile(pattern));
 		if(Pattern.compile(pattern).matcher(baseFoodPercentage).matches())
@@ -66,17 +66,15 @@ public class US1148_DisplayBaseFoodFOBDollerAndPercentage extends AbstractTest
 
 	//TC2474 : Verify the aggregated month Base Food % in the Actual % column for each historical month
 	
-	
-
 	@Test()
 	public void foodOverBase_US1148_TC2474() throws RowsExceededException,
 	BiffException, WriteException, IOException, InterruptedException 
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US1148_TC2474";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String pattern=("(.*)(%)");
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -118,17 +116,15 @@ public class US1148_DisplayBaseFoodFOBDollerAndPercentage extends AbstractTest
 
 	
 	//TC2732 : Verify Base Food % on food over base page.
-	
-	
 	@Test()
 	public void foodOverBase_US1148_TC2732() throws RowsExceededException,
 	BiffException, WriteException, IOException, InterruptedException 
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US1148_TC2732";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		FoodOverBasePage foodOverBasePage = PageFactory.initElements(driver,FoodOverBasePage.class);
@@ -138,13 +134,13 @@ public class US1148_DisplayBaseFoodFOBDollerAndPercentage extends AbstractTest
 		GenericMethods.clickOnElement(foodOverBasePage.CurrentMonth_BT, "foodOverBasePage.CurrentMonth_BT");
 		wait.until(ExpectedConditions.visibilityOf(foodOverBasePage.CurrentMonth_BaseFood_Label));
 		//Fetch the aggregated Base Food Cost $
-		BigDecimal baseFoodCost$=new BigDecimal(GenericMethods.getText(driver.findElement(By.xpath("//table[@id='current_month_right']/tbody/tr/td[text()='Base Food:']/following-sibling::td[2]")), "Base Food $").replace("$", ""));
+		BigDecimal baseFoodCost$=new BigDecimal(GenericMethods.getText(driver.findElement(By.xpath("//table[@id='current_month_food_cost']/tbody/tr/td[text()='Base Food']/following-sibling::td[2]")), "Base Food $").replace("$", ""));
 		//Fetch the aggregated Product Net Sales $
-		BigDecimal  netSales$=new BigDecimal(GenericMethods.getText(driver.findElement(By.xpath("//div[text()='Month-to-Date Product Net Sales:']/../following-sibling::div/div[1]")), "Net Sales $").replace("$", ""));
+		BigDecimal  netSales$=new BigDecimal(GenericMethods.getText(foodOverBasePage.CurrentMonth_NetSales_Value,"CurrentMonth_NetSales_Value").replace("$", ""));
 		//Fetch the Base Food %
-		BigDecimal baseFoodCostPercentage=new BigDecimal(GenericMethods.getText(driver.findElement(By.xpath("//table[@id='current_month_right']/tbody/tr/td[text()='Base Food:']/following-sibling::td[1]")), "Base Food %").replace("%", ""));
-		/*System.out.println("(baseFoodCost$.floatValue()/netSales$.floatValue())*100"+(baseFoodCost$.floatValue()/netSales$.floatValue())*100);
-		System.out.println("baseFoodCostPercentage.floatValue()"+baseFoodCostPercentage);*/
+		BigDecimal baseFoodCostPercentage=new BigDecimal(GenericMethods.getText(driver.findElement(By.xpath("//table[@id='current_month_food_cost']/tbody/tr/td[text()='Base Food']/following-sibling::td[1]")), "Base Food %").replace("%", ""));
+		/*System.out.println("(baseFoodCost$.floatValue()/netSales$.floatValue())*100"+(baseFoodCost$.floatValue()/netSales$.floatValue())*100);*/
+		System.out.println("baseFoodCostPercentage.floatValue()"+baseFoodCostPercentage);
 		BigDecimal calculatedPercent = baseFoodCost$.divide(netSales$,8,RoundingMode.FLOOR).multiply(new BigDecimal(100));
 		System.out.println("calculatedPercent   "+calculatedPercent);
 		BigDecimal calculatedPercent1 = calculatedPercent.setScale(2, BigDecimal.ROUND_DOWN);
@@ -175,9 +171,9 @@ public class US1148_DisplayBaseFoodFOBDollerAndPercentage extends AbstractTest
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US1148_TC2467";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String pattern=("(\\$)(.*)");
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -188,7 +184,7 @@ public class US1148_DisplayBaseFoodFOBDollerAndPercentage extends AbstractTest
 		GenericMethods.clickOnElement(foodOverBasePage.CurrentMonth_BT, "foodOverBasePage.CurrentMonth_BT");
 		wait.until(ExpectedConditions.visibilityOf(foodOverBasePage.CurrentMonth_BaseFood_Label));
 		//User should be able to view the aggregated month to date Base Food % in the Month to Date (actual) % column.
-		String baseFooddoller=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='current_month_right']/tbody/tr/td[text()='Base Food:']/following-sibling::td[2]")), "Base Foor Month To Date $ Value");
+		String baseFooddoller=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='current_month_food_cost']/tbody/tr/td[text()='Base Food']/following-sibling::td[2]")), "Base Foor Month To Date $ Value");
 		System.out.println("baseFooddoller"+baseFooddoller);
 		System.out.println("Pattern.compile(pattern)"+Pattern.compile(pattern));
 		if(Pattern.compile(pattern).matcher(baseFooddoller).matches())
@@ -219,9 +215,9 @@ public class US1148_DisplayBaseFoodFOBDollerAndPercentage extends AbstractTest
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US1148_TC2472";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String pattern=("(.*)(%)");
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);

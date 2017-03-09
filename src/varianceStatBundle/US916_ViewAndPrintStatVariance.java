@@ -2,7 +2,6 @@ package varianceStatBundle;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.text.ParseException;
 
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
@@ -17,6 +16,7 @@ import common.GenericMethods;
 import common.GlobalVariable;
 import common.LoginTestData;
 import common.Reporter;
+
 import eInventoryPageClasses.AbstractTest;
 import eInventoryPageClasses.HomePage;
 import eInventoryPageClasses.VarianceStatPage;
@@ -133,7 +133,7 @@ public class US916_ViewAndPrintStatVariance extends AbstractTest{
 		Thread.sleep(5000);
 		if(Base.isElementDisplayed(varianceStatPage.StatGain_Label)
 				& Base.isElementDisplayed(varianceStatPage.StatGain_Value)
-				& Base.isElementDisplayed(varianceStatPage.StatLoss_Label)
+				//& Base.isElementDisplayed(varianceStatPage.StatLoss_Label)
 				& Base.isElementDisplayed(varianceStatPage.StatLoss_Value)
 				& Base.isElementDisplayed(varianceStatPage.StatVariance_Value)){
 			Reporter.reportPassResult(
@@ -147,9 +147,10 @@ public class US916_ViewAndPrintStatVariance extends AbstractTest{
 					"Fail");
 			AbstractTest.takeSnapShot();
 		}
-		BigDecimal statGain = new BigDecimal(varianceStatPage.StatGain_Value.getText());
-		BigDecimal statLoss = new BigDecimal(varianceStatPage.StatLoss_Value.getText());
-		BigDecimal statVar = new BigDecimal(varianceStatPage.StatVariance_Value.getText());
+		System.out.println("gain "+varianceStatPage.StatGain_Value.getText());
+		BigDecimal statGain = new BigDecimal(varianceStatPage.StatGain_Value.getText().replace("$", ""));
+		BigDecimal statLoss = new BigDecimal(varianceStatPage.StatLoss_Value.getText().replace("$", ""));
+		BigDecimal statVar = new BigDecimal(varianceStatPage.StatVariance_Value.getText().replace("$", ""));
 		if(statVar.equals(statLoss.add(statGain))){
 			Reporter.reportPassResult(
 					browser,
@@ -173,7 +174,7 @@ public class US916_ViewAndPrintStatVariance extends AbstractTest{
 		String password = LoginTestData.level1_SSO_Password;
 		String userId = LoginTestData.level1_SSO_UserId;
 		String storeId = LoginTestData.level1StoreId;
-		String samplewRINID1 = GlobalVariable.createDailyInventoryWrin2;
+		String samplewRINID1 = GlobalVariable.actualUsageItem;
 		String createDate = GlobalVariable.createDate;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -185,7 +186,6 @@ public class US916_ViewAndPrintStatVariance extends AbstractTest{
 		System.out.println("ActualUsageInStatPage  "+ ActualUsageInStatPage);
 		varianceStatPage.viewActivityButtn(samplewRINID1).click();
 		wait.until(ExpectedConditions.visibilityOf(varianceStatPage.VarianceStatRawItemActivity_Label));
-		varianceStatPage.clickOnDateGroup(createDate);
 		String diffInStatPageActivity = varianceStatPage.calculateActualUsageForARawItem(createDate);
 		System.out.println("ActualUsage Calculated  "+diffInStatPageActivity);
 		if(ActualUsageInStatPage.equals(diffInStatPageActivity)){
@@ -224,7 +224,6 @@ public class US916_ViewAndPrintStatVariance extends AbstractTest{
 		System.out.println("difffffff  "+ diffInStatPage);
 		varianceStatPage.viewActivityButtn(samplewRINID1).click();
 		wait.until(ExpectedConditions.visibilityOf(varianceStatPage.VarianceStatRawItemActivity_Label));
-		varianceStatPage.clickOnDateGroup(createDate);
 		String diffInStatPageActivity = varianceStatPage.calculateDifferenceForARawItem(createDate);
 		System.out.println("Difference  "+diffInStatPageActivity);
 		if(diffInStatPage.equals(diffInStatPageActivity)){

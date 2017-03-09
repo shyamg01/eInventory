@@ -31,9 +31,9 @@ public class US1146_DisplayStatVariance extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US1146_TC2484";
 		FoodOverBasePage foodOverBasePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -94,9 +94,9 @@ public class US1146_DisplayStatVariance extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US1146_TC2487";
 		FoodOverBasePage foodOverBasePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -151,9 +151,9 @@ public class US1146_DisplayStatVariance extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US1146_TC2530";
 		FoodOverBasePage foodOverBasePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -215,9 +215,9 @@ public class US1146_DisplayStatVariance extends AbstractTest {
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US1146_TC2532";
 		FoodOverBasePage foodOverBasePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -244,21 +244,21 @@ public class US1146_DisplayStatVariance extends AbstractTest {
 	}
 	
 	//TC2490: Verify, that stat variance information recalculated and displayed each time a physical inventory is submitted.
-	@Test()
+	/*@Test()
 	public void foodOverBase_US1146_TC2490() throws InterruptedException,
 			RowsExceededException, BiffException, WriteException, IOException {
-		/** Variable Section : **/
+		*//** Variable Section : **//*
 		AbstractTest.tcName="foodOverBase_US1146_TC2490";
 		FoodOverBasePage foodOverBasePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String stratDate=GlobalVariable.startDate;
 		String createDate = GlobalVariable.createDate;
 		String inventoryTime = GlobalVariable.time;
 		String samplewRINID1 = GlobalVariable.createDailyInventoryWrin1;
 		String outerPackQty = String.valueOf(Base.generateNdigitRandomNumber(2));
-		/***********************************/
+		*//***********************************//*
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		foodOverBasePage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToFoodOverBasePage();
@@ -295,5 +295,5 @@ public class US1146_DisplayStatVariance extends AbstractTest {
 					"Fail");
 			AbstractTest.takeSnapShot();
 		}
-	}
+	}*/
 }

@@ -26,9 +26,9 @@ public class US1125_DisplayDifferenceBetweenFoodOverBaseTargetsAndFoodOverBaseAc
 		/** Variable Section : **/
 		FoodOverBasePage foodOverBasePage;
 		AbstractTest.tcName="foodOverBase_US1125_TC2149";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -67,9 +67,9 @@ public class US1125_DisplayDifferenceBetweenFoodOverBaseTargetsAndFoodOverBaseAc
 		/** Variable Section : **/
 		FoodOverBasePage foodOverBasePage;
 		AbstractTest.tcName="foodOverBase_US1125_TC2150";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -106,9 +106,9 @@ public class US1125_DisplayDifferenceBetweenFoodOverBaseTargetsAndFoodOverBaseAc
 		/** Variable Section : **/
 		FoodOverBasePage foodOverBasePage;
 		AbstractTest.tcName="foodOverBase_US1125_TC2152";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -146,9 +146,9 @@ public class US1125_DisplayDifferenceBetweenFoodOverBaseTargetsAndFoodOverBaseAc
 		/** Variable Section : **/
 		FoodOverBasePage foodOverBasePage;
 		AbstractTest.tcName="foodOverBase_US1125_TC2153";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page

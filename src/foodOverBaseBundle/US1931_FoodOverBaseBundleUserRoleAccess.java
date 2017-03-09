@@ -32,7 +32,7 @@ public class US1931_FoodOverBaseBundleUserRoleAccess extends AbstractTest{
 		FoodOverBasePage foodOverBasePage;
 		AbstractTest.tcName="foodOverBase_US1931_TC4133_Level1";
 		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
+		String userId =  LoginTestData.level1_1532_SSO_UserId;
 		String storeId = LoginTestData.level1StoreId;
 		String targetValue = Base.generateDecimalRandomNumber(3).toString();
 		/***********************************/
@@ -647,9 +647,9 @@ public class US1931_FoodOverBaseBundleUserRoleAccess extends AbstractTest{
 		/** Variable Section : **/
 		FoodOverBasePage foodOverBasePage;
 		AbstractTest.tcName="foodOverBase_US1931_TC4134_Level1";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String currentMonthcomments = "TestAuto_"+Base.generateNdigitRandomNumber(3);
 		String projectionscomments = "TestAuto_"+Base.generateNdigitRandomNumber(3);
 		/***********************************/

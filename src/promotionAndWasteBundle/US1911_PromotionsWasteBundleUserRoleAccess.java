@@ -442,7 +442,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 		}
 	}	
 
-	@Test(enabled=false)
+	@Test()
 	public void pramotionWaste_US1911_TC3207_level4() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
@@ -682,7 +682,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 			}
 		}
 	
-		@Test(enabled=false)
+		@Test()
 		public void pramotionWaste_US1911_TC3208_Level4() throws RowsExceededException,
 				BiffException, WriteException, IOException, InterruptedException {
 			/** Variable Section : **/

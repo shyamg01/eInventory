@@ -27,16 +27,16 @@ public class US1048_WhenUserOpensPageAllDayRollUpsWillStartCollapsed extends Abs
 		
 		/** Variable Section : **/
 		AbstractTest.tcName="pramotionWaste_US1048_TC1727";
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and waste page
 		homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToPromotionsAndWastePage();
-
+		
 		// Verify that raw waste entry should displayed in Promotion and waste page
 		if (driver.findElements(By.xpath("//table[@id='waste_history_table']/tbody/tr/th[1]/strong/i[@class='glyphicon glyphicon-chevron-down']")).size()==0) {
 			Reporter.reportPassResult(
@@ -59,9 +59,9 @@ public class US1048_WhenUserOpensPageAllDayRollUpsWillStartCollapsed extends Abs
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="pramotionWaste_US1048_TC2040";
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		String date = GlobalVariable.createDate;

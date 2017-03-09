@@ -30,15 +30,12 @@ public class US1270_EnterDecimalLooseUnitQuantitiesOnRawWasteAndPromo  extends A
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US1270_TC2044";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level2_SSO_UserId;
-		String password = LoginTestData.level2_SSO_Password;
-		String storeId = LoginTestData.level2StoreId;
+		String userId = LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.rawItemWatsewrin1;
 		String looseUnitQuantity1 = "10.25";
 		String looseUnitQuantity2 = "10.125";
-//		String createDate = GlobalVariable.createDate;
-		String createDate = Base.returnTodayDate();
-		
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		RawItemWastePage rawItemWastePage = PageFactory.initElements(driver,RawItemWastePage.class);
@@ -102,15 +99,12 @@ public class US1270_EnterDecimalLooseUnitQuantitiesOnRawWasteAndPromo  extends A
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US1270_TC2045";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.rawItemPromowrin1;
 		String looseUnitQuantity1 = "10.25";
 		String looseUnitQuantity2 = "10.125";
-//		String createDate = GlobalVariable.createDate;
-		String createDate = Base.returnTodayDate();
-		//String time = GlobalVariable.time;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		RawItemPromoPage rawItemPromoPage = PageFactory.initElements(driver,RawItemPromoPage.class);
@@ -174,14 +168,12 @@ public class US1270_EnterDecimalLooseUnitQuantitiesOnRawWasteAndPromo  extends A
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US1270_TC3913";
 		PromotionsAndWastePage promotionsAndWastePage;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String password = LoginTestData.level1_SSO_Password;
-		String storeId = LoginTestData.level1StoreId;
+		String userId =  LoginTestData.userId;
+		String password = LoginTestData.password;
+		String storeId = LoginTestData.StoreId;
 		String wrinId = GlobalVariable.rawItemWatsewrin1;
 		String looseUnitQuantity1 = "12345.67";
 		String looseUnitQuantity2 = "1234567";
-		String createDate = Base.returnTodayDate();
-		
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		RawItemWastePage rawItemWastePage = PageFactory.initElements(driver,RawItemWastePage.class);

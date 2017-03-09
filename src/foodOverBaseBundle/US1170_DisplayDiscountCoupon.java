@@ -27,9 +27,9 @@ public class US1170_DisplayDiscountCoupon extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName = "foodOverBase_US1170_TC2560";
 		FoodOverBasePage foodOverBasePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -90,9 +90,9 @@ public class US1170_DisplayDiscountCoupon extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName = "foodOverBase_US1170_TC2561";
 		FoodOverBasePage foodOverBasePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -152,9 +152,9 @@ public class US1170_DisplayDiscountCoupon extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName = "foodOverBase_US1170_TC2562";
 		FoodOverBasePage foodOverBasePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -247,9 +247,9 @@ public class US1170_DisplayDiscountCoupon extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName = "foodOverBase_US1170_TC2563";
 		FoodOverBasePage foodOverBasePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -257,8 +257,8 @@ public class US1170_DisplayDiscountCoupon extends AbstractTest{
 				.goToFoodOverBasePage();
 		GenericMethods.clickOnElement(foodOverBasePage.Projections_BT, "Projections_BT");
 		String discountCouponPercent1 = foodOverBasePage.Historicals_DiscountCoupon_PastMonth1_Value.getText().trim();
-		String discountCouponPercent2 = foodOverBasePage.Historicals_DiscountCoupon_PastMonth1_Value.getText().trim();
-		String discountCouponPercent3 = foodOverBasePage.Historicals_DiscountCoupon_PastMonth1_Value.getText().trim();
+		String discountCouponPercent2 = foodOverBasePage.Historicals_DiscountCoupon_PastMonth2_Value.getText().trim();
+		String discountCouponPercent3 = foodOverBasePage.Historicals_DiscountCoupon_PastMonth3_Value.getText().trim();
 		if (!discountCouponPercent1.isEmpty()
 				& !discountCouponPercent2.isEmpty()
 				& !discountCouponPercent3.isEmpty()) {
@@ -273,6 +273,7 @@ public class US1170_DisplayDiscountCoupon extends AbstractTest{
 					"Fail");
 			AbstractTest.takeSnapShot();
 		}
+		System.out.println(discountCouponPercent1.substring(discountCouponPercent1.length()-1,discountCouponPercent1.length()));
 		if (discountCouponPercent1.substring(discountCouponPercent1.length()-1,discountCouponPercent1.length()).equals("%")
 				& discountCouponPercent2.substring(discountCouponPercent2.length()-1,discountCouponPercent2.length()).equals("%")
 				& discountCouponPercent3.substring(discountCouponPercent3.length()-1,discountCouponPercent3.length()).equals("%")) {

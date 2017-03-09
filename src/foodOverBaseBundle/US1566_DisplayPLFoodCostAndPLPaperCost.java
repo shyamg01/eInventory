@@ -26,9 +26,9 @@ public class US1566_DisplayPLFoodCostAndPLPaperCost extends AbstractTest{
 		/** Variable Section : **/
 		FoodOverBasePage foodOverBasePage;
 		AbstractTest.tcName="foodOverBase_US1566_TC2747";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -96,9 +96,9 @@ public class US1566_DisplayPLFoodCostAndPLPaperCost extends AbstractTest{
 		/** Variable Section : **/
 		FoodOverBasePage foodOverBasePage;
 		AbstractTest.tcName="foodOverBase_US1566_TC2749";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page

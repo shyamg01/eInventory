@@ -31,9 +31,9 @@ public class US1111_AbilityToViewAndEditFoodOverBaseTargetsManually extends Abst
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US1111_TC2029";
 		FoodOverBasePage foodOverBasePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String targetValue = Base.generateDecimalRandomNumber(3).toString();
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -109,9 +109,9 @@ public class US1111_AbilityToViewAndEditFoodOverBaseTargetsManually extends Abst
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US1111_TC2030";
 		FoodOverBasePage foodOverBasePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String targetValue = Base.generateDecimalRandomNumber(3).toString();
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -187,9 +187,9 @@ public class US1111_AbilityToViewAndEditFoodOverBaseTargetsManually extends Abst
 		/** Variable Section : **/
 		FoodOverBasePage foodOverBasePage;
 		AbstractTest.tcName="foodOverBase_US1111_TC2032";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String negativeTargetValue = "-";
 		String invalidTargetValue = "1.234";
 		String validTargetValue = Base.generateDecimalRandomNumber(3).toString();

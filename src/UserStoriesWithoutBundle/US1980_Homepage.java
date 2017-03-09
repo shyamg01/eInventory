@@ -70,7 +70,6 @@ public class US1980_Homepage extends AbstractTest
 		{
 			/**Variable Section :**/
 			AbstractTest.tcName="UserStoriesWithoutBundle_US1980_TC4544";
-//			String userId = LoginTestData.operatorUserId;
 			String userId = LoginTestData.operator_SSO_UserId;
 			String password = LoginTestData.operator_SSO_Password;
 			String storeId = LoginTestData.operatorStoreId;
@@ -83,10 +82,9 @@ public class US1980_Homepage extends AbstractTest
 			//Click on  Create Daily inventory link
 			GenericMethods.clickOnElement(homePage.CreateDailyInventory_BT, "homePage.CreateDailyInventory_BT");
 			Thread.sleep(5000);
-			wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.DailyInventoryList_Title));
+			wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.DailyInventoryPopUp_Title));
 			//Verify create daily inventory page is opened
-			if(GenericMethods.isElementDisplayed(physicalInventoryPage.DailyInventoryList_Title, "physicalInventoryPage.DailyInventoryList_Title")
-					)
+			if(GenericMethods.isElementDisplayed(physicalInventoryPage.DailyInventoryPopUp_Title, "DailyInventoryPopUp_Title"))
 			{
 				Reporter.reportPassResult(
 						browser,

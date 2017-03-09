@@ -30,9 +30,9 @@ public class US924_DisplayCondimentsPercentageAndDoller extends AbstractTest
 			RowsExceededException, BiffException, WriteException, IOException {
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US924_TC2334";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String pattern=("(\\$)(.*)");
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -42,7 +42,7 @@ public class US924_DisplayCondimentsPercentageAndDoller extends AbstractTest
 		//click on Current Month button
 		GenericMethods.clickOnElement(foodOverBasePage.CurrentMonth_BT, "foodOverBasePage.CurrentMonth_BT");
 		wait.until(ExpectedConditions.visibilityOf(foodOverBasePage.CurrentMonth_BaseFood_Label));
-		String expeCondignment=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='current_month_left']/tbody/tr/td[text()='Condiments']/following-sibling::td[5]")), "Condignment $ Value").trim();
+		String expeCondignment=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='current_month_contributors']/tbody/tr/td[text()='Condiments']/following-sibling::td[5]")), "Condignment $ Value").trim();
 		System.out.println("expeCondignment"+expeCondignment);
 		System.out.println("Pattern.compile(pattern)"+Pattern.compile(pattern));
 		if(Pattern.compile(pattern).matcher(expeCondignment).matches())
@@ -73,9 +73,9 @@ public class US924_DisplayCondimentsPercentageAndDoller extends AbstractTest
 			RowsExceededException, BiffException, WriteException, IOException {
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US924_TC2336";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String pattern=("(\\$)(.*)");
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -85,7 +85,7 @@ public class US924_DisplayCondimentsPercentageAndDoller extends AbstractTest
 		//click on Month End button
 		GenericMethods.clickOnElement(foodOverBasePage.MonthEnd_BT, "foodOverBasePage.MonthEnd_BT");
 		wait.until(ExpectedConditions.visibilityOf(foodOverBasePage.MonthEnd_Actual_Column_Label));
-		String expeCondignment=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_left']/tbody/tr/td[text()='Condiments']/following-sibling::td[5]")), "Condignment $ Value").trim();
+		String expeCondignment=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_contributors']/tbody/tr/td[text()='Condiments']/following-sibling::td[5]")), "Condignment $ Value").trim();
 		System.out.println("expeCondignment"+expeCondignment);
 		System.out.println("Pattern.compile(pattern)"+Pattern.compile(pattern));
 		if(Pattern.compile(pattern).matcher(expeCondignment).matches())
@@ -115,9 +115,9 @@ public class US924_DisplayCondimentsPercentageAndDoller extends AbstractTest
 			RowsExceededException, BiffException, WriteException, IOException {
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US924_TC2338";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String pattern=("(.*)(%)");
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -127,7 +127,7 @@ public class US924_DisplayCondimentsPercentageAndDoller extends AbstractTest
 		//click on Current Month button
 		GenericMethods.clickOnElement(foodOverBasePage.CurrentMonth_BT, "foodOverBasePage.CurrentMonth_BT");
 		wait.until(ExpectedConditions.visibilityOf(foodOverBasePage.CurrentMonth_BaseFood_Label));
-		String expeCondignment=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='current_month_left']/tbody/tr/td[text()='Condiments']/following-sibling::td[3]")), "Condignment % Value").trim();
+		String expeCondignment=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='current_month_contributors']/tbody/tr/td[text()='Condiments']/following-sibling::td[3]")), "Condignment % Value").trim();
 		System.out.println("expeCondignment"+expeCondignment);
 		System.out.println("Pattern.compile(pattern)"+Pattern.compile(pattern));
 		if(Pattern.compile(pattern).matcher(expeCondignment).matches())
@@ -157,9 +157,9 @@ public class US924_DisplayCondimentsPercentageAndDoller extends AbstractTest
 			RowsExceededException, BiffException, WriteException, IOException {
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US924_TC2339";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String pattern=("(.*)(%)");
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -169,7 +169,7 @@ public class US924_DisplayCondimentsPercentageAndDoller extends AbstractTest
 		//click on Month End button
 		GenericMethods.clickOnElement(foodOverBasePage.MonthEnd_BT, "foodOverBasePage.MonthEnd_BT");
 		wait.until(ExpectedConditions.visibilityOf(foodOverBasePage.MonthEnd_Actual_Column_Label));
-		String expeCondignment=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_left']/tbody/tr/td[text()='Condiments']/following-sibling::td[3]")), "Condignment % Value").trim();
+		String expeCondignment=GenericMethods.getText(driver.findElement(By.xpath("//table[@id='month_end_contributors']/tbody/tr/td[text()='Condiments']/following-sibling::td[3]")), "Condignment % Value").trim();
 		System.out.println("expeCondignment"+expeCondignment);
 		System.out.println("Pattern.compile(pattern)"+Pattern.compile(pattern));
 		if(Pattern.compile(pattern).matcher(expeCondignment).matches())
@@ -201,9 +201,9 @@ public class US924_DisplayCondimentsPercentageAndDoller extends AbstractTest
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US924_TC2340";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String pattern=("(.*)(%)");
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -251,9 +251,9 @@ public class US924_DisplayCondimentsPercentageAndDoller extends AbstractTest
 	{
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US924_TC2341";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String pattern=("(.*)(%)");
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -292,12 +292,4 @@ public class US924_DisplayCondimentsPercentageAndDoller extends AbstractTest
 		}
 
 	}
-	
-	
-	
-	
-	
-	
-	
-
 }

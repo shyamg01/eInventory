@@ -44,6 +44,7 @@ public class US911_ViewMasterChangeSummary extends AbstractTest{
 		String vendorName = "TestAuto"+Base.generateNdigitRandomNumber(4);
 		String newVendorName = "TTestAuto"+Base.generateNdigitRandomNumber(4);
 		String newVendorNumber = Integer.toString(Base.generateNdigitRandomNumber(4));
+		String date = GlobalVariable.createDate;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Manual Vendor page
@@ -68,7 +69,9 @@ public class US911_ViewMasterChangeSummary extends AbstractTest{
 		wait.until(ExpectedConditions.visibilityOf(manualVendorsPage.EditvendorDetails_ChangesSaved_Message));
 		Thread.sleep(5000);
 		auditPage = homePage.goToAuditPage();
-		if (auditPage.verifyManualVendorNameAuditDisplayed(userId, vendorName, newVendorName, Base.returnTodayDate())){
+		String eId = userId.substring(0,1).toUpperCase() + userId.substring(1, userId.length());
+		System.out.println("eId "+ eId);
+		if (auditPage.verifyManualVendorNameAuditDisplayed(eId, vendorName, newVendorName, date)){
 			Reporter.reportPassResult(
 					browser,
 					"User should be able to view audit log for manual vendor name",
@@ -80,7 +83,7 @@ public class US911_ViewMasterChangeSummary extends AbstractTest{
 					"Fail");
 			AbstractTest.takeSnapShot();
 		}
-		if (auditPage.verifyManualVendorNumberAuditDisplayed(userId, vendorNumber, newVendorNumber, Base.returnTodayDate())){
+		if (auditPage.verifyManualVendorNumberAuditDisplayed(eId, vendorNumber, newVendorNumber, date)){
 			Reporter.reportPassResult(
 					browser,
 					"User should be able to view audit log for manual vendor Number",
@@ -107,6 +110,7 @@ public class US911_ViewMasterChangeSummary extends AbstractTest{
 		String userId = LoginTestData.level1_SSO_UserId;
 		String storeId = LoginTestData.level1StoreId;
 		String samplewRINID = GlobalVariable.rawItemActvityAuditWrin1;
+		String date = GlobalVariable.createDate;
 		String casePrice = "25.00";
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -117,8 +121,8 @@ public class US911_ViewMasterChangeSummary extends AbstractTest{
 		//Click on Information button
 		rawitemactivitypage.Information_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(rawitemactivitypage.RawItemInformation_Title));
-		/*rawitemactivitypage.RawItemInformation_popUp_ManualPurchase_CB.click();
-		Thread.sleep(5000);*/
+		rawitemactivitypage.RawItemInformation_popUp_ManualPurchase_CB.click();
+		Thread.sleep(5000);
 		Select select =new Select(rawitemactivitypage.RawItemInformation_popUp_Frequency_DD);
 		String defaultListType = select.getFirstSelectedOption().getText();
 		if(defaultListType.equals("Weekly") || defaultListType.equals("Daily")){
@@ -155,7 +159,8 @@ public class US911_ViewMasterChangeSummary extends AbstractTest{
 		rawitemactivitypage.RawItemInformation_ConfirmationPopUp_Yes_BT.click();
 		Thread.sleep(5000);
 		auditPage = homePage.goToAuditPage();
-		if (auditPage.verifyRawItemInvoiceTypeAuditDisplayed(userId, "E", "M", Base.returnTodayDate())){
+		String eId = userId.substring(0,1).toUpperCase() + userId.substring(1, userId.length());
+		if (auditPage.verifyRawItemInvoiceTypeAuditDisplayed(eId, "E", "M", date)){
 			Reporter.reportPassResult(
 					browser,
 					"User should be able to view audit log for Invoice type in raw item information Page",
@@ -168,7 +173,7 @@ public class US911_ViewMasterChangeSummary extends AbstractTest{
 			AbstractTest.takeSnapShot();
 		}
 		
-		if (auditPage.verifyRawItemFrequencyAuditDisplayed(userId, auditPage.getListType(defaultListType),auditPage.getListType(selectedListType), Base.returnTodayDate())){
+		if (auditPage.verifyRawItemFrequencyAuditDisplayed(eId, auditPage.getListType(defaultListType),auditPage.getListType(selectedListType), date)){
 			Reporter.reportPassResult(
 					browser,
 					"User should be able to view audit log for List type in raw item information Page",
@@ -181,7 +186,7 @@ public class US911_ViewMasterChangeSummary extends AbstractTest{
 			AbstractTest.takeSnapShot();
 		}
 		
-		if (auditPage.verifyRawItemAccountPrimaryVendorAuditDisplayed(userId, "",selectedVendor, Base.returnTodayDate())){
+		if (auditPage.verifyRawItemAccountPrimaryVendorAuditDisplayed(eId, "",selectedVendor, date)){
 			Reporter.reportPassResult(
 					browser,
 					"User should be able to view audit log for Primary vendor in raw item information Page",
@@ -194,7 +199,7 @@ public class US911_ViewMasterChangeSummary extends AbstractTest{
 			AbstractTest.takeSnapShot();
 		}
 		
-		if (auditPage.verifyRawItemAccountNumberAuditDisplayed(userId, glAccountValue1,selectedAccount, Base.returnTodayDate())){
+		if (auditPage.verifyRawItemAccountNumberAuditDisplayed(eId, glAccountValue1,selectedAccount, date)){
 			Reporter.reportPassResult(
 					browser,
 					"User should be able to view audit log for McDonalds GL Account in raw item information Page",
@@ -251,7 +256,8 @@ public class US911_ViewMasterChangeSummary extends AbstractTest{
 		Thread.sleep(5000);
 		String afterValue = foodOverBasePage.CurrentMonth_Comments_TB.getAttribute("value");
 		auditPage = homePage.goToAuditPage();
-		if (auditPage.verifyFOBCommentsAuditDisplayed(userId, beforeValue,afterValue, Base.returnTodayDate())){
+		String eId = userId.substring(0,1).toUpperCase() + userId.substring(1, userId.length());
+		if (auditPage.verifyFOBCommentsAuditDisplayed(eId, beforeValue,afterValue, Base.returnTodayDate())){
 			Reporter.reportPassResult(
 					browser,
 					"User should be able to view the audit info for comment section on FOB page",

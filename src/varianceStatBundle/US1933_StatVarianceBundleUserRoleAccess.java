@@ -597,8 +597,6 @@ public class US1933_StatVarianceBundleUserRoleAccess extends AbstractTest
 		String userId = LoginTestData.level5_SSO_UserId;
 		String password = LoginTestData.level5_SSO_Password;
 		String storeId = LoginTestData.level5StoreId;
-		String createDate=GlobalVariable.createDate;
-		String inventoryTime =GlobalVariable.time;
 		String quantity=Integer.toString(Base.generateNdigitRandomNumber(1));
 		String wrin01=GlobalVariable.createDailyInventoryWrin1;		
 		/***********************************/
@@ -608,22 +606,7 @@ public class US1933_StatVarianceBundleUserRoleAccess extends AbstractTest
 		physicalInventoryPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToPhysicalInventoryPage();
 		//Create a daily Inventory
-		GenericMethods.clickOnElement(physicalInventoryPage.CreateDailyInventory_BT,"CreateDailyInventory_BT");
-		wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.DailyInventoryList_Title));
-		Thread.sleep(2000);
-		String time = physicalInventoryPage.getTimeForNewInventory(createDate, inventoryTime);
-		System.out.println("time"+time);
-		physicalInventoryPage.selectADateForPhysicalInventory(createDate).selectTimeForPhysicalInventory(time);
-		physicalInventoryPage.searchRawItemInInventoryList(wrin01);
-		GenericMethods.clearValueOfElement(physicalInventoryPage.OuterPackQty_TB,"OuterPackQty_TB");
-		GenericMethods.enterValueInElement(physicalInventoryPage.OuterPackQty_TB,"OuterPackQty_TB",quantity);
-		//Fetch the Item Total Value
-		String amount=driver.findElement(By.xpath("//table[@id='inventory_table']/tbody/tr[2]/td[7]")).getText();
-		System.out.println("amount"+amount);
-		Thread.sleep(5000);
-		GenericMethods.clickOnElement(physicalInventoryPage.CreateInventoryPopUp_Submit_BT,"CreateInventoryPopUp_Submit_BT");
-		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.Confirmation_PopUp_YES_BT)),"Confirmation_PopUp_YES_BT");
-		wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.DailyInventorySaved_Confirmation_MSG));
+		physicalInventoryPage.submitDailyInventoryForAWrin(wrin01, quantity, quantity, quantity);
 		//Go to State Varient page
 		Thread.sleep(2000);
 		GenericMethods.clickOnElement(homePage.Menu_DD_BT, "homePage.Menu_DD_BT");
@@ -640,17 +623,14 @@ public class US1933_StatVarianceBundleUserRoleAccess extends AbstractTest
 					"User should be able to select 'Daily' from the dropdown",
 					"Fail");
 			AbstractTest.takeSnapShot();
-			
 		}catch(Exception e)
 		{
 			Reporter.reportPassResult(
 					browser,
 					"User should be able to select 'Daily' from the dropdown",
 					"Pass");
-			
 		}
 		Thread.sleep(2000);
-		
 		try
 		{
 			varianceStatPage.selectVarianceStatType("Monthly");
@@ -659,7 +639,6 @@ public class US1933_StatVarianceBundleUserRoleAccess extends AbstractTest
 					"User should be able to select 'Monthly' from the dropdown",
 					"Fail");
 			AbstractTest.takeSnapShot();
-			
 		}catch(Exception e)
 		{
 			Reporter.reportPassResult(
@@ -667,7 +646,6 @@ public class US1933_StatVarianceBundleUserRoleAccess extends AbstractTest
 					"User should be able to select 'Monthly' from the dropdown",
 					"Pass");
 		}
-		
 		if(GenericMethods.isElementDisplayed(driver.findElement(By.xpath("//table[@id='dailyinvstattable']/tbody/tr/td[1][contains(.,'"+wrin01+"')]")), "Created Physical Inventory"))
 		{
 			Reporter.reportPassResult(
@@ -683,7 +661,6 @@ public class US1933_StatVarianceBundleUserRoleAccess extends AbstractTest
 					"Fail");
 			AbstractTest.takeSnapShot();
 		}
-		
 	}
 	
 	
@@ -695,8 +672,6 @@ public class US1933_StatVarianceBundleUserRoleAccess extends AbstractTest
 		String userId = LoginTestData.level6_SSO_UserId;
 		String password = LoginTestData.level6_SSO_Password;
 		String storeId = LoginTestData.level6StoreId;
-		String createDate=GlobalVariable.createDate;
-		String inventoryTime =GlobalVariable.time;
 		String quantity=Integer.toString(Base.generateNdigitRandomNumber(1));
 		String wrin01=GlobalVariable.createDailyInventoryWrin1;		
 		/***********************************/
@@ -706,22 +681,7 @@ public class US1933_StatVarianceBundleUserRoleAccess extends AbstractTest
 		physicalInventoryPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToPhysicalInventoryPage();
 		//Create a daily Inventory
-		GenericMethods.clickOnElement(physicalInventoryPage.CreateDailyInventory_BT,"CreateDailyInventory_BT");
-		wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.DailyInventoryList_Title));
-		Thread.sleep(2000);
-		String time = physicalInventoryPage.getTimeForNewInventory(createDate, inventoryTime);
-		System.out.println("time"+time);
-		physicalInventoryPage.selectADateForPhysicalInventory(createDate).selectTimeForPhysicalInventory(time);
-		physicalInventoryPage.searchRawItemInInventoryList(wrin01);
-		GenericMethods.clearValueOfElement(physicalInventoryPage.OuterPackQty_TB,"OuterPackQty_TB");
-		GenericMethods.enterValueInElement(physicalInventoryPage.OuterPackQty_TB,"OuterPackQty_TB",quantity);
-		//Fetch the Item Total Value
-		String amount=driver.findElement(By.xpath("//table[@id='inventory_table']/tbody/tr[2]/td[7]")).getText();
-		System.out.println("amount"+amount);
-		Thread.sleep(5000);
-		GenericMethods.clickOnElement(physicalInventoryPage.CreateInventoryPopUp_Submit_BT,"CreateInventoryPopUp_Submit_BT");
-		GenericMethods.clickOnElement(wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.Confirmation_PopUp_YES_BT)),"Confirmation_PopUp_YES_BT");
-		wait.until(ExpectedConditions.visibilityOf(physicalInventoryPage.DailyInventorySaved_Confirmation_MSG));
+		physicalInventoryPage.submitDailyInventoryForAWrin(wrin01, quantity, quantity, quantity);
 		//Go to State Varient page
 		Thread.sleep(2000);
 		GenericMethods.clickOnElement(homePage.Menu_DD_BT, "homePage.Menu_DD_BT");
@@ -748,7 +708,6 @@ public class US1933_StatVarianceBundleUserRoleAccess extends AbstractTest
 			
 		}
 		Thread.sleep(2000);
-		
 		try
 		{
 			varianceStatPage.selectVarianceStatType("Monthly");
@@ -765,7 +724,6 @@ public class US1933_StatVarianceBundleUserRoleAccess extends AbstractTest
 					"User should be able to select 'Monthly' from the dropdown",
 					"Pass");
 		}
-		
 		if(GenericMethods.isElementDisplayed(driver.findElement(By.xpath("//table[@id='dailyinvstattable']/tbody/tr/td[1][contains(.,'"+wrin01+"')]")), "Created Physical Inventory"))
 		{
 			Reporter.reportPassResult(
@@ -783,16 +741,4 @@ public class US1933_StatVarianceBundleUserRoleAccess extends AbstractTest
 		}
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }

@@ -27,9 +27,9 @@ public class US922_DisplayCompletedWaste extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US922_TC2544";
 		FoodOverBasePage foodOverBasePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -78,9 +78,9 @@ public class US922_DisplayCompletedWaste extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US922_TC2545";
 		FoodOverBasePage foodOverBasePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -107,9 +107,9 @@ public class US922_DisplayCompletedWaste extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US922_TC2546";
 		FoodOverBasePage foodOverBasePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -151,9 +151,9 @@ public class US922_DisplayCompletedWaste extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US922_TC2547";
 		FoodOverBasePage foodOverBasePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -181,9 +181,9 @@ public class US922_DisplayCompletedWaste extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US922_TC2548";
 		FoodOverBasePage foodOverBasePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -245,9 +245,9 @@ public class US922_DisplayCompletedWaste extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US922_TC2549";
 		FoodOverBasePage foodOverBasePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -294,9 +294,9 @@ public class US922_DisplayCompletedWaste extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US922_TC2550";
 		FoodOverBasePage foodOverBasePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -326,9 +326,9 @@ public class US922_DisplayCompletedWaste extends AbstractTest{
 		/** Variable Section : **/
 		AbstractTest.tcName="foodOverBase_US922_TC2551";
 		FoodOverBasePage foodOverBasePage;
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page

@@ -39,8 +39,6 @@ public class US1437_CreateAutoSaveBehaviour extends AbstractTest{
 		String caseQuantity = "4";
 		String innerPackQuantity = "2";
 		String looseUnitQuantity = "3";
-		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
 		String wrinId1 = GlobalVariable.rawItemWatsewrin1;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -51,7 +49,6 @@ public class US1437_CreateAutoSaveBehaviour extends AbstractTest{
 		promotionsAndWastePage.RawPromo_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(rawItemPromoPage.RawPromo_Title));
 		rawItemPromoPage.removeAllWrinIdFromRawPromoPage();
-		rawItemPromoPage.selectDateForRawPromo(createDate).selectTimeInRawPromoForm(time);
 		//Create a raw waste entry
 		rawItemPromoPage.searchAndSelectRawPromoItem(wrinId1);
 		rawItemPromoPage.addQuantitiesForMultipleWrin(wrinId1, innerPackQuantity, caseQuantity, looseUnitQuantity);
@@ -60,16 +57,11 @@ public class US1437_CreateAutoSaveBehaviour extends AbstractTest{
 		Thread.sleep(3000);
 		homePage.goToPromotionsAndWastePage().RawPromo_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(rawItemPromoPage.RawPromo_Title));
-		System.out.println("time "+ rawItemPromoPage.SelectTime_TB.getText().equals(time));
 		System.out.println("time "+ rawItemPromoPage.OuterPack_TB.getAttribute("value").equals(caseQuantity));
 		System.out.println("time "+ rawItemPromoPage.LooseUnits_TB.getAttribute("value").equals(looseUnitQuantity));
-		System.out.println("date "+ rawItemPromoPage.SelectDateAndTime_TB.getAttribute("value"));
-		System.out.println("compare "+ rawItemPromoPage.SelectDateAndTime_TB.getAttribute("value").equals(createDate));
 		if (rawItemPromoPage.verifyWasteItemIsAdded(wrinId1)
 				& rawItemPromoPage.OuterPack_TB.getAttribute("value").equals(caseQuantity)
 				& rawItemPromoPage.LooseUnits_TB.getAttribute("value").equals(looseUnitQuantity)
-				& rawItemPromoPage.SelectDateAndTime_TB.getAttribute("value").equals(createDate)
-				& rawItemPromoPage.SelectTime_TB.getText().equals(time)
 				) {
 			Reporter.reportPassResult(
 					browser,
@@ -109,7 +101,6 @@ public class US1437_CreateAutoSaveBehaviour extends AbstractTest{
 		promotionsAndWastePage.CompletedWaste_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(completedWastePage.CompletedWaste_Title));
 		completedWastePage.removeAllWrinIdFromCompletedWastePage();
-		completedWastePage.selectDateForRawWaste(createDate).selectTimeInCompletedWasteForm(time);
 		//Create a raw waste entry
 		completedWastePage.searchMenuItemForCompletedWaste(menuItemId1);
 		completedWastePage.addQuantitiesForMultipleWrin(menuItemId1, quantity);
@@ -118,15 +109,9 @@ public class US1437_CreateAutoSaveBehaviour extends AbstractTest{
 		Thread.sleep(3000);
 		homePage.goToPromotionsAndWastePage().CompletedWaste_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(completedWastePage.CompletedWaste_Title));
-		System.out.println("time "+ completedWastePage.SelectTime_TB.getText().equals(time));
 		System.out.println("time "+ completedWastePage.CompletedWastePopUp_QuantityWasted_TB.getAttribute("value").equals(quantity));
-		System.out.println("date "+ completedWastePage.SelectDateAndTime_TB.getAttribute("value"));
-		System.out.println("compare "+ completedWastePage.SelectDateAndTime_TB.getAttribute("value").equals(createDate));
 		if (completedWastePage.verifyCompletedWasteItemIsAdded(menuItemId1)
-				& completedWastePage.CompletedWastePopUp_QuantityWasted_TB.getAttribute("value").equals(quantity)
-				& completedWastePage.SelectDateAndTime_TB.getAttribute("value").equals(createDate)
-				& completedWastePage.SelectTime_TB.getText().equals(time)
-				) {
+				& completedWastePage.CompletedWastePopUp_QuantityWasted_TB.getAttribute("value").equals(quantity)				) {
 			Reporter.reportPassResult(
 					browser,
 					" User should be able to view the previously entered data for completed waste in promotion and waste landing page.",

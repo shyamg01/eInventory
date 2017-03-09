@@ -3,10 +3,7 @@ package foodOverBaseBundle;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
@@ -15,10 +12,10 @@ import jxl.write.biff.RowsExceededException;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
-import common.Base;
 import common.GenericMethods;
 import common.LoginTestData;
 import common.Reporter;
+
 import eInventoryPageClasses.AbstractTest;
 import eInventoryPageClasses.FoodOverBasePage;
 import eInventoryPageClasses.HomePage;
@@ -32,9 +29,9 @@ public class US729_CalculateAndDisplayFoodOverBaseTargets extends AbstractTest{
 		/** Variable Section : **/
 		FoodOverBasePage foodOverBasePage;
 		AbstractTest.tcName="foodOverBase_US729_TC4161";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -42,23 +39,18 @@ public class US729_CalculateAndDisplayFoodOverBaseTargets extends AbstractTest{
 				.goToFoodOverBasePage();
 		// Verify that Difference percentage column is displaying
 		GenericMethods.clickOnElement(foodOverBasePage.Projections_BT,"Projections_BT");
-		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		/*DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		Date date = new Date();
 		String todayDate = dateFormat.format(date);
 		int month = Base.getCorrectMonthFromDate(todayDate);
 		int year = Base.getYearFromDate(todayDate);
 		String date2 = month+"/"+"20"+"/"+year;
-		Date twentythDate = dateFormat.parse(date2);
+		Date twentythDate = dateFormat.parse(date2);*/
 		boolean completedWasteCalculationDisplayed = true;
 		boolean rawWasteCalculationDisplayed = true;
 		boolean condimentsCalculationDisplayed = true;
 		boolean empMgrMealsCalculationDisplayed = true;
 		boolean discountCouponCalculationDisplayed = true;
-		if(date.after(twentythDate) ||date.equals(twentythDate)){
-			/*String valueInProjections = foodOverBasePage.Projections_RawWaste_Value.getText();
-			String targetWasteValue = foodOverBasePage.Projections_RawWasteTarget_TB.getText();
-			rawWasteCalculationDisplayed = rawWasteCalculationDisplayed & valueInProjections.equals(targetWasteValue);*/
-		}else{
 			String completedWasteValueInProjections = foodOverBasePage.Projections_CompletedWasteProjected_Value.getText().replace("%", "");
 			System.out.println("completedWasteValueInProjections "+ completedWasteValueInProjections);
 			String[] completedWasteData = foodOverBasePage.getDataForLastThreeMonths("Completed Waste");
@@ -108,58 +100,57 @@ public class US729_CalculateAndDisplayFoodOverBaseTargets extends AbstractTest{
 			BigDecimal avgDiscountCouponData = new BigDecimal(month1DiscountCouponData).add(new BigDecimal(month2DiscountCouponData)).add(new BigDecimal(month3DiscountCouponData)).divide(new BigDecimal("3"), 2, RoundingMode.HALF_UP);
 			System.out.println("avgDiscountCouponData "+ avgDiscountCouponData);
 			discountCouponCalculationDisplayed = discountCouponCalculationDisplayed & discountCouponInProjections.equals(avgDiscountCouponData.toString());
-		}
 		if (completedWasteCalculationDisplayed) {
 			Reporter.reportPassResult(browser,
-					"If Current Date is less than 20th, then Completed Waste Value displayed under Projected column should be average of preceding three months",
+					"Completed Waste Value displayed under Projected column should be average of preceding three months",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(browser,
-					"If Current Date is less than 20th, then Completed Waste Value displayed under Projected column should be average of preceding three months",
+					"Completed Waste Value displayed under Projected column should be average of preceding three months",
 					"Fail");
 			AbstractTest.takeSnapShot();
 		}
 		
 		if (rawWasteCalculationDisplayed) {
 			Reporter.reportPassResult(browser,
-					"If Current Date is less than 20th, then Raw Waste Value displayed under Projected column should be average of preceding three months",
+					"Raw Waste Value displayed under Projected column should be average of preceding three months",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(browser,
-					"If Current Date is less than 20th, then Raw Waste Value displayed under Projected column should be average of preceding three months",
+					"Raw Waste Value displayed under Projected column should be average of preceding three months",
 					"Fail");
 			AbstractTest.takeSnapShot();
 		}
 		
 		if (condimentsCalculationDisplayed) {
 			Reporter.reportPassResult(browser,
-					"If Current Date is less than 20th, then Condiments Value displayed under Projected column should be average of preceding three months",
+					"Condiments Value displayed under Projected column should be average of preceding three months",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(browser,
-					"If Current Date is less than 20th, then Condiments Waste Value displayed under Projected column should be average of preceding three months",
+					"Condiments Value displayed under Projected column should be average of preceding three months",
 					"Fail");
 			AbstractTest.takeSnapShot();
 		}
 		
 		if (empMgrMealsCalculationDisplayed) {
 			Reporter.reportPassResult(browser,
-					"If Current Date is less than 20th, then Emp/Mgr Meals Value displayed under Projected column should be average of preceding three months",
+					"Emp/Mgr Meals Value displayed under Projected column should be average of preceding three months",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(browser,
-					"If Current Date is less than 20th, then Emp/Mgr Meals Value displayed under Projected column should be average of preceding three months",
+					"Emp/Mgr Meals Value displayed under Projected column should be average of preceding three months",
 					"Fail");
 			AbstractTest.takeSnapShot();
 		}
 		
 		if (discountCouponCalculationDisplayed) {
 			Reporter.reportPassResult(browser,
-					"If Current Date is less than 20th, then Discount/Coupon Value displayed under Projected column should be average of preceding three months",
+					"Discount/Coupon Value displayed under Projected column should be average of preceding three months",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(browser,
-					"If Current Date is less than 20th, then Discount/Coupon Value displayed under Projected column should be average of preceding three months",
+					"Discount/Coupon Value displayed under Projected column should be average of preceding three months",
 					"Fail");
 			AbstractTest.takeSnapShot();
 		}

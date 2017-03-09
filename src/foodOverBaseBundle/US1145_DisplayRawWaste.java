@@ -37,9 +37,9 @@ public class US1145_DisplayRawWaste extends AbstractTest{
 		/** Variable Section : **/
 		FoodOverBasePage foodOverBasePage;
 		AbstractTest.tcName="foodOverBase_US1145_TC2172";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -78,9 +78,9 @@ public class US1145_DisplayRawWaste extends AbstractTest{
 		/** Variable Section : **/
 		FoodOverBasePage foodOverBasePage;
 		AbstractTest.tcName="foodOverBase_US1145_TC2174";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -88,19 +88,19 @@ public class US1145_DisplayRawWaste extends AbstractTest{
 				.goToFoodOverBasePage();
 		// Verify that Difference percentage column is displaying
 		foodOverBasePage.Projections_BT.click();
-		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		/*DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		Date date = new Date();
 		String todayDate = dateFormat.format(date);
 		int month = Base.getCorrectMonthFromDate(todayDate);
 		int year = Base.getYearFromDate(todayDate);
 		String date2 = month+"/"+"20"+"/"+year;
-		Date twentythDate = dateFormat.parse(date2);
+		Date twentythDate = dateFormat.parse(date2);*/
 		boolean rawWasteCalculationDisplayed = true;
-		if(date.after(twentythDate) ||date.equals(twentythDate)){
+		/*if(date.after(twentythDate) ||date.equals(twentythDate)){
 			String valueInProjections = foodOverBasePage.Projections_RawWasteProjected_Value.getText();
 			String targetWasteValue = foodOverBasePage.Projections_RawWasteTarget_TB.getText();
 			rawWasteCalculationDisplayed = rawWasteCalculationDisplayed & valueInProjections.equals(targetWasteValue);
-		}else{
+		}else{*/
 			String valueInProjections = foodOverBasePage.Projections_RawWasteProjected_Value.getText().replace("%", "");
 			System.out.println("valueInProjections "+ valueInProjections);
 			String[] threeMonthData = foodOverBasePage.getDataForLastThreeMonths("Raw Waste");
@@ -110,16 +110,14 @@ public class US1145_DisplayRawWaste extends AbstractTest{
 			BigDecimal avgData = new BigDecimal(month1Data).add(new BigDecimal(month2Data)).add(new BigDecimal(month3Data)).divide(new BigDecimal("3"), 2, RoundingMode.HALF_UP);
 			System.out.println("avgData "+ avgData);
 			rawWasteCalculationDisplayed = rawWasteCalculationDisplayed & valueInProjections.equals(avgData.toString());
-		}
+		//}
 		if (rawWasteCalculationDisplayed) {
 			Reporter.reportPassResult(browser,
-					"If Current Date is less than 20th, then Value displayed under Projected column should be average of preceding three months else "
-					+ "Value entered in New Target field should be displayed under Projected column against Raw Waste label.",
+					"Value displayed under Projected column should be average of preceding three months",
 					"Pass");
 		} else {
 			Reporter.reportTestFailure(browser,
-					"If Current Date is less than 20th, then Value displayed under Projected column should be average of preceding three months else "
-					+ "Value entered in New Target field should be displayed under Projected column against Raw Waste label.",
+					"Value displayed under Projected column should be average of preceding three months.",
 					"Fail");
 			AbstractTest.takeSnapShot();
 		}
@@ -132,9 +130,9 @@ public class US1145_DisplayRawWaste extends AbstractTest{
 		/** Variable Section : **/
 		FoodOverBasePage foodOverBasePage;
 		AbstractTest.tcName="foodOverBase_US1145_TC2175";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -171,9 +169,9 @@ public class US1145_DisplayRawWaste extends AbstractTest{
 		/** Variable Section : **/
 		FoodOverBasePage foodOverBasePage;
 		AbstractTest.tcName="foodOverBase_US1145_TC2180";
-		String password = LoginTestData.operator_SSO_Password;
-		String userId = LoginTestData.operator_SSO_UserId;
-		String storeId = LoginTestData.operatorStoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Food over base page
@@ -212,20 +210,20 @@ public class US1145_DisplayRawWaste extends AbstractTest{
 		FoodOverBasePage foodOverBasePage;
 		PromotionsAndWastePage promotionsAndWastePage;
 		AbstractTest.tcName="foodOverBase_US1145_TC2176";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String samplewRINID = GlobalVariable.wasteItem1;
 		String uomPerCase = GlobalVariable.wasteItem1_UOMPerCase;
-		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		RawItemWastePage rawItemWastePage = PageFactory.initElements(driver,RawItemWastePage.class);
 		// Navigate to Food over base page
 		foodOverBasePage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId).goToFoodOverBasePage();
 		String rawWastePercentValue1 = foodOverBasePage.CurrentMonth_RawWaste_AcutalPercent_Value.getText().trim().replace("%", "");
+		System.out.println("rawWastePercentValue1 "+ rawWastePercentValue1);
 		String netSalesValue = foodOverBasePage.CurrentMonth_NetSales_Value.getText().trim().replace("$", "");
+		System.out.println("netSalesValue "+ netSalesValue);
 		RawItemActivityPage rawItemActivityPage = homePage.goToRawItemActivityPage();
 		rawItemActivityPage.searchAndSelectWRINID(samplewRINID);
 		GenericMethods.clickOnElement(rawItemActivityPage.Information_BT, "Information_BT");
@@ -239,15 +237,18 @@ public class US1145_DisplayRawWaste extends AbstractTest{
 		GenericMethods.clickOnElement(promotionsAndWastePage.RawWaste_BT,"RawWaste_BT");
 		wait.until(ExpectedConditions.visibilityOf(rawItemWastePage.RawWaste_Title));
 		rawItemWastePage.removeAllWrinIdFromRawWastePage();
-		rawItemWastePage.selectDateForRawWaste(createDate).selectTimeInRawWasteForm(time);
+		//rawItemWastePage.selectDateForRawWaste(createDate).selectTimeInRawWasteForm(time);
 		//Create a raw waste entry
 		rawItemWastePage.searchAndSelectRawItemWasted(samplewRINID);
 		//Get the total waste amount
 		rawItemWastePage.addQuantitiesForMultipleWrin(samplewRINID, "", "", "100");
 		Thread.sleep(2000);
 		BigDecimal costPerUnit = new BigDecimal(casePrice).divide(new BigDecimal(uomPerCase));
+		System.out.println("costPerUnit "+ costPerUnit);
 		BigDecimal rawWasteCost = costPerUnit.multiply(new BigDecimal("100"));
+		System.out.println("rawWasteCost "+ rawWasteCost);
 		BigDecimal changeInWasteValue = (rawWasteCost.divide(new BigDecimal(netSalesValue),4,RoundingMode.HALF_UP)).multiply(new BigDecimal("100"));
+		System.out.println("changeInWasteValue "+ changeInWasteValue);
 		BigDecimal expectedRawWaste = new BigDecimal(rawWastePercentValue1).add(changeInWasteValue);
 		expectedRawWaste = expectedRawWaste.setScale(2, RoundingMode.HALF_UP);
 		System.out.println("expectedRawWaste roundingmode "+expectedRawWaste);

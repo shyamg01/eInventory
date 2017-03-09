@@ -31,9 +31,9 @@ public class US1190_SelectAndViewStatVarianceForAMonth extends AbstractTest
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="varianceStatBundle_US1190_TC2705";
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		VarianceStatPage varianceStatPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
@@ -62,9 +62,9 @@ public class US1190_SelectAndViewStatVarianceForAMonth extends AbstractTest
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="varianceStatBundle_US1190_TC2706";
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -96,9 +96,9 @@ public class US1190_SelectAndViewStatVarianceForAMonth extends AbstractTest
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="varianceStatBundle_US1190_TC2707";
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String quantity=Integer.toString(Base.generateNdigitRandomNumber(1));
 		String wrin01=GlobalVariable.wrinID_01_recepie;
 		String wrin02=GlobalVariable.wrinID_02_recepie;
@@ -176,9 +176,9 @@ public class US1190_SelectAndViewStatVarianceForAMonth extends AbstractTest
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="varianceStatBundle_US1190_TC2728";
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String createDate=GlobalVariable.createDate;
 		String quantity=Integer.toString(Base.generateNdigitRandomNumber(1));
 		String wrin01=GlobalVariable.createDailyInventoryWrin1;		
@@ -233,9 +233,9 @@ public class US1190_SelectAndViewStatVarianceForAMonth extends AbstractTest
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="varianceStatBundle_US1190_TC2731";
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String password =  LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String quantity=Integer.toString(Base.generateNdigitRandomNumber(1));
 		String wrin01=GlobalVariable.wrinID_01_recepie;
 		String wrin02=GlobalVariable.wrinID_02_recepie;

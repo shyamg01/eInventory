@@ -26,8 +26,6 @@ public class US1933_StatVarianceBundleUserRoleAccess extends AbstractTest
 	
 	
 	//TC4136 : Verify that level 1, level 2, level 3, level 4, supervisor, supervisor with role assignment, org admin and operator can view the current business date "Daily" Stat Variance information,historical "Daily" Stat Variance information and "Monthly" Stat Variance information
-	
-	
 	@Test
 	public void varianceStatBundle_US1933_TC4136_level1() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException 

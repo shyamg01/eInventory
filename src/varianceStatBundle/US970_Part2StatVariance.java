@@ -30,9 +30,9 @@ public class US970_Part2StatVariance extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="varianceStatBundle_US970_TC2712";
-		String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
-		String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
-		String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		VarianceStatPage varianceStatPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
@@ -60,9 +60,9 @@ public class US970_Part2StatVariance extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="varianceStatBundle_US970_TC2713";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId = LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String samplewRINID1 = GlobalVariable.createDailyInventoryWrin2;
 		String createDate = GlobalVariable.createDate;
 		String quantity = String.valueOf(Base.generateNdigitRandomNumber(1));
@@ -112,9 +112,9 @@ public class US970_Part2StatVariance extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="varianceStatBundle_US970_TC2714";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String samplewRINID1 = GlobalVariable.createDailyInventoryWrin2;
 		String createDate = GlobalVariable.createDate;
 		/***********************************/
@@ -145,9 +145,9 @@ public class US970_Part2StatVariance extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="varianceStatBundle_US970_TC2715";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String samplewRINID1 = GlobalVariable.dailyInventoryWrin_YieldValue;
 		String samplewRINID1_description = GlobalVariable.dailyInventoryWrinDescription_YieldValue;
 		String createDate = GlobalVariable.createDate;
@@ -190,9 +190,9 @@ public class US970_Part2StatVariance extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="varianceStatBundle_US970_TC2716";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		VarianceStatPage varianceStatPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
@@ -266,9 +266,9 @@ public class US970_Part2StatVariance extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="varianceStatBundle_US970_TC2717";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String samplewRINID1 = GlobalVariable.createDailyInventoryWrin2;
 		String createDate = GlobalVariable.createDate;
 		/***********************************/
@@ -303,9 +303,9 @@ public class US970_Part2StatVariance extends AbstractTest{
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
 		AbstractTest.tcName="varianceStatBundle_US970_TC2734";
-		String password = LoginTestData.level1_SSO_Password;
-		String userId = LoginTestData.level1_SSO_UserId;
-		String storeId = LoginTestData.level1StoreId;
+		String password = LoginTestData.password;
+		String userId =  LoginTestData.userId;
+		String storeId = LoginTestData.StoreId;
 		String samplewRINID1 = GlobalVariable.createDailyInventoryWrin3;
 		String createDate = GlobalVariable.createDate;
 		String quantity = String.valueOf(Base.generateNdigitRandomNumber(1));

@@ -36,6 +36,7 @@ public class US923_DisplayEmpMgrMeals extends AbstractTest{
 		foodOverBasePage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
 				.goToFoodOverBasePage();
 		String actualPercentage = foodOverBasePage.CurrentMonth_EmpMgrMeals_DifferencePercent_Value.getText().replace("%", "").trim();
+		System.out.println("actualPercentage "+actualPercentage);
 		BigDecimal actual;
 		if(actualPercentage.contains("-")){
 			actual = new BigDecimal(actualPercentage.replace("-", "").trim()).negate();

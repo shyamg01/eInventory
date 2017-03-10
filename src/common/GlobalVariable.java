@@ -140,7 +140,7 @@ public class GlobalVariable
 
 	/***********AUdit Log Test Data***********/
 	//It should be a wrin Id for which manual purchase should not be enabled in Raw Item Activity Page
-	public static String rawItemActvityAuditWrin1="03719-036";
+	public static String rawItemActvityAuditWrin1="11886-000";
 	//pick the item for which inventory is submitted only once
 	public static String actualUsageItem = "00055-080";
 

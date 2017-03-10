@@ -183,7 +183,7 @@ public class US477_Part2ManualPurchase extends AbstractTest
 		String quantity = "1";
 		String pricePerCase = "25.00";
 		String invoiceId = Base.randomNumberFiveDigit();
-		String approveDate=GlobalVariable.approveDate;
+		String approveDate=GlobalVariable.createDate;
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		RawItemActivityPage rawItemActivityPage = PageFactory.initElements(driver, RawItemActivityPage.class);
 		PurchasesPage purchasesPage = PageFactory.initElements(driver, PurchasesPage.class);
@@ -336,7 +336,7 @@ public class US477_Part2ManualPurchase extends AbstractTest
 		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String wrin=GlobalVariable.createPurchaseWrin;
-		String approveDate=GlobalVariable.approveDate;
+		String approveDate=GlobalVariable.createDate;
 		String invoiceNumber=Integer.toString(Base.generateNdigitRandomNumber(4));
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = PageFactory.initElements(driver, PurchasesPage.class);

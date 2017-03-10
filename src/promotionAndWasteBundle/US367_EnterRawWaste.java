@@ -38,7 +38,6 @@ public class US367_EnterRawWaste  extends AbstractTest {
 		String innerPackQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		String looseUnitQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		/***********************************/
@@ -124,9 +123,6 @@ public class US367_EnterRawWaste  extends AbstractTest {
 		String caseQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		String innerPackQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		String looseUnitQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
-		String createDate = GlobalVariable.createDate;
-		String time=GlobalVariable.time;
-		//String time = GlobalVariable.time;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		RawItemWastePage rawItemWastePage = PageFactory.initElements(driver,RawItemWastePage.class);
@@ -199,7 +195,7 @@ public class US367_EnterRawWaste  extends AbstractTest {
 		String innerPackQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		String looseUnitQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
+		
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		/***********************************/

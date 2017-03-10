@@ -670,22 +670,6 @@ public PurchasesPage approveAManualInvoice(String invoiceId) throws InterruptedE
 	return PageFactory.initElements(driver, PurchasesPage.class);
 }
 
-public PurchasesPage approveAManualInvoice(String todayDate,String amount,String approveDate) throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException
-{
-	System.out.println("//table[@id='eb_purchase_table']/tbody/tr/td[10][preceding-sibling::td/span[text()='"+todayDate+"'] and preceding-sibling::td[text()='$"+amount+"'] ]/eb-button/button");
-	WebElement element =driver.findElement(By.xpath("//table[@id='eb_purchase_table']/tbody/tr/td[10][preceding-sibling::td/span[text()='"+todayDate+"'] and preceding-sibling::td[text()='$"+amount+"'] ]/eb-button/button"));
-	executor.executeScript("arguments[0].click();", element);
-    wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_Lable));
-	wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_Lable));
-	selectDateForApproveInvoice(approveDate);
-	selectTimeForApproveInvoice(GlobalVariable.time);
-	ApproveManualInvoice_Approve_BT.click();
-	wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_ConfirmationMessage_Yes_BT));
-	ApproveManualInvoice_PopUp_ConfirmationMessage_Yes_BT.click();
-	wait.until(ExpectedConditions.visibilityOf(ApproveManualInvoice_PopUp_InvoiceApprove_Confirmation_MSG));
-	return PageFactory.initElements(driver, PurchasesPage.class);
-	}
-	
 	//Method to select the start date on View History page
 	public PurchasesPage selectStartDate(String startDate) throws InterruptedException, RowsExceededException, BiffException, WriteException, IOException{
 	

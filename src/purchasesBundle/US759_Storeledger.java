@@ -37,7 +37,7 @@ public class US759_Storeledger extends AbstractTest
 		String storeId = LoginTestData.StoreId;
 		String vendorName=GlobalVariable.vendorName;
 		String wrin=GlobalVariable.createPurchaseWrin;
-		String date=GlobalVariable.approveDate;
+		String date=GlobalVariable.createDate;
 		/*String monthYear=GlobalVariable.viewLedger_monthDate;*/
 		String invoiceNumber=Integer.toString(Base.generateNdigitRandomNumber(4));
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -89,7 +89,7 @@ public class US759_Storeledger extends AbstractTest
 		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
-		String date = GlobalVariable.transferDate;
+		String date = GlobalVariable.createDate;
 //		String transferTime = GlobalVariable.transferTime;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);

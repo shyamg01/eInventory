@@ -354,7 +354,7 @@ public class US405_EditRawItemInformationManualPurchaseRawItems extends Abstract
 		String storeId = LoginTestData.StoreId;
 		String samplewRINID = GlobalVariable.rawItemActivityWrin;	
 		String vendorName=GlobalVariable.vendorName;
-		String date=GlobalVariable.approveDate;
+		String date=GlobalVariable.createDate;
 		String casePrice="12";
 		String invoiceNumber=Integer.toString(Base.generateNdigitRandomNumber(4));
 		/***********************************/

@@ -12,7 +12,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
-import bsh.ParseException;
 import common.Base;
 import common.GlobalVariable;
 import common.LoginTestData;
@@ -26,7 +25,7 @@ public class US425_WastePromoLandingPage extends AbstractTest{
 	// TC1739: Verify that the user should be able to select a start and end date to filter the list of raw waste/promo entries.
 	@Test(groups="Smoke")
 	public void promotionWaste_US425_TC1739() throws RowsExceededException,
-			BiffException, WriteException, IOException, InterruptedException, ParseException, java.text.ParseException {
+			BiffException, WriteException, IOException, InterruptedException, java.text.ParseException {
 		
 		/** Variable Section : **/
 		AbstractTest.tcName="promotionWaste_US425_TC1739";

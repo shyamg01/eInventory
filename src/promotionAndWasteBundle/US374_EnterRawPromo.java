@@ -42,7 +42,6 @@ public class US374_EnterRawPromo extends AbstractTest{
 		String innerPackQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		String looseUnitQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		/***********************************/
@@ -127,8 +126,6 @@ public class US374_EnterRawPromo extends AbstractTest{
 		String caseQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		String innerPackQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		String looseUnitQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
-		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		RawItemPromoPage rawItemPromoPage = PageFactory.initElements(driver,RawItemPromoPage.class);
@@ -198,7 +195,6 @@ public class US374_EnterRawPromo extends AbstractTest{
 		String innerPackQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		String looseUnitQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		/***********************************/
@@ -263,7 +259,6 @@ public class US374_EnterRawPromo extends AbstractTest{
 		String innerPackQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		String looseUnitQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		/***********************************/

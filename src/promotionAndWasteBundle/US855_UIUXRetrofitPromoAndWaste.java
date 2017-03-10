@@ -774,7 +774,6 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		String innerPackQuantity = "";
 		String looseUnitQuantity = "";
 		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		/***********************************/
@@ -910,7 +909,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		String caseQuantity = "2";
 		
 		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
+		
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		/***********************************/
@@ -989,8 +988,6 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		String caseQuantity = "2";
 		String innerPackQuantity = "2";
 		String looseUnitQuantity = "3";
-		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		RawItemWastePage rawItemWastePage = PageFactory.initElements(driver,RawItemWastePage.class);
@@ -1316,7 +1313,6 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 					browser,
 					"User should be able to open a fresh Raw Waste Form after closing the previous entry", "Fail");
 			AbstractTest.takeSnapShot();
-			
 		}
 	}
 	
@@ -1334,8 +1330,6 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		String caseQuantity = "2";
 		String innerPackQuantity = "2";
 		String looseUnitQuantity = "3";
-		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		RawItemWastePage rawItemWastePage = PageFactory.initElements(driver,RawItemWastePage.class);
@@ -1475,7 +1469,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		String menuItemId = GlobalVariable.completedWasteWrin1;
 		String quantity = "2";
 		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
+		
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		/***********************************/
@@ -1574,8 +1568,6 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		String menuItem1Description = GlobalVariable.completedWasteWrin3Description;
 		String menuItemId2 = GlobalVariable.completedWasteWrin2;
 		String quantity = "2";
-		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		CompletedWastePage completedWastePage = PageFactory.initElements(driver,CompletedWastePage.class);
@@ -1638,8 +1630,6 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		String menuItemId2 = GlobalVariable.completedWasteWrin2;
 		String quantity = "2";
-		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		CompletedWastePage completedWastePage = PageFactory.initElements(driver,CompletedWastePage.class);
@@ -1969,10 +1959,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		String password = LoginTestData.password;
 		String storeId = LoginTestData.StoreId;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
-		String time=GlobalVariable.time;
 		String quantity = "2";
-		String createDate = GlobalVariable.createDate;
-		//String time = GlobalVariable.time;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		CompletedWastePage completedWastePage = PageFactory.initElements(driver,CompletedWastePage.class);
@@ -2121,7 +2108,7 @@ public class US855_UIUXRetrofitPromoAndWaste extends AbstractTest {
 		String innerPackQuantity = "2";
 		String looseUnitQuantity = "3";
 		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
+		
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		

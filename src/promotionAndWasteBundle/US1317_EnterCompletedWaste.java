@@ -63,7 +63,7 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 	}
 	
 	//TC2302: Verify that the user is able to select a date and time for the completed waste entry.
-	@Test(enabled = false)
+	@Test(enabled = false)//Not valid for current ui
 	public void promotionWaste_US1317_TC2302() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException {
 		/** Variable Section : **/
@@ -72,8 +72,6 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		String userId =  LoginTestData.userId;
 		String password = LoginTestData.password;
 		String storeId = LoginTestData.StoreId;
-		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Promotion and Waste page
@@ -82,20 +80,20 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 				.goToPromotionsAndWastePage();
 		promotionsAndWastePage.CompletedWaste_BT.click();
 		wait.until(ExpectedConditions.visibilityOf(completedWastePage.CompletedWaste_Title));
-		completedWastePage.selectDateForRawWaste(createDate).selectTimeInCompletedWasteForm(time);
-		if(completedWastePage.SelectDateAndTime_TB.getAttribute("value").equals(createDate)
-				& completedWastePage.SelectTime_TB.getText().equals(time)){
-			Reporter.reportPassResult(
-					browser, 
-					"user is able to select a date and time for the completed waste entry.", "Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"user is able to select a date and time for the completed waste entry.", "Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
+//		completedWastePage.selectDateForRawWaste(createDate).selectTimeInCompletedWasteForm(time);
+//		if(completedWastePage.SelectDateAndTime_TB.getAttribute("value").equals(createDate)
+//				& completedWastePage.SelectTime_TB.getText().equals(time)){
+//			Reporter.reportPassResult(
+//					browser, 
+//					"user is able to select a date and time for the completed waste entry.", "Pass");
+//			
+//		} else {
+//			Reporter.reportTestFailure(
+//					browser,
+//					"user is able to select a date and time for the completed waste entry.", "Fail");
+//			AbstractTest.takeSnapShot();
+//			
+//		}
 		
 	}
 	
@@ -110,7 +108,7 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		String password = LoginTestData.password;
 		String storeId = LoginTestData.StoreId;
 		//String createDate = GlobalVariable.createDate;
-		/*String time = GlobalVariable.time;*/
+		/**/
 		String menuItemId1 = GlobalVariable.completedWasteWrin3;
 		String menuItem1Description = GlobalVariable.completedWasteWrin3Description;
 		String menuItemId2 = GlobalVariable.completedWasteWrin2;
@@ -155,8 +153,6 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		String userId =  LoginTestData.userId;
 		String password = LoginTestData.password;
 		String storeId = LoginTestData.StoreId;
-		String createDate = GlobalVariable.createDate;
-	/*	String time = GlobalVariable.time;*/
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		String validquantity = "4";
 		String inValidquantity1 = "0";
@@ -237,8 +233,6 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		String userId =  LoginTestData.userId;
 		String password = LoginTestData.password;
 		String storeId = LoginTestData.StoreId;
-		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		String quantity1 = "$$$###";
 		String quantity2 = ".";
@@ -306,8 +300,6 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		String userId =  LoginTestData.userId;
 		String password = LoginTestData.password;
 		String storeId = LoginTestData.StoreId;
-		String createDate = GlobalVariable.createDate;
-		/*String time = GlobalVariable.time;*/
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		String quantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		/***********************************/
@@ -351,8 +343,6 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		String userId =  LoginTestData.userId;
 		String password = LoginTestData.password;
 		String storeId = LoginTestData.StoreId;
-		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		String quantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		/***********************************/
@@ -394,8 +384,6 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		String userId =  LoginTestData.userId;
 		String password = LoginTestData.password;
 		String storeId = LoginTestData.StoreId;
-		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		String quantity = String.valueOf(Base.generateNdigitRandomNumber(2));
 		/***********************************/
@@ -570,7 +558,7 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		String createDate = GlobalVariable.createDate;
-		//String time = GlobalVariable.time;
+		//
 		/*String startTime = GlobalVariable.startTime;
 		String endTime = GlobalVariable.endTime;*/
 		/***********************************/
@@ -687,7 +675,7 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		String createDate = GlobalVariable.createDate;
-		//String time = GlobalVariable.time;
+		//
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		CompletedWastePage completedWastePage = PageFactory.initElements(driver,CompletedWastePage.class);
@@ -887,7 +875,7 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		String innerPackQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		String looseUnitQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
+		
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		/***********************************/
@@ -953,7 +941,7 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		String innerPackQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		String looseUnitQuantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		String createDate = GlobalVariable.createDate;
-		//String time = GlobalVariable.time;
+		//
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		/***********************************/
@@ -1024,7 +1012,7 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 		String createDate = GlobalVariable.createDate;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
-		String time = GlobalVariable.time;
+		
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		CompletedWastePage completedWastePage = PageFactory.initElements(driver,CompletedWastePage.class);
@@ -1168,8 +1156,6 @@ public class US1317_EnterCompletedWaste extends AbstractTest{
 			String storeId = LoginTestData.StoreId;
 			String menuItemId1 = GlobalVariable.completedWasteWrin_YWasteIndicator;
 			String quantity = String.valueOf(Base.generateNdigitRandomNumber(2));
-			String createDate = GlobalVariable.createDate;
-			String time = GlobalVariable.time;
 			/***********************************/
 			HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 			CompletedWastePage completedWastePage = PageFactory.initElements(driver,CompletedWastePage.class);

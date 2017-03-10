@@ -441,7 +441,6 @@ public class US858_UIUXRetrofitRawItemActivityInfo extends AbstractTest
 		String quantity = "1";
 		String pricePerCase = "25.00";
 		String invoiceId = Base.randomNumberFiveDigit();
-		String time = GlobalVariable.time;
 		String transferType = GlobalVariable.transferTypeOffice;
 		String stratDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;

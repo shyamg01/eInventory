@@ -867,7 +867,7 @@ public class US857_UIUXRetrofitTransfers extends AbstractTest{
 	}
 	
 	//TC3141 : Verify,"The Form provides a calendar control to facilitate Date entry".
-	@Test(enabled=false)
+	@Test(enabled=false)//Not valid as per new UI
 	public void transferBundle_US857_TC3141() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException,
 			ParseException {
@@ -883,22 +883,22 @@ public class US857_UIUXRetrofitTransfers extends AbstractTest{
 				.selectLocation(storeId).goToTransferLandingPage();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.CreateNewTransfers_BT)).click();
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddNewTransfer_Header));
-		transferLandingPage.selectTimeInAddNewTransferForm(GlobalVariable.transferTime);
-		System.out.println(transferLandingPage.AddTransferPopup_Time_TB.getText());
-		if (transferLandingPage.AddTransferPopup_Time_TB.getText().equals(GlobalVariable.transferTime)) {
-			Reporter.reportPassResult(
-					browser,
-					"User should be able to click and select time to create transfer from calendar icon",
-					"Pass");
-			
-		} else {
-			Reporter.reportTestFailure(
-					browser,
-					"User should be able to click and select time to create transfer from calendar icon",
-					"Fail");
-			AbstractTest.takeSnapShot();
-			
-		}
+		//transferLandingPage.selectTimeInAddNewTransferForm(GlobalVariable.transferTime);
+//		System.out.println(transferLandingPage.AddTransferPopup_Time_TB.getText());
+//		if (transferLandingPage.AddTransferPopup_Time_TB.getText().equals(GlobalVariable.transferTime)) {
+//			Reporter.reportPassResult(
+//					browser,
+//					"User should be able to click and select time to create transfer from calendar icon",
+//					"Pass");
+//			
+//		} else {
+//			Reporter.reportTestFailure(
+//					browser,
+//					"User should be able to click and select time to create transfer from calendar icon",
+//					"Fail");
+//			AbstractTest.takeSnapShot();
+//			
+//		}
 	}
 	
 	//TC3145 : Verify,"The Form provides a control for users to select between Transfer Types:  Transfer In, Transfer Out, Office Transfer.  Only one selection is allowed".
@@ -1033,8 +1033,6 @@ public class US857_UIUXRetrofitTransfers extends AbstractTest{
 		String samplewRINID2 = GlobalVariable.addTransferItemWrin1;
 		String samplewRINID2Description = GlobalVariable.addTransferItemWrin1Description;
 		String transferType = GlobalVariable.transferTypeOffice;
-		String date = GlobalVariable.createDate;
-		String transferTime = GlobalVariable.transferTime;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Transfer Landing page and click on create new transfer  button
@@ -1277,7 +1275,6 @@ public class US857_UIUXRetrofitTransfers extends AbstractTest{
 		String storeId = LoginTestData.StoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeOffice;
-		String date = GlobalVariable.createDate;
 		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
@@ -1343,7 +1340,6 @@ public class US857_UIUXRetrofitTransfers extends AbstractTest{
 		String storeId = LoginTestData.StoreId;
 		String samplewRINID1 = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeOffice;
-		String date = GlobalVariable.createDate;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Transfer Landing page and click on create new transfer  button
@@ -1403,7 +1399,6 @@ public class US857_UIUXRetrofitTransfers extends AbstractTest{
 		String storeId = LoginTestData.StoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeOffice;
-		String date = GlobalVariable.createDate;
 		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
@@ -1455,7 +1450,6 @@ public class US857_UIUXRetrofitTransfers extends AbstractTest{
 		String storeId = LoginTestData.StoreId;
 		String samplewRINID = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeOffice;
-		String date = GlobalVariable.createDate;
 		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
@@ -1635,8 +1629,6 @@ public class US857_UIUXRetrofitTransfers extends AbstractTest{
 		String samplewRINID3 = GlobalVariable.addTransferItemWrin2;
 		String samplewRINID4 = GlobalVariable.addTransferItemWrin3;
 		String transferType = GlobalVariable.transferTypeOffice;
-		String date = GlobalVariable.createDate;
-		String time = GlobalVariable.transferTime;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		// Navigate to Transfer Landing page and click on create new transfer  button
@@ -1683,7 +1675,6 @@ public class US857_UIUXRetrofitTransfers extends AbstractTest{
 		String storeId = LoginTestData.StoreId;
 		String samplewRINID1 = GlobalVariable.addTransferItemWrin;
 		String transferType = GlobalVariable.transferTypeOffice;
-		String date = GlobalVariable.createDate;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
 		/***********************************/

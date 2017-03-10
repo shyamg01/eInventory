@@ -336,7 +336,7 @@ public class US764_AbilityToInitiateAndSubmitTransferForOffice extends AbstractT
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 		transferLandingPage.removeAllWrinIdFromTransferPage();
 		// Select the transfer type as "Office" and add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(GlobalVariable.time);
+		//transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(GlobalVariable.time);
 		transferLandingPage.selectTransferType(transferType)
 				.insertAndAddDetailsToTransfer(samplewRINID, caseQuantity,innerPackQuantity, looseUnitQuantity);
 		Thread.sleep(2000);
@@ -388,7 +388,7 @@ public class US764_AbilityToInitiateAndSubmitTransferForOffice extends AbstractT
 		wait.until(ExpectedConditions.visibilityOf(transferLandingPage.AddTransferItemsPopup_RawItemsSearchBox_TB));
 		Thread.sleep(3000);
 		// Select the transfer type as "Office" and add the transfer details
-		transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(GlobalVariable.time);
+		//transferLandingPage.selectDateInAddNewTransferPopUp(date).selectTimeInAddNewTransferForm(GlobalVariable.time);
 		// Get the time of transfer
 		time = transferLandingPage.InsertNewTransfersPopup_Time_Value.getText().trim();
 		// Select the transfer type as "Office" and add the transfer details

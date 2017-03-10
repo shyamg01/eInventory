@@ -89,8 +89,6 @@ public class US1437_CreateAutoSaveBehaviour extends AbstractTest{
 		String storeId = LoginTestData.StoreId;
 		String menuItemId1 = GlobalVariable.completedWasteWrin1;
 		String quantity = "4";
-		String createDate = GlobalVariable.createDate;
-		String time = GlobalVariable.time;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		CompletedWastePage completedWastePage = PageFactory.initElements(driver,CompletedWastePage.class);

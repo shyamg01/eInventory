@@ -20,6 +20,7 @@ public class GlobalVariable
 	public static String wrinID_Linens="";
 	public static String wrinID_NonProductHappyMealPremiums="11824";
 	public static String wrinID_NonProductother="02581";
+	
 	/*************State Varient****************/
 	//List type value in Raw item activity page should be 'Daily' for below items
 	public static String wrinID_01_recepie="00001";
@@ -84,7 +85,6 @@ public class GlobalVariable
 	public static String rawItemActivityWrin="00003";
 
 	/*****************************************/
-
 	/*************Transfer Test Data*****************/
 	public static String addTransferItemWrin="00001";
 	public static String addTransferItemWrin1="00002";
@@ -99,18 +99,12 @@ public class GlobalVariable
 	public static String nationalStore1="1719";
 	public static String nationalStore2="1842";
 
-
-	public static String transferDate="03/08/2017";
-
 	/*********************************************
 		common Data
 	*********************************************/
-	public static String createDate = "03/08/2017";
-	public static String approveDate = "03/08/2017";
-	public static String time = "03:30";
-	public static String transferTime = "03:30";
+	public static String createDate = "03/09/2017";
 	public static String startDate = "03/03/2017";
-	public static String endDate = "03/08/2017";
+	public static String endDate = "03/09/2017";
 
 	/*******Menu Item Activity Data***********/
 	public static String menuItem="1";

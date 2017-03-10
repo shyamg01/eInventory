@@ -46,7 +46,7 @@ public class US478_Part2BillLedger extends AbstractTest
 			String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 			String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 			String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
-			String date = GlobalVariable.transferDate;
+			String date = GlobalVariable.createDate;
 			/***********************************/
 			HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 			PurchasesPage purchasesPage = PageFactory.initElements(driver, PurchasesPage.class);
@@ -334,7 +334,7 @@ public class US478_Part2BillLedger extends AbstractTest
 		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 		String innerPackQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
 		String looseUnitQuantity =Integer.toString(Base.generateNdigitRandomNumber(1));
-		String date = GlobalVariable.approveDate;
+		String date = GlobalVariable.createDate;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PurchasesPage purchasesPage = PageFactory.initElements(driver, PurchasesPage.class);
@@ -358,7 +358,6 @@ public class US478_Part2BillLedger extends AbstractTest
 		Thread.sleep(5000);
 		//Go to Purchase landing page
 		homePage.Menu_DD_BT.click();
-		Thread.sleep(2000);
 		wait.until(ExpectedConditions.visibilityOf(homePage.Purchases_BT));
 		Thread.sleep(2000);
 		homePage.Purchases_BT.click();

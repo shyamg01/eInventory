@@ -35,11 +35,7 @@ public class US952_ShowPerpetualInventoryOnHandForRecipeRawItems extends Abstrac
 		String userId = LoginTestData.userId;
 		String storeId = LoginTestData.StoreId;
 		String value1=Integer.toString(Base.generateNdigitRandomNumber(1));
-
-
 		String createDate = GlobalVariable.createDate;
-
-
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		PhysicalInventoryPage physicalInventoryPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
@@ -172,7 +168,6 @@ public class US952_ShowPerpetualInventoryOnHandForRecipeRawItems extends Abstrac
 		String samplewRINID=GlobalVariable.rawItem1;
 		String stratDate=GlobalVariable.startDate;
 		String endDate=GlobalVariable.endDate;
-		String time = GlobalVariable.time;
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 		RawItemActivityPage rawItemActivityPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)

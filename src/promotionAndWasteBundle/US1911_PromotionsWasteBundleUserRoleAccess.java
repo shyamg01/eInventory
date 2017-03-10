@@ -36,7 +36,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 		String samplewRINID = GlobalVariable.rawItemWatsewrin1;
 		String createDate=GlobalVariable.createDate;
 		
-		String time = GlobalVariable.time;
+		
 		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 		String innerPackQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 		String looseUnitQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
@@ -93,7 +93,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 		String userId = LoginTestData.level3_SSO_UserId;
 		String storeId = LoginTestData.level3StoreId;
 		String createDate=GlobalVariable.createDate;
-		String time = GlobalVariable.time;
+		
 		String samplewRINID = GlobalVariable.rawItemWatsewrin1;
 		
 		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
@@ -154,7 +154,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 		String createDate=GlobalVariable.createDate;
 		String samplewRINID = GlobalVariable.rawItemWatsewrin1;
 		
-		String time = GlobalVariable.time;
+		
 		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 		String innerPackQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 		String looseUnitQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
@@ -214,7 +214,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 		String createDate=GlobalVariable.createDate;
 		
 		String samplewRINID = GlobalVariable.rawItemWatsewrin1;
-		String time = GlobalVariable.time;
+		
 		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 		String innerPackQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 		String looseUnitQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
@@ -274,7 +274,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 		String createDate=GlobalVariable.createDate;
 		String samplewRINID = GlobalVariable.rawItemWatsewrin1;
 		
-		String time = GlobalVariable.time;
+		
 		String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 		String innerPackQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 		String looseUnitQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
@@ -335,7 +335,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 		String createDate=GlobalVariable.createDate;
 		
 		String menuItemId = GlobalVariable.completedWasteWrin1;
-		String time = GlobalVariable.time;
+		
 		String quantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 		
 		/***********************************/
@@ -391,7 +391,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 		String password = LoginTestData.level3_SSO_Password;
 		String userId = LoginTestData.level3_SSO_UserId;
 		String storeId = LoginTestData.level3StoreId;
-		String time = GlobalVariable.time;
+		
 //		String createDate=GlobalVariable.createDate;
 		String createDate=GlobalVariable.createDate;
 		
@@ -450,7 +450,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 		String password = LoginTestData.level4_SSO_Password;
 		String userId = LoginTestData.level4_SSO_UserId;
 		String storeId = LoginTestData.level4StoreId;
-		String time = GlobalVariable.time;
+		
 //		String createDate=GlobalVariable.createDate;
 		String createDate=GlobalVariable.createDate;
 		
@@ -509,7 +509,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 		String password = LoginTestData.level5_SSO_Password;
 		String userId = LoginTestData.level5_SSO_UserId;
 		String storeId = LoginTestData.level5StoreId;
-		String time = GlobalVariable.time;
+		
 //		String createDate=GlobalVariable.createDate;
 		String createDate=GlobalVariable.createDate;
 		
@@ -568,7 +568,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 		String password = LoginTestData.level6_SSO_Password;
 		String userId = LoginTestData.level6_SSO_UserId;
 		String storeId = LoginTestData.level6StoreId;
-		String time = GlobalVariable.time;
+		
 //		String createDate=GlobalVariable.createDate;
 		String createDate=GlobalVariable.createDate;
 		
@@ -786,10 +786,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 				String userId = LoginTestData.supervisor_SSO_UserId;
 				String storeId = LoginTestData.supervisorStoreId;
 				String createDate=GlobalVariable.createDate;
-				
 				String samplewRINID = GlobalVariable.rawItemWatsewrin1;
-				String date=GlobalVariable.createDate;
-				String time = GlobalVariable.time;
 				String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 				String innerPackQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 				String looseUnitQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
@@ -850,7 +847,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 				
 				String samplewRINID = GlobalVariable.rawItemWatsewrin1;
 				/*String date=GlobalVariable.createDate;*/
-				String time = GlobalVariable.time;
+				
 				String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 				String innerPackQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 				String looseUnitQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
@@ -912,7 +909,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 				String samplewRINID = GlobalVariable.rawItemWatsewrin1;
 				/*String date=GlobalVariable.createDate;*/
 
-				String time = GlobalVariable.time;
+				
 				String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 				String innerPackQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 				String looseUnitQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
@@ -974,7 +971,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 				
 				String samplewRINID = GlobalVariable.rawItemWatsewrin1;
 				/*String date=GlobalVariable.createDate;*/
-				String time = GlobalVariable.time;
+				
 				String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 				String innerPackQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 				String looseUnitQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
@@ -1035,7 +1032,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 				String createDate=GlobalVariable.createDate;
 				
 				String samplewRINID = GlobalVariable.rawItemWatsewrin1;
-				String time = GlobalVariable.time;
+				
 				String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 				String innerPackQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 				String looseUnitQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
@@ -1098,7 +1095,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 				
 				String samplewRINID = GlobalVariable.rawItemWatsewrin1;
 				
-				String time = GlobalVariable.time;
+				
 				String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 				String innerPackQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 				String looseUnitQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
@@ -1155,10 +1152,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 				String password = LoginTestData.supervisorWithRoleAssignment_SSO_Password;
 				String userId = LoginTestData.supervisorWithRoleAssignment_SSO_UserId;
 				String storeId = LoginTestData.supervisorWithRoleAssignmentStoreId;
-//				String createDate=GlobalVariable.createDate;
 				String createDate=GlobalVariable.createDate;
-				String time =GlobalVariable.time;
-				
 				String samplewRINID = GlobalVariable.rawItemWatsewrin1;
 				String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 				String innerPackQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
@@ -1217,7 +1211,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 				String password = LoginTestData.orgAdmin_SSO_Password;
 				String userId = LoginTestData.orgAdmin_SSO_UserId;
 				String storeId = LoginTestData.orgAdminStoreId;
-				String time = GlobalVariable.time;
+				
 //				String createDate=GlobalVariable.createDate;
 				String createDate=GlobalVariable.createDate;
 				
@@ -1282,7 +1276,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 				String createDate=GlobalVariable.createDate;
 				
 				String samplewRINID = GlobalVariable.rawItemWatsewrin1;
-				String time = GlobalVariable.time;
+				
 				String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 				String innerPackQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 				String looseUnitQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
@@ -1343,7 +1337,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 				String createDate=GlobalVariable.createDate;
 				
 				String samplewRINID = GlobalVariable.rawItemWatsewrin1;
-				String time = GlobalVariable.time;
+				
 				
 				String caseQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 				String innerPackQuantity = Integer.toString(Base.generateNdigitRandomNumber(1));
@@ -1406,7 +1400,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 				String createDate=GlobalVariable.createDate;
 				
 				String menuItemId = GlobalVariable.completedWasteWrin1;
-				String time = GlobalVariable.time;
+				
 				String quantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 				
 				/***********************************/
@@ -1467,7 +1461,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 				String createDate=GlobalVariable.createDate;
 				
 				String menuItemId = GlobalVariable.completedWasteWrin1;
-				String time = GlobalVariable.time;
+				
 				String quantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 				/***********************************/
 				HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -1527,7 +1521,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 				String createDate=GlobalVariable.createDate;
 				
 				String menuItemId = GlobalVariable.completedWasteWrin1;
-				String time = GlobalVariable.time;
+				
 				String quantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 				/***********************************/
 				HomePage homePage = PageFactory.initElements(driver, HomePage.class);
@@ -1582,7 +1576,7 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 				String password = LoginTestData.operator_SSO_Password;
 				String userId = LoginTestData.operator_SSO_UserId;
 				String storeId = LoginTestData.operatorStoreId;
-				String time = GlobalVariable.time;
+				
 //				String createDate=GlobalVariable.createDate;
 				String createDate=GlobalVariable.createDate;
 				
@@ -1641,11 +1635,8 @@ public class US1911_PromotionsWasteBundleUserRoleAccess extends AbstractTest{
 				String password = LoginTestData.level1_SSO_Password;
 				String userId = LoginTestData.level1_SSO_UserId;
 				String storeId = LoginTestData.level1StoreId;
-//				String createDate=GlobalVariable.createDate;
 				String createDate=GlobalVariable.createDate;
-			/*	*/
 				String menuItemId = GlobalVariable.completedWasteWrin1;
-				String time = GlobalVariable.time;
 				String quantity = Integer.toString(Base.generateNdigitRandomNumber(1));
 				/***********************************/
 				HomePage homePage = PageFactory.initElements(driver, HomePage.class);

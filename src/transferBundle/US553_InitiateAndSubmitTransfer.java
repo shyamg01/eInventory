@@ -261,7 +261,6 @@ public class US553_InitiateAndSubmitTransfer extends AbstractTest
 		String date = GlobalVariable.createDate;
 		String startDate = GlobalVariable.startDate;
 		String endDate = GlobalVariable.endDate;
-		String time=GlobalVariable.time;
 		String expCount;
 		String totalAmount = null;
 		RawItemActivityPage rawItemActivityPage;

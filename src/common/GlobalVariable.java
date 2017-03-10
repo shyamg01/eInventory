@@ -17,9 +17,9 @@ public class GlobalVariable
 	public static String productCategorypPaper = "paper";
 	public static String wrinID_opsSupplier="00173";
 	public static String productCategoryOpsSupplies = "ops supplies";
-	public static String wrinID_Linens="";
+	public static String wrinID_Linens="00000-222";
 	public static String wrinID_NonProductHappyMealPremiums="11824";
-	public static String wrinID_NonProductother="02581";
+	public static String wrinID_NonProductother="00000-444";
 	
 	/*************State Varient****************/
 	//List type value in Raw item activity page should be 'Daily' for below items

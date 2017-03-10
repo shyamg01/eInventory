@@ -262,16 +262,19 @@ public class US1123_FoodOverBaseLandingPageFunctionality extends AbstractTest{
 		Calendar c2 = Calendar.getInstance();
 		c2.add(Calendar.MONTH ,-1);
 		String pastMonth1 = c2.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH );
+		year = c2.get(Calendar.YEAR);
 		String monthYear1 = pastMonth1 + " " + year;
 		System.out.println("previousMonth "+monthYear1);
 		
 		c2.add(Calendar.MONTH ,-1);
 		String pastMonth2 = c2.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH );
+		year = c2.get(Calendar.YEAR);
 		String monthYear2 = pastMonth2 + " " + year;
 		System.out.println("previousMonth "+monthYear2);
 		
 		c2.add(Calendar.MONTH ,-1);
 		String pastMonth3 = c2.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH );
+		year = c2.get(Calendar.YEAR);
 		String monthYear3 = pastMonth3 + " " + year;
 		System.out.println("previousMonth "+monthYear3);
 		if(Base.isElementDisplayed(foodOverBasePage.Historicals_Column_Label)

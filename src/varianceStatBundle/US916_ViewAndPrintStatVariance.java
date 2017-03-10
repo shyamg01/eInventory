@@ -19,6 +19,7 @@ import common.Reporter;
 
 import eInventoryPageClasses.AbstractTest;
 import eInventoryPageClasses.HomePage;
+import eInventoryPageClasses.PhysicalInventoryPage;
 import eInventoryPageClasses.VarianceStatPage;
 
 public class US916_ViewAndPrintStatVariance extends AbstractTest{
@@ -176,10 +177,13 @@ public class US916_ViewAndPrintStatVariance extends AbstractTest{
 		String storeId = LoginTestData.level1StoreId;
 		String samplewRINID1 = GlobalVariable.actualUsageItem;
 		String createDate = GlobalVariable.createDate;
+		String quantity = String.valueOf(Base.generateNdigitRandomNumber(1));
 		/***********************************/
 		HomePage homePage = PageFactory.initElements(driver, HomePage.class);
-		VarianceStatPage varianceStatPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
-				.goToVarianceStatPage();
+		PhysicalInventoryPage physicalInventoryPage = homePage.selectUserWithSSOLogin(userId, password).selectLocation(storeId)
+				.goToPhysicalInventoryPage();
+		physicalInventoryPage.submitDailyInventoryForAWrin(samplewRINID1, quantity, quantity, quantity);
+		VarianceStatPage varianceStatPage = homePage.goToVarianceStatPage();
 		varianceStatPage.selectVarianceStatType("Daily").selectDateForDailyStat(GlobalVariable.createDate);
 		Thread.sleep(5000);
 		String ActualUsageInStatPage = varianceStatPage.getActualUsageForAWrin(samplewRINID1);

@@ -263,16 +263,19 @@ public class US1334_2ndIterationOnSignificantEventPOSOpen extends AbstractTest{
 		Calendar c2 = Calendar.getInstance();
 		c2.add(Calendar.MONTH ,-1);
 		String pastMonth1 = c2.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH );
+		year = c2.get(Calendar.YEAR);
 		String monthYear1 = pastMonth1 + " " + year;
 		System.out.println("previousMonth "+monthYear1);
 		
 		c2.add(Calendar.MONTH ,-1);
 		String pastMonth2 = c2.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH );
+		year = c2.get(Calendar.YEAR);
 		String monthYear2 = pastMonth2 + " " + year;
 		System.out.println("previousMonth "+monthYear2);
 		
 		c2.add(Calendar.MONTH ,-1);
 		String pastMonth3 = c2.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH );
+		year = c2.get(Calendar.YEAR);
 		String monthYear3 = pastMonth3 + " " + year;
 		System.out.println("previousMonth "+monthYear3);
 		if(Base.isElementDisplayed(foodOverBasePage.Historicals_Column_Label)
@@ -363,6 +366,7 @@ public class US1334_2ndIterationOnSignificantEventPOSOpen extends AbstractTest{
 		Thread.sleep(5000);
 		c2.add(Calendar.MONTH ,-1);
 		String pastMonth4 = c2.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH );
+		year = c2.get(Calendar.YEAR);
 		String monthYear4 = pastMonth4 + " " + year;
 		System.out.println("previousMonth "+monthYear4);
 		if(Base.isElementDisplayed(foodOverBasePage.Historicals_Column_Label)
@@ -502,7 +506,7 @@ public class US1334_2ndIterationOnSignificantEventPOSOpen extends AbstractTest{
 			Calendar c2 = Calendar.getInstance();
 			c2.add(Calendar.MONTH ,-2);
 			String pastMonth1 = c2.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH );
-			int year = Calendar.getInstance().get(Calendar.YEAR);
+			int year = c2.get(Calendar.YEAR);
 			String monthYear1 = pastMonth1 + " " + year;
 			System.out.println("previousMonth "+monthYear1);
 			if (selectedMonth.contains(monthYear1)) {

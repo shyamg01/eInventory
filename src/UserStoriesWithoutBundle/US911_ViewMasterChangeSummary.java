@@ -215,7 +215,7 @@ public class US911_ViewMasterChangeSummary extends AbstractTest{
 	}
 	
 	//TC4549 : Verify that the user is able to view audit log for comment on FOB page
-	@Test()
+	@Test(enabled=false)
 	public void UserStoriesWithoutBundle_US911_TC4549() throws RowsExceededException,
 			BiffException, WriteException, IOException, InterruptedException 
 	{

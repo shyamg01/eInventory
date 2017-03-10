@@ -131,9 +131,9 @@ public class HomePage extends AbstractPage
 		GenericMethods.enterValueInElement(SSOUserName_TB,"SSOUserName_TB", userName);
 		GenericMethods.enterValueInElement(SSOPassword_TB,"SSOPassword_TB", password);
 		GenericMethods.clickOnElement(SSOLogin_BT,"SSOLogin_BT");
-		if(Base.isElementDisplayed(By.xpath("//input[@value='No']"))){
-			driver.findElement(By.xpath("//input[@value='No']")).click();
-		}
+//		if(Base.isElementDisplayed(By.xpath("//input[@value='No']"))){
+//			driver.findElement(By.xpath("//input[@value='No']")).click();
+//		}
 		driver.switchTo().defaultContent();
 		wait.until(ExpectedConditions.visibilityOf(HomePage_Title));
 		Reporter.log("Successfully redirected to the Home Page");

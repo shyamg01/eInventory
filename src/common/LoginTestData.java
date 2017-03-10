@@ -88,7 +88,7 @@ public class LoginTestData {
 	//Operator role
 	public static String operatorUserId = "e100001";
 	/****Copy the required Store Id and User Id to below fields****/
-	public static String operator_SSO_UserId = "ez712279";
+	public static String operator_SSO_UserId = "ef003532";
 	public static String operator_SSO_Password = "Bigmac2";
 	public static String operatorStoreId= "1532";
 	
@@ -101,7 +101,7 @@ public class LoginTestData {
 	//Supervisor role
 	public static String supervisorUserId = "e100010";
 	/****Copy the required Store Id and User Id to below fields****/
-	public static String supervisor_SSO_UserId = "ez712279";
+	public static String supervisor_SSO_UserId = "";
 	public static String supervisor_SSO_Password = "Bigmac2";
 	public static String supervisorStoreId= "1532";
 	

@@ -5,7 +5,16 @@
     <parameter name="browser"  value="Chrome"/>
     <parameter name="StoreId"  value="762"/>
 	<packages>
+      <package name="manualVendorBundle" />
+      <package name="purchasesBundle" />
+      <package name="promotionAndWasteBundle" />
+      <package name="transferBundle" />
+      <package name="physicalInventoryBundle" />
+      <package name="rawItemActivityBundle" />
+      <package name="menuItemActivityBundle" />
+      <package name="foodOverBaseBundle" />
       <package name="varianceStatBundle" />
+      <package name="UserStoriesWithoutBundle" />
    </packages>
 </test>
 </suite>
